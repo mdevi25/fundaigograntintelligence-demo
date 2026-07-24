@@ -617,7 +617,7 @@
       <p class="hero-split-sub">Fundaigo empowers small nonprofits with AI, shifting focus away from time spent researching and toward what matters most: evaluating and deciding which funding opportunities to pursue.</p>
       <div class="hero-split-ctas">
         <button class="start-btn" onclick="enterApp()">Start for free →</button>
-        <button class="hero-ghost-btn" onclick="document.getElementById('how-it-works').scrollIntoView({behavior:'smooth'})">See the five-stage workflow</button>
+        <button class="hero-ghost-btn" onclick="expandHowItWorks();document.getElementById('how-it-works').scrollIntoView({behavior:'smooth'})">See the five-stage workflow</button>
       </div>
     </div>
     <div class="hero-right">
@@ -783,12 +783,17 @@
     <span class="how-sec-label">How it works</span>
     <h2 class="how-title">From search to proposal in five steps</h2>
     <p class="how-sub">Select a category, let AI do the research, review only verified leads.</p>
-    <div class="how-steps">
-      <div class="how-step"><div class="how-step-num">1</div><div class="how-step-title">Choose category</div><div class="how-step-desc">Pick a funder type or type a custom search</div></div>
-      <div class="how-step"><div class="how-step-num">2</div><div class="how-step-title">AI searches</div><div class="how-step-desc">5-layer pipeline runs automatically</div></div>
-      <div class="how-step"><div class="how-step-num">3</div><div class="how-step-title">Review results</div><div class="how-step-desc">Verified, scored, guard-checked leads only</div></div>
-      <div class="how-step"><div class="how-step-num">4</div><div class="how-step-title">Track pipeline</div><div class="how-step-desc">Add to tracker, assign, set deadlines</div></div>
-      <div class="how-step"><div class="how-step-num">5</div><div class="how-step-title">Draft &amp; submit</div><div class="how-step-desc">NotebookLM drafts, staff reviews, submits</div></div>
+    <button id="how-it-works-expand-btn" class="hero-ghost-btn" onclick="expandHowItWorks()" style="margin-bottom:20px;">
+      Show details <i class="ti ti-chevron-down" style="font-size:12px;vertical-align:-1px;" aria-hidden="true"></i>
+    </button>
+    <div id="how-it-works-content" style="display:none;">
+      <div class="how-steps">
+        <div class="how-step"><div class="how-step-num">1</div><div class="how-step-title">Choose category</div><div class="how-step-desc">Pick a funder type or type a custom search</div></div>
+        <div class="how-step"><div class="how-step-num">2</div><div class="how-step-title">AI searches</div><div class="how-step-desc">5-layer pipeline runs automatically</div></div>
+        <div class="how-step"><div class="how-step-num">3</div><div class="how-step-title">Review results</div><div class="how-step-desc">Verified, scored, guard-checked leads only</div></div>
+        <div class="how-step"><div class="how-step-num">4</div><div class="how-step-title">Track pipeline</div><div class="how-step-desc">Add to tracker, assign, set deadlines</div></div>
+        <div class="how-step"><div class="how-step-num">5</div><div class="how-step-title">Draft &amp; submit</div><div class="how-step-desc">NotebookLM drafts, staff reviews, submits</div></div>
+      </div>
     </div>
   </section>
 
@@ -1965,6 +1970,14 @@ function toggleAcc(btn) {
 function expandAboutSection() {
   const content = document.getElementById('about-content');
   const btn = document.getElementById('about-expand-btn');
+  if (content) content.style.display = 'block';
+  if (btn) btn.style.display = 'none';
+}
+
+// ── HOW IT WORKS (landing page, collapsed by default to reduce scroll) ──
+function expandHowItWorks() {
+  const content = document.getElementById('how-it-works-content');
+  const btn = document.getElementById('how-it-works-expand-btn');
   if (content) content.style.display = 'block';
   if (btn) btn.style.display = 'none';
 }
