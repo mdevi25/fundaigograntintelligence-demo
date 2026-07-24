@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fundigo - AI Powered Grant Intelligence</title>
+  <title>Fundaigo - AI Powered Grant Intelligence</title>
   <meta name="description" content="AI-powered funding intelligence for nonprofits. 5-layer pipeline. Verified leads. Human in control.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
@@ -616,11 +616,11 @@
       <circle cx="40" cy="40" r="6.5" fill="#fff"/><circle cx="40" cy="40" r="3" fill="url(#lg-gate)"/>
     </svg>
     <div style="font-family:var(--font-display,inherit);font-weight:700;font-size:19px;color:#f0ece4;margin-bottom:4px;">
-      Sign in to Fundigo
+      Sign in to Fundaigo
     </div>
     <p style="font-size:12.5px;color:rgba(240,236,228,.55);line-height:1.6;margin:0 0 20px;">
       Use your Google or nonprofit Google Workspace account.
-      Nothing is uploaded. Your grant data stays in this browser.
+      Fundaigo doesn't operate its own database. Depending on setup, your search settings stay in this browser while your team's shared grant data is stored in a Google Sheet your organization owns.
     </p>
     <div id="google-signin-btn" style="display:flex;justify-content:center;min-height:44px;align-items:center;"></div>
   </div>
@@ -670,14 +670,14 @@
     <div class="hero-left">
       <div class="hero-pill"><span class="hero-pill-dot"></span>AI-powered · Verified · Human in control</div>
       <h1 class="hero-split-title">Find the grants your<br><em>mission deserves</em></h1>
-      <p class="hero-split-sub">A free 5-layer AI pipeline that discovers, verifies, and scores grant leads, so small nonprofits compete on equal footing.</p>
+      <p class="hero-split-sub">Fundaigo helps small nonprofits discover, verify, evaluate, and track funding opportunities, while keeping every decision in human hands.</p>
       <div class="hero-split-ctas">
         <button class="start-btn" onclick="enterApp()">Start for free →</button>
-        <button class="hero-ghost-btn" onclick="document.getElementById('how-it-works').scrollIntoView({behavior:'smooth'})">See how it works</button>
+        <button class="hero-ghost-btn" onclick="document.getElementById('how-it-works').scrollIntoView({behavior:'smooth'})">See the five-stage workflow</button>
       </div>
     </div>
     <div class="hero-right">
-      <div class="hero-results-label">TOP RESULTS THIS RUN</div>
+      <div class="hero-results-label">Illustrative example &middot; top results this run</div>
       <div class="hero-result-card hero-result-hi">
         <div class="hero-result-score">5</div>
         <div class="hero-result-body"><div class="hero-result-name">Chicago Community Trust</div><div class="hero-result-meta">Education · Rolling deadline</div></div>
@@ -701,12 +701,35 @@
     </div>
   </section>
 
+  <section class="how-section" id="watch-video" style="padding-bottom:8px;">
+    <span class="how-sec-label">See it in action</span>
+    <h2 class="how-title">Watch a walkthrough</h2>
+    <div style="position:relative;padding-bottom:56.25%;height:0;max-width:800px;border-radius:12px;overflow:hidden;border:0.5px solid rgba(232,240,252,.1);margin-top:16px;">
+      <iframe src="https://www.loom.com/embed/d1a9d423a04645c8ad3d5691e8a77c9e" frameborder="0" allow="fullscreen" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+    </div>
+  </section>
+
   <div class="stats-strip">
     <div class="stats-strip-item"><div class="stats-strip-n">750K+</div><div class="stats-strip-l">nonprofits this is built for</div></div>
     <div class="stats-strip-item"><div class="stats-strip-n">5 layers</div><div class="stats-strip-l">of AI verification before you see a result</div></div>
-    <div class="stats-strip-item"><div class="stats-strip-n">30 min</div><div class="stats-strip-l">staff time per week to run a full search</div></div>
-    <div class="stats-strip-item"><div class="stats-strip-n">$0.00</div><div class="stats-strip-l">total cost for any org</div></div>
+    <div class="stats-strip-item"><div class="stats-strip-n">30 min</div><div class="stats-strip-l">typical staff time per week</div></div>
+    <div class="stats-strip-item"><div class="stats-strip-n">$0.00</div><div class="stats-strip-l">on Groq's free tier</div></div>
   </div>
+
+  <section class="how-section" id="who-its-for">
+    <span class="how-sec-label">Who Fundaigo is for</span>
+    <h2 class="how-title">Built for small nonprofits that</h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:20px;max-width:640px;">
+      <div style="display:flex;align-items:flex-start;gap:8px;"><i class="ti ti-check" style="font-size:16px;color:#2dd4bf;flex-shrink:0;margin-top:2px;" aria-hidden="true"></i><span style="font-size:13.5px;color:rgba(232,240,252,.7);">Have limited resources</span></div>
+      <div style="display:flex;align-items:flex-start;gap:8px;"><i class="ti ti-check" style="font-size:16px;color:#2dd4bf;flex-shrink:0;margin-top:2px;" aria-hidden="true"></i><span style="font-size:13.5px;color:rgba(232,240,252,.7);">Can benefit from AI assistance while staying in control of decision making</span></div>
+    </div>
+  </section>
+
+  <section class="how-section" id="what-it-doesnt-do">
+    <span class="how-sec-label">What Fundaigo does not do</span>
+    <h2 class="how-title">Just as important as what it does</h2>
+    <p class="how-sub">Fundaigo does not guarantee funding, determine final eligibility, provide legal advice, or submit applications automatically. Every result is a starting point for your team's own judgment, not a decision made on your behalf.</p>
+  </section>
 
 
   <section class="how-section" id="how-it-works">
@@ -754,8 +777,8 @@
         </button>
         <div class="acc-body">
           <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px;">
-            <div style="background:var(--c-soft);border-radius:10px;padding:14px;text-align:center;"><div style="font-size:22px;font-weight:500;color:var(--c-deep);">750K+</div><div style="font-size:10px;color:var(--c-muted);margin-top:3px;line-height:1.4;">nonprofits under $500K budget with no dedicated grant staff</div></div>
-            <div style="background:var(--c-soft);border-radius:10px;padding:14px;text-align:center;"><div style="font-size:22px;font-weight:500;color:var(--c-deep);">$0.00</div><div style="font-size:10px;color:var(--c-muted);margin-top:3px;line-height:1.4;">total cost to run this system for any education nonprofit</div></div>
+            <div style="background:var(--c-soft);border-radius:10px;padding:14px;text-align:center;"><div style="font-size:22px;font-weight:500;color:var(--c-deep);">750K+</div><div style="font-size:10px;color:var(--c-muted);margin-top:3px;line-height:1.4;">est. nonprofits under $500K budget with no dedicated grant staff</div></div>
+            <div style="background:var(--c-soft);border-radius:10px;padding:14px;text-align:center;"><div style="font-size:22px;font-weight:500;color:var(--c-deep);">$0.00</div><div style="font-size:10px;color:var(--c-muted);margin-top:3px;line-height:1.4;">designed to run on currently free tiers (Groq, Google)</div></div>
             <div style="background:var(--c-soft);border-radius:10px;padding:14px;text-align:center;"><div style="font-size:22px;font-weight:500;color:var(--c-deep);">30 min</div><div style="font-size:10px;color:var(--c-muted);margin-top:3px;line-height:1.4;">staff time per week to discover, qualify, and track new leads</div></div>
           </div>
           <div style="background:var(--c-tint);border-left:3px solid var(--c-purple);border-radius:0 8px 8px 0;padding:10px 12px;font-size:11.5px;color:var(--c-text);line-height:1.65;">One Groq API key, a browser, and 30 minutes a week is all it takes. Any small nonprofit in education can clone this, update the org profile, and run it immediately.</div>
@@ -766,16 +789,17 @@
       <div class="acc-item">
         <button class="acc-trigger" onclick="toggleAcc(this)" aria-expanded="false">
           <div class="acc-num" aria-hidden="true">3</div>
-          <div><span class="acc-label">AI Models</span><span class="acc-title">What runs under the hood and why</span></div>
+          <div><span class="acc-label">Technical architecture</span><span class="acc-title">For implementers and reviewers</span></div>
           <i class="ti ti-chevron-down acc-chev" aria-hidden="true"></i>
         </button>
         <div class="acc-body">
+          <p style="font-size:12px;color:var(--c-muted);line-height:1.6;margin:0 0 14px;">In plain terms, this stage searches current funding sources, validates source links, compares eligibility against your org profile, flags risk or questionable output, organizes approved leads, and supports evidence-grounded proposal drafting. The table below is the technical detail behind that: which model runs each step, and its usage limit.</p>
           <div style="display:grid;grid-template-columns:180px 1fr 70px;gap:10px;padding:6px 0;border-bottom:0.5px solid var(--c-border);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--c-muted);"><div>Model</div><div>Role &amp; function</div><div>Limit</div></div>
           <div style="display:grid;grid-template-columns:180px 1fr 70px;gap:10px;padding:9px 0;border-bottom:0.5px solid #F0EDF8;align-items:start;"><div><div style="font-weight:600;font-size:12px;">groq/compound</div><span style="display:inline-flex;background:var(--c-soft);color:var(--c-deep);font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;margin-top:3px;">Layer 1 &middot; Discover</span></div><div style="font-size:11px;color:var(--c-muted);">Live web search, up to 10 searches/call. Returns funders, amounts, deadlines, URLs. Memory excludes known funders.</div><div><span style="background:#DCFCE7;color:#166534;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;">Free</span><div style="font-size:9px;color:var(--c-faint);margin-top:3px;">1K req/day</div></div></div>
           <div style="display:grid;grid-template-columns:180px 1fr 70px;gap:10px;padding:9px 0;border-bottom:0.5px solid #F0EDF8;align-items:start;"><div><div style="font-weight:600;font-size:12px;">groq/compound</div><span style="display:inline-flex;background:var(--c-soft);color:var(--c-deep);font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;margin-top:3px;">Layer 1.5 &middot; Verify</span></div><div style="font-size:11px;color:var(--c-muted);">Visits every URL server-side. Filters dead links, login walls, unverifiable pages silently.</div><div><span style="background:#DCFCE7;color:#166534;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;">Free</span><div style="font-size:9px;color:var(--c-faint);margin-top:3px;">Same key</div></div></div>
           <div style="display:grid;grid-template-columns:180px 1fr 70px;gap:10px;padding:9px 0;border-bottom:0.5px solid #F0EDF8;align-items:start;"><div><div style="font-weight:600;font-size:12px;">gpt-oss-120b</div><span style="display:inline-flex;background:var(--c-soft);color:var(--c-deep);font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;margin-top:3px;">Layer 2 &middot; Qualify</span></div><div style="font-size:11px;color:var(--c-muted);">Scores 1–5 vs org profile. Mission, geography, eligibility, risks. Returns structured JSON with recommended action.</div><div><span style="background:#DCFCE7;color:#166534;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;">Free</span><div style="font-size:9px;color:var(--c-faint);margin-top:3px;">1K req/day</div></div></div>
           <div style="display:grid;grid-template-columns:180px 1fr 70px;gap:10px;padding:9px 0;border-bottom:0.5px solid #F0EDF8;align-items:start;"><div><div style="font-weight:600;font-size:12px;">gpt-oss-safeguard</div><span style="display:inline-flex;background:var(--c-soft);color:var(--c-deep);font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;margin-top:3px;">Layer 2.5 &middot; Guard</span></div><div style="font-size:11px;color:var(--c-muted);">Language, bias, accuracy, appropriateness. Soft-flag only, AI never hard-blocks. Humans decide.</div><div><span style="background:#DCFCE7;color:#166534;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;">Free</span><div style="font-size:9px;color:var(--c-faint);margin-top:3px;">Policy-driven</div></div></div>
-          <div style="display:grid;grid-template-columns:180px 1fr 70px;gap:10px;padding:9px 0;align-items:start;"><div><div style="font-weight:600;font-size:12px;">Google NotebookLM</div><span style="display:inline-flex;background:var(--c-soft);color:var(--c-deep);font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;margin-top:3px;">Layer 4 &middot; Propose</span></div><div style="font-size:11px;color:var(--c-muted);">Drafts from real org documents only. No invented stats. Marks gaps [INSERT: ...]. Upload once, reuse forever.</div><div><span style="background:#DCFCE7;color:#166534;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;">Free</span><div style="font-size:9px;color:var(--c-faint);margin-top:3px;">No API key</div></div></div>
+          <div style="display:grid;grid-template-columns:180px 1fr 70px;gap:10px;padding:9px 0;align-items:start;"><div><div style="font-weight:600;font-size:12px;">Google NotebookLM</div><span style="display:inline-flex;background:var(--c-soft);color:var(--c-deep);font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;margin-top:3px;">Layer 4 &middot; Propose</span></div><div style="font-size:11px;color:var(--c-muted);">Drafts from real org documents only. Prompts instruct the model to use only uploaded evidence. Marks gaps [INSERT: ...]. Upload once, reuse forever.</div><div><span style="background:#DCFCE7;color:#166534;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;">Free</span><div style="font-size:9px;color:var(--c-faint);margin-top:3px;">No API key</div></div></div>
           <div style="margin-top:10px;background:var(--c-tint);border-radius:7px;padding:8px 10px;font-size:10.5px;color:var(--c-muted);">One Groq key covers all AI layers. Weekly run uses ~16,200 tokens, under 10% of the free daily limit. Resets every 24 hours.</div>
         </div>
       </div>
@@ -789,7 +813,7 @@
         </button>
         <div class="acc-body">
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-            <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:11px 13px;"><div style="display:flex;align-items:center;gap:7px;margin-bottom:5px;"><div style="width:24px;height:24px;border-radius:6px;background:var(--c-soft);display:flex;align-items:center;justify-content:center;"><i class="ti ti-search" style="font-size:12px;color:var(--c-purple);" aria-hidden="true"></i></div><b style="font-size:12px;">Discover</b></div><div style="font-size:10.5px;color:var(--c-muted);line-height:1.55;">Category chips or custom search (280 char). 5-layer pipeline runs automatically. Every result has a working URL, fit score, and why-qualifies explanation.</div></div>
+            <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:11px 13px;"><div style="display:flex;align-items:center;gap:7px;margin-bottom:5px;"><div style="width:24px;height:24px;border-radius:6px;background:var(--c-soft);display:flex;align-items:center;justify-content:center;"><i class="ti ti-search" style="font-size:12px;color:var(--c-purple);" aria-hidden="true"></i></div><b style="font-size:12px;">Discover</b></div><div style="font-size:10.5px;color:var(--c-muted);line-height:1.55;">Category chips or custom search (280 char). 5-layer pipeline runs automatically. Every result includes a source link, fit score, and why-qualifies explanation.</div></div>
             <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:11px 13px;"><div style="display:flex;align-items:center;gap:7px;margin-bottom:5px;"><div style="width:24px;height:24px;border-radius:6px;background:var(--c-soft);display:flex;align-items:center;justify-content:center;"><i class="ti ti-table" style="font-size:12px;color:var(--c-purple);" aria-hidden="true"></i></div><b style="font-size:12px;">Tracker</b></div><div style="font-size:10.5px;color:var(--c-muted);line-height:1.55;">Inline editable pipeline. Status changes auto-exclude funders from future searches. Deadline badges turn red within 14 days. CSV export for team sharing.</div></div>
             <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:11px 13px;"><div style="display:flex;align-items:center;gap:7px;margin-bottom:5px;"><div style="width:24px;height:24px;border-radius:6px;background:var(--c-soft);display:flex;align-items:center;justify-content:center;"><i class="ti ti-file-text" style="font-size:12px;color:var(--c-purple);" aria-hidden="true"></i></div><b style="font-size:12px;">Proposal</b></div><div style="font-size:10.5px;color:var(--c-muted);line-height:1.55;">Select opportunity → copy generated prompt → paste into NotebookLM with funder's RFP. Drafts use only real org documents. Every gap marked [INSERT: ...].</div></div>
             <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:11px 13px;"><div style="display:flex;align-items:center;gap:7px;margin-bottom:5px;"><div style="width:24px;height:24px;border-radius:6px;background:var(--c-soft);display:flex;align-items:center;justify-content:center;"><i class="ti ti-info-circle" style="font-size:12px;color:var(--c-purple);" aria-hidden="true"></i></div><b style="font-size:12px;">About</b></div><div style="font-size:10.5px;color:var(--c-muted);line-height:1.55;">This tab. Mission, AI models, tab guide, and architecture. Any team member or judge understands the full system in under 2 minutes.</div></div>
@@ -817,9 +841,9 @@
             <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:10px;"><i class="ti ti-filter" style="font-size:16px;color:var(--c-purple);" aria-hidden="true"></i><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin:4px 0 3px;">5-layer pipeline</div><div style="font-size:10px;color:var(--c-muted);line-height:1.5;">Each layer filters noise. Only the best reach staff.</div></div>
             <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:10px;"><i class="ti ti-brain" style="font-size:16px;color:var(--c-purple);" aria-hidden="true"></i><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin:4px 0 3px;">Search memory</div><div style="font-size:10px;color:var(--c-muted);line-height:1.5;">Every run smarter. Known funders excluded automatically.</div></div>
             <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:10px;"><i class="ti ti-shield-check" style="font-size:16px;color:var(--c-purple);" aria-hidden="true"></i><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin:4px 0 3px;">Guardrails</div><div style="font-size:10px;color:var(--c-muted);line-height:1.5;">Bias, accuracy, appropriateness checked every run.</div></div>
-            <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:10px;"><i class="ti ti-link-off" style="font-size:16px;color:var(--c-purple);" aria-hidden="true"></i><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin:4px 0 3px;">Zero dead links</div><div style="font-size:10px;color:var(--c-muted);line-height:1.5;">Every URL visited server-side before staff sees it.</div></div>
+            <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:10px;"><i class="ti ti-link-off" style="font-size:16px;color:var(--c-purple);" aria-hidden="true"></i><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin:4px 0 3px;">Links checked automatically</div><div style="font-size:10px;color:var(--c-muted);line-height:1.5;">Every URL is checked before results are shown.</div></div>
             <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:10px;"><i class="ti ti-plug" style="font-size:16px;color:var(--c-purple);" aria-hidden="true"></i><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin:4px 0 3px;">Modular</div><div style="font-size:10px;color:var(--c-muted);line-height:1.5;">One config line swaps any AI provider.</div></div>
-            <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:10px;"><i class="ti ti-currency-dollar-off" style="font-size:16px;color:var(--c-purple);" aria-hidden="true"></i><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin:4px 0 3px;">Zero cost</div><div style="font-size:10px;color:var(--c-muted);line-height:1.5;">Under 10% of free daily token limit per weekly run.</div></div>
+            <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:10px;"><i class="ti ti-currency-dollar-off" style="font-size:16px;color:var(--c-purple);" aria-hidden="true"></i><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin:4px 0 3px;">Runs on free tiers</div><div style="font-size:10px;color:var(--c-muted);line-height:1.5;">Under 10% of free daily token limit per weekly run.</div></div>
           </div>
         </div>
       </div>
@@ -857,8 +881,7 @@
       <a href="https://mdevi25.github.io/" target="_blank" rel="noopener">Portfolio</a>
     </div>
     <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px;">
-      <div class="landing-footer-badge">$0.00 / mo</div>
-      <div style="font-size:10px;color:#8A93A1;">&#169; 2026 Madhu Devi. All rights reserved.</div>
+            <div style="font-size:10px;color:#8A93A1;">&#169; 2026 Madhu Devi. All rights reserved.</div>
     </div>
   </footer>
 
@@ -877,7 +900,7 @@
       <div class="app-hdr-row">
         <a href="javascript:void(0)" onclick="backToLanding()" aria-label="Home"
            style="display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit;cursor:pointer;">
-        <svg width="34" height="34" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" aria-label="Fundigo" role="img">
+        <svg width="34" height="34" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" aria-label="Fundaigo" role="img">
           <defs><linearGradient id="lg-app" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#22b8a0"/><stop offset="100%" stop-color="#2dd4bf"/></linearGradient></defs>
           <rect width="80" height="80" rx="18" fill="url(#lg-app)"/>
           <line x1="40" y1="33" x2="40" y2="18" stroke="#fff" stroke-width="1.8" stroke-linecap="round" opacity=".9"/>
@@ -1099,11 +1122,11 @@
 
       <div class="proposal-panel">
         <h2>Step 1: Set up your NotebookLM knowledge base</h2>
-        <p class="proposal-panel-desc">Do this once. Upload your org documents to NotebookLM. Every proposal draft draws from these, no invented facts.</p>
+        <p class="proposal-panel-desc">Do this once. Upload your org documents to NotebookLM. Every proposal draft draws only from these uploaded documents.</p>
         <ul class="doc-checklist">
           <li class="doc-item"><span class="doc-star" aria-hidden="true">★</span><div><b>Mission, vision, and values statement</b> <span class="pill pill-open" style="margin-left:5px;">Required</span><div style="font-size:10.5px;color:var(--c-muted);margin-top:1px;">Core context for every proposal</div></div></li>
           <li class="doc-item"><span class="doc-star" aria-hidden="true">★</span><div><b>Program descriptions</b> <span class="pill pill-open" style="margin-left:5px;">Required</span><div style="font-size:10.5px;color:var(--c-muted);margin-top:1px;">What you do, in grant language</div></div></li>
-          <li class="doc-item"><span class="doc-star" aria-hidden="true">★</span><div><b>Student outcome data and impact statistics</b> <span class="pill pill-open" style="margin-left:5px;">Required</span><div style="font-size:10.5px;color:var(--c-muted);margin-top:1px;">Real numbers only, never invented</div></div></li>
+          <li class="doc-item"><span class="doc-star" aria-hidden="true">★</span><div><b>Student outcome data and impact statistics</b> <span class="pill pill-open" style="margin-left:5px;">Required</span><div style="font-size:10.5px;color:var(--c-muted);margin-top:1px;">Uses only what's in your uploaded documents</div></div></li>
           <li class="doc-item"><span class="doc-star" aria-hidden="true">★</span><div><b>IRS 501(c)(3) determination letter</b> <span class="pill pill-open" style="margin-left:5px;">Required</span><div style="font-size:10.5px;color:var(--c-muted);margin-top:1px;">Required by nearly every funder</div></div></li>
           <li class="doc-item"><span class="doc-star" aria-hidden="true">★</span><div><b>Past funders list</b> <span class="pill pill-open" style="margin-left:5px;">Required</span><div style="font-size:10.5px;color:var(--c-muted);margin-top:1px;">Builds credibility with new funders</div></div></li>
           <li class="doc-item"><span style="color:var(--c-faint);" aria-hidden="true">○</span><div style="color:var(--c-muted);font-size:11.5px;">Budget overview · Student testimonials · Service areas <span style="font-size:10px;">(optional but recommended)</span></div></li>
@@ -1182,8 +1205,8 @@
         </button>
         <div class="acc-body">
           <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px;">
-            <div style="background:var(--c-soft);border-radius:10px;padding:14px;text-align:center;"><div style="font-size:22px;font-weight:500;color:var(--c-deep);">750K+</div><div style="font-size:10px;color:var(--c-muted);margin-top:3px;line-height:1.4;">nonprofits under $500K budget with no dedicated grant staff</div></div>
-            <div style="background:var(--c-soft);border-radius:10px;padding:14px;text-align:center;"><div style="font-size:22px;font-weight:500;color:var(--c-deep);">$0.00</div><div style="font-size:10px;color:var(--c-muted);margin-top:3px;line-height:1.4;">total cost to run this system for any education nonprofit</div></div>
+            <div style="background:var(--c-soft);border-radius:10px;padding:14px;text-align:center;"><div style="font-size:22px;font-weight:500;color:var(--c-deep);">750K+</div><div style="font-size:10px;color:var(--c-muted);margin-top:3px;line-height:1.4;">est. nonprofits under $500K budget with no dedicated grant staff</div></div>
+            <div style="background:var(--c-soft);border-radius:10px;padding:14px;text-align:center;"><div style="font-size:22px;font-weight:500;color:var(--c-deep);">$0.00</div><div style="font-size:10px;color:var(--c-muted);margin-top:3px;line-height:1.4;">designed to run on currently free tiers (Groq, Google)</div></div>
             <div style="background:var(--c-soft);border-radius:10px;padding:14px;text-align:center;"><div style="font-size:22px;font-weight:500;color:var(--c-deep);">30 min</div><div style="font-size:10px;color:var(--c-muted);margin-top:3px;line-height:1.4;">staff time per week to discover, qualify, and track new leads</div></div>
           </div>
           <div style="background:var(--c-tint);border-left:3px solid var(--c-purple);border-radius:0 8px 8px 0;padding:10px 12px;font-size:11.5px;color:var(--c-text);line-height:1.65;">One Groq API key, a browser, and 30 minutes a week is all it takes. Any small nonprofit in education can clone this, update the org profile, and run it immediately.</div>
@@ -1194,16 +1217,17 @@
       <div class="acc-item">
         <button class="acc-trigger" onclick="toggleAcc(this)" aria-expanded="false">
           <div class="acc-num" aria-hidden="true">3</div>
-          <div><span class="acc-label">AI Models</span><span class="acc-title">What runs under the hood and why</span></div>
+          <div><span class="acc-label">Technical architecture</span><span class="acc-title">For implementers and reviewers</span></div>
           <i class="ti ti-chevron-down acc-chev" aria-hidden="true"></i>
         </button>
         <div class="acc-body">
+          <p style="font-size:12px;color:var(--c-muted);line-height:1.6;margin:0 0 14px;">In plain terms, this stage searches current funding sources, validates source links, compares eligibility against your org profile, flags risk or questionable output, organizes approved leads, and supports evidence-grounded proposal drafting. The table below is the technical detail behind that: which model runs each step, and its usage limit.</p>
           <div style="display:grid;grid-template-columns:180px 1fr 70px;gap:10px;padding:6px 0;border-bottom:0.5px solid var(--c-border);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--c-muted);"><div>Model</div><div>Role &amp; function</div><div>Limit</div></div>
           <div style="display:grid;grid-template-columns:180px 1fr 70px;gap:10px;padding:9px 0;border-bottom:0.5px solid #F0EDF8;align-items:start;"><div><div style="font-weight:600;font-size:12px;">groq/compound</div><span style="display:inline-flex;background:var(--c-soft);color:var(--c-deep);font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;margin-top:3px;">Layer 1 &middot; Discover</span></div><div style="font-size:11px;color:var(--c-muted);">Live web search, up to 10 searches/call. Returns funders, amounts, deadlines, URLs. Memory excludes known funders.</div><div><span style="background:#DCFCE7;color:#166534;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;">Free</span><div style="font-size:9px;color:var(--c-faint);margin-top:3px;">1K req/day</div></div></div>
           <div style="display:grid;grid-template-columns:180px 1fr 70px;gap:10px;padding:9px 0;border-bottom:0.5px solid #F0EDF8;align-items:start;"><div><div style="font-weight:600;font-size:12px;">groq/compound</div><span style="display:inline-flex;background:var(--c-soft);color:var(--c-deep);font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;margin-top:3px;">Layer 1.5 &middot; Verify</span></div><div style="font-size:11px;color:var(--c-muted);">Visits every URL server-side. Filters dead links, login walls, unverifiable pages silently.</div><div><span style="background:#DCFCE7;color:#166534;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;">Free</span><div style="font-size:9px;color:var(--c-faint);margin-top:3px;">Same key</div></div></div>
           <div style="display:grid;grid-template-columns:180px 1fr 70px;gap:10px;padding:9px 0;border-bottom:0.5px solid #F0EDF8;align-items:start;"><div><div style="font-weight:600;font-size:12px;">gpt-oss-120b</div><span style="display:inline-flex;background:var(--c-soft);color:var(--c-deep);font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;margin-top:3px;">Layer 2 &middot; Qualify</span></div><div style="font-size:11px;color:var(--c-muted);">Scores 1–5 vs org profile. Mission, geography, eligibility, risks. Returns structured JSON with recommended action.</div><div><span style="background:#DCFCE7;color:#166534;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;">Free</span><div style="font-size:9px;color:var(--c-faint);margin-top:3px;">1K req/day</div></div></div>
           <div style="display:grid;grid-template-columns:180px 1fr 70px;gap:10px;padding:9px 0;border-bottom:0.5px solid #F0EDF8;align-items:start;"><div><div style="font-weight:600;font-size:12px;">gpt-oss-safeguard</div><span style="display:inline-flex;background:var(--c-soft);color:var(--c-deep);font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;margin-top:3px;">Layer 2.5 &middot; Guard</span></div><div style="font-size:11px;color:var(--c-muted);">Language, bias, accuracy, appropriateness. Soft-flag only, AI never hard-blocks. Humans decide.</div><div><span style="background:#DCFCE7;color:#166534;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;">Free</span><div style="font-size:9px;color:var(--c-faint);margin-top:3px;">Policy-driven</div></div></div>
-          <div style="display:grid;grid-template-columns:180px 1fr 70px;gap:10px;padding:9px 0;align-items:start;"><div><div style="font-weight:600;font-size:12px;">Google NotebookLM</div><span style="display:inline-flex;background:var(--c-soft);color:var(--c-deep);font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;margin-top:3px;">Layer 4 &middot; Propose</span></div><div style="font-size:11px;color:var(--c-muted);">Drafts from real org documents only. No invented stats. Marks gaps [INSERT: ...]. Upload once, reuse forever.</div><div><span style="background:#DCFCE7;color:#166534;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;">Free</span><div style="font-size:9px;color:var(--c-faint);margin-top:3px;">No API key</div></div></div>
+          <div style="display:grid;grid-template-columns:180px 1fr 70px;gap:10px;padding:9px 0;align-items:start;"><div><div style="font-weight:600;font-size:12px;">Google NotebookLM</div><span style="display:inline-flex;background:var(--c-soft);color:var(--c-deep);font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;margin-top:3px;">Layer 4 &middot; Propose</span></div><div style="font-size:11px;color:var(--c-muted);">Drafts from real org documents only. Prompts instruct the model to use only uploaded evidence. Marks gaps [INSERT: ...]. Upload once, reuse forever.</div><div><span style="background:#DCFCE7;color:#166534;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;">Free</span><div style="font-size:9px;color:var(--c-faint);margin-top:3px;">No API key</div></div></div>
           <div style="margin-top:10px;background:var(--c-tint);border-radius:7px;padding:8px 10px;font-size:10.5px;color:var(--c-muted);">One Groq key covers all AI layers. Weekly run uses ~16,200 tokens, under 10% of the free daily limit. Resets every 24 hours.</div>
         </div>
       </div>
@@ -1217,7 +1241,7 @@
         </button>
         <div class="acc-body">
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-            <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:11px 13px;"><div style="display:flex;align-items:center;gap:7px;margin-bottom:5px;"><div style="width:24px;height:24px;border-radius:6px;background:var(--c-soft);display:flex;align-items:center;justify-content:center;"><i class="ti ti-search" style="font-size:12px;color:var(--c-purple);" aria-hidden="true"></i></div><b style="font-size:12px;">Discover</b></div><div style="font-size:10.5px;color:var(--c-muted);line-height:1.55;">Category chips or custom search (280 char). 5-layer pipeline runs automatically. Every result has a working URL, fit score, and why-qualifies explanation.</div></div>
+            <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:11px 13px;"><div style="display:flex;align-items:center;gap:7px;margin-bottom:5px;"><div style="width:24px;height:24px;border-radius:6px;background:var(--c-soft);display:flex;align-items:center;justify-content:center;"><i class="ti ti-search" style="font-size:12px;color:var(--c-purple);" aria-hidden="true"></i></div><b style="font-size:12px;">Discover</b></div><div style="font-size:10.5px;color:var(--c-muted);line-height:1.55;">Category chips or custom search (280 char). 5-layer pipeline runs automatically. Every result includes a source link, fit score, and why-qualifies explanation.</div></div>
             <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:11px 13px;"><div style="display:flex;align-items:center;gap:7px;margin-bottom:5px;"><div style="width:24px;height:24px;border-radius:6px;background:var(--c-soft);display:flex;align-items:center;justify-content:center;"><i class="ti ti-table" style="font-size:12px;color:var(--c-purple);" aria-hidden="true"></i></div><b style="font-size:12px;">Tracker</b></div><div style="font-size:10.5px;color:var(--c-muted);line-height:1.55;">Inline editable pipeline. Status changes auto-exclude funders from future searches. Deadline badges turn red within 14 days. CSV export for team sharing.</div></div>
             <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:11px 13px;"><div style="display:flex;align-items:center;gap:7px;margin-bottom:5px;"><div style="width:24px;height:24px;border-radius:6px;background:var(--c-soft);display:flex;align-items:center;justify-content:center;"><i class="ti ti-file-text" style="font-size:12px;color:var(--c-purple);" aria-hidden="true"></i></div><b style="font-size:12px;">Proposal</b></div><div style="font-size:10.5px;color:var(--c-muted);line-height:1.55;">Select opportunity → copy generated prompt → paste into NotebookLM with funder's RFP. Drafts use only real org documents. Every gap marked [INSERT: ...].</div></div>
             <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:11px 13px;"><div style="display:flex;align-items:center;gap:7px;margin-bottom:5px;"><div style="width:24px;height:24px;border-radius:6px;background:var(--c-soft);display:flex;align-items:center;justify-content:center;"><i class="ti ti-info-circle" style="font-size:12px;color:var(--c-purple);" aria-hidden="true"></i></div><b style="font-size:12px;">About</b></div><div style="font-size:10.5px;color:var(--c-muted);line-height:1.55;">This tab. Mission, AI models, tab guide, and architecture. Any team member or judge understands the full system in under 2 minutes.</div></div>
@@ -1245,9 +1269,9 @@
             <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:10px;"><i class="ti ti-filter" style="font-size:16px;color:var(--c-purple);" aria-hidden="true"></i><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin:4px 0 3px;">5-layer pipeline</div><div style="font-size:10px;color:var(--c-muted);line-height:1.5;">Each layer filters noise. Only the best reach staff.</div></div>
             <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:10px;"><i class="ti ti-brain" style="font-size:16px;color:var(--c-purple);" aria-hidden="true"></i><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin:4px 0 3px;">Search memory</div><div style="font-size:10px;color:var(--c-muted);line-height:1.5;">Every run smarter. Known funders excluded automatically.</div></div>
             <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:10px;"><i class="ti ti-shield-check" style="font-size:16px;color:var(--c-purple);" aria-hidden="true"></i><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin:4px 0 3px;">Guardrails</div><div style="font-size:10px;color:var(--c-muted);line-height:1.5;">Bias, accuracy, appropriateness checked every run.</div></div>
-            <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:10px;"><i class="ti ti-link-off" style="font-size:16px;color:var(--c-purple);" aria-hidden="true"></i><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin:4px 0 3px;">Zero dead links</div><div style="font-size:10px;color:var(--c-muted);line-height:1.5;">Every URL visited server-side before staff sees it.</div></div>
+            <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:10px;"><i class="ti ti-link-off" style="font-size:16px;color:var(--c-purple);" aria-hidden="true"></i><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin:4px 0 3px;">Links checked automatically</div><div style="font-size:10px;color:var(--c-muted);line-height:1.5;">Every URL is checked before results are shown.</div></div>
             <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:10px;"><i class="ti ti-plug" style="font-size:16px;color:var(--c-purple);" aria-hidden="true"></i><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin:4px 0 3px;">Modular</div><div style="font-size:10px;color:var(--c-muted);line-height:1.5;">One config line swaps any AI provider.</div></div>
-            <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:10px;"><i class="ti ti-currency-dollar-off" style="font-size:16px;color:var(--c-purple);" aria-hidden="true"></i><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin:4px 0 3px;">Zero cost</div><div style="font-size:10px;color:var(--c-muted);line-height:1.5;">Under 10% of free daily token limit per weekly run.</div></div>
+            <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:10px;"><i class="ti ti-currency-dollar-off" style="font-size:16px;color:var(--c-purple);" aria-hidden="true"></i><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin:4px 0 3px;">Runs on free tiers</div><div style="font-size:10px;color:var(--c-muted);line-height:1.5;">Under 10% of free daily token limit per weekly run.</div></div>
           </div>
         </div>
       </div>
@@ -1285,7 +1309,7 @@
         <div class="api-note">
           <b>One-time setup (founder/admin does this once):</b>
           1) In Google Drive, click <b>New → Shared Drive</b>, name it (e.g.
-          "Fundigo Grant Data"), and add your grant team as members.
+          "Fundaigo Grant Data"), and add your grant team as members.
           2) Open it. The URL looks like
           <code style="background:var(--c-soft);color:var(--c-deep);padding:1px 5px;border-radius:4px;">drive.google.com/drive/folders/&lt;ID&gt;</code>
           , copy the <code style="background:var(--c-soft);color:var(--c-deep);padding:1px 5px;border-radius:4px;">&lt;ID&gt;</code> part.
@@ -1365,8 +1389,7 @@
       <a href="https://mdevi25.github.io/" target="_blank" rel="noopener">Portfolio</a>
     </div>
     <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px;">
-      <div class="app-footer-badge">$0.00 / mo</div>
-      <div style="font-size:10px;color:#8A93A1;">© 2026 Madhu Devi. All rights reserved.</div>
+            <div style="font-size:10px;color:#8A93A1;">© 2026 Madhu Devi. All rights reserved.</div>
     </div>
   </footer>
 </div><!-- /app-shell -->
