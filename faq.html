@@ -43,8 +43,10 @@
 
     /* ── BODY ── */
     .faq-body{max-width:760px;margin:0 auto;padding:12px 32px 72px;}
-    .cat-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--c-purple);margin:28px 0 10px;display:flex;align-items:center;gap:6px;}
+    .cat-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--c-purple);margin:28px 0 10px;display:flex;align-items:center;gap:6px;cursor:pointer;user-select:none;}
     .cat-label:first-child{margin-top:4px;}
+    .cat-chev{margin-left:auto;font-size:12px;transition:transform .15s;}
+    .cat-label.cat-open .cat-chev{transform:rotate(180deg);}
     .faq-item{border:0.5px solid var(--c-border);border-radius:10px;margin-bottom:7px;background:#0d1829;overflow:hidden;}
     .faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 15px;background:#0d1829;border:none;cursor:pointer;text-align:left;font-family:var(--font-sans);font-size:13px;font-weight:600;color:var(--c-text);}
     .faq-q:hover{background:var(--c-tint);}
@@ -127,8 +129,163 @@
     No questions match your search. Try different keywords.
   </div>
 
-  <!-- KNOWN ERROR MESSAGES -->
-  <div class="cat-label" data-cat><i class="ti ti-alert-triangle" style="font-size:11px;color:#D97706;" aria-hidden="true"></i> Known error messages</div>
+  <div class="cat-label" data-cat onclick="toggleCategory(this)"><i class="ti ti-rocket" style="font-size:11px;" aria-hidden="true"></i> Getting started<i class="ti ti-chevron-down cat-chev" aria-hidden="true"></i></div>
+
+  <div class="faq-item" data-q="what is fundigo">
+    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">What is Fundigo?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
+    <div class="faq-a">Fundigo is a free AI-powered grant intelligence platform for small nonprofits in education. It runs a <b>5-layer pipeline</b>, discovery, link verification, qualification scoring, bias guard, and tracking, so your team spends 30 minutes a week instead of hours finding verified, scored funding leads.</div>
+  </div>
+
+  <div class="faq-item" data-q="is it really free cost catch credit card">
+    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">Is it really free? What's the catch?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
+    <div class="faq-a">Yes, genuinely free. <b>No credit card required to start.</b> Fundigo runs on Groq's free API tier: 1,000 requests and 200,000 tokens per day, resetting every 24 hours. One weekly full scan uses under 10% of that daily limit. No trial period, no expiry date.</div>
+  </div>
+
+  <div class="faq-item" data-q="what do i need setup get started requirements google account shared drive">
+    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">What do I need to get started?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
+    <div class="faq-a"><b>(1)</b> A free Groq API key from <a href="https://console.groq.com" target="_blank" rel="noopener">console.groq.com</a>, no credit card. <b>(2)</b> A Google account, for NotebookLM and a Shared Drive to hold your team's tracker. <b>(3)</b> Your org's core documents for NotebookLM (mission statement, program descriptions, 501(c)(3) letter, impact stats). Setup takes under 30 minutes.</div>
+  </div>
+
+  <div class="faq-item" data-q="groq api key how to get create account">
+    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">How do I get a Groq API key?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
+    <div class="faq-a">Go to <a href="https://console.groq.com" target="_blank" rel="noopener">console.groq.com</a> → sign up (free, no credit card) → click <b>API Keys</b> in the sidebar → click <b>Create API Key</b> → name it <code>Fundigo</code> → copy the key. It starts with <code>gsk_</code>. Takes about 3 minutes total.</div>
+  </div>
+
+  <div class="faq-item" data-q="other nonprofits use clone different organization profile">
+    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">Can other nonprofits use Fundigo?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
+    <div class="faq-a">Yes, that's the point. Any small nonprofit updates the org profile in the Settings tab and runs their own searches immediately. The architecture is identical whether you serve 50 students in Chicago or 5,000 in Texas. <b>750,000+ US nonprofits</b> have this exact problem, same zero-cost solution for all of them.</div>
+  </div>
+
+  <!-- DISCOVERY -->
+
+<div class="cat-label" data-cat onclick="toggleCategory(this)"><i class="ti ti-search" style="font-size:11px;" aria-hidden="true"></i> Discovery<i class="ti ti-chevron-down cat-chev" aria-hidden="true"></i></div>
+
+  <div class="faq-item" data-q="how does ai search grants find funders web">
+    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">How does the AI search for grants?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
+    <div class="faq-a">Fundigo uses <b>groq/compound</b>, a model with built-in live web search, to scan the open web across 6 funder categories simultaneously. It runs up to 10 separate searches per call, then returns the strongest candidates matching your org profile. Every result then passes through 4 more pipeline layers before you see it.</div>
+  </div>
+
+  <div class="faq-item" data-q="why filtered out dead links removed before see them">
+    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">Why are some results filtered before I see them?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
+    <div class="faq-a">Layer 1.5 visits every URL server-side using the <code>visit_website</code> tool. Pages that return 404 errors, require login, redirect to homepages, or can't be verified are silently dropped. Dead links waste your team's time, only working, accessible grant pages reach you. Filtered URLs are cached for 60 days so they're never re-checked unnecessarily.</div>
+  </div>
+
+  <div class="faq-item" data-q="guard flagged warning what does it mean flag review">
+    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">What does "guard flagged" mean?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
+    <div class="faq-a">Every result passes through Layer 2.5 which checks four things: language quality, demographic bias, factual accuracy, and nonprofit appropriateness. A <b>⚠ Guard flagged</b> badge means at least one check raised a concern. The result is shown with a warning rather than hidden, your staff reviews and decides. AI surfaces the flag; humans make the final call. Always.</div>
+  </div>
+
+  <div class="faq-item" data-q="how many grants results per search find">
+    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">How many opportunities does it find per search?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
+    <div class="faq-a">Up to 8 candidates are discovered in Layer 1. After link verification, qualification scoring, and guard checks, typically <b>3-6 verified, qualified results</b> reach you. Accuracy over volume, a small set of verified leads with working URLs and fit scores is far more useful than a large unverified list.</div>
+  </div>
+
+  <div class="faq-item" data-q="fit score 1 2 3 4 5 criteria what does it mean rubric">
+    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">What does the fit score 1–5 mean? How does the AI decide?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
+    <div class="faq-a">Every grant opportunity is scored 1-5 by the Qualification Agent against your org profile. The rubric is explicit, the AI applies the same criteria every run:<br><br>
+      <b>5 &middot; Perfect fit:</b> Mission directly matches the funder's stated focus. Location explicitly eligible. Amount within your stated grant range. No special requirements or flags.<br><br>
+      <b>4 &middot; Strong fit:</b> Mission closely aligns. Location eligible. Amount within range. Minor manageable flags such as a Letter of Intent required.<br><br>
+      <b>3 &middot; Moderate fit:</b> Mission partially aligns or is an adjacent focus area. Location eligible but not the funder's primary geography. Amount slightly outside your range.<br><br>
+      <b>2 &middot; Weak fit:</b> Mission alignment is a stretch. Location may need verification. Amount significantly outside range. Multiple flags to investigate.<br><br>
+      <b>1 &middot; Poor fit:</b> Mission mismatch, funder focus is unrelated to your work. Location ineligible. Amount far outside range. Major barriers such as invitation-only or school district sponsorship required.<br><br>
+      Opportunities scoring below 3 are filtered out and moved to the Future Monitoring section rather than shown as active results.
+    </div>
+  </div>
+
+  <div class="faq-item" data-q="how often run search weekly cadence schedule">
+    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">How often should I run a search?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
+    <div class="faq-a"><b>Once a week</b> is the recommended cadence. The memory layer automatically excludes funders already found in previous runs, so each weekly search surfaces genuinely new leads. Set a 30-minute calendar reminder on the same day each week and make it a routine.</div>
+  </div>
+
+  <div class="faq-item" data-q="what funder categories search community corporate government faith family healthcare">
+    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">What funder categories does it search?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
+    <div class="faq-a">Six categories: <b>Community foundations</b> (local and regional, rolling deadlines), <b>Corporate giving</b> (company programs, often unpublicized), <b>Government grants</b> (federal, state, Title I-adjacent), <b>Faith-based funders</b> (churches, dioceses, religious foundations), <b>Family foundations</b> (private, rarely publicized), and <b>Healthcare foundations</b> (health equity, trauma-informed programs). The "Full scan" chip searches all six in one run.</div>
+  </div>
+
+  <!-- TRACKER -->
+
+<div class="cat-label" data-cat onclick="toggleCategory(this)"><i class="ti ti-table" style="font-size:11px;" aria-hidden="true"></i> Tracker<i class="ti ti-chevron-down cat-chev" aria-hidden="true"></i></div>
+
+  <div class="faq-item" data-q="data saved browser close session persistent storage">
+    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">Will my tracker data be saved if I close the browser?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
+    <div class="faq-a">Yes. All tracker data is saved to <b>localStorage</b>, it survives closing the tab, closing the browser, and restarting your computer. It is not the same as browser cache. Clearing your browser cache will not delete it. Only explicitly clearing "Cookies and site data" in your browser's privacy settings would remove it.</div>
+  </div>
+
+  <div class="faq-item" data-q="team access share tracker multiple people devices">
+    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">Can my whole team access the tracker?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
+    <div class="faq-a">Currently the tracker lives in one browser on one device. Use <b>Export CSV</b> to share with your team instantly via Google Sheets. <b>Coming in Phase 2:</b> Google Sheets direct sync so the full tracker is accessible from any device for any team member, without exporting.</div>
+  </div>
+
+  <div class="faq-item" data-q="deadline alert reminder 14 days urgent red">
+    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">How do deadline alerts work?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
+    <div class="faq-a">When you open the Tracker tab, the system checks every deadline in your pipeline. Any opportunity with a deadline within <b>14 days</b> triggers a red alert banner at the top of the tracker listing each urgent grant by name, amount, and exact date. Deadline badges on each row also change color: green (&gt;30 days), amber (14–30 days), red (&lt;14 days).</div>
+  </div>
+
+  <div class="faq-item" data-q="status options new pursuing submitted funded declined deferred">
+    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">What are the tracker status options?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
+    <div class="faq-a">Seven statuses: <b>New</b> (just added), <b>Pursuing</b> (actively working on application), <b>Submitted</b> (application sent), <b>Funded</b> (award received), <b>Declined</b> (rejected this cycle), <b>Not Eligible</b> (confirmed doesn't qualify), <b>Deferred</b> (skipping this cycle, revisit later). Funded and Submitted funders are automatically excluded from future discovery searches.</div>
+  </div>
+
+  <!-- PROPOSALS -->
+
+<div class="cat-label" data-cat onclick="toggleCategory(this)"><i class="ti ti-file-text" style="font-size:11px;" aria-hidden="true"></i> Proposals<i class="ti ti-chevron-down cat-chev" aria-hidden="true"></i></div>
+
+  <div class="faq-item" data-q="notebooklm what is why documents knowledge base upload">
+    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">What is NotebookLM and why does it need my documents?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
+    <div class="faq-a">Google NotebookLM is a free AI tool that answers questions and drafts content based <b>only</b> on documents you upload, it cannot make things up from its training data. Fundigo uses it as your org's knowledge base. Upload your mission statement, program descriptions, and impact stats once, and every proposal draft draws from your real facts, not invented ones. Free at <a href="https://notebooklm.google.com" target="_blank" rel="noopener">notebooklm.google.com</a>.</div>
+  </div>
+
+  <div class="faq-item" data-q="will ai write full proposal automatically complete">
+    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">Will the AI write the full proposal for me?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
+    <div class="faq-a">It produces a strong first draft, not a finished, submittable proposal. Fundigo generates a tailored prompt you paste into NotebookLM alongside the funder's RFP. NotebookLM drafts using your uploaded documents. Staff then fills in <code>[INSERT: ...]</code> placeholders, edits for the org's voice, verifies every statistic, and gives final approval before submission. <b>AI assists. Humans decide and submit. Always.</b></div>
+  </div>
+
+  <div class="faq-item" data-q="insert placeholder what fill in missing required">
+    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">What are the [INSERT: ...] placeholders?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
+    <div class="faq-a">When NotebookLM needs information that isn't in your uploaded documents, it writes <code>[INSERT: description of what's needed]</code> rather than inventing content. This is a safety feature. Every placeholder must be filled with accurate information before submitting, a funder will reject or disqualify any proposal with unfilled placeholders.</div>
+  </div>
+
+  <div class="faq-item" data-q="which documents upload notebooklm required needed">
+    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">Which documents do I need to upload to NotebookLM?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
+    <div class="faq-a"><b>Required:</b> Mission/vision statement, program descriptions, student outcome data and impact statistics, IRS 501(c)(3) determination letter, past funders list.<br><br><b>Recommended:</b> Annual budget overview, student testimonials, geographic service areas (cities and zip codes).<br><br>Upload once. The Proposal tab in Fundigo shows the full checklist with required vs optional labels.</div>
+  </div>
+
+  <!-- TECHNICAL -->
+
+<div class="cat-label" data-cat onclick="toggleCategory(this)"><i class="ti ti-cpu" style="font-size:11px;" aria-hidden="true"></i> Technical<i class="ti ti-chevron-down cat-chev" aria-hidden="true"></i></div>
+
+  <div class="faq-item" data-q="what ai models used groq llm layer pipeline">
+    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">What AI models does Fundigo use?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
+    <div class="faq-a">All free under one Groq API key:<br><br>
+      <b>Layer 1 + 1.5:</b> <code>groq/compound</code>, live web search and URL verification via <code>visit_website</code><br>
+      <b>Layer 2:</b> <code>openai/gpt-oss-120b</code>, qualification scoring 1-5 with <code>reasoning_effort: "low"</code><br>
+      <b>Layer 2.5:</b> <code>openai/gpt-oss-safeguard-20b</code>, bias, accuracy, and appropriateness guard<br>
+      <b>Layer 4:</b> Google NotebookLM, proposal drafting (no API key required)</div>
+  </div>
+
+  <div class="faq-item" data-q="data privacy stored org documents secure server">
+    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">Does Fundigo store my org's data?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
+    <div class="faq-a">Fundigo stores tracker rows, org profile, and search memory <b>locally in your browser</b> via <code>localStorage</code>. There are no Fundigo servers, no data leaves your device except the search prompts sent to Groq's API. Org documents stay in your Google NotebookLM account. Your Groq API key is stored in <code>sessionStorage</code> only and is never written to disk.</div>
+  </div>
+
+  <div class="faq-item" data-q="swap ai provider change model gemini config.js different">
+    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">Can I swap to a different AI provider?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
+    <div class="faq-a">Yes. One line in <code>config.js</code> swaps any model in any pipeline layer. The system is provider-agnostic by design, built on Groq today because it's free with no credit card, but ready for Gemini, Mistral, or any open-source model tomorrow. The pipeline logic is completely separate from the model selection.</div>
+  </div>
+
+  <div class="faq-item" data-q="token limit hit rate 429 error wait reset">
+    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">What happens if I hit the free token limit?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
+    <div class="faq-a">Fundigo shows a clear message: <i>"Rate limit reached. Wait 60 seconds and try again."</i> The per-minute limit resets every 60 seconds. The daily limit resets at midnight UTC. At the recommended weekly usage of one full scan per week, hitting the daily limit is essentially impossible, one scan uses under 10% of the daily allowance.</div>
+  </div>
+
+  <div class="faq-item" data-q="why single index.html not separate files tabs split">
+    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">Why is everything in one index.html instead of separate tab files?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
+    <div class="faq-a">All five tabs share JavaScript state, tracker rows, pipeline results, and org profile all live in the same memory scope. Splitting into separate HTML files would break cross-tab communication: the Proposal tab needs tracker data, the Discover tab writes to the same memory the Settings tab reads. One shell file, eight separate JS modules for business logic, is the right architecture for vanilla JS with shared state. A React or Vue app would restructure this with a component store.</div>
+  </div>
+
+  <!-- FUTURE -->
+
+<div class="cat-label" data-cat onclick="toggleCategory(this)"><i class="ti ti-alert-triangle" style="font-size:11px;color:#D97706;" aria-hidden="true"></i> Known error messages<i class="ti ti-chevron-down cat-chev" aria-hidden="true"></i></div>
 
   <div class="faq-item" data-q="rate limit reached tpm 429 qualification groq tokens per minute">
     <button class="faq-q" onclick="toggle(this)" aria-expanded="false">
@@ -226,158 +383,8 @@
   </div>
 
   <!-- GETTING STARTED -->
-  <div class="cat-label" data-cat><i class="ti ti-rocket" style="font-size:11px;" aria-hidden="true"></i> Getting started</div>
 
-  <div class="faq-item" data-q="what is fundigo">
-    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">What is Fundigo?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">Fundigo is a free AI-powered grant intelligence platform for small nonprofits in education. It runs a <b>5-layer pipeline</b>, discovery, link verification, qualification scoring, bias guard, and tracking, so your team spends 30 minutes a week instead of hours finding verified, scored funding leads.</div>
-  </div>
-
-  <div class="faq-item" data-q="is it really free cost catch credit card">
-    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">Is it really free? What's the catch?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">Yes, genuinely free. <b>No credit card required to start.</b> Fundigo runs on Groq's free API tier: 1,000 requests and 200,000 tokens per day, resetting every 24 hours. One weekly full scan uses under 10% of that daily limit. No trial period, no expiry date.</div>
-  </div>
-
-  <div class="faq-item" data-q="what do i need setup get started requirements google account shared drive">
-    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">What do I need to get started?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a"><b>(1)</b> A free Groq API key from <a href="https://console.groq.com" target="_blank" rel="noopener">console.groq.com</a>, no credit card. <b>(2)</b> A Google account, for NotebookLM and a Shared Drive to hold your team's tracker. <b>(3)</b> Your org's core documents for NotebookLM (mission statement, program descriptions, 501(c)(3) letter, impact stats). Setup takes under 30 minutes.</div>
-  </div>
-
-  <div class="faq-item" data-q="groq api key how to get create account">
-    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">How do I get a Groq API key?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">Go to <a href="https://console.groq.com" target="_blank" rel="noopener">console.groq.com</a> → sign up (free, no credit card) → click <b>API Keys</b> in the sidebar → click <b>Create API Key</b> → name it <code>Fundigo</code> → copy the key. It starts with <code>gsk_</code>. Takes about 3 minutes total.</div>
-  </div>
-
-  <div class="faq-item" data-q="other nonprofits use clone different organization profile">
-    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">Can other nonprofits use Fundigo?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">Yes, that's the point. Any small nonprofit updates the org profile in the Settings tab and runs their own searches immediately. The architecture is identical whether you serve 50 students in Chicago or 5,000 in Texas. <b>750,000+ US nonprofits</b> have this exact problem, same zero-cost solution for all of them.</div>
-  </div>
-
-  <!-- DISCOVERY -->
-  <div class="cat-label" data-cat><i class="ti ti-search" style="font-size:11px;" aria-hidden="true"></i> Discovery</div>
-
-  <div class="faq-item" data-q="how does ai search grants find funders web">
-    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">How does the AI search for grants?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">Fundigo uses <b>groq/compound</b>, a model with built-in live web search, to scan the open web across 6 funder categories simultaneously. It runs up to 10 separate searches per call, then returns the strongest candidates matching your org profile. Every result then passes through 4 more pipeline layers before you see it.</div>
-  </div>
-
-  <div class="faq-item" data-q="why filtered out dead links removed before see them">
-    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">Why are some results filtered before I see them?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">Layer 1.5 visits every URL server-side using the <code>visit_website</code> tool. Pages that return 404 errors, require login, redirect to homepages, or can't be verified are silently dropped. Dead links waste your team's time, only working, accessible grant pages reach you. Filtered URLs are cached for 60 days so they're never re-checked unnecessarily.</div>
-  </div>
-
-  <div class="faq-item" data-q="guard flagged warning what does it mean flag review">
-    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">What does "guard flagged" mean?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">Every result passes through Layer 2.5 which checks four things: language quality, demographic bias, factual accuracy, and nonprofit appropriateness. A <b>⚠ Guard flagged</b> badge means at least one check raised a concern. The result is shown with a warning rather than hidden, your staff reviews and decides. AI surfaces the flag; humans make the final call. Always.</div>
-  </div>
-
-  <div class="faq-item" data-q="how many grants results per search find">
-    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">How many opportunities does it find per search?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">Up to 8 candidates are discovered in Layer 1. After link verification, qualification scoring, and guard checks, typically <b>3-6 verified, qualified results</b> reach you. Accuracy over volume, a small set of verified leads with working URLs and fit scores is far more useful than a large unverified list.</div>
-  </div>
-
-  <div class="faq-item" data-q="fit score 1 2 3 4 5 criteria what does it mean rubric">
-    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">What does the fit score 1–5 mean? How does the AI decide?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">Every grant opportunity is scored 1-5 by the Qualification Agent against your org profile. The rubric is explicit, the AI applies the same criteria every run:<br><br>
-      <b>5 &middot; Perfect fit:</b> Mission directly matches the funder's stated focus. Location explicitly eligible. Amount within your stated grant range. No special requirements or flags.<br><br>
-      <b>4 &middot; Strong fit:</b> Mission closely aligns. Location eligible. Amount within range. Minor manageable flags such as a Letter of Intent required.<br><br>
-      <b>3 &middot; Moderate fit:</b> Mission partially aligns or is an adjacent focus area. Location eligible but not the funder's primary geography. Amount slightly outside your range.<br><br>
-      <b>2 &middot; Weak fit:</b> Mission alignment is a stretch. Location may need verification. Amount significantly outside range. Multiple flags to investigate.<br><br>
-      <b>1 &middot; Poor fit:</b> Mission mismatch, funder focus is unrelated to your work. Location ineligible. Amount far outside range. Major barriers such as invitation-only or school district sponsorship required.<br><br>
-      Opportunities scoring below 3 are filtered out and moved to the Future Monitoring section rather than shown as active results.
-    </div>
-  </div>
-
-  <div class="faq-item" data-q="how often run search weekly cadence schedule">
-    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">How often should I run a search?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a"><b>Once a week</b> is the recommended cadence. The memory layer automatically excludes funders already found in previous runs, so each weekly search surfaces genuinely new leads. Set a 30-minute calendar reminder on the same day each week and make it a routine.</div>
-  </div>
-
-  <div class="faq-item" data-q="what funder categories search community corporate government faith family healthcare">
-    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">What funder categories does it search?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">Six categories: <b>Community foundations</b> (local and regional, rolling deadlines), <b>Corporate giving</b> (company programs, often unpublicized), <b>Government grants</b> (federal, state, Title I-adjacent), <b>Faith-based funders</b> (churches, dioceses, religious foundations), <b>Family foundations</b> (private, rarely publicized), and <b>Healthcare foundations</b> (health equity, trauma-informed programs). The "Full scan" chip searches all six in one run.</div>
-  </div>
-
-  <!-- TRACKER -->
-  <div class="cat-label" data-cat><i class="ti ti-table" style="font-size:11px;" aria-hidden="true"></i> Tracker</div>
-
-  <div class="faq-item" data-q="data saved browser close session persistent storage">
-    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">Will my tracker data be saved if I close the browser?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">Yes. All tracker data is saved to <b>localStorage</b>, it survives closing the tab, closing the browser, and restarting your computer. It is not the same as browser cache. Clearing your browser cache will not delete it. Only explicitly clearing "Cookies and site data" in your browser's privacy settings would remove it.</div>
-  </div>
-
-  <div class="faq-item" data-q="team access share tracker multiple people devices">
-    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">Can my whole team access the tracker?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">Currently the tracker lives in one browser on one device. Use <b>Export CSV</b> to share with your team instantly via Google Sheets. <b>Coming in Phase 2:</b> Google Sheets direct sync so the full tracker is accessible from any device for any team member, without exporting.</div>
-  </div>
-
-  <div class="faq-item" data-q="deadline alert reminder 14 days urgent red">
-    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">How do deadline alerts work?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">When you open the Tracker tab, the system checks every deadline in your pipeline. Any opportunity with a deadline within <b>14 days</b> triggers a red alert banner at the top of the tracker listing each urgent grant by name, amount, and exact date. Deadline badges on each row also change color: green (&gt;30 days), amber (14–30 days), red (&lt;14 days).</div>
-  </div>
-
-  <div class="faq-item" data-q="status options new pursuing submitted funded declined deferred">
-    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">What are the tracker status options?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">Seven statuses: <b>New</b> (just added), <b>Pursuing</b> (actively working on application), <b>Submitted</b> (application sent), <b>Funded</b> (award received), <b>Declined</b> (rejected this cycle), <b>Not Eligible</b> (confirmed doesn't qualify), <b>Deferred</b> (skipping this cycle, revisit later). Funded and Submitted funders are automatically excluded from future discovery searches.</div>
-  </div>
-
-  <!-- PROPOSALS -->
-  <div class="cat-label" data-cat><i class="ti ti-file-text" style="font-size:11px;" aria-hidden="true"></i> Proposals</div>
-
-  <div class="faq-item" data-q="notebooklm what is why documents knowledge base upload">
-    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">What is NotebookLM and why does it need my documents?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">Google NotebookLM is a free AI tool that answers questions and drafts content based <b>only</b> on documents you upload, it cannot make things up from its training data. Fundigo uses it as your org's knowledge base. Upload your mission statement, program descriptions, and impact stats once, and every proposal draft draws from your real facts, not invented ones. Free at <a href="https://notebooklm.google.com" target="_blank" rel="noopener">notebooklm.google.com</a>.</div>
-  </div>
-
-  <div class="faq-item" data-q="will ai write full proposal automatically complete">
-    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">Will the AI write the full proposal for me?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">It produces a strong first draft, not a finished, submittable proposal. Fundigo generates a tailored prompt you paste into NotebookLM alongside the funder's RFP. NotebookLM drafts using your uploaded documents. Staff then fills in <code>[INSERT: ...]</code> placeholders, edits for the org's voice, verifies every statistic, and gives final approval before submission. <b>AI assists. Humans decide and submit. Always.</b></div>
-  </div>
-
-  <div class="faq-item" data-q="insert placeholder what fill in missing required">
-    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">What are the [INSERT: ...] placeholders?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">When NotebookLM needs information that isn't in your uploaded documents, it writes <code>[INSERT: description of what's needed]</code> rather than inventing content. This is a safety feature. Every placeholder must be filled with accurate information before submitting, a funder will reject or disqualify any proposal with unfilled placeholders.</div>
-  </div>
-
-  <div class="faq-item" data-q="which documents upload notebooklm required needed">
-    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">Which documents do I need to upload to NotebookLM?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a"><b>Required:</b> Mission/vision statement, program descriptions, student outcome data and impact statistics, IRS 501(c)(3) determination letter, past funders list.<br><br><b>Recommended:</b> Annual budget overview, student testimonials, geographic service areas (cities and zip codes).<br><br>Upload once. The Proposal tab in Fundigo shows the full checklist with required vs optional labels.</div>
-  </div>
-
-  <!-- TECHNICAL -->
-  <div class="cat-label" data-cat><i class="ti ti-cpu" style="font-size:11px;" aria-hidden="true"></i> Technical</div>
-
-  <div class="faq-item" data-q="what ai models used groq llm layer pipeline">
-    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">What AI models does Fundigo use?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">All free under one Groq API key:<br><br>
-      <b>Layer 1 + 1.5:</b> <code>groq/compound</code>, live web search and URL verification via <code>visit_website</code><br>
-      <b>Layer 2:</b> <code>openai/gpt-oss-120b</code>, qualification scoring 1-5 with <code>reasoning_effort: "low"</code><br>
-      <b>Layer 2.5:</b> <code>openai/gpt-oss-safeguard-20b</code>, bias, accuracy, and appropriateness guard<br>
-      <b>Layer 4:</b> Google NotebookLM, proposal drafting (no API key required)</div>
-  </div>
-
-  <div class="faq-item" data-q="data privacy stored org documents secure server">
-    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">Does Fundigo store my org's data?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">Fundigo stores tracker rows, org profile, and search memory <b>locally in your browser</b> via <code>localStorage</code>. There are no Fundigo servers, no data leaves your device except the search prompts sent to Groq's API. Org documents stay in your Google NotebookLM account. Your Groq API key is stored in <code>sessionStorage</code> only and is never written to disk.</div>
-  </div>
-
-  <div class="faq-item" data-q="swap ai provider change model gemini config.js different">
-    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">Can I swap to a different AI provider?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">Yes. One line in <code>config.js</code> swaps any model in any pipeline layer. The system is provider-agnostic by design, built on Groq today because it's free with no credit card, but ready for Gemini, Mistral, or any open-source model tomorrow. The pipeline logic is completely separate from the model selection.</div>
-  </div>
-
-  <div class="faq-item" data-q="token limit hit rate 429 error wait reset">
-    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">What happens if I hit the free token limit?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">Fundigo shows a clear message: <i>"Rate limit reached. Wait 60 seconds and try again."</i> The per-minute limit resets every 60 seconds. The daily limit resets at midnight UTC. At the recommended weekly usage of one full scan per week, hitting the daily limit is essentially impossible, one scan uses under 10% of the daily allowance.</div>
-  </div>
-
-  <div class="faq-item" data-q="why single index.html not separate files tabs split">
-    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">Why is everything in one index.html instead of separate tab files?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">All five tabs share JavaScript state, tracker rows, pipeline results, and org profile all live in the same memory scope. Splitting into separate HTML files would break cross-tab communication: the Proposal tab needs tracker data, the Discover tab writes to the same memory the Settings tab reads. One shell file, eight separate JS modules for business logic, is the right architecture for vanilla JS with shared state. A React or Vue app would restructure this with a component store.</div>
-  </div>
-
-  <!-- FUTURE -->
-  <div class="cat-label" data-cat><i class="ti ti-road" style="font-size:11px;" aria-hidden="true"></i> Future</div>
+<div class="cat-label" data-cat onclick="toggleCategory(this)"><i class="ti ti-road" style="font-size:11px;" aria-hidden="true"></i> Future<i class="ti ti-chevron-down cat-chev" aria-hidden="true"></i></div>
 
   <div class="faq-item" data-q="what's coming next roadmap phase 2 3 features google sheets">
     <button class="faq-q" onclick="toggle(this)" aria-expanded="false">What's coming next?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
@@ -392,7 +399,6 @@
     <button class="faq-q" onclick="toggle(this)" aria-expanded="false">Will it always be free?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
     <div class="faq-a">Fundigo runs on free tools by design. The underlying AI providers (Groq) currently offer free tiers sufficient for weekly nonprofit use, but LLM pricing is a market decision outside our control. If a provider changes pricing, the one-line model swap in <code>config.js</code> lets any org move to a different free provider immediately. The system is designed to never depend on a single vendor.</div>
   </div>
-
 </div><!-- /faq-body -->
 
 <!-- FOOTER -->
@@ -440,8 +446,34 @@ function toggle(btn) {
   btn.setAttribute('aria-expanded', String(!open));
 }
 
+// ── CATEGORY COLLAPSE (reduces scroll: only category headers show by default) ──
+function toggleCategory(catEl) {
+  const isOpen = catEl.classList.contains('cat-open');
+  catEl.classList.toggle('cat-open', !isOpen);
+  let next = catEl.nextElementSibling;
+  while (next && !next.classList.contains('cat-label')) {
+    if (next.classList.contains('faq-item')) next.style.display = isOpen ? 'none' : '';
+    next = next.nextElementSibling;
+  }
+}
+
+function collapseAllCategories() {
+  document.querySelectorAll('.cat-label').forEach(cat => cat.classList.remove('cat-open'));
+  document.querySelectorAll('.faq-item').forEach(item => { item.style.display = 'none'; });
+}
+
+collapseAllCategories();
+
 function filterFAQ(val) {
   const q = val.toLowerCase().trim();
+
+  if (!q) {
+    collapseAllCategories();
+    document.getElementById('no-results').style.display = 'none';
+    document.querySelectorAll('.cat-label').forEach(cat => { cat.style.display = ''; });
+    return;
+  }
+
   const items = document.querySelectorAll('.faq-item');
   const cats  = document.querySelectorAll('.cat-label');
   let any = false;
@@ -450,12 +482,13 @@ function filterFAQ(val) {
     const text = (item.dataset.q || '') + ' ' +
                  (item.querySelector('.faq-q')?.textContent  || '') + ' ' +
                  (item.querySelector('.faq-a')?.textContent  || '');
-    const match = !q || text.toLowerCase().includes(q);
+    const match = text.toLowerCase().includes(q);
     item.style.display = match ? '' : 'none';
     if (match) any = true;
   });
 
   cats.forEach(cat => {
+    cat.classList.add('cat-open');
     let next = cat.nextElementSibling;
     let has  = false;
     while (next && !next.classList.contains('cat-label')) {
