@@ -1486,13 +1486,22 @@ function backToLanding() {
 }
 
 function enterApp() {
-  requireSignIn(function (user) {
+  requireSignIn(async function (user) {
     document.body.classList.add('in-app');
     window.scrollTo(0, 0);
     if (!window._appInited) {
       window._appInited = true;
+      // Request the Sheets-scoped access token FIRST and wait for it.
+      // This token is granted separately (and silently) from basic
+      // sign-in, so firing Sheets-dependent reads before it resolves
+      // was causing them to silently fail and fall back to an empty
+      // localStorage read (e.g. Tracker badge showing blank until a
+      // refresh, by which point Google had cached the grant).
+      try {
+        if (typeof requestSheetsAccessToken === 'function') await requestSheetsAccessToken();
+      } catch (e) { console.warn('Sheets access token not ready yet:', e.message); }
       // Guard each call — functions defined in loaded JS files
-      try { if (typeof initTracker === 'function') initTracker(); } catch(e) { console.warn('initTracker:', e); }
+      try { if (typeof initTracker === 'function') await initTracker(); } catch(e) { console.warn('initTracker:', e); }
       try { if (typeof loadProfileIntoSettings === 'function') loadProfileIntoSettings(); } catch(e) { console.warn('loadProfile:', e); }
       try { if (typeof updateMemoryStats === 'function') updateMemoryStats(); } catch(e) { console.warn('memStats:', e); }
       try { if (typeof checkApiKeyStatus === 'function') checkApiKeyStatus(); } catch(e) { console.warn('apiKey:', e); }
