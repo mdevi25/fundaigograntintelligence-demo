@@ -54,7 +54,7 @@
     body{font-family:var(--font-sans);background:var(--c-bg);color:var(--c-text);font-size:var(--fs-base);line-height:1.6;-webkit-font-smoothing:antialiased;}
 
     /* ── VIEW ROUTING ── */
-    #view-landing{display:block;overflow:hidden;min-height:100vh;display:flex;flex-direction:column;}
+    #view-landing{display:block;min-height:100vh;display:flex;flex-direction:column;}
     #view-app{display:none;}
     body.in-app #view-landing{display:none;}
     body.in-app #view-app{display:block;}
@@ -118,10 +118,10 @@
     .landing-footer{background:var(--c-text);padding:24px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:auto;}
     .landing-footer-logo{display:flex;align-items:center;gap:8px;}
     .landing-footer-name{font-size:14px;font-weight:600;color:#fff;}
-    .landing-footer-name span{color:#A78BFA;}
+    .landing-footer-name span{color:#2dd4bf;}
     .landing-footer-links{display:flex;gap:16px;flex-wrap:wrap;row-gap:6px;}
-    .landing-footer-links a{font-size:11.5px;color:#6B7280;text-decoration:none;}
-    .landing-footer-links a:hover{color:#A78BFA;}
+    .landing-footer-links a{font-size:11.5px;color:#8A93A1;text-decoration:none;}
+    .landing-footer-links a:hover{color:#2dd4bf;}
     .landing-footer-badge{font-size:10px;font-weight:700;background:#1A3A2A;color:#86EFAC;border:1px solid #166634;padding:3px 9px;border-radius:20px;}
 
     /* ── APP SHELL ── */
@@ -129,10 +129,10 @@
     .app-footer{background:var(--c-text);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:auto;}
     .app-footer-logo{display:flex;align-items:center;gap:8px;text-decoration:none;}
     .app-footer-name{font-size:13px;font-weight:600;color:#fff;}
-    .app-footer-name span{color:#A78BFA;}
+    .app-footer-name span{color:#2dd4bf;}
     .app-footer-links{display:flex;gap:16px;}
-    .app-footer-links a{font-size:11.5px;color:#6B7280;text-decoration:none;}
-    .app-footer-links a:hover{color:#A78BFA;}
+    .app-footer-links a{font-size:11.5px;color:#8A93A1;text-decoration:none;}
+    .app-footer-links a:hover{color:#2dd4bf;}
     .app-footer-badge{font-size:10px;font-weight:700;background:#1A3A2A;color:#86EFAC;border:1px solid #166534;padding:3px 9px;border-radius:20px;}
     .app-hdr{background:var(--c-bg);border-bottom:0.5px solid var(--c-border);position:sticky;top:0;z-index:100;}
     .app-hdr-stripe{height:4px;background:linear-gradient(90deg,var(--c-purple),#A855F7);}
@@ -659,7 +659,7 @@
     </a>
     <div class="landing-nav-links">
       <a href="index.html">Home</a>
-      <a href="#" onclick="enterApp();setTimeout(function(){var t=document.querySelectorAll('.app-tab')[3];if(t)switchTab('about',t);},100);return false;">About</a>
+      <a href="javascript:void(0)" onclick="document.getElementById('about-section').scrollIntoView({behavior:'smooth'});">About</a>
       <a href="faq.html">Help</a>
       <button class="landing-nav-cta" onclick="enterApp()">Start here</button>
     </div>
@@ -722,6 +722,106 @@
     </div>
   </section>
 
+  <section class="how-section" id="about-section">
+    <span class="how-sec-label">About</span>
+    <h2 class="how-title">Mission, architecture, and how it all fits together</h2>
+    <p class="how-sub">No sign-in required to read this. The tabs described below are only visible after you sign in.</p>
+      <!-- Section 1 -->
+      <div class="acc-item">
+        <button class="acc-trigger acc-open" onclick="toggleAcc(this)" aria-expanded="true">
+          <div class="acc-num" aria-hidden="true">1</div>
+          <div><span class="acc-label">Mission &amp; Vision</span><span class="acc-title">Why this system exists</span></div>
+          <i class="ti ti-chevron-down acc-chev" aria-hidden="true"></i>
+        </button>
+        <div class="acc-body acc-open">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+            <div style="background:var(--c-tint);border:0.5px solid var(--c-border);border-radius:8px;padding:12px;"><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--c-purple);margin-bottom:4px;">Mission</div><div style="font-size:11.5px;color:var(--c-text);line-height:1.6;">Helping nonprofits spend less time searching for funding and more time advancing their mission.</div></div>
+            <div style="background:var(--c-tint);border:0.5px solid var(--c-border);border-radius:8px;padding:12px;"><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--c-purple);margin-bottom:4px;">Vision</div><div style="font-size:11.5px;color:var(--c-text);line-height:1.6;">A future where every nonprofit, regardless of size, budget, or staff capacity, has equal access to funding opportunities and the tools to turn them into lasting community impact.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2 -->
+      <div class="acc-item">
+        <button class="acc-trigger" onclick="toggleAcc(this)" aria-expanded="false">
+          <div class="acc-num" aria-hidden="true">2</div>
+          <div><span class="acc-label">Impact &amp; Goal</span><span class="acc-title">The problem we are solving</span></div>
+          <i class="ti ti-chevron-down acc-chev" aria-hidden="true"></i>
+        </button>
+        <div class="acc-body">
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px;">
+            <div style="background:var(--c-soft);border-radius:10px;padding:14px;text-align:center;"><div style="font-size:22px;font-weight:500;color:var(--c-deep);">750K+</div><div style="font-size:10px;color:var(--c-muted);margin-top:3px;line-height:1.4;">nonprofits under $500K budget with no dedicated grant staff</div></div>
+            <div style="background:var(--c-soft);border-radius:10px;padding:14px;text-align:center;"><div style="font-size:22px;font-weight:500;color:var(--c-deep);">$0.00</div><div style="font-size:10px;color:var(--c-muted);margin-top:3px;line-height:1.4;">total cost to run this system for any education nonprofit</div></div>
+            <div style="background:var(--c-soft);border-radius:10px;padding:14px;text-align:center;"><div style="font-size:22px;font-weight:500;color:var(--c-deep);">30 min</div><div style="font-size:10px;color:var(--c-muted);margin-top:3px;line-height:1.4;">staff time per week to discover, qualify, and track new leads</div></div>
+          </div>
+          <div style="background:var(--c-tint);border-left:3px solid var(--c-purple);border-radius:0 8px 8px 0;padding:10px 12px;font-size:11.5px;color:var(--c-text);line-height:1.65;">One Groq API key, a browser, and 30 minutes a week is all it takes. Any small nonprofit in education can clone this, update the org profile, and run it immediately.</div>
+        </div>
+      </div>
+
+      <!-- Section 3 -->
+      <div class="acc-item">
+        <button class="acc-trigger" onclick="toggleAcc(this)" aria-expanded="false">
+          <div class="acc-num" aria-hidden="true">3</div>
+          <div><span class="acc-label">AI Models</span><span class="acc-title">What runs under the hood and why</span></div>
+          <i class="ti ti-chevron-down acc-chev" aria-hidden="true"></i>
+        </button>
+        <div class="acc-body">
+          <div style="display:grid;grid-template-columns:180px 1fr 70px;gap:10px;padding:6px 0;border-bottom:0.5px solid var(--c-border);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--c-muted);"><div>Model</div><div>Role &amp; function</div><div>Limit</div></div>
+          <div style="display:grid;grid-template-columns:180px 1fr 70px;gap:10px;padding:9px 0;border-bottom:0.5px solid #F0EDF8;align-items:start;"><div><div style="font-weight:600;font-size:12px;">groq/compound</div><span style="display:inline-flex;background:var(--c-soft);color:var(--c-deep);font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;margin-top:3px;">Layer 1 &middot; Discover</span></div><div style="font-size:11px;color:var(--c-muted);">Live web search, up to 10 searches/call. Returns funders, amounts, deadlines, URLs. Memory excludes known funders.</div><div><span style="background:#DCFCE7;color:#166534;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;">Free</span><div style="font-size:9px;color:var(--c-faint);margin-top:3px;">1K req/day</div></div></div>
+          <div style="display:grid;grid-template-columns:180px 1fr 70px;gap:10px;padding:9px 0;border-bottom:0.5px solid #F0EDF8;align-items:start;"><div><div style="font-weight:600;font-size:12px;">groq/compound</div><span style="display:inline-flex;background:var(--c-soft);color:var(--c-deep);font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;margin-top:3px;">Layer 1.5 &middot; Verify</span></div><div style="font-size:11px;color:var(--c-muted);">Visits every URL server-side. Filters dead links, login walls, unverifiable pages silently.</div><div><span style="background:#DCFCE7;color:#166534;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;">Free</span><div style="font-size:9px;color:var(--c-faint);margin-top:3px;">Same key</div></div></div>
+          <div style="display:grid;grid-template-columns:180px 1fr 70px;gap:10px;padding:9px 0;border-bottom:0.5px solid #F0EDF8;align-items:start;"><div><div style="font-weight:600;font-size:12px;">gpt-oss-120b</div><span style="display:inline-flex;background:var(--c-soft);color:var(--c-deep);font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;margin-top:3px;">Layer 2 &middot; Qualify</span></div><div style="font-size:11px;color:var(--c-muted);">Scores 1–5 vs org profile. Mission, geography, eligibility, risks. Returns structured JSON with recommended action.</div><div><span style="background:#DCFCE7;color:#166534;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;">Free</span><div style="font-size:9px;color:var(--c-faint);margin-top:3px;">1K req/day</div></div></div>
+          <div style="display:grid;grid-template-columns:180px 1fr 70px;gap:10px;padding:9px 0;border-bottom:0.5px solid #F0EDF8;align-items:start;"><div><div style="font-weight:600;font-size:12px;">gpt-oss-safeguard</div><span style="display:inline-flex;background:var(--c-soft);color:var(--c-deep);font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;margin-top:3px;">Layer 2.5 &middot; Guard</span></div><div style="font-size:11px;color:var(--c-muted);">Language, bias, accuracy, appropriateness. Soft-flag only, AI never hard-blocks. Humans decide.</div><div><span style="background:#DCFCE7;color:#166534;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;">Free</span><div style="font-size:9px;color:var(--c-faint);margin-top:3px;">Policy-driven</div></div></div>
+          <div style="display:grid;grid-template-columns:180px 1fr 70px;gap:10px;padding:9px 0;align-items:start;"><div><div style="font-weight:600;font-size:12px;">Google NotebookLM</div><span style="display:inline-flex;background:var(--c-soft);color:var(--c-deep);font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;margin-top:3px;">Layer 4 &middot; Propose</span></div><div style="font-size:11px;color:var(--c-muted);">Drafts from real org documents only. No invented stats. Marks gaps [INSERT: ...]. Upload once, reuse forever.</div><div><span style="background:#DCFCE7;color:#166534;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;">Free</span><div style="font-size:9px;color:var(--c-faint);margin-top:3px;">No API key</div></div></div>
+          <div style="margin-top:10px;background:var(--c-tint);border-radius:7px;padding:8px 10px;font-size:10.5px;color:var(--c-muted);">One Groq key covers all AI layers. Weekly run uses ~16,200 tokens, under 10% of the free daily limit. Resets every 24 hours.</div>
+        </div>
+      </div>
+
+      <!-- Section 4 -->
+      <div class="acc-item">
+        <button class="acc-trigger" onclick="toggleAcc(this)" aria-expanded="false">
+          <div class="acc-num" aria-hidden="true">4</div>
+          <div><span class="acc-label">Tab Guide</span><span class="acc-title">How each tab works</span></div>
+          <i class="ti ti-chevron-down acc-chev" aria-hidden="true"></i>
+        </button>
+        <div class="acc-body">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:11px 13px;"><div style="display:flex;align-items:center;gap:7px;margin-bottom:5px;"><div style="width:24px;height:24px;border-radius:6px;background:var(--c-soft);display:flex;align-items:center;justify-content:center;"><i class="ti ti-search" style="font-size:12px;color:var(--c-purple);" aria-hidden="true"></i></div><b style="font-size:12px;">Discover</b></div><div style="font-size:10.5px;color:var(--c-muted);line-height:1.55;">Category chips or custom search (280 char). 5-layer pipeline runs automatically. Every result has a working URL, fit score, and why-qualifies explanation.</div></div>
+            <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:11px 13px;"><div style="display:flex;align-items:center;gap:7px;margin-bottom:5px;"><div style="width:24px;height:24px;border-radius:6px;background:var(--c-soft);display:flex;align-items:center;justify-content:center;"><i class="ti ti-table" style="font-size:12px;color:var(--c-purple);" aria-hidden="true"></i></div><b style="font-size:12px;">Tracker</b></div><div style="font-size:10.5px;color:var(--c-muted);line-height:1.55;">Inline editable pipeline. Status changes auto-exclude funders from future searches. Deadline badges turn red within 14 days. CSV export for team sharing.</div></div>
+            <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:11px 13px;"><div style="display:flex;align-items:center;gap:7px;margin-bottom:5px;"><div style="width:24px;height:24px;border-radius:6px;background:var(--c-soft);display:flex;align-items:center;justify-content:center;"><i class="ti ti-file-text" style="font-size:12px;color:var(--c-purple);" aria-hidden="true"></i></div><b style="font-size:12px;">Proposal</b></div><div style="font-size:10.5px;color:var(--c-muted);line-height:1.55;">Select opportunity → copy generated prompt → paste into NotebookLM with funder's RFP. Drafts use only real org documents. Every gap marked [INSERT: ...].</div></div>
+            <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:11px 13px;"><div style="display:flex;align-items:center;gap:7px;margin-bottom:5px;"><div style="width:24px;height:24px;border-radius:6px;background:var(--c-soft);display:flex;align-items:center;justify-content:center;"><i class="ti ti-info-circle" style="font-size:12px;color:var(--c-purple);" aria-hidden="true"></i></div><b style="font-size:12px;">About</b></div><div style="font-size:10.5px;color:var(--c-muted);line-height:1.55;">This tab. Mission, AI models, tab guide, and architecture. Any team member or judge understands the full system in under 2 minutes.</div></div>
+            <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:11px 13px;grid-column:1/-1;"><div style="display:flex;align-items:center;gap:7px;margin-bottom:5px;"><div style="width:24px;height:24px;border-radius:6px;background:var(--c-soft);display:flex;align-items:center;justify-content:center;"><i class="ti ti-settings" style="font-size:12px;color:var(--c-purple);" aria-hidden="true"></i></div><b style="font-size:12px;">Settings</b></div><div style="font-size:10.5px;color:var(--c-muted);line-height:1.55;">Groq API key (session only, never saved permanently). Search memory: known funders excluded, dead URLs cached 60 days, domains cached 30 days. Org profile editor.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 5 -->
+      <div class="acc-item">
+        <button class="acc-trigger" onclick="toggleAcc(this)" aria-expanded="false">
+          <div class="acc-num" aria-hidden="true">5</div>
+          <div><span class="acc-label">Architecture</span><span class="acc-title">Pipeline flow and what makes this stand out</span></div>
+          <i class="ti ti-chevron-down acc-chev" aria-hidden="true"></i>
+        </button>
+        <div class="acc-body">
+          <div style="display:grid;grid-template-columns:22px 1fr auto;gap:8px;padding:8px 0;border-bottom:0.5px solid #F0EDF8;align-items:start;"><div style="width:20px;height:20px;border-radius:50%;background:var(--c-purple);color:#fff;font-size:9.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;" aria-hidden="true">1</div><div><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin-bottom:1px;">Discovery &middot; groq/compound</div><div style="font-size:10.5px;color:var(--c-muted);">Live web search, 6 funder categories. Memory auto-excludes known funders.</div></div><span style="font-size:9px;font-weight:700;background:var(--c-soft);color:var(--c-deep);padding:2px 7px;border-radius:20px;white-space:nowrap;">Web search</span></div>
+          <div style="display:grid;grid-template-columns:22px 1fr auto;gap:8px;padding:8px 0;border-bottom:0.5px solid #F0EDF8;align-items:start;"><div style="width:20px;height:20px;border-radius:50%;background:#0369A1;color:#fff;font-size:8px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;" aria-hidden="true">1.5</div><div><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin-bottom:1px;">Link verification &middot; visit_website</div><div style="font-size:10.5px;color:var(--c-muted);">Every URL visited server-side. Dead, login wall, unverifiable → silently dropped. Cached 60 days.</div></div><span style="font-size:9px;font-weight:700;background:#FEE2E2;color:#991B1B;padding:2px 7px;border-radius:20px;white-space:nowrap;">Filters dead links</span></div>
+          <div style="display:grid;grid-template-columns:22px 1fr auto;gap:8px;padding:8px 0;border-bottom:0.5px solid #F0EDF8;align-items:start;"><div style="width:20px;height:20px;border-radius:50%;background:#D97706;color:#fff;font-size:9.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;" aria-hidden="true">2</div><div><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin-bottom:1px;">Qualification &middot; gpt-oss-120b</div><div style="font-size:10.5px;color:var(--c-muted);">Fit score 1–5 vs org profile. Mission, geography, eligibility, risks. Below minimum → filtered out.</div></div><span style="font-size:9px;font-weight:700;background:#FEF3C7;color:#92400E;padding:2px 7px;border-radius:20px;white-space:nowrap;">Fit score</span></div>
+          <div style="display:grid;grid-template-columns:22px 1fr auto;gap:8px;padding:8px 0;border-bottom:0.5px solid #F0EDF8;align-items:start;"><div style="width:20px;height:20px;border-radius:50%;background:#991B1B;color:#fff;font-size:7.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;" aria-hidden="true">2.5</div><div><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin-bottom:1px;">Guard &middot; gpt-oss-safeguard-20b</div><div style="font-size:10.5px;color:var(--c-muted);">Language, bias, accuracy, appropriateness. Soft-flag only, never hard-blocks.</div></div><span style="font-size:9px;font-weight:700;background:#FEE2E2;color:#991B1B;padding:2px 7px;border-radius:20px;white-space:nowrap;">Guardrails</span></div>
+          <div style="display:grid;grid-template-columns:22px 1fr auto;gap:8px;padding:8px 0;border-bottom:0.5px solid #F0EDF8;align-items:start;"><div style="width:20px;height:20px;border-radius:50%;background:#166534;color:#fff;font-size:9.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;" aria-hidden="true">3</div><div><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin-bottom:1px;">Tracker &middot; browser + memory</div><div style="font-size:10.5px;color:var(--c-muted);">Verified results land here. Status changes feed back to memory. CSV export.</div></div><span style="font-size:9px;font-weight:700;background:#DCFCE7;color:#166534;padding:2px 7px;border-radius:20px;white-space:nowrap;">Persistent</span></div>
+          <div style="display:grid;grid-template-columns:22px 1fr auto;gap:8px;padding:8px 0;border-bottom:0.5px solid #F0EDF8;align-items:start;"><div style="width:20px;height:20px;border-radius:50%;background:var(--c-deep);color:#fff;font-size:9.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;" aria-hidden="true">4</div><div><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin-bottom:1px;">Proposal &middot; NotebookLM</div><div style="font-size:10.5px;color:var(--c-muted);">Generated prompt + org docs → draft grounded in real data only.</div></div><span style="font-size:9px;font-weight:700;background:var(--c-soft);color:var(--c-deep);padding:2px 7px;border-radius:20px;white-space:nowrap;">Human-driven</span></div>
+          <div style="display:grid;grid-template-columns:22px 1fr auto;gap:8px;padding:8px 0;align-items:start;"><div style="width:20px;height:20px;border-radius:50%;background:#374151;color:#fff;font-size:9.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;" aria-hidden="true">5</div><div><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin-bottom:1px;">Human review &middot; staff submits</div><div style="font-size:10.5px;color:var(--c-muted);">AI discovers and drafts. Humans decide and submit. Always.</div></div><span style="font-size:9px;font-weight:700;background:#DCFCE7;color:#166534;padding:2px 7px;border-radius:20px;white-space:nowrap;">Human in control</span></div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px;">
+            <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:10px;"><i class="ti ti-filter" style="font-size:16px;color:var(--c-purple);" aria-hidden="true"></i><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin:4px 0 3px;">5-layer pipeline</div><div style="font-size:10px;color:var(--c-muted);line-height:1.5;">Each layer filters noise. Only the best reach staff.</div></div>
+            <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:10px;"><i class="ti ti-brain" style="font-size:16px;color:var(--c-purple);" aria-hidden="true"></i><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin:4px 0 3px;">Search memory</div><div style="font-size:10px;color:var(--c-muted);line-height:1.5;">Every run smarter. Known funders excluded automatically.</div></div>
+            <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:10px;"><i class="ti ti-shield-check" style="font-size:16px;color:var(--c-purple);" aria-hidden="true"></i><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin:4px 0 3px;">Guardrails</div><div style="font-size:10px;color:var(--c-muted);line-height:1.5;">Bias, accuracy, appropriateness checked every run.</div></div>
+            <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:10px;"><i class="ti ti-link-off" style="font-size:16px;color:var(--c-purple);" aria-hidden="true"></i><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin:4px 0 3px;">Zero dead links</div><div style="font-size:10px;color:var(--c-muted);line-height:1.5;">Every URL visited server-side before staff sees it.</div></div>
+            <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:10px;"><i class="ti ti-plug" style="font-size:16px;color:var(--c-purple);" aria-hidden="true"></i><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin:4px 0 3px;">Modular</div><div style="font-size:10px;color:var(--c-muted);line-height:1.5;">One config line swaps any AI provider.</div></div>
+            <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:10px;"><i class="ti ti-currency-dollar-off" style="font-size:16px;color:var(--c-purple);" aria-hidden="true"></i><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin:4px 0 3px;">Zero cost</div><div style="font-size:10px;color:var(--c-muted);line-height:1.5;">Under 10% of free daily token limit per weekly run.</div></div>
+          </div>
+        </div>
+      </div>
+
+  </section>
+
   <footer class="landing-footer">
     <div class="landing-footer-logo">
       <svg width="24" height="24" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -753,7 +853,7 @@
     </div>
     <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px;">
       <div class="landing-footer-badge">$0.00 / mo</div>
-      <div style="font-size:10px;color:#6B7280;">&#169; 2026 Madhu Devi. All rights reserved.</div>
+      <div style="font-size:10px;color:#8A93A1;">&#169; 2026 Madhu Devi. All rights reserved.</div>
     </div>
   </footer>
 
@@ -1258,7 +1358,7 @@
     </div>
     <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px;">
       <div class="app-footer-badge">$0.00 / mo</div>
-      <div style="font-size:10px;color:#6B7280;">© 2026 Madhu Devi. All rights reserved.</div>
+      <div style="font-size:10px;color:#8A93A1;">© 2026 Madhu Devi. All rights reserved.</div>
     </div>
   </footer>
 </div><!-- /app-shell -->
