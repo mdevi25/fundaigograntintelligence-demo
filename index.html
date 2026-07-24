@@ -659,7 +659,7 @@
     </a>
     <div class="landing-nav-links">
       <a href="index.html">Home</a>
-      <a href="javascript:void(0)" onclick="document.getElementById('about-section').scrollIntoView({behavior:'smooth'});">About</a>
+      <a href="javascript:void(0)" onclick="expandAboutSection();document.getElementById('about-section').scrollIntoView({behavior:'smooth'});">About</a>
       <a href="faq.html">Help</a>
       <button class="landing-nav-cta" onclick="enterApp()">Start here</button>
     </div>
@@ -726,6 +726,10 @@
     <span class="how-sec-label">About</span>
     <h2 class="how-title">Mission, architecture, and how it all fits together</h2>
     <p class="how-sub">No sign-in required to read this. The tabs described below are only visible after you sign in.</p>
+    <button id="about-expand-btn" class="hero-ghost-btn" onclick="expandAboutSection()" style="margin-bottom:20px;">
+      Show details <i class="ti ti-chevron-down" style="font-size:12px;vertical-align:-1px;" aria-hidden="true"></i>
+    </button>
+    <div id="about-content" style="display:none;">
       <!-- Section 1 -->
       <div class="acc-item">
         <button class="acc-trigger acc-open" onclick="toggleAcc(this)" aria-expanded="true">
@@ -820,6 +824,7 @@
         </div>
       </div>
 
+    </div><!-- /about-content -->
   </section>
 
   <footer class="landing-footer">
@@ -1978,6 +1983,14 @@ function toggleAcc(btn) {
   btn.classList.toggle('acc-open', !isOpen);
   body.classList.toggle('acc-open', !isOpen);
   btn.setAttribute('aria-expanded', String(!isOpen));
+}
+
+// ── ABOUT SECTION (landing page, collapsed by default to reduce scroll) ──
+function expandAboutSection() {
+  const content = document.getElementById('about-content');
+  const btn = document.getElementById('about-expand-btn');
+  if (content) content.style.display = 'block';
+  if (btn) btn.style.display = 'none';
 }
 
 // ── TOAST ─────────────────────────────────────────────────────
