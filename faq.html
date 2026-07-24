@@ -3,14 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Help — Fundigo</title>
-  <meta name="description" content="Frequently asked questions about Fundigo — the free AI-powered AI-Powered Grant Intelligence for Nonprofits for small nonprofits.">
+  <title>Help - Fundigo</title>
+  <meta name="description" content="Frequently asked questions about Fundigo, the free AI-powered grant intelligence platform for small nonprofits.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/tabler-icons.min.css">
   <style>
     :root{
-      --c-bg:#F8F7FF;--c-border:#DDD8F0;--c-purple:#7C3AED;--c-deep:#5B21B6;
-      --c-tint:#F5F3FF;--c-soft:#EDE9FE;--c-text:#1E1B2E;--c-muted:#6B7280;--c-faint:#9CA3AF;
-      --font-sans:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+      --c-bg:#08101e;--c-border:rgba(232,240,252,.1);--c-purple:#2dd4bf;--c-deep:#22b8a0;
+      --c-tint:rgba(45,212,191,.07);--c-soft:rgba(45,212,191,.16);--c-text:#e8f0fc;--c-muted:rgba(232,240,252,.48);--c-faint:rgba(232,240,252,.55);
+      --font-sans:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     html{scroll-behavior:smooth;}
@@ -34,7 +37,7 @@
     .faq-hero{padding:32px 32px 24px;max-width:760px;margin:0 auto;}
     .faq-title{font-size:26px;font-weight:500;color:var(--c-text);letter-spacing:-.02em;margin-bottom:16px;}
     .faq-search-wrap{position:relative;}
-    .faq-search{width:100%;border:0.5px solid var(--c-border);border-radius:10px;padding:11px 14px 11px 38px;font-size:13px;color:var(--c-text);background:#fff;font-family:var(--font-sans);}
+    .faq-search{width:100%;border:0.5px solid var(--c-border);border-radius:10px;padding:11px 14px 11px 38px;font-size:13px;color:var(--c-text);background:#0d1829;font-family:var(--font-sans);}
     .faq-search:focus{outline:none;border-color:var(--c-purple);box-shadow:0 0 0 3px rgba(124,58,237,.1);}
     .faq-search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--c-faint);font-size:15px;pointer-events:none;}
 
@@ -42,8 +45,8 @@
     .faq-body{max-width:760px;margin:0 auto;padding:12px 32px 72px;}
     .cat-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--c-purple);margin:28px 0 10px;display:flex;align-items:center;gap:6px;}
     .cat-label:first-child{margin-top:4px;}
-    .faq-item{border:0.5px solid var(--c-border);border-radius:10px;margin-bottom:7px;background:#fff;overflow:hidden;}
-    .faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 15px;background:#fff;border:none;cursor:pointer;text-align:left;font-family:var(--font-sans);font-size:13px;font-weight:600;color:var(--c-text);}
+    .faq-item{border:0.5px solid var(--c-border);border-radius:10px;margin-bottom:7px;background:#0d1829;overflow:hidden;}
+    .faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 15px;background:#0d1829;border:none;cursor:pointer;text-align:left;font-family:var(--font-sans);font-size:13px;font-weight:600;color:var(--c-text);}
     .faq-q:hover{background:var(--c-tint);}
     .faq-q.open{background:var(--c-tint);border-bottom:0.5px solid var(--c-border);}
     .faq-chev{color:var(--c-faint);font-size:14px;transition:transform .2s;flex-shrink:0;}
@@ -57,14 +60,14 @@
     .no-results i{font-size:32px;color:var(--c-soft);display:block;margin-bottom:10px;}
 
     /* ── FOOTER ── */
-    .faq-footer{background:var(--c-text);padding:20px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+    .faq-footer{background:#060e1a;padding:20px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
     .footer-logo{display:flex;align-items:center;gap:8px;}
     .footer-name{font-size:13px;font-weight:600;color:#fff;}
-    .footer-name span{color:#A78BFA;}
+    .footer-name span{color:var(--c-purple);}
     .footer-links{display:flex;gap:16px;}
-    .footer-links a{font-size:11.5px;color:#6B7280;text-decoration:none;}
-    .footer-links a:hover{color:#A78BFA;}
-    .footer-badge{font-size:10px;font-weight:700;background:#1A3A2A;color:#86EFAC;border:1px solid #166534;padding:3px 9px;border-radius:20px;}
+    .footer-links a{font-size:11.5px;color:#8A93A1;text-decoration:none;}
+    .footer-links a:hover{color:#2dd4bf;}
+    .footer-badge{font-size:10px;font-weight:700;background:rgba(45,212,191,.1);color:#2dd4bf;border:1px solid rgba(45,212,191,.25);padding:3px 9px;border-radius:20px;}
 
     @media(max-width:640px){
       .nav{padding:12px 16px;}
@@ -80,7 +83,7 @@
 <nav class="nav">
   <a class="nav-logo" href="index.html">
     <svg width="30" height="30" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <defs><linearGradient id="lg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#7B2FBE"/><stop offset="100%" stop-color="#A855F7"/></linearGradient></defs>
+      <defs><linearGradient id="lg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#22b8a0"/><stop offset="100%" stop-color="#2dd4bf"/></linearGradient></defs>
       <rect width="80" height="80" rx="18" fill="url(#lg)"/>
       <line x1="40" y1="33" x2="40" y2="18" stroke="#fff" stroke-width="1.8" stroke-linecap="round" opacity=".9"/>
       <line x1="40" y1="47" x2="40" y2="62" stroke="#fff" stroke-width="1.8" stroke-linecap="round" opacity=".9"/>
@@ -102,13 +105,12 @@
   </a>
   <div class="nav-links">
     <a href="index.html">&larr; Back to app</a>
-    <a href="faq.html">About</a>
     <a href="faq.html" class="active">Help</a>
     <a href="index.html" class="nav-cta">Start here</a>
   </div>
 </nav>
 
-<!-- HERO — title + search only -->
+<!-- HERO: title + search only -->
 <div class="faq-hero">
   <h1 class="faq-title">Help &amp; FAQ</h1>
   <div class="faq-search-wrap">
@@ -136,7 +138,7 @@
     <div class="faq-a">
       <b>What it means:</b> The qualification layer (Layer 2) hit Groq's per-minute token limit of 8,000 TPM. This happens when Layer 1 (discovery) and Layer 2 (qualification) both run in the same 60-second window, combining to exceed the limit.<br><br>
       <b>What to do:</b> Wait 65 seconds and click <b>Run search</b> again. The TPM limit resets every 60 seconds automatically. The system will retry and complete successfully.<br><br>
-      <b>Why it happens:</b> Groq's free tier shares an 8,000 token-per-minute limit across all models. Layer 1 uses ~3,500 tokens, and Layer 2 immediately requests ~5,000 more — together exceeding the limit.<br><br>
+      <b>Why it happens:</b> Groq's free tier shares an 8,000 token-per-minute limit across all models. Layer 1 uses ~3,500 tokens, and Layer 2 immediately requests ~5,000 more, together exceeding the limit.<br><br>
       <b>Long-term fix:</b> The system adds a 65-second wait between layers automatically on retry. If you see this repeatedly, wait 2 minutes between searches.
     </div>
   </div>
@@ -147,9 +149,9 @@
       <i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i>
     </button>
     <div class="faq-a">
-      <b>What it means:</b> The guard agent (Layer 2.5) ran successfully but its response wasn't in the expected format — so the system couldn't automatically read the pass/flag decision. This is a <b>soft warning, not an error</b>. The opportunity still appears in results.<br><br>
+      <b>What it means:</b> The guard agent (Layer 2.5) ran successfully but its response wasn't in the expected format, so the system couldn't automatically read the pass/flag decision. This is a <b>soft warning, not an error</b>. The opportunity still appears in results.<br><br>
       <b>What to do:</b> Review the opportunity yourself before adding it to the tracker. Check that the funder is real, the URL works, and the grant is open. This is exactly what staff should do regardless of what the guard says.<br><br>
-      <b>Why it shows:</b> By design, Fundigo never silently passes something it can't fully assess. The warning is the system being honest — AI flags uncertainty, human decides.
+      <b>Why it shows:</b> By design, Fundigo never silently passes something it can't fully assess. The warning is the system being honest: AI flags uncertainty, human decides.
     </div>
   </div>
 
@@ -184,23 +186,23 @@
         <li>If the key is new, wait 30 seconds after creating it before using</li>
         <li>Get a new key at <a href="https://console.groq.com" target="_blank" rel="noopener">console.groq.com</a> if needed</li>
       </ul>
-      <b>Note:</b> Keys are stored in session memory only — they clear when you close the tab. Re-enter your key at the start of each session.
+      <b>Note:</b> Keys are stored in session memory only, they clear when you close the tab. Re-enter your key at the start of each session.
     </div>
   </div>
 
   <div class="faq-item" data-q="no verified opportunities found 0 results empty pipeline">
     <button class="faq-q" onclick="toggle(this)" aria-expanded="false">
-      Result: "No verified opportunities found" — 0 results after a full run
+      Result: "No verified opportunities found", 0 results after a full run
       <i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i>
     </button>
     <div class="faq-a">
-      <b>What it means:</b> The pipeline ran but all discovered opportunities were filtered out before reaching you — either by link verification or by scoring below the minimum fit threshold.<br><br>
+      <b>What it means:</b> The pipeline ran but all discovered opportunities were filtered out before reaching you, either by link verification or by scoring below the minimum fit threshold.<br><br>
       <b>What to do:</b>
       <ul style="margin:6px 0 6px 16px;line-height:1.8;">
-        <li>Wait 2 minutes and run again — a different search result may come back</li>
+        <li>Wait 2 minutes and run again, a different search result may come back</li>
         <li>Try a different search category button instead of the default</li>
         <li>Type a more specific custom search in the text box</li>
-        <li>Check your org profile in Settings — a very narrow profile can cause all results to fail the fit score</li>
+        <li>Check your org profile in Settings, a very narrow profile can cause all results to fail the fit score</li>
         <li>Go to Settings → <b>Reset all memory</b> if the exclude list has grown large</li>
       </ul>
     </div>
@@ -212,13 +214,13 @@
       <i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i>
     </button>
     <div class="faq-a">
-      <b>What it means:</b> The request to Groq's API failed — either a network issue, a Groq service outage, or the request timed out.<br><br>
+      <b>What it means:</b> The request to Groq's API failed: either a network issue, a Groq service outage, or the request timed out.<br><br>
       <b>What to do:</b>
       <ul style="margin:6px 0 6px 16px;line-height:1.8;">
         <li>Check your internet connection</li>
         <li>Wait 30 seconds and try again</li>
         <li>Check <a href="https://status.groq.com" target="_blank" rel="noopener">status.groq.com</a> for any outages</li>
-        <li>If using a VPN, try disabling it — some VPNs block API requests</li>
+        <li>If using a VPN, try disabling it, some VPNs block API requests</li>
       </ul>
     </div>
   </div>
@@ -228,12 +230,12 @@
 
   <div class="faq-item" data-q="what is fundigo">
     <button class="faq-q" onclick="toggle(this)" aria-expanded="false">What is Fundigo?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">Fundigo is a free AI-powered AI-Powered Grant Intelligence for Nonprofits for small nonprofits in education. It runs a <b>5-layer pipeline</b> — discovery, link verification, qualification scoring, bias guard, and tracking — so your team spends 30 minutes a week instead of hours finding verified, scored funding leads.</div>
+    <div class="faq-a">Fundigo is a free AI-powered grant intelligence platform for small nonprofits in education. It runs a <b>5-layer pipeline</b>, discovery, link verification, qualification scoring, bias guard, and tracking, so your team spends 30 minutes a week instead of hours finding verified, scored funding leads.</div>
   </div>
 
   <div class="faq-item" data-q="is it really free cost catch credit card">
     <button class="faq-q" onclick="toggle(this)" aria-expanded="false">Is it really free? What's the catch?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">Yes, genuinely free. <b>No credit card required to start.</b> Fundigo runs on Groq's free API tier — 1,000 requests and 200,000 tokens per day, resetting every 24 hours. One weekly full scan uses under 10% of that daily limit. No trial period, no expiry date.</div>
+    <div class="faq-a">Yes, genuinely free. <b>No credit card required to start.</b> Fundigo runs on Groq's free API tier: 1,000 requests and 200,000 tokens per day, resetting every 24 hours. One weekly full scan uses under 10% of that daily limit. No trial period, no expiry date.</div>
   </div>
 
   <div class="faq-item" data-q="what do i need setup get started requirements google account shared drive">
@@ -248,7 +250,7 @@
 
   <div class="faq-item" data-q="other nonprofits use clone different organization profile">
     <button class="faq-q" onclick="toggle(this)" aria-expanded="false">Can other nonprofits use Fundigo?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">Yes — that's the point. Any small nonprofit updates the org profile in the Settings tab and runs their own searches immediately. The architecture is identical whether you serve 50 students in Chicago or 5,000 in Texas. <b>750,000+ US nonprofits</b> have this exact problem — same zero-cost solution for all of them.</div>
+    <div class="faq-a">Yes, that's the point. Any small nonprofit updates the org profile in the Settings tab and runs their own searches immediately. The architecture is identical whether you serve 50 students in Chicago or 5,000 in Texas. <b>750,000+ US nonprofits</b> have this exact problem, same zero-cost solution for all of them.</div>
   </div>
 
   <!-- DISCOVERY -->
@@ -256,32 +258,32 @@
 
   <div class="faq-item" data-q="how does ai search grants find funders web">
     <button class="faq-q" onclick="toggle(this)" aria-expanded="false">How does the AI search for grants?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">Fundigo uses <b>groq/compound</b> — a model with built-in live web search — to scan the open web across 6 funder categories simultaneously. It runs up to 10 separate searches per call, then returns the strongest candidates matching your org profile. Every result then passes through 4 more pipeline layers before you see it.</div>
+    <div class="faq-a">Fundigo uses <b>groq/compound</b>, a model with built-in live web search, to scan the open web across 6 funder categories simultaneously. It runs up to 10 separate searches per call, then returns the strongest candidates matching your org profile. Every result then passes through 4 more pipeline layers before you see it.</div>
   </div>
 
   <div class="faq-item" data-q="why filtered out dead links removed before see them">
     <button class="faq-q" onclick="toggle(this)" aria-expanded="false">Why are some results filtered before I see them?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">Layer 1.5 visits every URL server-side using the <code>visit_website</code> tool. Pages that return 404 errors, require login, redirect to homepages, or can't be verified are silently dropped. Dead links waste your team's time — only working, accessible grant pages reach you. Filtered URLs are cached for 60 days so they're never re-checked unnecessarily.</div>
+    <div class="faq-a">Layer 1.5 visits every URL server-side using the <code>visit_website</code> tool. Pages that return 404 errors, require login, redirect to homepages, or can't be verified are silently dropped. Dead links waste your team's time, only working, accessible grant pages reach you. Filtered URLs are cached for 60 days so they're never re-checked unnecessarily.</div>
   </div>
 
   <div class="faq-item" data-q="guard flagged warning what does it mean flag review">
     <button class="faq-q" onclick="toggle(this)" aria-expanded="false">What does "guard flagged" mean?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">Every result passes through Layer 2.5 which checks four things: language quality, demographic bias, factual accuracy, and nonprofit appropriateness. A <b>⚠ Guard flagged</b> badge means at least one check raised a concern. The result is shown with a warning rather than hidden — your staff reviews and decides. AI surfaces the flag; humans make the final call. Always.</div>
+    <div class="faq-a">Every result passes through Layer 2.5 which checks four things: language quality, demographic bias, factual accuracy, and nonprofit appropriateness. A <b>⚠ Guard flagged</b> badge means at least one check raised a concern. The result is shown with a warning rather than hidden, your staff reviews and decides. AI surfaces the flag; humans make the final call. Always.</div>
   </div>
 
   <div class="faq-item" data-q="how many grants results per search find">
     <button class="faq-q" onclick="toggle(this)" aria-expanded="false">How many opportunities does it find per search?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">Up to 8 candidates are discovered in Layer 1. After link verification, qualification scoring, and guard checks, typically <b>3–6 verified, qualified results</b> reach you. Accuracy over volume — a small set of verified leads with working URLs and fit scores is far more useful than a large unverified list.</div>
+    <div class="faq-a">Up to 8 candidates are discovered in Layer 1. After link verification, qualification scoring, and guard checks, typically <b>3-6 verified, qualified results</b> reach you. Accuracy over volume, a small set of verified leads with working URLs and fit scores is far more useful than a large unverified list.</div>
   </div>
 
   <div class="faq-item" data-q="fit score 1 2 3 4 5 criteria what does it mean rubric">
     <button class="faq-q" onclick="toggle(this)" aria-expanded="false">What does the fit score 1–5 mean? How does the AI decide?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">Every grant opportunity is scored 1–5 by the Qualification Agent against your org profile. The rubric is explicit — the AI applies the same criteria every run:<br><br>
-      <b>5 — Perfect fit:</b> Mission directly matches the funder's stated focus. Location explicitly eligible. Amount within your stated grant range. No special requirements or flags.<br><br>
-      <b>4 — Strong fit:</b> Mission closely aligns. Location eligible. Amount within range. Minor manageable flags such as a Letter of Intent required.<br><br>
-      <b>3 — Moderate fit:</b> Mission partially aligns or is an adjacent focus area. Location eligible but not the funder's primary geography. Amount slightly outside your range.<br><br>
-      <b>2 — Weak fit:</b> Mission alignment is a stretch. Location may need verification. Amount significantly outside range. Multiple flags to investigate.<br><br>
-      <b>1 — Poor fit:</b> Mission mismatch — funder focus is unrelated to your work. Location ineligible. Amount far outside range. Major barriers such as invitation-only or school district sponsorship required.<br><br>
+    <div class="faq-a">Every grant opportunity is scored 1-5 by the Qualification Agent against your org profile. The rubric is explicit, the AI applies the same criteria every run:<br><br>
+      <b>5 &middot; Perfect fit:</b> Mission directly matches the funder's stated focus. Location explicitly eligible. Amount within your stated grant range. No special requirements or flags.<br><br>
+      <b>4 &middot; Strong fit:</b> Mission closely aligns. Location eligible. Amount within range. Minor manageable flags such as a Letter of Intent required.<br><br>
+      <b>3 &middot; Moderate fit:</b> Mission partially aligns or is an adjacent focus area. Location eligible but not the funder's primary geography. Amount slightly outside your range.<br><br>
+      <b>2 &middot; Weak fit:</b> Mission alignment is a stretch. Location may need verification. Amount significantly outside range. Multiple flags to investigate.<br><br>
+      <b>1 &middot; Poor fit:</b> Mission mismatch, funder focus is unrelated to your work. Location ineligible. Amount far outside range. Major barriers such as invitation-only or school district sponsorship required.<br><br>
       Opportunities scoring below 3 are filtered out and moved to the Future Monitoring section rather than shown as active results.
     </div>
   </div>
@@ -301,7 +303,7 @@
 
   <div class="faq-item" data-q="data saved browser close session persistent storage">
     <button class="faq-q" onclick="toggle(this)" aria-expanded="false">Will my tracker data be saved if I close the browser?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">Yes. All tracker data is saved to <b>localStorage</b> — it survives closing the tab, closing the browser, and restarting your computer. It is not the same as browser cache. Clearing your browser cache will not delete it. Only explicitly clearing "Cookies and site data" in your browser's privacy settings would remove it.</div>
+    <div class="faq-a">Yes. All tracker data is saved to <b>localStorage</b>, it survives closing the tab, closing the browser, and restarting your computer. It is not the same as browser cache. Clearing your browser cache will not delete it. Only explicitly clearing "Cookies and site data" in your browser's privacy settings would remove it.</div>
   </div>
 
   <div class="faq-item" data-q="team access share tracker multiple people devices">
@@ -324,17 +326,17 @@
 
   <div class="faq-item" data-q="notebooklm what is why documents knowledge base upload">
     <button class="faq-q" onclick="toggle(this)" aria-expanded="false">What is NotebookLM and why does it need my documents?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">Google NotebookLM is a free AI tool that answers questions and drafts content based <b>only</b> on documents you upload — it cannot make things up from its training data. Fundigo uses it as your org's knowledge base. Upload your mission statement, program descriptions, and impact stats once, and every proposal draft draws from your real facts, not invented ones. Free at <a href="https://notebooklm.google.com" target="_blank" rel="noopener">notebooklm.google.com</a>.</div>
+    <div class="faq-a">Google NotebookLM is a free AI tool that answers questions and drafts content based <b>only</b> on documents you upload, it cannot make things up from its training data. Fundigo uses it as your org's knowledge base. Upload your mission statement, program descriptions, and impact stats once, and every proposal draft draws from your real facts, not invented ones. Free at <a href="https://notebooklm.google.com" target="_blank" rel="noopener">notebooklm.google.com</a>.</div>
   </div>
 
   <div class="faq-item" data-q="will ai write full proposal automatically complete">
     <button class="faq-q" onclick="toggle(this)" aria-expanded="false">Will the AI write the full proposal for me?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">It produces a strong first draft — not a finished, submittable proposal. Fundigo generates a tailored prompt you paste into NotebookLM alongside the funder's RFP. NotebookLM drafts using your uploaded documents. Staff then fills in <code>[INSERT: ...]</code> placeholders, edits for the org's voice, verifies every statistic, and gives final approval before submission. <b>AI assists. Humans decide and submit. Always.</b></div>
+    <div class="faq-a">It produces a strong first draft, not a finished, submittable proposal. Fundigo generates a tailored prompt you paste into NotebookLM alongside the funder's RFP. NotebookLM drafts using your uploaded documents. Staff then fills in <code>[INSERT: ...]</code> placeholders, edits for the org's voice, verifies every statistic, and gives final approval before submission. <b>AI assists. Humans decide and submit. Always.</b></div>
   </div>
 
   <div class="faq-item" data-q="insert placeholder what fill in missing required">
     <button class="faq-q" onclick="toggle(this)" aria-expanded="false">What are the [INSERT: ...] placeholders?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">When NotebookLM needs information that isn't in your uploaded documents, it writes <code>[INSERT: description of what's needed]</code> rather than inventing content. This is a safety feature. Every placeholder must be filled with accurate information before submitting — a funder will reject or disqualify any proposal with unfilled placeholders.</div>
+    <div class="faq-a">When NotebookLM needs information that isn't in your uploaded documents, it writes <code>[INSERT: description of what's needed]</code> rather than inventing content. This is a safety feature. Every placeholder must be filled with accurate information before submitting, a funder will reject or disqualify any proposal with unfilled placeholders.</div>
   </div>
 
   <div class="faq-item" data-q="which documents upload notebooklm required needed">
@@ -348,30 +350,30 @@
   <div class="faq-item" data-q="what ai models used groq llm layer pipeline">
     <button class="faq-q" onclick="toggle(this)" aria-expanded="false">What AI models does Fundigo use?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
     <div class="faq-a">All free under one Groq API key:<br><br>
-      <b>Layer 1 + 1.5:</b> <code>groq/compound</code> — live web search and URL verification via <code>visit_website</code><br>
-      <b>Layer 2:</b> <code>openai/gpt-oss-120b</code> — qualification scoring 1–5 with <code>reasoning_effort: "low"</code><br>
-      <b>Layer 2.5:</b> <code>openai/gpt-oss-safeguard-20b</code> — bias, accuracy, and appropriateness guard<br>
-      <b>Layer 4:</b> Google NotebookLM — proposal drafting (no API key required)</div>
+      <b>Layer 1 + 1.5:</b> <code>groq/compound</code>, live web search and URL verification via <code>visit_website</code><br>
+      <b>Layer 2:</b> <code>openai/gpt-oss-120b</code>, qualification scoring 1-5 with <code>reasoning_effort: "low"</code><br>
+      <b>Layer 2.5:</b> <code>openai/gpt-oss-safeguard-20b</code>, bias, accuracy, and appropriateness guard<br>
+      <b>Layer 4:</b> Google NotebookLM, proposal drafting (no API key required)</div>
   </div>
 
   <div class="faq-item" data-q="data privacy stored org documents secure server">
     <button class="faq-q" onclick="toggle(this)" aria-expanded="false">Does Fundigo store my org's data?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">Fundigo stores tracker rows, org profile, and search memory <b>locally in your browser</b> via <code>localStorage</code>. There are no Fundigo servers — no data leaves your device except the search prompts sent to Groq's API. Org documents stay in your Google NotebookLM account. Your Groq API key is stored in <code>sessionStorage</code> only and is never written to disk.</div>
+    <div class="faq-a">Fundigo stores tracker rows, org profile, and search memory <b>locally in your browser</b> via <code>localStorage</code>. There are no Fundigo servers, no data leaves your device except the search prompts sent to Groq's API. Org documents stay in your Google NotebookLM account. Your Groq API key is stored in <code>sessionStorage</code> only and is never written to disk.</div>
   </div>
 
   <div class="faq-item" data-q="swap ai provider change model gemini config.js different">
     <button class="faq-q" onclick="toggle(this)" aria-expanded="false">Can I swap to a different AI provider?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">Yes. One line in <code>config.js</code> swaps any model in any pipeline layer. The system is provider-agnostic by design — built on Groq today because it's free with no credit card, but ready for Gemini, Mistral, or any open-source model tomorrow. The pipeline logic is completely separate from the model selection.</div>
+    <div class="faq-a">Yes. One line in <code>config.js</code> swaps any model in any pipeline layer. The system is provider-agnostic by design, built on Groq today because it's free with no credit card, but ready for Gemini, Mistral, or any open-source model tomorrow. The pipeline logic is completely separate from the model selection.</div>
   </div>
 
   <div class="faq-item" data-q="token limit hit rate 429 error wait reset">
     <button class="faq-q" onclick="toggle(this)" aria-expanded="false">What happens if I hit the free token limit?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">Fundigo shows a clear message: <i>"Rate limit reached. Wait 60 seconds and try again."</i> The per-minute limit resets every 60 seconds. The daily limit resets at midnight UTC. At the recommended weekly usage of one full scan per week, hitting the daily limit is essentially impossible — one scan uses under 10% of the daily allowance.</div>
+    <div class="faq-a">Fundigo shows a clear message: <i>"Rate limit reached. Wait 60 seconds and try again."</i> The per-minute limit resets every 60 seconds. The daily limit resets at midnight UTC. At the recommended weekly usage of one full scan per week, hitting the daily limit is essentially impossible, one scan uses under 10% of the daily allowance.</div>
   </div>
 
   <div class="faq-item" data-q="why single index.html not separate files tabs split">
     <button class="faq-q" onclick="toggle(this)" aria-expanded="false">Why is everything in one index.html instead of separate tab files?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">All five tabs share JavaScript state — tracker rows, pipeline results, and org profile all live in the same memory scope. Splitting into separate HTML files would break cross-tab communication: the Proposal tab needs tracker data, the Discover tab writes to the same memory the Settings tab reads. One shell file, eight separate JS modules for business logic, is the right architecture for vanilla JS with shared state. A React or Vue app would restructure this with a component store.</div>
+    <div class="faq-a">All five tabs share JavaScript state, tracker rows, pipeline results, and org profile all live in the same memory scope. Splitting into separate HTML files would break cross-tab communication: the Proposal tab needs tracker data, the Discover tab writes to the same memory the Settings tab reads. One shell file, eight separate JS modules for business logic, is the right architecture for vanilla JS with shared state. A React or Vue app would restructure this with a component store.</div>
   </div>
 
   <!-- FUTURE -->
@@ -381,14 +383,14 @@
     <button class="faq-q" onclick="toggle(this)" aria-expanded="false">What's coming next?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
     <div class="faq-a">
       <b>Phase 2:</b> Google Sheets direct sync, Google Sign-In via OAuth, automated weekly email digest of new opportunities.<br><br>
-      <b>Phase 3:</b> Multi-org SaaS platform on Netlify + Supabase — each nonprofit gets isolated profile, tracker, and memory. Free for small nonprofits under $500K budget.<br><br>
-      <b>Phase 4:</b> AI router — <code>config.js</code> intelligently selects the optimal free model per pipeline task based on available keys and org preference (speed vs accuracy).
+      <b>Phase 3:</b> Multi-org SaaS platform, each nonprofit gets isolated profile, tracker, and memory. Free for small nonprofits under $500K budget.<br><br>
+      <b>Phase 4:</b> AI router, <code>config.js</code> intelligently selects the optimal free model per pipeline task based on available keys and org preference (speed vs accuracy).
     </div>
   </div>
 
   <div class="faq-item" data-q="forever free pricing change LLM cost paid upgrade">
     <button class="faq-q" onclick="toggle(this)" aria-expanded="false">Will it always be free?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">Fundigo runs on free tools by design. The underlying AI providers (Groq) currently offer free tiers sufficient for weekly nonprofit use — but LLM pricing is a market decision outside our control. If a provider changes pricing, the one-line model swap in <code>config.js</code> lets any org move to a different free provider immediately. The system is designed to never depend on a single vendor.</div>
+    <div class="faq-a">Fundigo runs on free tools by design. The underlying AI providers (Groq) currently offer free tiers sufficient for weekly nonprofit use, but LLM pricing is a market decision outside our control. If a provider changes pricing, the one-line model swap in <code>config.js</code> lets any org move to a different free provider immediately. The system is designed to never depend on a single vendor.</div>
   </div>
 
 </div><!-- /faq-body -->
@@ -397,7 +399,7 @@
 <footer class="faq-footer">
   <div class="footer-logo">
     <svg width="26" height="26" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <defs><linearGradient id="flg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#7B2FBE"/><stop offset="100%" stop-color="#A855F7"/></linearGradient></defs>
+      <defs><linearGradient id="flg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#22b8a0"/><stop offset="100%" stop-color="#2dd4bf"/></linearGradient></defs>
       <rect width="80" height="80" rx="18" fill="url(#flg)"/>
       <line x1="40" y1="33" x2="40" y2="18" stroke="#fff" stroke-width="1.8" stroke-linecap="round" opacity=".9"/>
       <line x1="40" y1="47" x2="40" y2="62" stroke="#fff" stroke-width="1.8" stroke-linecap="round" opacity=".9"/>
@@ -418,14 +420,14 @@
     <div class="footer-name">Fundi<span>go</span></div>
   </div>
   <div class="footer-links">
-    <a href="index.html">Home</a>
+    <a href="index.html">Back to app</a>
     <a href="faq.html">Help</a>
     <a href="https://www.linkedin.com/in/madhudevi/" target="_blank" rel="noopener">LinkedIn</a>
     <a href="https://mdevi25.github.io/" target="_blank" rel="noopener">Portfolio</a>
   </div>
   <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px;">
     <div class="footer-badge">$0.00 / mo</div>
-    <div style="font-size:10px;color:#6B7280;">© 2026 Madhu Devi. All rights reserved.</div>
+    <div style="font-size:10px;color:#8A93A1;">© 2026 Madhu Devi. All rights reserved.</div>
   </div>
 </footer>
 
