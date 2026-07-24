@@ -600,15 +600,15 @@
      Hidden by default; shown by requireSignIn() when entering the
      app without an existing session. Purely client-side access gate.
 ================================================================ -->
-<div id="auth-gate" style="display:none;position:fixed;inset:0;z-index:9999;
+<div id="auth-gate" onclick="if(event.target===this)hideAuthGate();" style="display:none;position:fixed;inset:0;z-index:9999;
      background:rgba(17,17,17,.55);backdrop-filter:blur(3px);
      align-items:center;justify-content:center;padding:16px;">
   <div style="background:#1e1924;border-radius:16px;max-width:360px;width:100%;
        padding:32px 28px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.7);border:1px solid rgba(240,236,228,.1);position:relative;">
     <button onclick="hideAuthGate()" aria-label="Close"
-      style="position:absolute;top:12px;right:12px;background:none;border:none;color:rgba(240,236,228,.5);
-             width:28px;height:28px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;">
-      <i class="ti ti-x" aria-hidden="true"></i>
+      style="position:absolute;top:10px;right:10px;background:rgba(240,236,228,.1);border:none;color:#f0ece4;
+             width:30px;height:30px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;line-height:1;">
+      &times;
     </button>
     <svg width="44" height="44" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="margin:0 auto 14px;display:block;">
       <defs><linearGradient id="lg-gate" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#22b8a0"/><stop offset="100%" stop-color="#2dd4bf"/></linearGradient></defs>
