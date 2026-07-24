@@ -516,7 +516,7 @@
     /* ── 4A HERO SPLIT LAYOUT ── */
     .hero-split{display:grid;grid-template-columns:1fr 1fr;min-height:520px;position:relative;overflow:hidden;padding:0;text-align:left;align-items:stretch;justify-content:stretch;}
     .hero-left{padding:80px 52px;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2;background:radial-gradient(ellipse 600px 500px at -10% 50%,rgba(193,70,26,.07) 0%,transparent 65%),#F5F0E6;}
-    .hero-right{padding:60px 52px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;z-index:2;background:linear-gradient(155deg,#FFFFFF 0%,#F5F0E6 100%);border-left:1px solid rgba(36,28,20,.06);}
+    .hero-right{padding:60px 52px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;z-index:2;background:radial-gradient(ellipse 600px 500px at 110% 50%,rgba(193,70,26,.07) 0%,transparent 65%),#F5F0E6;}
     .hero-pill{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(193,70,26,.25);border-radius:100px;padding:5px 16px 5px 10px;font-size:12px;color:rgba(193,70,26,.85);font-weight:500;margin-bottom:28px;width:fit-content;}
     .hero-pill-dot{width:6px;height:6px;border-radius:50%;background:#C1461A;box-shadow:0 0 8px rgba(193,70,26,.6);flex-shrink:0;}
     .hero-split-title{font-family:'DM Serif Display',serif;font-size:62px;line-height:1.06;font-weight:400;margin:0 0 22px;letter-spacing:-1px;color:#241C14;}
@@ -524,7 +524,7 @@
     .hero-split-sub{font-size:16px;line-height:1.7;color:rgba(36,28,20,.70);max-width:440px;margin:0 0 36px;font-weight:300;}
     .hero-split-ctas{display:flex;gap:14px;align-items:center;}
     .hero-ghost-btn{background:transparent;border:1.5px solid rgba(36,28,20,.18);color:rgba(36,28,20,.65);padding:13px 22px;border-radius:10px;font-size:15px;font-family:'DM Sans',sans-serif;cursor:pointer;}
-    .hero-results-label{font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(36,28,20,.73);margin-bottom:16px;}
+    .hero-results-label{font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(36,28,20,.73);margin-bottom:16px;text-align:center;width:100%;max-width:480px;}
     /* how-step teal */
     .how-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;}
     .how-step{background:rgba(36,28,20,.03);border:1px solid rgba(36,28,20,.07);border-radius:12px;padding:26px 22px;}
@@ -625,11 +625,7 @@
       <!-- Click-to-load thumbnail: the Loom iframe is only inserted on
            click, not on page load, so the player never loads until
            someone actually wants to watch. -->
-      <div id="hero-video-wrap" style="position:relative;width:100%;max-width:480px;aspect-ratio:16/9;border-radius:12px;overflow:hidden;border:1px solid rgba(193,70,26,.3);background:radial-gradient(circle at 50% 40%,#F7E4D4,#FAF7F0);cursor:pointer;" onclick="document.getElementById('hero-video-wrap').innerHTML='<iframe src=&quot;https://www.loom.com/embed/d1a9d423a04645c8ad3d5691e8a77c9e?autoplay=1&quot; frameborder=&quot;0&quot; allow=&quot;autoplay; fullscreen&quot; allowfullscreen style=&quot;position:absolute;top:0;left:0;width:100%;height:100%;&quot;></iframe>'">
-        <div style="position:absolute;top:10px;left:10px;display:flex;align-items:center;gap:5px;background:rgba(255,255,255,.85);border:0.5px solid rgba(193,70,26,.35);border-radius:20px;padding:4px 10px;">
-          <i class="ti ti-video" style="font-size:12px;color:#C1461A;" aria-hidden="true"></i>
-          <span style="font-size:10px;font-weight:700;letter-spacing:.05em;color:#C1461A;text-transform:uppercase;">Video</span>
-        </div>
+      <div id="hero-video-wrap" style="position:relative;width:100%;max-width:480px;aspect-ratio:16/9;cursor:pointer;" onclick="document.getElementById('hero-video-wrap').innerHTML='<iframe src=&quot;https://www.loom.com/embed/d1a9d423a04645c8ad3d5691e8a77c9e?autoplay=1&quot; frameborder=&quot;0&quot; allow=&quot;autoplay; fullscreen&quot; allowfullscreen style=&quot;position:absolute;top:0;left:0;width:100%;height:100%;border-radius:12px;&quot;></iframe>'">
         <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;">
           <div style="width:60px;height:60px;border-radius:50%;background:#C1461A;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 8px rgba(193,70,26,.15);">
             <i class="ti ti-player-play" style="font-size:24px;color:#FFFFFF;margin-left:3px;" aria-hidden="true"></i>
