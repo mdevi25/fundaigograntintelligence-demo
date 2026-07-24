@@ -75,15 +75,9 @@
     /* ── HERO ── */
     .hero{position:relative;min-height:auto;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px 32px 20px;overflow:hidden;}
     #network-canvas{position:absolute;inset:0;width:100%;height:100%;opacity:.6;}
-    .hero-content{position:relative;z-index:2;max-width:580px;}
-    .hero-eyebrow{display:inline-flex;align-items:center;gap:6px;background:var(--c-soft);color:var(--c-deep);font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:20px;letter-spacing:.04em;text-transform:uppercase;}
-    .hero-title{font-size:36px;font-weight:500;color:var(--c-text);line-height:1.2;margin-bottom:16px;letter-spacing:-.02em;}
     .hero-title b{color:var(--c-purple);font-weight:600;}
-    .hero-sub{font-size:14px;color:var(--c-muted);line-height:1.65;max-width:460px;margin:0 auto 32px;}
     .start-btn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--c-purple),#A855F7);color:#fff;border:none;border-radius:12px;padding:14px 32px;font-size:15px;font-weight:600;cursor:pointer;letter-spacing:-.01em;box-shadow:0 4px 20px rgba(124,58,237,.35);transition:transform .15s,box-shadow .15s;}
     .start-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(124,58,237,.45);}
-    .start-btn-arrow{width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;}
-    .hero-note{margin-top:14px;font-size:11.5px;color:var(--c-faint);}
     .hero-note span{color:var(--c-purple);font-weight:600;}
 
     /* ── STATS STRIP ── */
@@ -94,14 +88,6 @@
     .stats-strip-l{font-size:13px;color:var(--c-muted);margin-top:6px;line-height:1.4;}
 
     /* ── FEATURES ── */
-    .features-section{padding:48px 32px;max-width:900px;margin:0 auto;}
-    .features-title{text-align:center;font-size:20px;font-weight:500;color:var(--c-text);margin-bottom:6px;}
-    .features-sub{text-align:center;font-size:13px;color:var(--c-muted);margin-bottom:32px;}
-    .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
-    .feature-card{background:#fff;border:0.5px solid var(--c-border);border-radius:14px;padding:20px;}
-    .feature-card-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;}
-    .feature-card-title{font-size:13.5px;font-weight:600;color:var(--c-text);margin-bottom:5px;}
-    .feature-card-desc{font-size:12px;color:var(--c-muted);line-height:1.55;}
 
     /* ── HOW IT WORKS ── */
     .how-section{padding:48px 52px;max-width:none;margin:0;}
@@ -122,7 +108,6 @@
     .landing-footer-links{display:flex;gap:16px;flex-wrap:wrap;row-gap:6px;}
     .landing-footer-links a{font-size:11.5px;color:#8A93A1;text-decoration:none;}
     .landing-footer-links a:hover{color:#2dd4bf;}
-    .landing-footer-badge{font-size:10px;font-weight:700;background:#1A3A2A;color:#86EFAC;border:1px solid #166634;padding:3px 9px;border-radius:20px;}
 
     /* ── APP SHELL ── */
     .app-shell{min-height:100vh;display:flex;flex-direction:column;}
@@ -133,7 +118,6 @@
     .app-footer-links{display:flex;gap:16px;}
     .app-footer-links a{font-size:11.5px;color:#8A93A1;text-decoration:none;}
     .app-footer-links a:hover{color:#2dd4bf;}
-    .app-footer-badge{font-size:10px;font-weight:700;background:#1A3A2A;color:#86EFAC;border:1px solid #166534;padding:3px 9px;border-radius:20px;}
     .app-hdr{background:var(--c-bg);border-bottom:0.5px solid var(--c-border);position:sticky;top:0;z-index:100;}
     .app-hdr-stripe{height:4px;background:linear-gradient(90deg,var(--c-purple),#A855F7);}
     .app-hdr-body{padding:12px 20px 0;}
@@ -142,7 +126,6 @@
     .app-hdr-title{font-family:'Alex Brush',cursive;font-size:30px;font-weight:400;color:var(--c-text);line-height:1;}
     .app-hdr-title span{color:var(--c-purple);}
     .app-hdr-sub{font-size:11px;color:var(--c-muted);margin-top:1px;}
-    .app-hdr-badge{font-size:10px;font-weight:700;background:rgba(45,212,191,.12);color:#2dd4bf;border:1px solid rgba(45,212,191,.3);padding:3px 9px;border-radius:20px;white-space:nowrap;}
     .app-tabs{display:flex;gap:0;border-bottom:1.5px solid var(--c-border);}
     .app-tab{background:none;border:none;color:var(--c-muted);font-size:12px;font-weight:600;padding:8px 14px;cursor:pointer;border-bottom:2px solid transparent;position:relative;top:1.5px;font-family:var(--font-sans);}
     .app-tab:hover{color:var(--c-text);}
@@ -173,8 +156,7 @@
     .custom-search-input{width:100%;border:0.5px solid var(--c-border);border-radius:8px;padding:8px 52px 8px 10px;font-size:12.5px;color:var(--c-text);background:#fff;resize:none;min-height:38px;font-family:var(--font-sans);}
     .custom-search-input:focus{outline:none;border-color:var(--c-purple);}
     .char-counter{position:absolute;right:8px;bottom:8px;font-size:9px;color:var(--c-faint);}
-    .char-counter.warn{color:#EF4444;}
-    .run-btn{display:flex;align-items:center;gap:6px;background:var(--c-purple);color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:12.5px;font-weight:600;cursor:pointer;white-space:nowrap;flex-shrink:0;font-family:var(--font-sans);}
+    .char-counter    .run-btn{display:flex;align-items:center;gap:6px;background:var(--c-purple);color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:12.5px;font-weight:600;cursor:pointer;white-space:nowrap;flex-shrink:0;font-family:var(--font-sans);}
     .run-btn:hover{background:var(--c-deep);}
     .run-btn:disabled{background:#C4B5FD;cursor:not-allowed;}
     .search-hint{font-size:10.5px;color:var(--c-faint);margin-top:5px;}
@@ -193,8 +175,7 @@
     .top-rec-row{font-size:12px;color:#374151;padding:2px 0;line-height:1.5;}
     .opp-card{background:#fff;border:0.5px solid var(--c-border);border-radius:12px;margin-bottom:10px;overflow:hidden;transition:box-shadow .15s;}
     .opp-card:hover{box-shadow:0 2px 12px rgba(124,58,237,.1);}
-    .opp-card.opp-flagged{border-left:3px solid #F59E0B;background:#FFFBEB;}
-    .opp-card-header{display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer;user-select:none;}
+    .opp-card    .opp-card-header{display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer;user-select:none;}
     .opp-card-header:hover{background:var(--c-tint);}
     .opp-card-name{font-size:14px;font-weight:500;color:var(--c-text);line-height:1.2;}
     .opp-card-prog{font-size:10.5px;color:var(--c-muted);margin-top:1px;}
@@ -217,7 +198,6 @@
     .opp-ctrl-row{display:flex;gap:8px;margin-bottom:10px;}
     .opp-ctrl-btn{background:none;border:0.5px solid var(--c-border);border-radius:6px;padding:5px 10px;font-size:11px;font-weight:600;color:var(--c-muted);cursor:pointer;font-family:var(--font-sans);}
     .opp-ctrl-btn:hover{background:var(--c-tint);color:var(--c-purple);}
-    .future-box{background:var(--c-tint);border:0.5px solid var(--c-border);border-radius:10px;overflow:hidden;margin-top:4px;}
     .future-header{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;user-select:none;}
     .future-header:hover{background:#EDEAF8;}
     .future-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--c-muted);flex:1;}
@@ -230,11 +210,7 @@
     .future-row:last-child{border-bottom:none;}
     .future-funder{font-weight:600;color:var(--c-text);}
     .future-why{font-size:11px;color:var(--c-muted);margin-top:2px;}
-    .future-cycle{font-size:10.5px;color:var(--c-faint);white-space:nowrap;}
     .rej-pill{font-size:10.5px;padding:2px 8px;border-radius:20px;white-space:nowrap;}
-    .rej-pill-good{background:#E7F5EC;color:#1B7A3D;}
-    .rej-pill-bad{background:#FCEAEA;color:#B3261E;}
-    .rej-pill-neutral{background:var(--c-soft);color:var(--c-muted);}
     .status-msg{background:var(--c-soft);border:0.5px solid var(--c-border);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--c-deep);margin-bottom:14px;display:none;}
     .status-msg.visible{display:flex;align-items:center;gap:8px;}
     .empty-state{text-align:center;padding:20px 20px;color:var(--c-muted);font-size:13px;}
@@ -261,13 +237,10 @@
     tbody tr.row-pursuing td:first-child{border-left:3px solid #F59E0B;}
     tbody tr.row-submitted td:first-child{border-left:3px solid #0EA5E9;}
     tbody tr.row-funded td:first-child{border-left:3px solid #16A34A;}
-    tbody tr.row-deferred{opacity:.65;}
-    .table-input{border:0.5px solid transparent;background:transparent;border-radius:4px;padding:2px 5px;font-size:11.5px;width:100%;color:var(--c-text);font-family:var(--font-sans);}
+    tbody tr    .table-input{border:0.5px solid transparent;background:transparent;border-radius:4px;padding:2px 5px;font-size:11.5px;width:100%;color:var(--c-text);font-family:var(--font-sans);}
     .table-input option,.field-select option{background:#0d1829;color:#e8f0fc;}
     .table-input:hover{border-color:var(--c-border);}
     .table-input:focus{border-color:var(--c-purple);background:#fff;outline:none;}
-    .delete-btn{background:none;border:0.5px solid #FECACA;color:#991B1B;border-radius:4px;padding:2px 7px;font-size:10px;cursor:pointer;}
-    .delete-btn:hover{background:#FEF2F2;}
 
     /* ── PROPOSAL TAB ── */
     .proposal-panel{background:#fff;border:0.5px solid var(--c-border);border-radius:12px;padding:16px;margin-bottom:12px;}
@@ -343,7 +316,6 @@
     .dl-urgent{background:#FEE2E2;color:#991B1B;font-size:9px;font-weight:700;padding:1px 7px;border-radius:20px;}
     .dl-soon{background:#FEF3C7;color:#92400E;font-size:9px;font-weight:700;padding:1px 7px;border-radius:20px;}
     .dl-ok{background:#DCFCE7;color:#166534;font-size:9px;font-weight:700;padding:1px 7px;border-radius:20px;}
-    .dl-roll{background:#F3F4F6;color:var(--c-muted);font-size:9px;font-weight:700;padding:1px 7px;border-radius:20px;}
 
     /* ── TOAST ── */
     #toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--c-text);color:#fff;padding:10px 20px;border-radius:8px;font-size:12.5px;font-weight:500;box-shadow:0 4px 20px rgba(0,0,0,.2);z-index:9999;transition:transform .3s ease;pointer-events:none;}
@@ -358,7 +330,6 @@
       .landing-nav-links a{display:none;}
     }
     @media(max-width:640px){
-      .features-grid{grid-template-columns:1fr;}
       .how-steps{flex-direction:column;align-items:center;}
       .how-step:not(:last-child)::after{display:none;}
       .summary-stats{grid-template-columns:repeat(3,1fr);}
@@ -381,11 +352,7 @@
     .how-step-desc{color:rgba(232,240,252,.5);}
     .how-step:not(:last-child)::after{color:rgba(232,240,252,.2);}
     .hero{background:#08101e;}
-    .hero-title{color:#e8f0fc;}
     .hero-title b{color:#2dd4bf;}
-    .hero-sub{color:rgba(232,240,252,.55);}
-    .hero-eyebrow{background:rgba(45,212,191,.15);color:#2dd4bf;}
-    .hero-note{color:rgba(232,240,252,.3);}
     .hero-note span{color:#2dd4bf;}
     .start-btn{background:linear-gradient(135deg,#22b8a0,#2dd4bf);box-shadow:0 4px 20px rgba(45,212,191,.3);}
     .start-btn:hover{box-shadow:0 8px 28px rgba(45,212,191,.45);}
@@ -420,8 +387,7 @@
     .top-rec-row{color:rgba(232,240,252,.7);}
     .opp-card{background:#0d1829;border-color:rgba(232,240,252,.08);}
     .opp-card:hover{box-shadow:0 2px 12px rgba(45,212,191,.1);}
-    .opp-card.opp-flagged{border-left-color:#2dd4bf;background:rgba(45,212,191,.05);}
-    .opp-card-header:hover{background:rgba(45,212,191,.04);}
+    .opp-card    .opp-card-header:hover{background:rgba(45,212,191,.04);}
     .opp-card-name{color:#e8f0fc;}
     .opp-card-prog{color:rgba(232,240,252,.5);}
     .sum-k{color:rgba(232,240,252,.48);}
@@ -442,15 +408,9 @@
     .pill-pass{background:rgba(93,227,150,.15);color:#5de396;}
     .pill-flag{background:rgba(45,212,191,.15);color:#2dd4bf;}
     .pill-verified{background:rgba(45,212,191,.12);color:#2dd4bf;}
-    .pill-match-high{background:rgba(45,212,191,.15);color:#2dd4bf;}
-    .pill-match-good{background:rgba(93,227,150,.15);color:#5de396;}
-    .pill-match-ok{background:rgba(45,212,191,.12);color:#2dd4bf;}
-    .pill-match-no{background:rgba(248,113,113,.15);color:#f87171;}
     .dl-urgent{background:rgba(248,113,113,.18);color:#f87171;}
     .dl-soon{background:rgba(45,212,191,.18);color:#2dd4bf;}
     .dl-ok{background:rgba(93,227,150,.15);color:#5de396;}
-    .dl-roll{background:rgba(232,240,252,.07);color:rgba(232,240,252,.5);}
-    .future-box{background:#0b1423;border-color:rgba(232,240,252,.08);}
     .future-header:hover{background:rgba(45,212,191,.04);}
     .future-label{color:rgba(232,240,252,.53);}
     .future-count{background:rgba(45,212,191,.15);color:#2dd4bf;}
@@ -459,9 +419,6 @@
     .future-row{border-bottom-color:rgba(232,240,252,.06);}
     .future-funder{color:#e8f0fc;}
     .future-why{color:rgba(232,240,252,.53);}
-    .rej-pill-good{background:rgba(93,227,150,.15);color:#5de396;}
-    .rej-pill-bad{background:rgba(248,113,113,.15);color:#f87171;}
-    .rej-pill-neutral{background:rgba(232,240,252,.08);color:rgba(232,240,252,.5);}
     .deadline-alert{background:rgba(248,113,113,.1);border-color:rgba(248,113,113,.25);}
     .deadline-alert-title{color:#f87171;}
     .deadline-alert li{color:#f87171;}
@@ -479,8 +436,6 @@
     .table-input{color:#e8f0fc;}
     .table-input:hover{border-color:rgba(232,240,252,.15);background:rgba(255,255,255,.03);}
     .table-input:focus{border-color:#2dd4bf;background:rgba(255,255,255,.05);outline:none;}
-    .delete-btn{border-color:rgba(248,113,113,.3);color:#f87171;}
-    .delete-btn:hover{background:rgba(248,113,113,.1);}
     .empty-state{color:rgba(232,240,252,.5);}
     .empty-state-title{color:rgba(232,240,252,.7);}
     .empty-state i{color:rgba(45,212,191,.3);}
@@ -528,13 +483,11 @@
     .app-footer-name span{color:#2dd4bf;}
     .app-footer-links a{color:rgba(232,240,252,.48);}
     .app-footer-links a:hover{color:#2dd4bf;}
-    .app-footer-badge{background:rgba(45,212,191,.1);color:#2dd4bf;border-color:rgba(45,212,191,.25);}
     .landing-footer{background:#060e1a;}
     .landing-footer-name{color:#e8f0fc;}
     .landing-footer-name span{color:#2dd4bf;}
     .landing-footer-links a{color:rgba(232,240,252,.48);}
     .landing-footer-links a:hover{color:#2dd4bf;}
-    .landing-footer-badge{background:rgba(45,212,191,.1);color:#2dd4bf;border-color:rgba(45,212,191,.25);}
     #toast{background:#0d1829;border:1px solid rgba(232,240,252,.1);color:#e8f0fc;}
     a{color:#2dd4bf;}
     a:hover{color:#22b8a0;}
@@ -572,15 +525,6 @@
     .hero-split-ctas{display:flex;gap:14px;align-items:center;}
     .hero-ghost-btn{background:transparent;border:1.5px solid rgba(232,240,252,.18);color:rgba(232,240,252,.65);padding:13px 22px;border-radius:10px;font-size:15px;font-family:'DM Sans',sans-serif;cursor:pointer;}
     .hero-results-label{font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(232,240,252,.55);margin-bottom:16px;}
-    .hero-result-card{display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:10px;background:rgba(232,240,252,.04);border:1px solid rgba(232,240,252,.07);margin-bottom:10px;}
-    .hero-result-hi{border-color:rgba(45,212,191,.22);background:rgba(45,212,191,.05);}
-    .hero-result-score{width:34px;height:34px;border-radius:8px;background:rgba(45,212,191,.18);color:#2dd4bf;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-    .hero-result-score-lo{background:rgba(232,240,252,.08);color:rgba(232,240,252,.53);}
-    .hero-result-body{flex:1;}
-    .hero-result-name{font-size:14px;font-weight:600;color:#e8f0fc;margin-bottom:3px;}
-    .hero-result-meta{font-size:12px;color:rgba(232,240,252,.49);}
-    .hero-result-amt{font-size:13px;font-weight:700;color:#2dd4bf;}
-    .hero-result-amt-lo{color:rgba(232,240,252,.53);}
     /* how-step teal */
     .how-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;}
     .how-step{background:rgba(232,240,252,.03);border:1px solid rgba(232,240,252,.07);border-radius:12px;padding:26px 22px;}
@@ -668,44 +612,46 @@
   <section class="hero hero-split" aria-label="Hero">
     <canvas id="network-canvas" aria-hidden="true" style="opacity:.35;"></canvas>
     <div class="hero-left">
-      <div class="hero-pill"><span class="hero-pill-dot"></span>AI-powered · Verified · Human in control</div>
+      <div class="hero-pill"><span class="hero-pill-dot"></span>AI-powered · Human in control</div>
       <h1 class="hero-split-title">Find the grants your<br><em>mission deserves</em></h1>
-      <p class="hero-split-sub">Fundaigo helps small nonprofits discover, verify, evaluate, and track funding opportunities, while keeping every decision in human hands.</p>
+      <p class="hero-split-sub">Fundaigo empowers small nonprofits with AI, shifting focus away from time spent researching and toward what matters most: evaluating and deciding which funding opportunities to pursue.</p>
       <div class="hero-split-ctas">
         <button class="start-btn" onclick="enterApp()">Start for free →</button>
         <button class="hero-ghost-btn" onclick="document.getElementById('how-it-works').scrollIntoView({behavior:'smooth'})">See the five-stage workflow</button>
       </div>
     </div>
     <div class="hero-right">
-      <div class="hero-results-label">Illustrative example &middot; top results this run</div>
-      <div class="hero-result-card hero-result-hi">
-        <div class="hero-result-score">5</div>
-        <div class="hero-result-body"><div class="hero-result-name">Chicago Community Trust</div><div class="hero-result-meta">Education · Rolling deadline</div></div>
-        <div class="hero-result-amt">$25K</div>
-      </div>
-      <div class="hero-result-card hero-result-hi">
-        <div class="hero-result-score">5</div>
-        <div class="hero-result-body"><div class="hero-result-name">Polk Bros. Foundation</div><div class="hero-result-meta">After-school · Illinois</div></div>
-        <div class="hero-result-amt">$50K</div>
-      </div>
-      <div class="hero-result-card">
-        <div class="hero-result-score hero-result-score-lo">4</div>
-        <div class="hero-result-body"><div class="hero-result-name">Title I Federal Grants</div><div class="hero-result-meta">Government · K-12</div></div>
-        <div class="hero-result-amt hero-result-amt-lo">$100K+</div>
-      </div>
-      <div class="hero-result-card">
-        <div class="hero-result-score hero-result-score-lo">4</div>
-        <div class="hero-result-body"><div class="hero-result-name">Harris Family Foundation</div><div class="hero-result-meta">Private · Underserved youth</div></div>
-        <div class="hero-result-amt hero-result-amt-lo">$15K</div>
+      <div class="hero-results-label">See it in action</div>
+      <!-- Click-to-load thumbnail: the Loom iframe is only inserted on
+           click, not on page load, so the player never loads until
+           someone actually wants to watch. -->
+      <div id="hero-video-wrap" style="position:relative;width:100%;max-width:480px;aspect-ratio:16/9;border-radius:12px;overflow:hidden;border:1px solid rgba(45,212,191,.3);background:radial-gradient(circle at 50% 40%,#152238,#0d1829);cursor:pointer;" onclick="document.getElementById('hero-video-wrap').innerHTML='<iframe src=&quot;https://www.loom.com/embed/d1a9d423a04645c8ad3d5691e8a77c9e?autoplay=1&quot; frameborder=&quot;0&quot; allow=&quot;autoplay; fullscreen&quot; allowfullscreen style=&quot;position:absolute;top:0;left:0;width:100%;height:100%;&quot;></iframe>'">
+        <div style="position:absolute;top:10px;left:10px;display:flex;align-items:center;gap:5px;background:rgba(8,16,30,.75);border:0.5px solid rgba(45,212,191,.35);border-radius:20px;padding:4px 10px;">
+          <i class="ti ti-video" style="font-size:12px;color:#2dd4bf;" aria-hidden="true"></i>
+          <span style="font-size:10px;font-weight:700;letter-spacing:.05em;color:#2dd4bf;text-transform:uppercase;">Video</span>
+        </div>
+        <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;">
+          <div style="width:60px;height:60px;border-radius:50%;background:#2dd4bf;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 8px rgba(45,212,191,.15);">
+            <i class="ti ti-player-play" style="font-size:24px;color:#08101e;margin-left:3px;" aria-hidden="true"></i>
+          </div>
+          <div style="font-size:13px;font-weight:600;color:#f0ece4;">Watch a walkthrough</div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="how-section" id="watch-video" style="padding-bottom:8px;">
-    <span class="how-sec-label">See it in action</span>
-    <h2 class="how-title">Watch a walkthrough</h2>
-    <div style="position:relative;padding-bottom:56.25%;height:0;max-width:800px;border-radius:12px;overflow:hidden;border:0.5px solid rgba(232,240,252,.1);margin-top:16px;">
-      <iframe src="https://www.loom.com/embed/d1a9d423a04645c8ad3d5691e8a77c9e" frameborder="0" allow="fullscreen" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+  <section class="how-section" id="mission-vision">
+    <span class="how-sec-label">Mission &amp; Vision</span>
+    <h2 class="how-title">Why this system exists</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px;">
+      <div>
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#2dd4bf;margin-bottom:8px;">Mission</div>
+        <p style="font-size:15px;color:rgba(232,240,252,.75);line-height:1.7;margin:0;">Helping nonprofits spend less time searching for funding and more time advancing their mission.</p>
+      </div>
+      <div>
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#2dd4bf;margin-bottom:8px;">Vision</div>
+        <p style="font-size:15px;color:rgba(232,240,252,.75);line-height:1.7;margin:0;">A future where every nonprofit, regardless of size, budget, or staff capacity, has equal access to funding opportunities and the tools to turn them into lasting community impact.</p>
+      </div>
     </div>
   </section>
 
@@ -716,39 +662,9 @@
     <div class="stats-strip-item"><div class="stats-strip-n">$0.00</div><div class="stats-strip-l">on Groq's free tier</div></div>
   </div>
 
-  <section class="how-section" id="who-its-for">
-    <span class="how-sec-label">Who Fundaigo is for</span>
-    <h2 class="how-title">Built for small nonprofits that</h2>
-    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:20px;max-width:640px;">
-      <div style="display:flex;align-items:flex-start;gap:8px;"><i class="ti ti-check" style="font-size:16px;color:#2dd4bf;flex-shrink:0;margin-top:2px;" aria-hidden="true"></i><span style="font-size:13.5px;color:rgba(232,240,252,.7);">Have limited resources</span></div>
-      <div style="display:flex;align-items:flex-start;gap:8px;"><i class="ti ti-check" style="font-size:16px;color:#2dd4bf;flex-shrink:0;margin-top:2px;" aria-hidden="true"></i><span style="font-size:13.5px;color:rgba(232,240,252,.7);">Can benefit from AI assistance while staying in control of decision making</span></div>
-    </div>
-  </section>
-
-  <section class="how-section" id="what-it-doesnt-do">
-    <span class="how-sec-label">What Fundaigo does not do</span>
-    <h2 class="how-title">Just as important as what it does</h2>
-    <p class="how-sub">Fundaigo does not guarantee funding, determine final eligibility, provide legal advice, or submit applications automatically. Every result is a starting point for your team's own judgment, not a decision made on your behalf.</p>
-  </section>
-
-
-  <section class="how-section" id="how-it-works">
-    <span class="how-sec-label">How it works</span>
-    <h2 class="how-title">From search to proposal in five steps</h2>
-    <p class="how-sub">Select a category, let AI do the research, review only verified leads.</p>
-    <div class="how-steps">
-      <div class="how-step"><div class="how-step-num">1</div><div class="how-step-title">Choose category</div><div class="how-step-desc">Pick a funder type or type a custom search</div></div>
-      <div class="how-step"><div class="how-step-num">2</div><div class="how-step-title">AI searches</div><div class="how-step-desc">5-layer pipeline runs automatically</div></div>
-      <div class="how-step"><div class="how-step-num">3</div><div class="how-step-title">Review results</div><div class="how-step-desc">Verified, scored, guard-checked leads only</div></div>
-      <div class="how-step"><div class="how-step-num">4</div><div class="how-step-title">Track pipeline</div><div class="how-step-desc">Add to tracker, assign, set deadlines</div></div>
-      <div class="how-step"><div class="how-step-num">5</div><div class="how-step-title">Draft &amp; submit</div><div class="how-step-desc">NotebookLM drafts, staff reviews, submits</div></div>
-    </div>
-  </section>
-
   <section class="how-section" id="about-section">
     <span class="how-sec-label">About</span>
-    <h2 class="how-title">Mission, architecture, and how it all fits together</h2>
-    <p class="how-sub">No sign-in required to read this. The tabs described below are only visible after you sign in.</p>
+    <h2 class="how-title">Who it's for, what it does, and how it all fits together</h2>
     <button id="about-expand-btn" class="hero-ghost-btn" onclick="expandAboutSection()" style="margin-bottom:20px;">
       Show details <i class="ti ti-chevron-down" style="font-size:12px;vertical-align:-1px;" aria-hidden="true"></i>
     </button>
@@ -757,13 +673,13 @@
       <div class="acc-item">
         <button class="acc-trigger acc-open" onclick="toggleAcc(this)" aria-expanded="true">
           <div class="acc-num" aria-hidden="true">1</div>
-          <div><span class="acc-label">Mission &amp; Vision</span><span class="acc-title">Why this system exists</span></div>
+          <div><span class="acc-label">Who Fundaigo is for</span><span class="acc-title">Built for small nonprofits that</span></div>
           <i class="ti ti-chevron-down acc-chev" aria-hidden="true"></i>
         </button>
         <div class="acc-body acc-open">
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-            <div style="background:var(--c-tint);border:0.5px solid var(--c-border);border-radius:8px;padding:12px;"><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--c-purple);margin-bottom:4px;">Mission</div><div style="font-size:11.5px;color:var(--c-text);line-height:1.6;">Helping nonprofits spend less time searching for funding and more time advancing their mission.</div></div>
-            <div style="background:var(--c-tint);border:0.5px solid var(--c-border);border-radius:8px;padding:12px;"><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--c-purple);margin-bottom:4px;">Vision</div><div style="font-size:11.5px;color:var(--c-text);line-height:1.6;">A future where every nonprofit, regardless of size, budget, or staff capacity, has equal access to funding opportunities and the tools to turn them into lasting community impact.</div></div>
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;">
+            <div style="display:flex;align-items:flex-start;gap:8px;"><i class="ti ti-check" style="font-size:16px;color:#2dd4bf;flex-shrink:0;margin-top:2px;" aria-hidden="true"></i><span style="font-size:12.5px;color:var(--c-text);">Have limited resources</span></div>
+            <div style="display:flex;align-items:flex-start;gap:8px;"><i class="ti ti-check" style="font-size:16px;color:#2dd4bf;flex-shrink:0;margin-top:2px;" aria-hidden="true"></i><span style="font-size:12.5px;color:var(--c-text);">Can benefit from AI assistance while staying in control of decision making</span></div>
           </div>
         </div>
       </div>
@@ -772,6 +688,18 @@
       <div class="acc-item">
         <button class="acc-trigger" onclick="toggleAcc(this)" aria-expanded="false">
           <div class="acc-num" aria-hidden="true">2</div>
+          <div><span class="acc-label">What Fundaigo does not do</span><span class="acc-title">Just as important as what it does</span></div>
+          <i class="ti ti-chevron-down acc-chev" aria-hidden="true"></i>
+        </button>
+        <div class="acc-body">
+          <p style="font-size:11.5px;color:var(--c-muted);line-height:1.6;margin:0;">Fundaigo does not guarantee funding, determine final eligibility, provide legal advice, or submit applications automatically. Every result is a starting point for your team's own judgment, not a decision made on your behalf.</p>
+        </div>
+      </div>
+
+      <!-- Section 3 -->
+      <div class="acc-item">
+        <button class="acc-trigger" onclick="toggleAcc(this)" aria-expanded="false">
+          <div class="acc-num" aria-hidden="true">3</div>
           <div><span class="acc-label">Impact &amp; Goal</span><span class="acc-title">The problem we are solving</span></div>
           <i class="ti ti-chevron-down acc-chev" aria-hidden="true"></i>
         </button>
@@ -785,10 +713,10 @@
         </div>
       </div>
 
-      <!-- Section 3 -->
+      <!-- Section 4 -->
       <div class="acc-item">
         <button class="acc-trigger" onclick="toggleAcc(this)" aria-expanded="false">
-          <div class="acc-num" aria-hidden="true">3</div>
+          <div class="acc-num" aria-hidden="true">4</div>
           <div><span class="acc-label">Technical architecture</span><span class="acc-title">For implementers and reviewers</span></div>
           <i class="ti ti-chevron-down acc-chev" aria-hidden="true"></i>
         </button>
@@ -804,10 +732,10 @@
         </div>
       </div>
 
-      <!-- Section 4 -->
+      <!-- Section 5 -->
       <div class="acc-item">
         <button class="acc-trigger" onclick="toggleAcc(this)" aria-expanded="false">
-          <div class="acc-num" aria-hidden="true">4</div>
+          <div class="acc-num" aria-hidden="true">5</div>
           <div><span class="acc-label">Tab Guide</span><span class="acc-title">How each tab works</span></div>
           <i class="ti ti-chevron-down acc-chev" aria-hidden="true"></i>
         </button>
@@ -822,10 +750,10 @@
         </div>
       </div>
 
-      <!-- Section 5 -->
+      <!-- Section 6 -->
       <div class="acc-item">
         <button class="acc-trigger" onclick="toggleAcc(this)" aria-expanded="false">
-          <div class="acc-num" aria-hidden="true">5</div>
+          <div class="acc-num" aria-hidden="true">6</div>
           <div><span class="acc-label">Architecture</span><span class="acc-title">Pipeline flow and what makes this stand out</span></div>
           <i class="ti ti-chevron-down acc-chev" aria-hidden="true"></i>
         </button>
@@ -851,7 +779,20 @@
     </div><!-- /about-content -->
   </section>
 
-  <footer class="landing-footer">
+  <section class="how-section" id="how-it-works">
+    <span class="how-sec-label">How it works</span>
+    <h2 class="how-title">From search to proposal in five steps</h2>
+    <p class="how-sub">Select a category, let AI do the research, review only verified leads.</p>
+    <div class="how-steps">
+      <div class="how-step"><div class="how-step-num">1</div><div class="how-step-title">Choose category</div><div class="how-step-desc">Pick a funder type or type a custom search</div></div>
+      <div class="how-step"><div class="how-step-num">2</div><div class="how-step-title">AI searches</div><div class="how-step-desc">5-layer pipeline runs automatically</div></div>
+      <div class="how-step"><div class="how-step-num">3</div><div class="how-step-title">Review results</div><div class="how-step-desc">Verified, scored, guard-checked leads only</div></div>
+      <div class="how-step"><div class="how-step-num">4</div><div class="how-step-title">Track pipeline</div><div class="how-step-desc">Add to tracker, assign, set deadlines</div></div>
+      <div class="how-step"><div class="how-step-num">5</div><div class="how-step-title">Draft &amp; submit</div><div class="how-step-desc">NotebookLM drafts, staff reviews, submits</div></div>
+    </div>
+  </section>
+
+    <footer class="landing-footer">
     <div class="landing-footer-logo">
       <svg width="24" height="24" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <defs><linearGradient id="lg-footer" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#22b8a0"/><stop offset="100%" stop-color="#2dd4bf"/></linearGradient></defs>
