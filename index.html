@@ -62,7 +62,7 @@
     .tab-section.tab-active{display:block;}
 
     /* ── LANDING NAV ── */
-    .landing-nav{display:flex;align-items:center;justify-content:space-between;padding:14px 32px;background:var(--c-bg);border-bottom:0.5px solid var(--c-border);position:sticky;top:0;z-index:100;flex-wrap:wrap;gap:8px;}
+    .landing-nav{display:flex;align-items:center;justify-content:space-between;padding:14px 32px;max-width:1200px;margin:0 auto;background:var(--c-bg);border-bottom:0.5px solid var(--c-border);position:sticky;top:0;z-index:100;flex-wrap:wrap;gap:8px;}
     .landing-nav-logo{display:flex;align-items:center;gap:8px;text-decoration:none;}
     .landing-nav-name{font-family:'Alex Brush',cursive;font-size:30px;font-weight:400;color:var(--c-text);line-height:1;}
     .landing-nav-name span{color:#C1461A;}
@@ -81,7 +81,7 @@
     .hero-note span{color:var(--c-purple);font-weight:600;}
 
     /* ── STATS STRIP ── */
-    .stats-strip{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--c-border);border-bottom:1px solid var(--c-border);background:var(--c-bg);}
+    .stats-strip{display:grid;grid-template-columns:repeat(4,1fr);max-width:1200px;margin:0 auto;border-top:1px solid var(--c-border);border-bottom:1px solid var(--c-border);background:var(--c-bg);}
     .stats-strip-item{text-align:left;padding:28px 36px;border-right:1px solid var(--c-border);}
     .stats-strip-item:last-child{border-right:none;}
     .stats-strip-n{font-family:"Syne",sans-serif;font-size:38px;font-weight:700;color:var(--c-purple);letter-spacing:-1.5px;line-height:1;}
@@ -90,7 +90,7 @@
     /* ── FEATURES ── */
 
     /* ── HOW IT WORKS ── */
-    .how-section{padding:48px 52px;max-width:none;margin:0;}
+    .how-section{padding:48px 52px;max-width:1200px;margin:0 auto;}
     .how-sec-label{font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--c-purple);margin-bottom:12px;display:block;}.how-title{text-align:left;font-family:"DM Serif Display",serif;font-size:40px;font-weight:400;color:var(--c-text);margin-bottom:4px;letter-spacing:-.5px;}
     .how-sub{text-align:left;font-size:15px;color:var(--c-muted);margin-bottom:40px;}
     .how-steps{display:flex;align-items:flex-start;justify-content:center;}
@@ -101,7 +101,7 @@
     .how-step-desc{font-size:11px;color:var(--c-muted);line-height:1.5;}
 
     /* ── LANDING FOOTER ── */
-    .landing-footer{background:var(--c-text);padding:24px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:auto;}
+    .landing-footer{background:var(--c-text);padding:24px 32px;max-width:1200px;margin-left:auto;margin-right:auto;margin-top:auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
     .landing-footer-logo{display:flex;align-items:center;gap:8px;}
     .landing-footer-name{font-family:'Alex Brush',cursive;font-size:24px;font-weight:400;color:#fff;line-height:1;}
     .landing-footer-name span{color:#C1461A;}
@@ -514,7 +514,7 @@
 
 
     /* ── 4A HERO SPLIT LAYOUT ── */
-    .hero-split{display:grid;grid-template-columns:3fr 2fr;min-height:460px;position:relative;overflow:hidden;padding:0;text-align:left;align-items:stretch;justify-content:stretch;}
+    .hero-split{display:grid;grid-template-columns:3fr 2fr;min-height:460px;max-width:1200px;margin:0 auto;position:relative;overflow:hidden;padding:0;text-align:left;align-items:stretch;justify-content:stretch;}
     .hero-left{padding:80px 52px;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2;background:radial-gradient(ellipse 600px 500px at -10% 50%,rgba(193,70,26,.07) 0%,transparent 65%),#F5F0E6;}
     .hero-right{padding:60px 52px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;z-index:2;background:radial-gradient(ellipse 600px 500px at 110% 50%,rgba(193,70,26,.07) 0%,transparent 65%),#F5F0E6;}
     .hero-pill{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(193,70,26,.25);border-radius:100px;padding:5px 16px 5px 10px;font-size:12px;color:rgba(193,70,26,.85);font-weight:500;margin-bottom:28px;width:fit-content;}
