@@ -877,16 +877,21 @@
         <div id="auth-header-slot"></div>
       </div>
       <nav class="app-tabs" role="tablist" aria-label="App navigation">
-        <button class="app-tab tab-active" role="tab" aria-selected="true"  onclick="switchTab('discover', this)">Discover</button>
-        <button class="app-tab"            role="tab" aria-selected="false" onclick="switchTab('tracker',  this)">Tracker <span class="tab-badge" id="tracker-tab-badge" style="display:none;">0</span></button>
-        <button class="app-tab"            role="tab" aria-selected="false" onclick="switchTab('proposal', this)">Proposal</button>
+        <button class="app-tab"            role="tab" aria-selected="false" onclick="switchTab('settings', this)">Step 1 &middot; Setup</button>
+        <button class="app-tab tab-active" role="tab" aria-selected="true"  onclick="switchTab('discover', this)">Step 2 &middot; Discover</button>
+        <button class="app-tab"            role="tab" aria-selected="false" onclick="switchTab('tracker',  this)">Step 3 &middot; Tracker <span class="tab-badge" id="tracker-tab-badge" style="display:none;">0</span></button>
+        <button class="app-tab"            role="tab" aria-selected="false" onclick="switchTab('proposal', this)">Step 4 &middot; Proposal</button>
         <button class="app-tab" id="tab-btn-about" role="tab" aria-selected="false" onclick="switchTab('about',    this)">About</button>
-        <button class="app-tab"            role="tab" aria-selected="false" onclick="switchTab('settings', this)">Settings</button>
       </nav>
     </div>
   </header>
 
   <main class="app-content">
+
+    <div id="setup-checklist-banner" style="display:none;background:#FFFFFF;border:0.5px solid rgba(193,70,26,.25);border-radius:10px;padding:14px 16px;margin-bottom:16px;">
+      <div style="font-size:12px;font-weight:600;color:var(--c-text);margin-bottom:10px;">Finish setting up Fundaigo (<span id="setup-checklist-count">0 of 3</span> done)</div>
+      <div style="display:flex;flex-direction:column;gap:7px;" id="setup-checklist-items"></div>
+    </div>
 
     <!-- ══════════════════════════════════════════
          DISCOVER TAB
@@ -1379,6 +1384,7 @@ async function saveSharedDriveId() {
     await refreshSharedDriveStatus();
     try { if (typeof loadProfileIntoSettings === 'function') await loadProfileIntoSettings(); } catch(e) {}
     try { if (typeof initTracker === 'function') await initTracker(); } catch(e) {}
+    await updateSetupChecklist();
   } catch (err) {
     if (err.code === "NOT_AUTHORIZED") {
       showToast(`Only ${err.configuredBy || "your org's admin"} can change this, ask them to update it.`);
@@ -1473,6 +1479,7 @@ function enterApp() {
       try { if (typeof loadProfileIntoSettings === 'function') loadProfileIntoSettings(); } catch(e) { console.warn('loadProfile:', e); }
       try { if (typeof updateMemoryStats === 'function') updateMemoryStats(); } catch(e) { console.warn('memStats:', e); }
       try { if (typeof checkApiKeyStatus === 'function') checkApiKeyStatus(); } catch(e) { console.warn('apiKey:', e); }
+      try { await updateSetupChecklist(); } catch(e) { console.warn('setupChecklist:', e); }
       // window._fundigoOrgInfo is only known after the first real
       // window.storage.get/set round-trip (in the calls above) —
       // refresh the header note now that it's available.
@@ -1892,6 +1899,60 @@ function toggleFuture() {
 }
 
 // ── SETTINGS ──────────────────────────────────────────────────
+// ── SETUP CHECKLIST (shows until Groq key, org profile, and Shared Drive are all set) ──
+async function updateSetupChecklist() {
+  const banner = document.getElementById('setup-checklist-banner');
+  const countEl = document.getElementById('setup-checklist-count');
+  const itemsEl = document.getElementById('setup-checklist-items');
+  if (!banner || !itemsEl) return;
+
+  const hasKey = typeof hasApiKey === 'function' ? hasApiKey('groq') : false;
+
+  let hasProfile = false;
+  try {
+    const profile = typeof loadProfile === 'function' ? await loadProfile() : null;
+    hasProfile = !!(profile && profile.name && profile.name !== CONFIG.defaultProfile.name);
+  } catch (e) { hasProfile = false; }
+
+  let hasSharedDrive = false;
+  try {
+    const status = typeof getOrgPointerStatus === 'function' ? await getOrgPointerStatus() : null;
+    hasSharedDrive = !!(status && status.sharedDriveId);
+  } catch (e) { hasSharedDrive = false; }
+
+  const steps = [
+    { label: 'Add your Groq API key', done: hasKey },
+    { label: 'Set up your organization profile', done: hasProfile },
+    { label: 'Connect your Shared Drive', done: hasSharedDrive },
+  ];
+  const doneCount = steps.filter(s => s.done).length;
+
+  if (doneCount === 3) {
+    banner.style.display = 'none';
+    return;
+  }
+
+  banner.style.display = 'block';
+  countEl.textContent = `${doneCount} of 3`;
+
+  let firstPending = true;
+  itemsEl.innerHTML = steps.map(s => {
+    const icon = s.done
+      ? '<i class="ti ti-circle-check-filled" style="font-size:16px;color:#166534;" aria-hidden="true"></i>'
+      : '<i class="ti ti-circle" style="font-size:16px;color:#C1461A;" aria-hidden="true"></i>';
+    const textStyle = s.done
+      ? 'font-size:11.5px;color:var(--c-text);text-decoration:line-through;opacity:.6;'
+      : 'font-size:11.5px;color:var(--c-text);font-weight:600;';
+    let cta = '';
+    if (!s.done && firstPending) {
+      cta = '<span style="margin-left:auto;font-size:10px;color:#C1461A;font-weight:600;cursor:pointer;" onclick="switchTab(\'settings\', document.querySelector(\'.app-tab[onclick*=settings]\'))">Go to Step 1 &rarr;</span>';
+      firstPending = false;
+    }
+    return `<div style="display:flex;align-items:center;gap:8px;">${icon}<span style="${textStyle}">${s.label}</span>${cta}</div>`;
+  }).join('');
+}
+
+
 function saveApiKey() {
   const val = document.getElementById('api-key-input').value.trim();
   if (!val) { showToast('Enter a valid Groq API key first.'); return; }
@@ -1900,6 +1961,7 @@ function saveApiKey() {
   sessionStorage.setItem('ere_key_groq', val);
   document.getElementById('key-status').classList.add('visible');
   showToast('API key saved for this session.');
+  updateSetupChecklist();
 }
 function checkApiKeyStatus() {
   try {
@@ -1935,6 +1997,7 @@ async function saveProfileFromForm() {
     excludeFunders: getValue('profile-exclude'),      // kept as string — discovery.js splits it
   });
   showToast('Profile saved.');
+  updateSetupChecklist();
 }
 function updateMemoryStats() {
   try {
