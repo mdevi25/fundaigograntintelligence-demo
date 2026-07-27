@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fundaigo - AI Powered Grant Intelligence</title>
-  <meta name="description" content="AI-powered funding intelligence for nonprofits. 5-layer pipeline. Verified leads. Human in control.">
+  <meta name="description" content="AI-powered funding intelligence for nonprofits. 5-layer pipeline. Human in control.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
@@ -756,7 +756,7 @@
   <canvas id="network-canvas" aria-hidden="true"></canvas>
   <div class="wrap hero-block">
     <div class="eyebrow">
-      <span>AI-powered</span><span class="sep">&middot;</span><span>Verified leads</span><span class="sep">&middot;</span><span>Human in control</span>
+      <span>AI-powered</span><span class="sep">&middot;</span><span>Human in control</span>
     </div>
     <h1>Find the grants your <strong>mission deserves</strong></h1>
     <p>Fundaigo searches, qualifies, and scores funding leads, so your team can shift its focus to deciding and pursuing, not researching funding resources.</p>
@@ -769,7 +769,7 @@
   <div class="stats">
     <div class="wrap stats-row">
       <div class="stat"><div class="num">750K+</div><div class="label">nonprofits this is built for</div></div>
-      <div class="stat"><div class="num">5 layers</div><div class="label">of AI verification before you see a result</div></div>
+      <div class="stat"><div class="num">5 layers</div><div class="label">of AI pipeline before you see a result</div></div>
       <div class="stat"><div class="num">30 min</div><div class="label">staff time per week to run a full search</div></div>
     </div>
   </div>
@@ -783,7 +783,7 @@
       <div class="step"><div class="n">0</div><h3>Setup</h3><p>Setup Groq API key and your org profile</p></div>
       <div class="step"><div class="n">1</div><h3>Choose category</h3><p>Pick a funder type or type a custom search</p></div>
       <div class="step"><div class="n">2</div><h3>AI searches</h3><p>5-layer pipeline runs automatically</p></div>
-      <div class="step"><div class="n">3</div><h3>Review results</h3><p>Verified, scored, guard-checked leads only</p></div>
+      <div class="step"><div class="n">3</div><h3>Review results</h3><p>Scored and guard-checked, confirm links before applying</p></div>
       <div class="step"><div class="n">4</div><h3>Track pipeline</h3><p>Add to tracker, assign, set deadlines</p></div>
       <div class="step"><div class="n">5</div><h3>Draft and submit</h3><p>NotebookLM drafts, staff reviews, submits</p></div>
     </div>
@@ -906,7 +906,7 @@
           <button class="search-panel-change-btn" onclick="expandSearchPanel()">Change search</button>
         </div>
         <h2>What do you want to search for?</h2>
-        <p class="search-panel-desc">Select one or more categories, or type a custom search. Results are verified, scored, and guard-checked before you see them.</p>
+        <p class="search-panel-desc">Select one or more categories, or type a custom search. Results are scored and guard-checked before you see them, always confirm each link before applying.</p>
 
         <div class="chip-grid" id="chip-grid">
           <div class="chip" data-category="community" onclick="selectChip(this)"><span class="chip-check"><i class="ti ti-check" style="font-size:11px;" aria-hidden="true"></i></span>
@@ -970,7 +970,7 @@
       <div class="pipeline-bar" id="pipeline-bar" style="display:none;" aria-label="Pipeline progress">
         <div class="pipeline-step" id="pipe-1"><i class="ti ti-search" style="font-size:9px;" aria-hidden="true"></i> 1 &middot; Discover</div>
         <div class="pipeline-arrow" aria-hidden="true">→</div>
-        <div class="pipeline-step" id="pipe-15"><i class="ti ti-link" style="font-size:9px;" aria-hidden="true"></i> 1.5 &middot; Verify</div>
+        <div class="pipeline-step" id="pipe-15"><i class="ti ti-link" style="font-size:9px;" aria-hidden="true"></i> 1.5 &middot; Links</div>
         <div class="pipeline-arrow" aria-hidden="true">→</div>
         <div class="pipeline-step" id="pipe-2"><i class="ti ti-star" style="font-size:9px;" aria-hidden="true"></i> 2 &middot; Qualify</div>
         <div class="pipeline-arrow" aria-hidden="true">→</div>
@@ -982,7 +982,7 @@
       <!-- Summary stats -->
       <div class="summary-stats" id="summary-stats" style="display:none;">
         <div class="summary-stat"><div class="summary-stat-n" id="stat-found">—</div><div class="summary-stat-l">Found</div></div>
-        <div class="summary-stat"><div class="summary-stat-n" id="stat-verified">—</div><div class="summary-stat-l">Verified</div></div>
+        <div class="summary-stat"><div class="summary-stat-n" id="stat-verified">—</div><div class="summary-stat-l">Passed forward</div></div>
         <div class="summary-stat"><div class="summary-stat-n" id="stat-filtered">—</div><div class="summary-stat-l">Filtered</div></div>
         <div class="summary-stat"><div class="summary-stat-n" id="stat-avg-fit">—</div><div class="summary-stat-l">Avg fit</div></div>
         <div class="summary-stat"><div class="summary-stat-n" id="stat-highest">—</div><div class="summary-stat-l">Highest</div></div>
@@ -998,7 +998,7 @@
       <div class="opp-ctrl-row" id="opp-controls" style="display:none;">
         <button class="opp-ctrl-btn" onclick="expandAllOpps()"><i class="ti ti-arrows-maximize" style="font-size:11px;" aria-hidden="true"></i> Expand all</button>
         <button class="opp-ctrl-btn" onclick="collapseAllOpps()"><i class="ti ti-arrows-minimize" style="font-size:11px;" aria-hidden="true"></i> Collapse all</button>
-        <button class="opp-ctrl-btn" onclick="addAllToTracker()" style="margin-left:auto;"><i class="ti ti-plus" style="font-size:11px;" aria-hidden="true"></i> Add all verified</button>
+        <button class="opp-ctrl-btn" onclick="addAllToTracker()" style="margin-left:auto;"><i class="ti ti-plus" style="font-size:11px;" aria-hidden="true"></i> Add all results</button>
       </div>
 
       <!-- Results -->
@@ -1173,7 +1173,7 @@
           <p style="font-size:12px;color:var(--c-muted);line-height:1.6;margin:0 0 14px;">In plain terms, this stage searches current funding sources, validates source links, compares eligibility against your org profile, flags risk or questionable output, organizes approved leads, and supports evidence-grounded proposal drafting. The table below is the technical detail behind that: which model runs each step, and its usage limit.</p>
           <div style="display:grid;grid-template-columns:180px 1fr 70px;gap:10px;padding:6px 0;border-bottom:0.5px solid var(--c-border);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--c-muted);"><div>Model</div><div>Role &amp; function</div><div>Limit</div></div>
           <div style="display:grid;grid-template-columns:180px 1fr 70px;gap:10px;padding:9px 0;border-bottom:0.5px solid #F0EDF8;align-items:start;"><div><div style="font-weight:600;font-size:12px;">groq/compound</div><span style="display:inline-flex;background:var(--c-soft);color:var(--c-deep);font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;margin-top:3px;">Layer 1 &middot; Discover</span></div><div style="font-size:11px;color:var(--c-muted);">Live web search, up to 10 searches/call. Returns funders, amounts, deadlines, URLs. Memory excludes known funders.</div><div><span style="background:#DCFCE7;color:#166534;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;">Free</span><div style="font-size:9px;color:var(--c-faint);margin-top:3px;">1K req/day</div></div></div>
-          <div style="display:grid;grid-template-columns:180px 1fr 70px;gap:10px;padding:9px 0;border-bottom:0.5px solid #F0EDF8;align-items:start;"><div><div style="font-weight:600;font-size:12px;">groq/compound</div><span style="display:inline-flex;background:var(--c-soft);color:var(--c-deep);font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;margin-top:3px;">Layer 1.5 &middot; Verify</span></div><div style="font-size:11px;color:var(--c-muted);">Visits every URL server-side. Filters dead links, login walls, unverifiable pages silently.</div><div><span style="background:#DCFCE7;color:#166534;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;">Free</span><div style="font-size:9px;color:var(--c-faint);margin-top:3px;">Same key</div></div></div>
+          <div style="display:grid;grid-template-columns:180px 1fr 70px;gap:10px;padding:9px 0;border-bottom:0.5px solid #F0EDF8;align-items:start;"><div><div style="font-weight:600;font-size:12px;">groq/compound</div><span style="display:inline-flex;background:#FEF3C7;color:#92400E;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;margin-top:3px;">Layer 1.5 &middot; Currently bypassed</span></div><div style="font-size:11px;color:var(--c-muted);">Live per-URL checking is temporarily disabled, it was dropping valid URLs on the free tier. Every result is marked "needs check," confirm the link yourself before applying.</div><div><span style="background:#DCFCE7;color:#166534;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;">Free</span><div style="font-size:9px;color:var(--c-faint);margin-top:3px;">Same key</div></div></div>
           <div style="display:grid;grid-template-columns:180px 1fr 70px;gap:10px;padding:9px 0;border-bottom:0.5px solid #F0EDF8;align-items:start;"><div><div style="font-weight:600;font-size:12px;">gpt-oss-120b</div><span style="display:inline-flex;background:var(--c-soft);color:var(--c-deep);font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;margin-top:3px;">Layer 2 &middot; Qualify</span></div><div style="font-size:11px;color:var(--c-muted);">Scores 1–5 vs org profile. Mission, geography, eligibility, risks. Returns structured JSON with recommended action.</div><div><span style="background:#DCFCE7;color:#166534;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;">Free</span><div style="font-size:9px;color:var(--c-faint);margin-top:3px;">1K req/day</div></div></div>
           <div style="display:grid;grid-template-columns:180px 1fr 70px;gap:10px;padding:9px 0;border-bottom:0.5px solid #F0EDF8;align-items:start;"><div><div style="font-weight:600;font-size:12px;">gpt-oss-safeguard</div><span style="display:inline-flex;background:var(--c-soft);color:var(--c-deep);font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;margin-top:3px;">Layer 2.5 &middot; Guard</span></div><div style="font-size:11px;color:var(--c-muted);">Language, bias, accuracy, appropriateness. Soft-flag only, AI never hard-blocks. Humans decide.</div><div><span style="background:#DCFCE7;color:#166534;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;">Free</span><div style="font-size:9px;color:var(--c-faint);margin-top:3px;">Policy-driven</div></div></div>
           <div style="display:grid;grid-template-columns:180px 1fr 70px;gap:10px;padding:9px 0;align-items:start;"><div><div style="font-weight:600;font-size:12px;">Google NotebookLM</div><span style="display:inline-flex;background:var(--c-soft);color:var(--c-deep);font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;margin-top:3px;">Layer 4 &middot; Propose</span></div><div style="font-size:11px;color:var(--c-muted);">Drafts from real org documents only. Prompts instruct the model to use only uploaded evidence. Marks gaps [INSERT: ...]. Upload once, reuse forever.</div><div><span style="background:#DCFCE7;color:#166534;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;">Free</span><div style="font-size:9px;color:var(--c-faint);margin-top:3px;">No API key</div></div></div>
@@ -1208,10 +1208,10 @@
         </button>
         <div class="acc-body">
           <div style="display:grid;grid-template-columns:22px 1fr auto;gap:8px;padding:8px 0;border-bottom:0.5px solid #F0EDF8;align-items:start;"><div style="width:20px;height:20px;border-radius:50%;background:var(--c-purple);color:#fff;font-size:9.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;" aria-hidden="true">1</div><div><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin-bottom:1px;">Discovery &middot; groq/compound</div><div style="font-size:10.5px;color:var(--c-muted);">Live web search, 6 funder categories. Memory auto-excludes known funders.</div></div><span style="font-size:9px;font-weight:700;background:var(--c-soft);color:var(--c-deep);padding:2px 7px;border-radius:20px;white-space:nowrap;">Web search</span></div>
-          <div style="display:grid;grid-template-columns:22px 1fr auto;gap:8px;padding:8px 0;border-bottom:0.5px solid #F0EDF8;align-items:start;"><div style="width:20px;height:20px;border-radius:50%;background:#0369A1;color:#fff;font-size:8px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;" aria-hidden="true">1.5</div><div><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin-bottom:1px;">Link verification &middot; visit_website</div><div style="font-size:10.5px;color:var(--c-muted);">Every URL visited server-side. Dead, login wall, unverifiable → silently dropped. Cached 60 days.</div></div><span style="font-size:9px;font-weight:700;background:#FEE2E2;color:#991B1B;padding:2px 7px;border-radius:20px;white-space:nowrap;">Filters dead links</span></div>
+          <div style="display:grid;grid-template-columns:22px 1fr auto;gap:8px;padding:8px 0;border-bottom:0.5px solid #F0EDF8;align-items:start;"><div style="width:20px;height:20px;border-radius:50%;background:#92400E;color:#fff;font-size:8px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;" aria-hidden="true">1.5</div><div><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin-bottom:1px;">Link check &middot; currently bypassed</div><div style="font-size:10.5px;color:var(--c-muted);">visit_website was dropping valid URLs on the free tier, so this step is temporarily disabled. Every result is marked "needs check" until it's re-enabled; confirm links manually before applying.</div></div><span style="font-size:9px;font-weight:700;background:#FEF3C7;color:#92400E;padding:2px 7px;border-radius:20px;white-space:nowrap;">Not verifying yet</span></div>
           <div style="display:grid;grid-template-columns:22px 1fr auto;gap:8px;padding:8px 0;border-bottom:0.5px solid #F0EDF8;align-items:start;"><div style="width:20px;height:20px;border-radius:50%;background:#92400E;color:#fff;font-size:9.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;" aria-hidden="true">2</div><div><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin-bottom:1px;">Qualification &middot; gpt-oss-120b</div><div style="font-size:10.5px;color:var(--c-muted);">Fit score 1–5 vs org profile. Mission, geography, eligibility, risks. Below minimum → filtered out.</div></div><span style="font-size:9px;font-weight:700;background:#FEF3C7;color:#92400E;padding:2px 7px;border-radius:20px;white-space:nowrap;">Fit score</span></div>
           <div style="display:grid;grid-template-columns:22px 1fr auto;gap:8px;padding:8px 0;border-bottom:0.5px solid #F0EDF8;align-items:start;"><div style="width:20px;height:20px;border-radius:50%;background:#991B1B;color:#fff;font-size:7.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;" aria-hidden="true">2.5</div><div><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin-bottom:1px;">Guard &middot; gpt-oss-safeguard-20b</div><div style="font-size:10.5px;color:var(--c-muted);">Language, bias, accuracy, appropriateness. Soft-flag only, never hard-blocks.</div></div><span style="font-size:9px;font-weight:700;background:#FEE2E2;color:#991B1B;padding:2px 7px;border-radius:20px;white-space:nowrap;">Guardrails</span></div>
-          <div style="display:grid;grid-template-columns:22px 1fr auto;gap:8px;padding:8px 0;border-bottom:0.5px solid #F0EDF8;align-items:start;"><div style="width:20px;height:20px;border-radius:50%;background:#166534;color:#fff;font-size:9.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;" aria-hidden="true">3</div><div><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin-bottom:1px;">Tracker &middot; browser + memory</div><div style="font-size:10.5px;color:var(--c-muted);">Verified results land here. Status changes feed back to memory. CSV export.</div></div><span style="font-size:9px;font-weight:700;background:#DCFCE7;color:#166534;padding:2px 7px;border-radius:20px;white-space:nowrap;">Persistent</span></div>
+          <div style="display:grid;grid-template-columns:22px 1fr auto;gap:8px;padding:8px 0;border-bottom:0.5px solid #F0EDF8;align-items:start;"><div style="width:20px;height:20px;border-radius:50%;background:#166534;color:#fff;font-size:9.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;" aria-hidden="true">3</div><div><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin-bottom:1px;">Tracker &middot; browser + memory</div><div style="font-size:10.5px;color:var(--c-muted);">Scored results land here. Status changes feed back to memory. CSV export.</div></div><span style="font-size:9px;font-weight:700;background:#DCFCE7;color:#166534;padding:2px 7px;border-radius:20px;white-space:nowrap;">Persistent</span></div>
           <div style="display:grid;grid-template-columns:22px 1fr auto;gap:8px;padding:8px 0;border-bottom:0.5px solid #F0EDF8;align-items:start;"><div style="width:20px;height:20px;border-radius:50%;background:var(--c-deep);color:#fff;font-size:9.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;" aria-hidden="true">4</div><div><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin-bottom:1px;">Proposal &middot; NotebookLM</div><div style="font-size:10.5px;color:var(--c-muted);">Generated prompt + org docs → draft grounded in real data only.</div></div><span style="font-size:9px;font-weight:700;background:var(--c-soft);color:var(--c-deep);padding:2px 7px;border-radius:20px;white-space:nowrap;">Human-driven</span></div>
           <div style="display:grid;grid-template-columns:22px 1fr auto;gap:8px;padding:8px 0;align-items:start;"><div style="width:20px;height:20px;border-radius:50%;background:#374151;color:#fff;font-size:9.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;" aria-hidden="true">5</div><div><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin-bottom:1px;">Human review &middot; staff submits</div><div style="font-size:10.5px;color:var(--c-muted);">AI discovers and drafts. Humans decide and submit. Always.</div></div><span style="font-size:9px;font-weight:700;background:#DCFCE7;color:#166534;padding:2px 7px;border-radius:20px;white-space:nowrap;">Human in control</span></div>
           <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px;">
@@ -1721,12 +1721,12 @@ async function runPipeline() {
     const discoveredFuture = discoveryResult.futureMonitoring || [];
     setPipe('pipe-1','done'); setPipe('pipe-15','running');
 
-    onStatus(`Layer 1.5: Verifying ${discovered.length} URLs server-side…`);
+    onStatus(`Layer 1.5: Automated link check is temporarily disabled, passing ${discovered.length} result${discovered.length !== 1 ? 's' : ''} through for scoring…`);
     // Layer 1.5 — Skip live URL verification (visit_website drops valid URLs on free tier)
     // Mark all as NEEDS_CHECK — staff verifies before applying
     const verified = discovered.map(o => ({ ...o, linkStatus: 'NEEDS_CHECK' }));
     const linkResult = { verified, dropped: [], meta: { verified: verified.length, dropped: 0 } };
-    onStatus(`Layer 1.5: ${verified.length} opportunit${verified.length !== 1 ? 'ies' : 'y'} passed for qualification…`);
+    onStatus(`Layer 1.5: ${verified.length} opportunit${verified.length !== 1 ? 'ies' : 'y'} passed for qualification, links not yet checked…`);
     setPipe('pipe-15','done'); setPipe('pipe-2','running');
 
     // Wait 65 seconds between layers — TPM limit is 8,000/min shared across all models
@@ -1764,7 +1764,7 @@ async function runPipeline() {
 
     if (guardResult.checked.length > 0) document.getElementById('opp-controls').style.display = 'flex';
     setPipe('pipe-3','done');
-    onStatus(`Done. ${guardResult.checked.length} verified opportunit${guardResult.checked.length !== 1 ? 'ies' : 'y'} found.`);
+    onStatus(`Done. ${guardResult.checked.length} qualified opportunit${guardResult.checked.length !== 1 ? 'ies' : 'y'} found, confirm each link before applying.`);
 
     // Collapse the search panel once results are in, regardless of
     // outcome — qualified matches or none. Replaces the earlier
@@ -1796,7 +1796,7 @@ async function runPipeline() {
 function renderOpportunityCards(opportunities) {
   const container = document.getElementById('results-container');
   if (opportunities.length === 0) {
-    container.innerHTML = `<div class="empty-state"><i class="ti ti-search-off" aria-hidden="true"></i><div class="empty-state-title">No verified opportunities found</div><div>Try a different category or broaden your search.</div></div>`;
+    container.innerHTML = `<div class="empty-state"><i class="ti ti-search-off" aria-hidden="true"></i><div class="empty-state-title">No qualifying opportunities found</div><div>Try a different category or broaden your search.</div></div>`;
     return;
   }
   container.innerHTML = opportunities.map((opp, i) => {
@@ -1837,7 +1837,7 @@ function renderOpportunityCards(opportunities) {
               ? `<a href="${esc(opp.finalUrl||opp.url)}" class="opp-link" target="_blank" rel="noopener"><i class="ti ti-external-link" style="font-size:11px;vertical-align:-1px;" aria-hidden="true"></i> Open application</a>`
               : `<span class="opp-link" style="color:var(--c-faint);">No URL available</span>`}
             <div style="display:flex;align-items:center;gap:8px;">
-              <span class="verified-note">Verified ${esc(opp.dateVerified||today())} · <b>${esc(opp.recommendedAction||'—')}</b></span>
+              <span class="verified-note">${isNeedsCheck ? 'Reviewed' : 'Verified'} ${esc(opp.dateVerified||today())} &middot; <b>${esc(opp.recommendedAction||'—')}</b></span>
               <button class="add-to-tracker-btn" onclick="addOpportunityToTracker('${esc(opp.id)}')">
                 <i class="ti ti-plus" style="font-size:11px;" aria-hidden="true"></i> Add to tracker
               </button>

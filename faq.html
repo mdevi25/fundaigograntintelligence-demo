@@ -170,7 +170,7 @@
 
   <div class="faq-item" data-q="what is fundigo">
     <button class="faq-q" onclick="toggle(this)" aria-expanded="false">What is Fundaigo?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">Fundaigo is a free AI-powered grant intelligence platform for small nonprofits in education. It runs a <b>5-layer pipeline</b>, discovery, link verification, qualification scoring, bias guard, and tracking, so your team spends 30 minutes a week instead of hours finding verified, scored funding leads.</div>
+    <div class="faq-a">Fundaigo is a free AI-powered grant intelligence platform for small nonprofits in education. It runs a <b>5-layer pipeline</b>, discovery, link check, qualification scoring, bias guard, and tracking, so your team spends 30 minutes a week instead of hours finding scored funding leads. Always confirm a funder's link yourself before applying.</div>
   </div>
   <div class="faq-item" data-q="what do i need setup get started requirements google account shared drive">
     <button class="faq-q" onclick="toggle(this)" aria-expanded="false">What do I need to get started?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
@@ -201,7 +201,7 @@
 
   <div class="faq-item" data-q="why filtered out dead links removed before see them">
     <button class="faq-q" onclick="toggle(this)" aria-expanded="false">Why are some results filtered before I see them?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">Layer 1.5 visits every URL server-side using the <code>visit_website</code> tool. Pages that return 404 errors, require login, redirect to homepages, or can't be verified are silently dropped. Dead links waste your team's time, only working, accessible grant pages reach you. Filtered URLs are cached for 60 days so they're never re-checked unnecessarily.</div>
+    <div class="faq-a"><b>Currently bypassed:</b> automated link checking was dropping valid URLs on the free tier, so Layer 1.5 is temporarily disabled. Every result is marked "needs check" and passes through to scoring as-is, nothing is dropped for a bad link right now. <b>Always visit the link yourself before applying</b>, some may redirect or 404. Filtering resumes once this is re-enabled.</div>
   </div>
 
   <div class="faq-item" data-q="guard flagged warning what does it mean flag review">
@@ -211,7 +211,7 @@
 
   <div class="faq-item" data-q="how many grants results per search find one result per run">
     <button class="faq-q" onclick="toggle(this)" aria-expanded="false">How many opportunities does it find per search?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">By design, each run surfaces <b>one candidate opportunity</b> from Layer 1. That single result then passes through link verification, qualification scoring, and the guard check. At the end of the run, it's either dropped, if it fails verification or scores below the fit threshold, or it reaches you as a verified, scored lead flagged for your review and decision. One result per run keeps each review focused. Run the search again for the next candidate.</div>
+    <div class="faq-a">By design, each run surfaces <b>one candidate opportunity</b> from Layer 1. That single result then passes through a link check (currently bypassed, see the FAQ above), qualification scoring, and the guard check. At the end of the run, it's either dropped, if it scores below the fit threshold, or it reaches you as a scored lead flagged for your review and decision, confirm the link yourself before applying. One result per run keeps each review focused. Run the search again for the next candidate.</div>
   </div>
 
   <div class="faq-item" data-q="fit score 1 2 3 4 5 criteria what does it mean rubric">
@@ -309,7 +309,7 @@
   <div class="faq-item" data-q="what ai models used groq llm layer pipeline">
     <button class="faq-q" onclick="toggle(this)" aria-expanded="false">What AI models does Fundaigo use?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
     <div class="faq-a">All free under one Groq API key:<br><br>
-      <b>Layer 1 + 1.5:</b> <code>groq/compound</code> · live web search and URL verification via <code>visit_website</code><br>
+      <b>Layer 1 + 1.5:</b> <code>groq/compound</code> · live web search; URL link check via <code>visit_website</code> is currently bypassed, see the FAQ above<br>
       <b>Layer 2:</b> <code>openai/gpt-oss-120b</code> · qualification scoring 1-5 with <code>reasoning_effort: "low"</code><br>
       <b>Layer 2.5:</b> <code>openai/gpt-oss-safeguard-20b</code> · bias, accuracy, and appropriateness guard<br>
       <b>Layer 4:</b> Google NotebookLM · proposal drafting (no API key required)</div>
@@ -405,13 +405,13 @@
     </div>
   </div>
 
-  <div class="faq-item" data-q="no verified opportunities found 0 results empty pipeline">
+  <div class="faq-item" data-q="no qualifying opportunities found 0 results empty pipeline">
     <button class="faq-q" onclick="toggle(this)" aria-expanded="false">
-      Result: "No verified opportunities found", 0 results after a full run
+      Result: "No qualifying opportunities found", 0 results after a full run
       <i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i>
     </button>
     <div class="faq-a">
-      <b>What it means:</b> The pipeline ran but the discovered candidate was dropped before reaching you, either it failed link verification or it scored below the minimum fit threshold.<br><br>
+      <b>What it means:</b> The pipeline ran but the discovered candidate was dropped before reaching you, it scored below the minimum fit threshold.<br><br>
       <b>What to do:</b>
       <ul style="margin:6px 0 6px 16px;line-height:1.8;">
         <li>Wait 2 minutes and run again, a different search result may come back</li>
