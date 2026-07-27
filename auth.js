@@ -46,9 +46,11 @@ const AUTH_CONFIG = {
   clientId: "604500199210-obblscfvreo3lecbu8tugvkjlreo34cf.apps.googleusercontent.com",
   storageKey: "fundigo_auth_user",
   tokenKey: "fundigo_auth_token", // sessionStorage — raw ID token
+  guestKey: "fundigo_guest_session", // sessionStorage — "1" while continuing as guest
 };
 
 let _authOnSignedIn = null; // callback set by enterApp()
+window._isGuest = false; // true when the user chose "Continue as guest"
 
 /**
  * Decode a JWT payload without any external library.
@@ -189,7 +191,9 @@ function signOut() {
   try {
     localStorage.removeItem(AUTH_CONFIG.storageKey);
     sessionStorage.removeItem(AUTH_CONFIG.tokenKey);
+    sessionStorage.removeItem(AUTH_CONFIG.guestKey);
   } catch (e) {}
+  window._isGuest = false;
   try {
     if (window.google && google.accounts && google.accounts.id) {
       google.accounts.id.disableAutoSelect();
@@ -241,6 +245,7 @@ function renderAuthHeader(user) {
 function renderOrgSharingNote(user) {
   const note = document.getElementById("org-sharing-note");
   if (!note) return;
+  if (!user) return; // guest mode — renderGuestHeader() already set its own note
   const domain = (user.email || "").split("@")[1] || "";
   const info = window._fundigoOrgInfo;
   if (info && info.isSharedOrg) {
@@ -305,9 +310,10 @@ function renderGoogleButton() {
 
 /**
  * Entry point called instead of jumping straight into the app.
- * If already signed in, proceeds immediately. Otherwise shows
- * the gate and waits for handleCredentialResponse().
- * @param {Function} onSignedIn  called once a user is available
+ * If already signed in, proceeds immediately. If a guest session
+ * is already active (chosen earlier in this tab), proceeds as guest.
+ * Otherwise shows the gate and waits for a choice.
+ * @param {Function} onSignedIn  called once a user (or guest) is available
  */
 function requireSignIn(onSignedIn) {
   _authOnSignedIn = onSignedIn;
@@ -318,8 +324,53 @@ function requireSignIn(onSignedIn) {
     onSignedIn(user);
     return;
   }
+  try {
+    if (sessionStorage.getItem(AUTH_CONFIG.guestKey) === "1") {
+      window._isGuest = true;
+      renderGuestHeader();
+      onSignedIn(null);
+      return;
+    }
+  } catch (e) {}
   // Cached display profile exists but the token expired/was cleared
   // (e.g. tab was closed) — re-show the gate. Google's One Tap will
   // often re-auth this silently since the browser still has a session.
   showAuthGate();
+}
+
+/**
+ * Continue without a Google account. Search, discovery, and the
+ * tracker all still work — everything just reads/writes localStorage
+ * in this browser instead of the org's shared Google Sheet. Persists
+ * for the rest of this tab session, so switching tabs or navigating
+ * back to the landing page and re-entering doesn't re-prompt.
+ */
+function continueAsGuest() {
+  window._isGuest = true;
+  try { sessionStorage.setItem(AUTH_CONFIG.guestKey, "1"); } catch (e) {}
+  hideAuthGate();
+  renderGuestHeader();
+  if (typeof _authOnSignedIn === "function") _authOnSignedIn(null);
+}
+
+/**
+ * Render the header for guest mode: no avatar, a "Sign in" link
+ * so they can upgrade to a synced account at any point without
+ * losing anything already in localStorage.
+ */
+function renderGuestHeader() {
+  const slot = document.getElementById("auth-header-slot");
+  if (!slot) return;
+  slot.innerHTML = `
+    <div style="display:flex;align-items:center;gap:8px;">
+      <div style="width:26px;height:26px;border-radius:50%;background:rgba(36,28,20,.1);
+           color:#241C14;display:flex;align-items:center;justify-content:center;
+           font-size:11px;font-weight:700;">G</div>
+      <div style="line-height:1.2;">
+        <div style="font-size:11px;font-weight:600;color:var(--c-text,#1F2937);">Guest</div>
+        <a href="#" onclick="showAuthGate();return false;"
+           style="font-size:10px;color:var(--c-muted,#6B7280);text-decoration:none;">Sign in</a>
+      </div>
+    </div>
+    <div style="font-size:9.5px;color:var(--c-muted,#9CA3AF);margin-top:2px;text-align:right;">Saved to this browser only</div>`;
 }

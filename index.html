@@ -684,6 +684,19 @@
       Fundaigo doesn't operate its own database. Depending on setup, your search settings stay in this browser while your team's shared grant data is stored in a Google Sheet your organization owns.
     </p>
     <div id="google-signin-btn" style="display:flex;justify-content:center;min-height:44px;align-items:center;"></div>
+    <div style="display:flex;align-items:center;gap:10px;margin:18px 0 14px;">
+      <div style="flex:1;height:1px;background:rgba(36,28,20,.12);"></div>
+      <span style="font-size:11px;color:rgba(36,28,20,.5);">or</span>
+      <div style="flex:1;height:1px;background:rgba(36,28,20,.12);"></div>
+    </div>
+    <button type="button" onclick="continueAsGuest()"
+      style="width:100%;background:none;border:1px solid rgba(36,28,20,.18);color:#241C14;
+             font-size:13px;font-weight:600;padding:10px 16px;border-radius:8px;cursor:pointer;">
+      Continue as guest
+    </button>
+    <p style="font-size:11px;color:rgba(36,28,20,.55);line-height:1.6;margin:10px 0 0;">
+      Search, discover, and build your tracker right in this browser. Nothing syncs to your team's shared Sheet unless you sign in.
+    </p>
   </div>
 </div>
 
@@ -1455,7 +1468,7 @@ function enterApp() {
       // localStorage read (e.g. Tracker badge showing blank until a
       // refresh, by which point Google had cached the grant).
       try {
-        if (typeof requestSheetsAccessToken === 'function') await requestSheetsAccessToken();
+        if (!window._isGuest && typeof requestSheetsAccessToken === 'function') await requestSheetsAccessToken();
       } catch (e) { console.warn('Sheets access token not ready yet:', e.message); }
       // Guard each call — functions defined in loaded JS files
       try { if (typeof initTracker === 'function') await initTracker(); } catch(e) { console.warn('initTracker:', e); }
