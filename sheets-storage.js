@@ -344,6 +344,7 @@ window.storage = {
   async get(key) {
     const tab = keyToSheetTab(key);
     if (!tab) return null;
+    if (window._isGuest) return null; // guest mode — caller falls back to localStorage, no Sheets/OAuth attempt at all
     try {
       const spreadsheetId = await getOrCreateOrgSpreadsheet();
       const value = tab === "Profile"
@@ -366,6 +367,7 @@ window.storage = {
   async set(key, jsonString) {
     const tab = keyToSheetTab(key);
     if (!tab) throw new Error("Not a Sheets-backed key");
+    if (window._isGuest) throw new Error("Guest mode — saved to this browser only"); // caller falls back to localStorage
     let value;
     try { value = JSON.parse(jsonString); } catch (e) { value = jsonString; }
 

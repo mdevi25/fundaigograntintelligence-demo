@@ -88,6 +88,8 @@ function handleCredentialResponse(response) {
     showToast && showToast("Sign-in failed to decode. Try again.");
     return;
   }
+  window._isGuest = false; // real sign-in — clear any leftover guest state
+  try { sessionStorage.removeItem(AUTH_CONFIG.guestKey); } catch (e) {}
 
   const user = {
     name: payload.name || payload.email,
