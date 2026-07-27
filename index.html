@@ -748,7 +748,10 @@
       <a href="index.html">Home</a>
       <a href="faq.html">Help</a>
     </nav>
-    <button type="button" class="btn btn-primary" onclick="enterApp()">Start here</button>
+    <div style="display:flex;align-items:center;gap:14px;">
+      <a href="javascript:void(0)" onclick="startAsGuest()" style="font-size:12.5px;color:var(--lp-ink-soft,#4F4E47);text-decoration:underline;text-underline-offset:3px;">Continue as guest</a>
+      <button type="button" class="btn btn-primary" onclick="enterApp()">Start here</button>
+    </div>
   </div>
 </header>
 
@@ -1469,9 +1472,19 @@ function backToLanding() {
   window.scrollTo(0, 0);
 }
 
+// Lets the header/hero "Continue as guest" link skip straight into
+// the app without showing the sign-in modal first. enterApp() wires
+// up the sign-in callback (via requireSignIn()) synchronously before
+// it decides whether to show the gate, so calling continueAsGuest()
+// immediately after still uses that same callback correctly, it just
+// closes the gate again before the user ever sees it open.
+function startAsGuest() {
+  enterApp();
+  continueAsGuest();
+}
+
 function enterApp() {
-  requireSignIn(async function (user) {
-    document.body.classList.add('in-app');
+  requireSignIn(async function (user) {    document.body.classList.add('in-app');
     window.scrollTo(0, 0);
     if (!window._appInited) {
       window._appInited = true;
