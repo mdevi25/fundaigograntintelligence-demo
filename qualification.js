@@ -2,34 +2,37 @@
  * ============================================================
  * qualification.js — Layer 2: Grant Qualification & Scoring
  * AI-Powered AI-Powered Grant Intelligence for Nonprofits
- * Version: 2.0 | July 2026 — ERE match-tier scoring
+ * Version: 2.1 | July 2026 — org-relative match-tier scoring
  *
  * WHAT THIS FILE DOES:
  * Takes verified opportunities from Layer 1.5 (link verified,
  * dead URLs filtered out) and runs each through a structured
  * qualification evaluation using openai/gpt-oss-120b on Groq.
  *
- * SCORING ARCHITECTURE (changed in v2.0 — see matchScoring.js):
- * The AI is asked to extract four FACTS about each grant
- * (subjectMatch, gradeLevelMatch, geoMatch, nonprofitEligible)
- * — reading comprehension. It is never asked to decide a tier.
+ * SCORING ARCHITECTURE (generalized in v2.1 — see matchScoring.js):
+ * The AI is asked to extract four FACTS about each grant, each
+ * judged relative to THIS org's own profile (focusMatch,
+ * populationMatch, geoMatch, nonprofitEligible) — reading
+ * comprehension against whatever the org actually typed into
+ * their profile. It is never asked to decide a tier.
  * mergeQualificationResults() then calls deriveMatchLevel() from
- * matchScoring.js, a pure deterministic function, to apply ERE's
- * HIGH/GOOD/OK/NO waterfall (source: 2026-GrantMatchScoring.txt)
- * and derive fitScore from that tier. This split exists so the
- * actual business logic is unit-testable and can't drift or
- * hallucinate a tier — see matchScoring.test.js.
+ * matchScoring.js, a pure deterministic function, to apply the
+ * HIGH/GOOD/OK/NO waterfall (generalized from ERE's original
+ * rubric, see matchScoring.js for detail) and derive fitScore
+ * from that tier. This split exists so the actual business logic
+ * is unit-testable and can't drift or hallucinate a tier — see
+ * matchScoring.test.js.
  *
  * For each opportunity it produces:
- *   matchLevel        HIGH / GOOD / OK / NO — ERE's tier, derived
+ *   matchLevel        HIGH / GOOD / OK / NO — derived
  *                      deterministically, see matchScoring.js
  *   fitScore          1–5, derived from matchLevel (HIGH=5..NO=1)
- *   subjectMatch, gradeLevelMatch, geoMatch, nonprofitEligible
+ *   focusMatch, populationMatch, geoMatch, nonprofitEligible
  *                      raw AI-extracted facts kept on the row too,
  *                      so staff can see WHY a tier was assigned
  *   missionAlignment  one sentence — does the mission match?
- *   geoEligibility    does the funder cover IL or TX?
- *   orgEligibility    does ERE meet size/type requirements?
+ *   geoEligibility    does the funder cover the org's location(s)?
+ *   orgEligibility    does the org meet size/type requirements?
  *   appStatus         OPEN / OPEN–Rolling / OPENS SOON
  *   deadline          confirmed or "Needs Verification"
  *   amount            confirmed funding range
@@ -80,10 +83,15 @@
  * @returns {string}
  */
 function buildQualificationSystemPrompt(profile) {
+  const focusList = Array.isArray(profile.focus) ? profile.focus.join(", ") : profile.focus;
+  const serviceArea = profile.serviceAreas ? `${profile.locations} (${profile.serviceAreas})` : profile.locations;
+
   return `Evaluate each grant opportunity for this nonprofit. Output ONLY JSON inside <QUALIFICATION_JSON> tags.
 
 Org: ${profile.name} | ${profile.mission} | ${profile.locations}
-E.R.E. focus: Tutoring in Math and Reading, grades 7-12, primarily Texas and Illinois.
+Org's stated focus areas: ${focusList}
+Org's stated population served: ${profile.population}
+Org's stated service area: ${serviceArea}
 
 ${MATCH_EXTRACTION_INSTRUCTIONS}
 
@@ -95,9 +103,9 @@ Today: ${today()}.
   "results": [
     {
       "id": "opp id",
-      "subjectMatch": "math_reading",
-      "gradeLevelMatch": "7-12",
-      "geoMatch": "tx_il",
+      "focusMatch": "yes",
+      "populationMatch": "yes",
+      "geoMatch": "yes",
       "nonprofitEligible": true,
       "missionAlignment": "one sentence",
       "geoEligibility": "Yes/No/Partial",
@@ -373,8 +381,8 @@ function mergeQualificationResults(opportunities, results) {
     // The model never decides HIGH/GOOD/OK/NO directly — see
     // matchScoring.js for why that split matters.
     const matchLevel = deriveMatchLevel({
-      subjectMatch:      result.subjectMatch,
-      gradeLevelMatch:   result.gradeLevelMatch,
+      focusMatch:        result.focusMatch,
+      populationMatch:   result.populationMatch,
       geoMatch:          result.geoMatch,
       nonprofitEligible: result.nonprofitEligible,
     });
@@ -388,8 +396,8 @@ function mergeQualificationResults(opportunities, results) {
       // Raw extracted facts kept on the row too — useful for the
       // Grant Team to see WHY a tier was assigned, and for spot-
       // checking the AI's reading against the actual grant text.
-      subjectMatch:      result.subjectMatch    || "unclear",
-      gradeLevelMatch:   result.gradeLevelMatch || "unclear",
+      focusMatch:        result.focusMatch      || "unclear",
+      populationMatch:   result.populationMatch || "unclear",
       geoMatch:          result.geoMatch        || "unclear",
       nonprofitEligible: result.nonprofitEligible ?? "unclear",
       missionAlignment:  (result.missionAlignment  || "").trim(),

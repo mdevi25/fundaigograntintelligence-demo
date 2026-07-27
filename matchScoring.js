@@ -1,28 +1,35 @@
 /**
  * ============================================================
- * matchScoring.js — ERE grant match-tier logic
- * Fundigo
+ * matchScoring.js — org-relative grant match-tier logic
+ * Fundaigo
  *
- * SOURCE OF TRUTH: 2026-GrantMatchScoring.txt (E.R.E, confirmed)
- * Two corrections applied per confirmation:
- *   - "Ok Match Criteria" outputs "OK" (doc said "GOOD" — typo)
- *   - "No Match Criteria" item 1 references "OK" (doc said
- *     "LOW", which isn't a defined tier — typo)
+ * GENERALIZED from ERE's original hardcoded rubric (2026-
+ * GrantMatchScoring.txt), which was built and tuned using ERE
+ * as the test org while proving out the scoring pipeline. The
+ * original hardcoded version is preserved as
+ * matchScoring.ere-hardcoded.js for reference/revert.
  *
  * WHY THIS IS A SEPARATE, PURE, DETERMINISTIC FUNCTION:
- * qualification.js asks the AI to extract four FACTS about a
- * grant (subject area, grade level, geography, nonprofit
- * eligibility) — reading comprehension, which LLMs are good at.
- * The actual HIGH/GOOD/OK/NO decision is a fixed waterfall over
- * those facts, applied here in plain code — no AI involved, so
- * it can't drift, can't hallucinate a tier, and is fully unit
- * testable without ever calling the Groq API. See the bottom of
- * this file for the interpretation choices this encodes, since
- * a few points in the source doc were ambiguous.
+ * qualification.js asks the AI to extract three FACTS about a
+ * grant relative to THIS org's own profile — focus alignment,
+ * population alignment, geographic alignment — plus nonprofit
+ * eligibility. Reading comprehension against the org's own
+ * stated profile, which LLMs are good at. The actual HIGH/GOOD/
+ * OK/NO decision is a fixed waterfall over those facts, applied
+ * here in plain code, no AI involved, so it can't drift, can't
+ * hallucinate a tier, and is fully unit testable without ever
+ * calling the Groq API.
  *
- * TUNABLE: the doc explicitly says this criteria "can be tweaked
- * based on Grant Team feedback" — that tuning should happen here,
- * in one place, not scattered across prompt text.
+ * TUNABLE: this waterfall shape mirrors ERE's original tiering
+ * exactly (exact match on everything = HIGH, broader-but-related
+ * = GOOD, loosely related = OK, mismatch/ineligible = NO) — just
+ * parameterized by whatever the org actually typed into their
+ * own profile instead of ERE's specific math/reading/7-12/TX-IL
+ * categories. For ERE's own profile this should reproduce
+ * equivalent results to the original, since it derives the same
+ * relationships from ERE's actual profile text instead of a
+ * hardcoded string — worth a spot-check against real runs before
+ * fully trusting it in production.
  * ============================================================
  */
 
@@ -36,14 +43,22 @@ const MATCH_LEVELS = ["HIGH", "GOOD", "OK", "NO"];
 const MATCH_LEVEL_TO_FIT_SCORE = { HIGH: 5, GOOD: 4, OK: 3, NO: 1 };
 
 /**
- * Apply the ERE match-tier waterfall to AI-extracted facts about
- * one grant opportunity. Pure function — same input always gives
- * same output, independent of any AI call.
+ * Apply the org-relative match-tier waterfall to AI-extracted
+ * facts about one grant opportunity, each fact judged against
+ * THIS org's own profile (focus areas, population served,
+ * locations), not a fixed taxonomy. Pure function — same input
+ * always gives same output, independent of any AI call.
  *
  * @param {Object} facts
- * @param {"math_reading"|"general_tutoring"|"other_education"|"none"|"unclear"} facts.subjectMatch
- * @param {"7-12"|"k-12"|"other"|"unclear"} facts.gradeLevelMatch
- * @param {"tx_il"|"us"|"outside_us"|"unclear"} facts.geoMatch
+ * @param {"yes"|"partial"|"no"|"unclear"} facts.focusMatch
+ *   Does the grant's subject/purpose align with the org's own
+ *   stated focus areas?
+ * @param {"yes"|"partial"|"no"|"unclear"} facts.populationMatch
+ *   Does the grant's target population align with the org's own
+ *   stated population served?
+ * @param {"yes"|"partial"|"no"|"unclear"} facts.geoMatch
+ *   Does the grant's geographic eligibility align with the org's
+ *   own stated locations/service area?
  * @param {true|false|"unclear"} facts.nonprofitEligible
  * @returns {"HIGH"|"GOOD"|"OK"|"NO"}
  */
@@ -52,27 +67,27 @@ function deriveMatchLevel(facts) {
 
   // Nonprofit eligibility is a hard gate for every tier — "unclear"
   // is treated as failing it (conservative: don't rank a grant highly
-  // when we're not sure ERE can even apply).
+  // when we're not sure this org can even apply).
   const nonprofitOk = f.nonprofitEligible === true;
   if (!nonprofitOk) return "NO";
 
-  const isMathReading = f.subjectMatch === "math_reading";
-  const isTutoringAtAll = isMathReading || f.subjectMatch === "general_tutoring";
+  const focusYes    = f.focusMatch === "yes";
+  const focusAtAll  = focusYes || f.focusMatch === "partial";
 
-  const is7to12 = f.gradeLevelMatch === "7-12";
-  const isK12OrNarrower = is7to12 || f.gradeLevelMatch === "k-12";
+  const popYes      = f.populationMatch === "yes";
+  const popAtAll    = popYes || f.populationMatch === "partial";
 
-  const isTxIl = f.geoMatch === "tx_il";
-  const isUsOrNarrower = isTxIl || f.geoMatch === "us";
+  const geoYes      = f.geoMatch === "yes";
+  const geoAtAll    = geoYes || f.geoMatch === "partial";
 
-  // HIGH — waterfall checked first per the doc.
-  if (isMathReading && is7to12 && isTxIl) return "HIGH";
+  // HIGH — exact match on every dimension.
+  if (focusYes && popYes && geoYes) return "HIGH";
 
-  // GOOD — broader grade range (K-12) and broader geography (US).
-  if (isMathReading && isK12OrNarrower && isUsOrNarrower) return "GOOD";
+  // GOOD — exact focus match, broader-but-related population and geography.
+  if (focusYes && popAtAll && geoAtAll) return "GOOD";
 
-  // OK — subject can be tutoring in general, not math/reading specifically.
-  if (isTutoringAtAll && isK12OrNarrower && isUsOrNarrower) return "OK";
+  // OK — focus can be partial (loosely related), population/geo still at least partial.
+  if (focusAtAll && popAtAll && geoAtAll) return "OK";
 
   // Everything else, including "unclear" facts that never satisfied
   // a tier above — falls to NO. Better to under-surface than to
@@ -92,43 +107,44 @@ function matchLevelToFitScore(level) {
  * Text block injected into the qualification system prompt,
  * telling the AI exactly which enum values to use for each fact
  * and nothing about tiers — the tier is never the AI's job.
+ * Judged relative to the org's own profile, which qualification.js
+ * places directly above this block in the prompt.
  */
 const MATCH_EXTRACTION_INSTRUCTIONS = `
-Extract these FACTS about the grant — do not decide a tier, just report what you read:
+Extract these FACTS about the grant, relative to THIS org's own profile above — do not decide a tier, just report what you read:
 
-subjectMatch — one of:
-  "math_reading"     grant funds tutoring specifically in Math and/or Reading
-  "general_tutoring" grant funds tutoring/tutoring programs/tutoring consulting, not specific to Math/Reading
-  "other_education"  grant funds some other education service, not tutoring
-  "none"             not education or tutoring related
-  "unclear"          cannot tell from available information
-
-gradeLevelMatch — one of:
-  "7-12"    grant specifically targets students in roughly grades 7–12 (middle/high school)
-  "k-12"    grant targets a broader K-12 range, not narrowly focused on 7-12
-  "other"   targets grades entirely outside K-12 (e.g. pre-K only, college only)
+focusMatch — does the grant's subject/purpose align with the org's stated focus areas? one of:
+  "yes"     grant funds work squarely within the org's stated focus areas
+  "partial" grant funds related or adjacent work, not a precise match
+  "no"      grant funds something unrelated to the org's focus areas
   "unclear" cannot tell from available information
 
-geoMatch — one of:
-  "tx_il"      grant is explicitly eligible in Texas and/or Illinois (state-specific or narrower)
-  "us"         grant is nationally open, not restricted to specific states other than TX/IL
-  "outside_us" grant is restricted to a region that excludes the US
-  "unclear"    cannot tell from available information
+populationMatch — does the grant's target population align with the org's stated population served? one of:
+  "yes"     grant explicitly targets the same population the org serves
+  "partial" grant targets a broader or adjacent population that includes the org's population
+  "no"      grant targets a population outside what the org serves
+  "unclear" cannot tell from available information
+
+geoMatch — does the grant's geographic eligibility align with the org's stated locations/service area? one of:
+  "yes"     grant is explicitly eligible in the org's stated location(s)
+  "partial" grant is nationally/regionally open, not restricted against the org's location(s)
+  "no"      grant is restricted to a region that excludes the org's location(s)
+  "unclear" cannot tell from available information
 
 nonprofitEligible — true, false, or "unclear" — does the grant explicitly allow 501(c)(3) nonprofit applicants?
 `.trim();
 
-// ── Interpretation choices, since the source doc left some things
-// ambiguous — documented here so the Grant Team can push back on
-// any of these when tuning:
+// ── Interpretation choices, carried over from ERE's original
+// rubric and generalized the same way — documented here so the
+// Grant Team can push back on any of these when tuning:
 //
-// 1. HIGH requires grade targeting to be SPECIFICALLY 7-12, not
-//    merely a K-12 program that happens to include those grades.
-//    A broad K-12 tutoring grant is GOOD, not HIGH, even though
-//    grades 7-12 are technically served.
-// 2. "Texas and Illinois" for HIGH is read as "either or both" —
-//    a Texas-only or Illinois-only grant qualifies, not just grants
-//    covering both states simultaneously.
+// 1. HIGH requires an exact match on every dimension (focus,
+//    population, and geography all "yes") — a broader-but-related
+//    match on any dimension caps the tier at GOOD, even if the
+//    grant technically covers the org's population/area.
+// 2. "partial" on population or geography is read as "broader,
+//    but still includes the org" — e.g. a nationally-open grant
+//    partially matches an org restricted to one state.
 // 3. "unclear" on any fact never promotes a grant above NO for that
 //    criterion — ambiguous grants fall to the lowest tier rather
 //    than being optimistically ranked higher.

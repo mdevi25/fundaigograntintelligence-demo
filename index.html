@@ -1862,9 +1862,9 @@ function collapseAllOpps(){ document.querySelectorAll('.opp-card').forEach(c => 
 // checks against — if those categories ever change, update both.
 function classifyFact(kind, value) {
   const GOOD = {
-    subjectMatch:      ["math_reading", "general_tutoring"],
-    gradeLevelMatch:   ["7-12", "k-12"],
-    geoMatch:          ["tx_il", "us"],
+    focusMatch:        ["yes", "partial"],
+    populationMatch:   ["yes", "partial"],
+    geoMatch:          ["yes", "partial"],
     nonprofitEligible: [true],
   };
   if (GOOD[kind] && GOOD[kind].includes(value)) return "good";
@@ -1874,13 +1874,12 @@ function classifyFact(kind, value) {
 
 function factPillLabel(kind, value) {
   const labels = {
-    subjectMatch:      { math_reading: "subject: math/reading tutoring", general_tutoring: "subject: general tutoring",
-                          other_education: "subject: other education, not tutoring", none: "subject: not education-related",
-                          unclear: "subject: unclear" },
-    gradeLevelMatch:   { "7-12": "grade: 7-12, on target", "k-12": "grade: K-12, broader than target",
-                          other: "grade: outside K-12", unclear: "grade: unclear" },
-    geoMatch:          { tx_il: "geography: Texas/Illinois, matches", us: "geography: US-wide, not TX/IL specific",
-                          outside_us: "geography: outside the US", unclear: "geography: unclear" },
+    focusMatch:        { yes: "focus: matches org's stated focus", partial: "focus: related, not exact",
+                          no: "focus: doesn't match org's focus", unclear: "focus: unclear" },
+    populationMatch:   { yes: "population: matches org's stated population", partial: "population: broader, includes org's population",
+                          no: "population: outside org's population", unclear: "population: unclear" },
+    geoMatch:          { yes: "geography: matches org's location(s)", partial: "geography: open, not restricted against org",
+                          no: "geography: excludes org's location(s)", unclear: "geography: unclear" },
     nonprofitEligible: { true: "nonprofit: eligible", false: "nonprofit: not eligible", "": "nonprofit: unclear" },
   };
   const key = kind === "nonprofitEligible" ? String(value) : value;
@@ -1892,7 +1891,7 @@ function renderFutureMonitoring(funders, autoExpand) {
   window._currentFilteredResults = funders || [];
   if (!funders || funders.length === 0) { container.innerHTML = ''; return; }
 
-  const factKinds = ["subjectMatch", "gradeLevelMatch", "geoMatch", "nonprofitEligible"];
+  const factKinds = ["focusMatch", "populationMatch", "geoMatch", "nonprofitEligible"];
   const rows = funders.map(f => {
     const pills = factKinds.map(kind => {
       const cls = classifyFact(kind, f[kind]);

@@ -113,8 +113,8 @@ function addOpportunityToTracker(oppId, silent = false) {
     deadline:          opp.deadline          || "",
     fitScore:          opp.fitScore          || 3,
     matchLevel:        opp.matchLevel        || "",
-    subjectMatch:      opp.subjectMatch      || "",
-    gradeLevelMatch:   opp.gradeLevelMatch   || "",
+    focusMatch:        opp.focusMatch        || "",
+    populationMatch:   opp.populationMatch   || "",
     geoMatch:          opp.geoMatch          || "",
     nonprofitEligible: opp.nonprofitEligible ?? "",
     // Always starts neutral — status is a deliberate team decision, not
