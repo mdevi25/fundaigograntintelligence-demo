@@ -7,7 +7,7 @@
   <meta name="description" content="AI-powered funding intelligence for nonprofits. 5-layer pipeline. Verified leads. Human in control.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Syne:wght@600;700;800&family=Alex+Brush&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/tabler-icons.min.css">
   <link rel="stylesheet" href="styles.css">
   <style>
@@ -16,6 +16,10 @@
       --c-border:rgba(36,28,20,.08);
       --c-purple:#C1461A;
       --c-deep:#8B3410;
+      --app-action:#5B2A55;
+      --app-action-deep:#3E1D3B;
+      --app-action-tint:rgba(91,42,85,.07);
+      --app-action-soft:rgba(91,42,85,.15);
       --c-tint:rgba(193,70,26,.07);
       --c-soft:rgba(193,70,26,.16);
       --c-text:#241C14;
@@ -24,7 +28,7 @@
       --fs-base:13px;
       --fs-sm:12px;
       --fs-xs:11px;
-      --font-sans:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+      --font-sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
       /* styles.css token overrides */
       --ink:#241C14;
       --purple:#C1461A;
@@ -64,7 +68,7 @@
     /* ── LANDING NAV ── */
     .landing-nav{display:flex;align-items:center;justify-content:space-between;padding:14px 32px;max-width:1200px;margin:0 auto;background:var(--c-bg);border-bottom:0.5px solid var(--c-border);position:sticky;top:0;z-index:100;flex-wrap:wrap;gap:8px;}
     .landing-nav-logo{display:flex;align-items:center;gap:8px;text-decoration:none;}
-    .landing-nav-name{font-family:'Alex Brush',cursive;font-size:30px;font-weight:400;color:var(--c-text);line-height:1;}
+    .landing-nav-name{font-family:'Fraunces',serif;font-size:26px;font-weight:600;letter-spacing:-0.01em;color:var(--c-text);line-height:1;}
     .landing-nav-name span{color:#C1461A;}
     .landing-nav-links{display:flex;align-items:center;gap:20px;}
     .landing-nav-links a{font-size:12.5px;color:var(--c-muted);text-decoration:none;font-weight:500;transition:color .15s;}
@@ -103,7 +107,7 @@
     /* ── LANDING FOOTER ── */
     .landing-footer{background:var(--c-text);padding:24px 32px;max-width:1200px;margin-left:auto;margin-right:auto;margin-top:auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
     .landing-footer-logo{display:flex;align-items:center;gap:8px;}
-    .landing-footer-name{font-family:'Alex Brush',cursive;font-size:24px;font-weight:400;color:#fff;line-height:1;}
+    .landing-footer-name{font-family:'Fraunces',serif;font-size:22px;font-weight:600;letter-spacing:-0.01em;color:#fff;line-height:1;}
     .landing-footer-name span{color:#C1461A;}
     .landing-footer-links{display:flex;gap:16px;flex-wrap:wrap;row-gap:6px;}
     .landing-footer-links a{font-size:11.5px;color:#8A93A1;text-decoration:none;}
@@ -113,17 +117,17 @@
     .app-shell{min-height:100vh;display:flex;flex-direction:column;}
     .app-footer{background:var(--c-text);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-top:auto;}
     .app-footer-logo{display:flex;align-items:center;gap:8px;text-decoration:none;}
-    .app-footer-name{font-family:'Alex Brush',cursive;font-size:24px;font-weight:400;color:#fff;line-height:1;}
+    .app-footer-name{font-family:'Fraunces',serif;font-size:22px;font-weight:600;letter-spacing:-0.01em;color:#fff;line-height:1;}
     .app-footer-name span{color:#C1461A;}
     .app-footer-links{display:flex;gap:16px;}
     .app-footer-links a{font-size:11.5px;color:#8A93A1;text-decoration:none;}
-    .app-footer-links a:hover{color:#C1461A;}
+    .app-footer-links a:hover{color:var(--app-action);}
     .app-hdr{background:var(--c-bg);border-bottom:0.5px solid var(--c-border);position:sticky;top:0;z-index:100;}
     .app-hdr-stripe{height:4px;background:linear-gradient(90deg,var(--c-purple),#E08544);}
     .app-hdr-body{padding:12px 20px 0;}
     .app-hdr-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
     .app-hdr-right{display:flex;align-items:center;gap:16px;justify-content:flex-end;margin-bottom:10px;}
-    .app-hdr-title{font-family:'Alex Brush',cursive;font-size:30px;font-weight:400;color:var(--c-text);line-height:1;}
+    .app-hdr-title{font-family:'Fraunces',serif;font-size:28px;font-weight:600;letter-spacing:-0.01em;color:var(--c-text);line-height:1;}
     .app-hdr-title span{color:var(--c-purple);}
     .app-hdr-sub{font-size:11px;color:var(--c-muted);margin-top:1px;}
     .app-tabs{display:flex;gap:0;border-bottom:1.5px solid var(--c-border);}
@@ -174,7 +178,7 @@
     .top-recs-title{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--c-deep);margin-bottom:5px;}
     .top-rec-row{font-size:12px;color:#374151;padding:2px 0;line-height:1.5;}
     .opp-card{background:#fff;border:0.5px solid var(--c-border);border-radius:12px;margin-bottom:10px;overflow:hidden;transition:box-shadow .15s;}
-    .opp-card:hover{box-shadow:0 2px 12px rgba(193,70,26,.1);}
+    .opp-card:hover{box-shadow:0 2px 12px rgba(91,42,85,.12);}
     .opp-card    .opp-card-header{display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer;user-select:none;}
     .opp-card-header:hover{background:var(--c-tint);}
     .opp-card-name{font-size:14px;font-weight:500;color:var(--c-text);line-height:1.2;}
@@ -361,59 +365,55 @@
     .search-panel-desc{color:rgba(36,28,20,.71);}
     .search-panel-summary-text{color:rgba(36,28,20,.68);}
     .chip{background:#F5F0E6;border-color:rgba(36,28,20,.1);}
-    .chip:hover,.chip.chip-selected{border-color:#C1461A;background:rgba(193,70,26,.07);}
-    .chip.chip-full{border-color:#C1461A !important;background:rgba(193,70,26,.06) !important;}
+    .chip:hover,.chip.chip-selected{border-color:var(--app-action);background:var(--app-action-tint);}
+    .chip.chip-full{border-color:var(--app-action) !important;background:var(--app-action-tint) !important;}
     .chip-label{color:#241C14;}
     .chip-desc{color:rgba(36,28,20,.71);}
     .custom-search-label{color:rgba(36,28,20,.68);}
     .custom-search-input{background:#F5F0E6;border-color:rgba(36,28,20,.12);color:#241C14;}
-    .custom-search-input:focus{border-color:#C1461A;outline:none;}
-    .run-btn{background:#C1461A;color:#F5F0E6;font-weight:700;}
-    .run-btn:hover{background:#8B3410;}
-    .run-btn:disabled{background:rgba(193,70,26,.35);}
+    .custom-search-input:focus{border-color:var(--app-action);outline:none;}
+    .run-btn{background:var(--app-action);color:#FAF8F3;font-weight:700;}
+    .run-btn:hover{background:var(--app-action-deep);}
+    .run-btn:disabled{background:rgba(91,42,85,.35);}
     .search-hint{color:rgba(36,28,20,.73);}
     .opp-ctrl-btn{background:transparent;border-color:rgba(36,28,20,.1);color:rgba(36,28,20,.68);}
-    .opp-ctrl-btn:hover{background:rgba(193,70,26,.06);color:#C1461A;}
-    .status-msg{background:rgba(193,70,26,.1);border-color:rgba(193,70,26,.2);color:#C1461A;}
+    .opp-ctrl-btn:hover{background:var(--app-action-tint);color:var(--app-action);}
+    .status-msg{background:var(--app-action-tint);border-color:rgba(91,42,85,.2);color:var(--app-action);}
     .pipeline-step{background:#F7F2E9;border-color:rgba(36,28,20,.1);color:rgba(36,28,20,.71);}
-    .pipeline-step.step-done{background:rgba(193,70,26,.12);border-color:#C1461A;color:#C1461A;}
-    .pipeline-step.step-running{background:rgba(193,70,26,.15);border-color:#C1461A;color:#C1461A;animation:pulse 1.5s ease-in-out infinite;}
+    .pipeline-step.step-done{background:var(--app-action-soft);border-color:var(--app-action);color:var(--app-action);}
     .pipeline-arrow{color:rgba(36,28,20,.2);}
     .summary-stat{background:#FFFFFF;border-color:rgba(36,28,20,.08);}
-    .summary-stat-n{color:#C1461A;}
+    .summary-stat-n{color:var(--app-action);}
     .summary-stat-l{color:rgba(36,28,20,.68);}
-    .top-recs{background:rgba(193,70,26,.06);border-color:rgba(193,70,26,.15);border-left-color:#C1461A;}
-    .top-recs-title{color:#C1461A;}
+    .top-recs{background:var(--app-action-tint);border-color:rgba(91,42,85,.15);border-left-color:var(--app-action);}
+    .top-recs-title{color:var(--app-action);}
     .top-rec-row{color:rgba(36,28,20,.7);}
     .opp-card{background:#FFFFFF;border-color:rgba(36,28,20,.08);}
-    .opp-card:hover{box-shadow:0 2px 12px rgba(193,70,26,.1);}
-    .opp-card    .opp-card-header:hover{background:rgba(193,70,26,.04);}
+    .opp-card:hover{box-shadow:0 2px 12px rgba(91,42,85,.12);}
+    .opp-card    .opp-card-header:hover{background:rgba(91,42,85,.05);}
     .opp-card-name{color:#241C14;}
     .opp-card-prog{color:rgba(36,28,20,.68);}
     .sum-k{color:rgba(36,28,20,.66);}
     .sum-v{color:#241C14;}
     .opp-chevron{color:rgba(36,28,20,.66);}
     .opp-card-body{border-top-color:rgba(36,28,20,.07);}
-    .opp-why{background:rgba(193,70,26,.07);color:rgba(36,28,20,.8);}
-    .opp-guard-flag{background:rgba(193,70,26,.09);border-left-color:#C1461A;color:rgba(193,70,26,.9);}
-    .opp-link{color:#C1461A;}
+    .opp-why{background:var(--app-action-tint);color:rgba(36,28,20,.8);}
+    .opp-link{color:var(--app-action);}
     .verified-note{color:rgba(36,28,20,.66);}
-    .add-to-tracker-btn{background:#C1461A;color:#F5F0E6;font-weight:700;}
-    .add-to-tracker-btn:hover{background:#8B3410;}
-    .fit-dot.filled{background:#C1461A;}
-    .fit-dots.score-5 .fit-dot.filled{background:#C1461A;}
+    .add-to-tracker-btn{background:var(--app-action);color:#FAF8F3;font-weight:700;}
+    .add-to-tracker-btn:hover{background:var(--app-action-deep);}
+    .fit-dot.filled{background:var(--app-action);}
+    .fit-dots.score-5 .fit-dot.filled{background:var(--app-action);}
     .pill{background:rgba(36,28,20,.08);color:rgba(36,28,20,.76);}
     .pill-open{background:rgba(93,227,150,.15);color:#5de396;}
     .pill-rolling{background:rgba(125,211,252,.12);color:#7dd3fc;}
     .pill-pass{background:rgba(93,227,150,.15);color:#5de396;}
-    .pill-flag{background:rgba(193,70,26,.15);color:#C1461A;}
-    .pill-verified{background:rgba(193,70,26,.12);color:#C1461A;}
+    .pill-verified{background:var(--app-action-soft);color:var(--app-action);}
     .dl-urgent{background:rgba(248,113,113,.18);color:#f87171;}
-    .dl-soon{background:rgba(193,70,26,.18);color:#C1461A;}
     .dl-ok{background:rgba(93,227,150,.15);color:#5de396;}
-    .future-header:hover{background:rgba(193,70,26,.04);}
+    .future-header:hover{background:rgba(91,42,85,.05);}
     .future-label{color:rgba(36,28,20,.71);}
-    .future-count{background:rgba(193,70,26,.15);color:#C1461A;}
+    .future-count{background:var(--app-action-soft);color:var(--app-action);}
     .future-chevron{color:rgba(36,28,20,.66);}
     .future-body{border-top-color:rgba(36,28,20,.07);}
     .future-row{border-bottom-color:rgba(36,28,20,.06);}
@@ -425,37 +425,37 @@
     .tracker-count{color:rgba(36,28,20,.71);}
     .tracker-count b{color:#241C14;}
     .btn{background:#FFFFFF;border-color:rgba(36,28,20,.1);color:rgba(36,28,20,.65);}
-    .btn:hover{background:rgba(193,70,26,.06);border-color:#C1461A;color:#C1461A;}
+    .btn:hover{background:var(--app-action-tint);border-color:var(--app-action);color:var(--app-action);}
     .table-wrap{border-color:rgba(36,28,20,.08);}
     thead th{background:#F7F2E9;color:rgba(36,28,20,.68);border-bottom-color:rgba(36,28,20,.08);}
     tbody td{border-bottom-color:rgba(36,28,20,.05);}
-    tbody tr:hover{background:rgba(193,70,26,.03);}
-    tbody tr.row-pursuing td:first-child{border-left-color:#C1461A;}
+    tbody tr:hover{background:rgba(91,42,85,.04);}
+    tbody tr.row-pursuing td:first-child{border-left-color:#F59E0B;}
     tbody tr.row-submitted td:first-child{border-left-color:#7dd3fc;}
     tbody tr.row-funded td:first-child{border-left-color:#5de396;}
     .table-input{color:#241C14;}
     .table-input:hover{border-color:rgba(36,28,20,.15);background:rgba(255,255,255,.03);}
-    .table-input:focus{border-color:#C1461A;background:rgba(255,255,255,.05);outline:none;}
+    .table-input:focus{border-color:var(--app-action);background:rgba(255,255,255,.05);outline:none;}
     .empty-state{color:rgba(36,28,20,.68);}
     .empty-state-title{color:rgba(36,28,20,.7);}
-    .empty-state i{color:rgba(193,70,26,.3);}
+    .empty-state i{color:rgba(91,42,85,.3);}
     .proposal-panel{background:#FFFFFF;border-color:rgba(36,28,20,.08);}
     .proposal-panel h2{color:#241C14;}
     .proposal-panel-desc{color:rgba(36,28,20,.71);}
     .doc-item{border-bottom-color:rgba(36,28,20,.07);}
     .prompt-preview{background:#F5F0E6;border-color:rgba(36,28,20,.08);color:rgba(36,28,20,.76);}
-    .prompt-label{color:#C1461A;}
-    .field-label{color:#C1461A;}
+    .prompt-label{color:var(--app-action);}
+    .field-label{color:var(--app-action);}
     .field-select{background:#F5F0E6;border-color:rgba(36,28,20,.12);color:#241C14;}
-    .field-select:focus{border-color:#C1461A;outline:none;}
-    .api-note{background:rgba(193,70,26,.07);border-color:rgba(193,70,26,.15);color:rgba(36,28,20,.76);}
-    .api-note a{color:#C1461A;}
-    .api-note code{background:rgba(193,70,26,.15);color:#C1461A;padding:1px 5px;border-radius:4px;}
+    .field-select:focus{border-color:var(--app-action);outline:none;}
+    .api-note{background:var(--app-action-tint);border-color:rgba(91,42,85,.15);color:rgba(36,28,20,.76);}
+    .api-note a{color:var(--app-action);}
+    .api-note code{background:var(--app-action-soft);color:var(--app-action);padding:1px 5px;border-radius:4px;}
     .acc-item{background:#FFFFFF;border-color:rgba(36,28,20,.08);}
     .acc-trigger{background:#FFFFFF;color:#241C14;}
-    .acc-trigger:hover,.acc-trigger.acc-open{background:rgba(193,70,26,.05);}
+    .acc-trigger:hover,.acc-trigger.acc-open{background:var(--app-action-tint);}
     .acc-trigger.acc-open{border-bottom-color:rgba(36,28,20,.08);}
-    .acc-num{background:#C1461A;color:#F5F0E6;}
+    .acc-num{background:var(--app-action);color:#FAF8F3;}
     .acc-title{color:#241C14;}
     .acc-chev{color:rgba(36,28,20,.66);}
     .acc-body{background:#FFFFFF;}
@@ -463,26 +463,26 @@
     .settings-panel h2{color:#241C14;}
     .settings-panel-desc{color:rgba(36,28,20,.71);}
     .api-key-input{background:#F5F0E6;border-color:rgba(36,28,20,.12);color:#241C14;}
-    .api-key-input:focus{border-color:#C1461A;outline:none;}
-    .save-key-btn{background:#C1461A;color:#F5F0E6;font-weight:700;}
-    .save-key-btn:hover{background:#8B3410;}
+    .api-key-input:focus{border-color:var(--app-action);outline:none;}
+    .save-key-btn{background:var(--app-action);color:#FAF8F3;font-weight:700;}
+    .save-key-btn:hover{background:var(--app-action-deep);}
     .key-status{background:rgba(93,227,150,.15);color:#5de396;}
     .memory-stat{background:#F5F0E6;border-color:rgba(36,28,20,.08);}
-    .memory-stat-n{color:#C1461A;}
+    .memory-stat-n{color:var(--app-action);}
     .memory-stat-l{color:rgba(36,28,20,.68);}
     .memory-btn{background:#F7F2E9;border-color:rgba(36,28,20,.1);color:rgba(36,28,20,.76);}
-    .memory-btn:hover{background:rgba(193,70,26,.06);border-color:#C1461A;}
+    .memory-btn:hover{background:var(--app-action-tint);border-color:var(--app-action);}
     .memory-btn-danger{color:#f87171;border-color:rgba(248,113,113,.25);}
     .memory-btn-danger:hover{background:rgba(248,113,113,.08);}
     .profile-input,.profile-textarea{background:#F5F0E6;border-color:rgba(36,28,20,.12);color:#241C14;}
-    .profile-input:focus,.profile-textarea:focus{border-color:#C1461A;outline:none;}
-    .save-profile-btn{background:#C1461A;color:#F5F0E6;font-weight:700;}
-    .save-profile-btn:hover{background:#8B3410;}
+    .profile-input:focus,.profile-textarea:focus{border-color:var(--app-action);outline:none;}
+    .save-profile-btn{background:var(--app-action);color:#FAF8F3;font-weight:700;}
+    .save-profile-btn:hover{background:var(--app-action-deep);}
     .app-footer{background:#EFE7D8;}
     .app-footer-name{color:#241C14;}
     .app-footer-name span{color:#C1461A;}
     .app-footer-links a{color:rgba(36,28,20,.66);}
-    .app-footer-links a:hover{color:#C1461A;}
+    .app-footer-links a:hover{color:var(--app-action);}
     .landing-footer{background:#EFE7D8;}
     .landing-footer-name{color:#241C14;}
     .landing-footer-name span{color:#C1461A;}
@@ -499,7 +499,7 @@
     .app-tabs{display:flex;gap:0;border-bottom:none;margin-left:24px;flex:1;align-self:stretch;align-items:flex-end;order:2;}
     .app-hdr-right{margin-left:0;margin-bottom:0;flex-shrink:0;order:3;padding-left:16px;}
     .app-tab{padding:10px 16px;font-size:13px;font-weight:500;top:0;border-bottom:2px solid transparent;}
-    .app-tab.tab-active,.app-tab[aria-selected="true"]{color:#C1461A;border-bottom-color:#C1461A;}
+    .app-tab.tab-active,.app-tab[aria-selected="true"]{color:var(--app-action);border-bottom-color:var(--app-action);}
     .chip{padding:14px 18px;border-radius:10px;gap:14px;}
     .chip-icon{width:32px;height:32px;border-radius:8px;flex-shrink:0;}
     .chip-label{font-size:13.5px;}
@@ -510,7 +510,7 @@
     .opp-ctrl-btn[title="Reset selection"]{order:3;}
     .char-counter{bottom:6px;}
 
-    input:focus,textarea:focus,select:focus{box-shadow:0 0 0 3px rgba(193,70,26,.15);}
+    input:focus,textarea:focus,select:focus{box-shadow:0 0 0 3px rgba(91,42,85,.15);}
 
 
     /* ── 4A HERO SPLIT LAYOUT ── */
@@ -533,6 +533,123 @@
     .how-step-desc{font-size:13px;color:rgba(36,28,20,.71);line-height:1.55;}
     .how-step:not(:last-child)::after{display:none;}
 
+
+  /* ===== BLV3 landing page (scoped to #view-landing) ===== */
+  #view-landing{
+    overflow:hidden;height:100vh;
+
+    --lp-paper:#FAF8F3;
+    --lp-paper-dim:#F2EEE5;
+    --lp-ink:#20242A;
+    --lp-ink-soft:#4F4E47;
+    --lp-plum:#5B2A55;
+    --lp-plum-deep:#3E1D3B;
+    --lp-gold-text:#7C5A1D;
+    --lp-green:#3F6B52;
+    --lp-line:#DFD8C8;
+    --lp-radius:2px;
+    --lp-logo-a:#8B3410;
+    --lp-logo-b:#C1461A;
+  }
+  #view-landing *{box-sizing:border-box;}
+  #view-landing h1, #view-landing h2 {font-family:'Fraunces',serif;font-weight:500;margin:0;letter-spacing:-0.01em;}
+  #view-landing a {color:inherit;}
+  #view-landing .wrap {max-width:1100px;margin:0 auto;padding:0 32px;width:100%;}
+
+  #view-landing .skip-link {
+    position:absolute;left:-999px;top:auto;background:var(--lp-plum);color:#fff;
+    padding:12px 18px;font-size:14px;font-weight:600;z-index:100;border-radius:var(--lp-radius);
+  }
+  #view-landing .skip-link:focus {left:16px;top:16px;}
+  #view-landing a:focus-visible, #view-landing button:focus-visible, #view-landing .btn:focus-visible {outline:3px solid var(--lp-plum);outline-offset:2px;}
+
+  /* ---------- brand lockup (matches real site markup) ---------- */
+  #view-landing .brand-lockup {
+    display:inline-flex;align-items:center;gap:8px;
+    text-decoration:none;background:transparent;padding:4px 2px;
+  }
+  #view-landing .logo-word {font-family:'Fraunces',serif;font-size:22px;font-weight:600;letter-spacing:-0.01em;color:var(--lp-ink);line-height:1;}
+  #view-landing .logo-word .accent {color:var(--lp-logo-b);}
+  #view-landing .logo-divider {display:flex;align-items:center;gap:2px;margin:2px 0 2px;}
+  #view-landing .logo-divider i {width:14px;height:1px;background:linear-gradient(to right,transparent,var(--lp-logo-b));}
+  #view-landing .logo-divider i:last-child {background:linear-gradient(to left,transparent,var(--lp-logo-b));}
+  #view-landing .logo-divider b {width:3px;height:3px;border-radius:50%;background:var(--lp-logo-b);flex:none;}
+  #view-landing .logo-tagline {font-family:'Inter',sans-serif;font-size:9.5px;color:var(--lp-ink-soft);letter-spacing:0.01em;white-space:nowrap;}
+
+  /* ---------- header ---------- */
+  #view-landing header {flex:0 0 auto;border-bottom:1px solid var(--lp-line);}
+  #view-landing .nav {display:flex;align-items:center;justify-content:space-between;padding:10px 0;gap:20px;flex-wrap:wrap;}
+  #view-landing .navlinks {display:flex;gap:22px;align-items:center;font-size:13.5px;color:var(--lp-ink-soft);}
+  #view-landing .navlinks a {text-decoration:none;}
+  #view-landing .navlinks a:hover {color:var(--lp-ink);}
+  #view-landing .btn {
+    font-family:'Inter',sans-serif;font-size:13.5px;font-weight:600;padding:9px 16px;border-radius:var(--lp-radius);
+    text-decoration:none;display:inline-block;border:1px solid transparent;cursor:pointer;
+  }
+  #view-landing .btn-primary {background:var(--lp-plum);color:#fff;}
+  #view-landing .btn-primary:hover {background:var(--lp-plum-deep);}
+
+  /* ---------- main: fills remaining viewport ---------- */
+  #view-landing main {
+    position:relative;
+    flex:1 1 auto;display:flex;flex-direction:column;justify-content:center;
+    gap:clamp(18px,3vh,40px);padding:clamp(10px,2.5vh,28px) 0;min-height:0;
+  }
+  #view-landing #network-canvas {position:absolute;inset:0;width:100%;height:100%;opacity:.55;pointer-events:none;z-index:-1;}
+
+  #view-landing .hero-block {text-align:center;}
+  #view-landing .eyebrow {
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;
+    color:var(--lp-green);display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:clamp(10px,1.8vh,18px);
+  }
+  #view-landing .eyebrow .sep {color:var(--lp-line);}
+  #view-landing .hero-block h1 {font-size:clamp(28px,4.4vw,48px);line-height:1.12;max-width:780px;margin:0 auto;}
+  #view-landing .hero-block h1 strong {color:var(--lp-plum);font-weight:600;}
+  #view-landing .hero-block p {
+    font-size:clamp(13.5px,1.4vw,16px);color:var(--lp-ink-soft);max-width:520px;margin:clamp(10px,1.8vh,18px) auto 0;line-height:1.55;
+  }
+  #view-landing .hero-actions {display:flex;gap:12px;justify-content:center;margin-top:clamp(14px,2.2vh,24px);flex-wrap:wrap;}
+  #view-landing .hero-actions .link {font-size:13.5px;color:var(--lp-ink-soft);text-decoration:underline;text-underline-offset:3px;align-self:center;}
+
+  #view-landing .stats {border-top:1px solid var(--lp-line);border-bottom:1px solid var(--lp-line);background:var(--lp-paper-dim);}
+  #view-landing .stats-row {display:flex;justify-content:space-around;flex-wrap:wrap;gap:14px;padding:clamp(12px,2vh,20px) 0;}
+  #view-landing .stat {text-align:center;}
+  #view-landing .stat .num {font-family:'Fraunces',serif;font-size:clamp(18px,2vw,24px);color:var(--lp-plum);}
+  #view-landing .stat .label {font-size:11px;color:var(--lp-ink-soft);margin-top:2px;max-width:150px;}
+
+  #view-landing .how {}
+  #view-landing .how-head {text-align:center;margin-bottom:clamp(12px,2vh,22px);}
+  #view-landing .how-head h2 {font-size:clamp(17px,1.8vw,22px);}
+  #view-landing .how-head p {font-size:12.5px;color:var(--lp-ink-soft);margin-top:4px;}
+  #view-landing .steps {display:flex;justify-content:space-between;gap:6px;}
+  #view-landing .step {flex:1 1 0;text-align:center;padding:0 4px;}
+  #view-landing .step .n {
+    width:24px;height:24px;border-radius:50%;border:1.5px solid var(--lp-plum);color:var(--lp-plum);
+    display:flex;align-items:center;justify-content:center;margin:0 auto 7px;
+    font-family:'IBM Plex Mono',monospace;font-size:11px;
+  }
+  #view-landing .step h3 {font-size:11.8px;font-weight:600;margin:0 0 3px;font-family:'Inter',sans-serif;}
+  #view-landing .step p {font-size:10.2px;color:var(--lp-ink-soft);margin:0;line-height:1.4;}
+
+  /* ---------- footer ---------- */
+  #view-landing footer {flex:0 0 auto;border-top:1px solid var(--lp-line);}
+  #view-landing .foot-row {display:flex;align-items:center;justify-content:space-between;padding:10px 0;gap:16px;flex-wrap:wrap;}
+  #view-landing .foot-links {display:flex;flex-wrap:wrap;align-items:center;gap:0;}
+  #view-landing .foot-links a {text-decoration:none;margin-left:16px;font-size:12px;color:var(--lp-ink-soft);}
+  #view-landing .foot-links a:hover {color:var(--lp-ink);}
+  #view-landing .foot-right {display:flex;align-items:center;gap:14px;font-size:11.5px;color:var(--lp-ink-soft);}
+
+  /* ---------- small-viewport fallback: allow scroll rather than clip content ---------- */
+  @media (max-height:680px), (max-width:640px){
+    #view-landing{overflow:auto;height:auto;}
+    #view-landing main {justify-content:flex-start;}
+    #view-landing .steps {flex-wrap:wrap;}
+    #view-landing .step {flex:1 1 28%;margin-bottom:10px;}
+  }
+  @media (max-width:560px){
+    #view-landing .stats-row {justify-content:center;}
+    #view-landing .stat {width:44%;}
+  }
   </style>
   <!-- Google Identity Services — Tier 1 sign-in gate (auth.js) -->
   <script src="https://accounts.google.com/gsi/client" async defer></script>
@@ -578,11 +695,14 @@
 ================================================================ -->
 <div id="view-landing">
 
-  <nav class="landing-nav">
-    <a class="landing-nav-logo" href="#">
+<a href="#main" class="skip-link">Skip to content</a>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="brand-lockup" aria-label="Fundaigo. AI-powered funding intelligence for nonprofits.">
       <svg width="30" height="30" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <defs><linearGradient id="lg0" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#8B3410"/><stop offset="100%" stop-color="#C1461A"/></linearGradient></defs>
-        <rect width="80" height="80" rx="18" fill="url(#lg0)"/>
+        <defs><linearGradient id="lg-head" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#8B3410"/><stop offset="100%" stop-color="#C1461A"/></linearGradient></defs>
+        <rect width="80" height="80" rx="18" fill="url(#lg-head)"/>
         <line x1="40" y1="33" x2="40" y2="18" stroke="#fff" stroke-width="1.8" stroke-linecap="round" opacity=".9"/>
         <line x1="40" y1="47" x2="40" y2="62" stroke="#fff" stroke-width="1.8" stroke-linecap="round" opacity=".9"/>
         <line x1="33" y1="40" x2="18" y2="40" stroke="#fff" stroke-width="1.8" stroke-linecap="round" opacity=".9"/>
@@ -595,209 +715,68 @@
         <circle cx="17" cy="40" r="3" fill="#fff" opacity=".9"/><circle cx="63" cy="40" r="3" fill="#fff" opacity=".9"/>
         <circle cx="22" cy="22" r="2.5" fill="#fff" opacity=".8"/><circle cx="58" cy="22" r="2.5" fill="#fff" opacity=".8"/>
         <circle cx="22" cy="58" r="2.5" fill="#fff" opacity=".8"/><circle cx="58" cy="58" r="2.5" fill="#fff" opacity=".8"/>
-        <circle cx="40" cy="40" r="6.5" fill="#fff"/><circle cx="40" cy="40" r="3" fill="url(#lg0)"/>
+        <circle cx="40" cy="40" r="6.5" fill="#fff"/><circle cx="40" cy="40" r="3" fill="url(#lg-head)"/>
         <circle cx="11" cy="12" r="1.8" fill="#fff" opacity=".4"/><circle cx="69" cy="11" r="1.8" fill="#fff" opacity=".4"/>
         <circle cx="11" cy="68" r="1.8" fill="#fff" opacity=".4"/><circle cx="69" cy="69" r="1.8" fill="#fff" opacity=".4"/>
       </svg>
-      <div><div class="landing-nav-name">Fund<span>aigo</span></div><div style="display:flex;align-items:center;gap:2px;margin:1px 0 2px;"><div style="width:16px;height:1px;background:linear-gradient(to left,#C1461A,transparent);"></div><div style="width:3px;height:3px;border-radius:50%;background:#C1461A;flex-shrink:0;"></div><div style="width:16px;height:1px;background:linear-gradient(to right,#C1461A,transparent);"></div></div><div class="landing-nav-sub">AI-powered funding intelligence for nonprofits</div></div>
+      <div>
+        <div class="logo-word">Fund<span class="accent">aigo</span></div>
+        <div class="logo-divider"><i></i><b></b><i></i></div>
+        <div class="logo-tagline">AI-powered funding intelligence for nonprofits</div>
+      </div>
     </a>
-    <div class="landing-nav-links">
+    <nav class="navlinks" aria-label="Primary">
       <a href="index.html">Home</a>
-      <a href="javascript:void(0)" onclick="expandAboutSection();document.getElementById('about-section').scrollIntoView({behavior:'smooth'});">About</a>
       <a href="faq.html">Help</a>
-      <button class="landing-nav-cta" onclick="enterApp()">Start here</button>
-    </div>
-  </nav>
+    </nav>
+    <button type="button" class="btn btn-primary" onclick="enterApp()">Start here</button>
+  </div>
+</header>
 
-  <section class="hero hero-split" aria-label="Hero">
-    <canvas id="network-canvas" aria-hidden="true" style="opacity:.35;"></canvas>
-    <div class="hero-left">
-      <div class="hero-pill"><span class="hero-pill-dot"></span>AI-powered · Human in control</div>
-      <h1 class="hero-split-title">Find the grants your<br><em>mission deserves</em></h1>
-      <p class="hero-split-sub">Fundaigo empowers small nonprofits with AI, shifting focus away from time spent researching and toward what matters most: evaluating and deciding which funding opportunities to pursue.</p>
-      <div class="hero-split-ctas">
-        <button class="start-btn" onclick="enterApp()">Start for free →</button>
-        <button class="hero-ghost-btn" onclick="expandHowItWorks();document.getElementById('how-it-works').scrollIntoView({behavior:'smooth'})">See the five-stage workflow</button>
-      </div>
+<main id="main">
+  <canvas id="network-canvas" aria-hidden="true"></canvas>
+  <div class="wrap hero-block">
+    <div class="eyebrow">
+      <span>AI-powered</span><span class="sep">&middot;</span><span>Verified leads</span><span class="sep">&middot;</span><span>Human in control</span>
     </div>
-    <div class="hero-right">
-      <div class="hero-results-label">See it in action</div>
-      <!-- Click-to-load thumbnail: the Loom iframe is only inserted on
-           click, not on page load, so the player never loads until
-           someone actually wants to watch. -->
-      <div id="hero-video-wrap" style="position:relative;width:100%;max-width:480px;aspect-ratio:16/9;cursor:pointer;" onclick="document.getElementById('hero-video-wrap').innerHTML='<iframe src=&quot;https://www.loom.com/embed/d1a9d423a04645c8ad3d5691e8a77c9e?autoplay=1&quot; frameborder=&quot;0&quot; allow=&quot;autoplay; fullscreen&quot; allowfullscreen style=&quot;position:absolute;top:0;left:0;width:100%;height:100%;border-radius:12px;&quot;></iframe>'">
-        <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;">
-          <div style="width:60px;height:60px;border-radius:50%;background:#C1461A;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 8px rgba(193,70,26,.15);">
-            <i class="ti ti-player-play" style="font-size:24px;color:#FFFFFF;margin-left:3px;" aria-hidden="true"></i>
-          </div>
-          <div style="font-size:13px;font-weight:600;color:#241C14;">Watch a walkthrough</div>
-        </div>
-      </div>
+    <h1>Find the grants your <strong>mission deserves</strong></h1>
+    <p>Fundaigo searches, qualifies, and scores funding leads, so your team can shift its focus to deciding and pursuing, not researching funding resources.</p>
+    <div class="hero-actions">
+      <button type="button" class="btn btn-primary" onclick="enterApp()">Start for free</button>
+      <a href="javascript:void(0)" class="link" onclick="document.querySelector('#view-landing .how').scrollIntoView({behavior:'smooth'})">See the six-step workflow</a>
     </div>
-  </section>
-
-  <section class="how-section" id="mission-vision">
-    <span class="how-sec-label">Mission &amp; Vision</span>
-    <h2 class="how-title">Why this system exists</h2>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px;">
-      <div>
-        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#C1461A;margin-bottom:8px;">Mission</div>
-        <p style="font-size:15px;color:rgba(36,28,20,.75);line-height:1.7;margin:0;">Helping nonprofits spend less time searching for funding and more time advancing their mission.</p>
-      </div>
-      <div>
-        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#C1461A;margin-bottom:8px;">Vision</div>
-        <p style="font-size:15px;color:rgba(36,28,20,.75);line-height:1.7;margin:0;">A future where every nonprofit, regardless of size, budget, or staff capacity, has equal access to funding opportunities and the tools to turn them into lasting community impact.</p>
-      </div>
-    </div>
-  </section>
-
-  <div class="stats-strip">
-    <div class="stats-strip-item"><div class="stats-strip-n">750K+</div><div class="stats-strip-l">nonprofits this is built for</div></div>
-    <div class="stats-strip-item"><div class="stats-strip-n">5 layers</div><div class="stats-strip-l">of AI verification before you see a result</div></div>
-    <div class="stats-strip-item"><div class="stats-strip-n">30 min</div><div class="stats-strip-l">typical staff time per week</div></div>
-    <div class="stats-strip-item"><div class="stats-strip-n">$0.00</div><div class="stats-strip-l">on Groq's free tier</div></div>
   </div>
 
-  <section class="how-section" id="about-section">
-    <span class="how-sec-label">About</span>
-    <h2 class="how-title">Who it's for, what it does, and how it all fits together</h2>
-    <button id="about-expand-btn" class="hero-ghost-btn" onclick="expandAboutSection()" style="margin-bottom:20px;">
-      Show details <i class="ti ti-chevron-down" style="font-size:12px;vertical-align:-1px;" aria-hidden="true"></i>
-    </button>
-    <div id="about-content" style="display:none;">
-      <!-- Section 1 -->
-      <div class="acc-item">
-        <button class="acc-trigger acc-open" onclick="toggleAcc(this)" aria-expanded="true">
-          <div class="acc-num" aria-hidden="true">1</div>
-          <div><span class="acc-label">Who Fundaigo is for</span><span class="acc-title">Built for small nonprofits that</span></div>
-          <i class="ti ti-chevron-down acc-chev" aria-hidden="true"></i>
-        </button>
-        <div class="acc-body acc-open">
-          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;">
-            <div style="display:flex;align-items:flex-start;gap:8px;"><i class="ti ti-check" style="font-size:16px;color:#C1461A;flex-shrink:0;margin-top:2px;" aria-hidden="true"></i><span style="font-size:12.5px;color:var(--c-text);">Have limited resources</span></div>
-            <div style="display:flex;align-items:flex-start;gap:8px;"><i class="ti ti-check" style="font-size:16px;color:#C1461A;flex-shrink:0;margin-top:2px;" aria-hidden="true"></i><span style="font-size:12.5px;color:var(--c-text);">Can benefit from AI assistance while staying in control of decision making</span></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Section 2 -->
-      <div class="acc-item">
-        <button class="acc-trigger" onclick="toggleAcc(this)" aria-expanded="false">
-          <div class="acc-num" aria-hidden="true">2</div>
-          <div><span class="acc-label">What Fundaigo does not do</span><span class="acc-title">Just as important as what it does</span></div>
-          <i class="ti ti-chevron-down acc-chev" aria-hidden="true"></i>
-        </button>
-        <div class="acc-body">
-          <p style="font-size:11.5px;color:var(--c-muted);line-height:1.6;margin:0;">Fundaigo does not guarantee funding, determine final eligibility, provide legal advice, or submit applications automatically. Every result is a starting point for your team's own judgment, not a decision made on your behalf.</p>
-        </div>
-      </div>
-
-      <!-- Section 3 -->
-      <div class="acc-item">
-        <button class="acc-trigger" onclick="toggleAcc(this)" aria-expanded="false">
-          <div class="acc-num" aria-hidden="true">3</div>
-          <div><span class="acc-label">Impact &amp; Goal</span><span class="acc-title">The problem we are solving</span></div>
-          <i class="ti ti-chevron-down acc-chev" aria-hidden="true"></i>
-        </button>
-        <div class="acc-body">
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px;">
-            <div style="background:var(--c-soft);border-radius:10px;padding:14px;text-align:center;"><div style="font-size:22px;font-weight:500;color:var(--c-deep);">750K+</div><div style="font-size:10px;color:var(--c-muted);margin-top:3px;line-height:1.4;">est. nonprofits under $500K budget with no dedicated grant staff</div></div>
-            <div style="background:var(--c-soft);border-radius:10px;padding:14px;text-align:center;"><div style="font-size:22px;font-weight:500;color:var(--c-deep);">$0.00</div><div style="font-size:10px;color:var(--c-muted);margin-top:3px;line-height:1.4;">designed to run on currently free tiers (Groq, Google)</div></div>
-            <div style="background:var(--c-soft);border-radius:10px;padding:14px;text-align:center;"><div style="font-size:22px;font-weight:500;color:var(--c-deep);">30 min</div><div style="font-size:10px;color:var(--c-muted);margin-top:3px;line-height:1.4;">staff time per week to discover, qualify, and track new leads</div></div>
-          </div>
-          <div style="background:var(--c-tint);border-left:3px solid var(--c-purple);border-radius:0 8px 8px 0;padding:10px 12px;font-size:11.5px;color:var(--c-text);line-height:1.65;">One Groq API key, a browser, and 30 minutes a week is all it takes. Any small nonprofit in education can clone this, update the org profile, and run it immediately.</div>
-        </div>
-      </div>
-
-      <!-- Section 4 -->
-      <div class="acc-item">
-        <button class="acc-trigger" onclick="toggleAcc(this)" aria-expanded="false">
-          <div class="acc-num" aria-hidden="true">4</div>
-          <div><span class="acc-label">Technical architecture</span><span class="acc-title">For implementers and reviewers</span></div>
-          <i class="ti ti-chevron-down acc-chev" aria-hidden="true"></i>
-        </button>
-        <div class="acc-body">
-          <p style="font-size:12px;color:var(--c-muted);line-height:1.6;margin:0 0 14px;">In plain terms, this stage searches current funding sources, validates source links, compares eligibility against your org profile, flags risk or questionable output, organizes approved leads, and supports evidence-grounded proposal drafting. The table below is the technical detail behind that: which model runs each step, and its usage limit.</p>
-          <div style="display:grid;grid-template-columns:180px 1fr 70px;gap:10px;padding:6px 0;border-bottom:0.5px solid var(--c-border);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--c-muted);"><div>Model</div><div>Role &amp; function</div><div>Limit</div></div>
-          <div style="display:grid;grid-template-columns:180px 1fr 70px;gap:10px;padding:9px 0;border-bottom:0.5px solid #F0EDF8;align-items:start;"><div><div style="font-weight:600;font-size:12px;">groq/compound</div><span style="display:inline-flex;background:var(--c-soft);color:var(--c-deep);font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;margin-top:3px;">Layer 1 &middot; Discover</span></div><div style="font-size:11px;color:var(--c-muted);">Live web search, up to 10 searches/call. Returns funders, amounts, deadlines, URLs. Memory excludes known funders.</div><div><span style="background:#DCFCE7;color:#166534;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;">Free</span><div style="font-size:9px;color:var(--c-faint);margin-top:3px;">1K req/day</div></div></div>
-          <div style="display:grid;grid-template-columns:180px 1fr 70px;gap:10px;padding:9px 0;border-bottom:0.5px solid #F0EDF8;align-items:start;"><div><div style="font-weight:600;font-size:12px;">groq/compound</div><span style="display:inline-flex;background:var(--c-soft);color:var(--c-deep);font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;margin-top:3px;">Layer 1.5 &middot; Verify</span></div><div style="font-size:11px;color:var(--c-muted);">Visits every URL server-side. Filters dead links, login walls, unverifiable pages silently.</div><div><span style="background:#DCFCE7;color:#166534;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;">Free</span><div style="font-size:9px;color:var(--c-faint);margin-top:3px;">Same key</div></div></div>
-          <div style="display:grid;grid-template-columns:180px 1fr 70px;gap:10px;padding:9px 0;border-bottom:0.5px solid #F0EDF8;align-items:start;"><div><div style="font-weight:600;font-size:12px;">gpt-oss-120b</div><span style="display:inline-flex;background:var(--c-soft);color:var(--c-deep);font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;margin-top:3px;">Layer 2 &middot; Qualify</span></div><div style="font-size:11px;color:var(--c-muted);">Scores 1–5 vs org profile. Mission, geography, eligibility, risks. Returns structured JSON with recommended action.</div><div><span style="background:#DCFCE7;color:#166534;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;">Free</span><div style="font-size:9px;color:var(--c-faint);margin-top:3px;">1K req/day</div></div></div>
-          <div style="display:grid;grid-template-columns:180px 1fr 70px;gap:10px;padding:9px 0;border-bottom:0.5px solid #F0EDF8;align-items:start;"><div><div style="font-weight:600;font-size:12px;">gpt-oss-safeguard</div><span style="display:inline-flex;background:var(--c-soft);color:var(--c-deep);font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;margin-top:3px;">Layer 2.5 &middot; Guard</span></div><div style="font-size:11px;color:var(--c-muted);">Language, bias, accuracy, appropriateness. Soft-flag only, AI never hard-blocks. Humans decide.</div><div><span style="background:#DCFCE7;color:#166534;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;">Free</span><div style="font-size:9px;color:var(--c-faint);margin-top:3px;">Policy-driven</div></div></div>
-          <div style="display:grid;grid-template-columns:180px 1fr 70px;gap:10px;padding:9px 0;align-items:start;"><div><div style="font-weight:600;font-size:12px;">Google NotebookLM</div><span style="display:inline-flex;background:var(--c-soft);color:var(--c-deep);font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;margin-top:3px;">Layer 4 &middot; Propose</span></div><div style="font-size:11px;color:var(--c-muted);">Drafts from real org documents only. Prompts instruct the model to use only uploaded evidence. Marks gaps [INSERT: ...]. Upload once, reuse forever.</div><div><span style="background:#DCFCE7;color:#166534;font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;">Free</span><div style="font-size:9px;color:var(--c-faint);margin-top:3px;">No API key</div></div></div>
-          <div style="margin-top:10px;background:var(--c-tint);border-radius:7px;padding:8px 10px;font-size:10.5px;color:var(--c-muted);">One Groq key covers all AI layers. Weekly run uses ~16,200 tokens, under 10% of the free daily limit. Resets every 24 hours.</div>
-        </div>
-      </div>
-
-      <!-- Section 5 -->
-      <div class="acc-item">
-        <button class="acc-trigger" onclick="toggleAcc(this)" aria-expanded="false">
-          <div class="acc-num" aria-hidden="true">5</div>
-          <div><span class="acc-label">Tab Guide</span><span class="acc-title">How each tab works</span></div>
-          <i class="ti ti-chevron-down acc-chev" aria-hidden="true"></i>
-        </button>
-        <div class="acc-body">
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-            <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:11px 13px;"><div style="display:flex;align-items:center;gap:7px;margin-bottom:5px;"><div style="width:24px;height:24px;border-radius:6px;background:var(--c-soft);display:flex;align-items:center;justify-content:center;"><i class="ti ti-search" style="font-size:12px;color:var(--c-purple);" aria-hidden="true"></i></div><b style="font-size:12px;">Discover</b></div><div style="font-size:10.5px;color:var(--c-muted);line-height:1.55;">Category chips or custom search (280 char). 5-layer pipeline runs automatically. Every result includes a source link, fit score, and why-qualifies explanation.</div></div>
-            <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:11px 13px;"><div style="display:flex;align-items:center;gap:7px;margin-bottom:5px;"><div style="width:24px;height:24px;border-radius:6px;background:var(--c-soft);display:flex;align-items:center;justify-content:center;"><i class="ti ti-table" style="font-size:12px;color:var(--c-purple);" aria-hidden="true"></i></div><b style="font-size:12px;">Tracker</b></div><div style="font-size:10.5px;color:var(--c-muted);line-height:1.55;">Inline editable pipeline. Status changes auto-exclude funders from future searches. Deadline badges turn red within 14 days. CSV export for team sharing.</div></div>
-            <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:11px 13px;"><div style="display:flex;align-items:center;gap:7px;margin-bottom:5px;"><div style="width:24px;height:24px;border-radius:6px;background:var(--c-soft);display:flex;align-items:center;justify-content:center;"><i class="ti ti-file-text" style="font-size:12px;color:var(--c-purple);" aria-hidden="true"></i></div><b style="font-size:12px;">Proposal</b></div><div style="font-size:10.5px;color:var(--c-muted);line-height:1.55;">Select opportunity → copy generated prompt → paste into NotebookLM with funder's RFP. Drafts use only real org documents. Every gap marked [INSERT: ...].</div></div>
-            <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:11px 13px;"><div style="display:flex;align-items:center;gap:7px;margin-bottom:5px;"><div style="width:24px;height:24px;border-radius:6px;background:var(--c-soft);display:flex;align-items:center;justify-content:center;"><i class="ti ti-info-circle" style="font-size:12px;color:var(--c-purple);" aria-hidden="true"></i></div><b style="font-size:12px;">About</b></div><div style="font-size:10.5px;color:var(--c-muted);line-height:1.55;">This tab. Mission, AI models, tab guide, and architecture. Any team member or judge understands the full system in under 2 minutes.</div></div>
-            <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:11px 13px;grid-column:1/-1;"><div style="display:flex;align-items:center;gap:7px;margin-bottom:5px;"><div style="width:24px;height:24px;border-radius:6px;background:var(--c-soft);display:flex;align-items:center;justify-content:center;"><i class="ti ti-settings" style="font-size:12px;color:var(--c-purple);" aria-hidden="true"></i></div><b style="font-size:12px;">Settings</b></div><div style="font-size:10.5px;color:var(--c-muted);line-height:1.55;">Groq API key (session only, never saved permanently). Search memory: known funders excluded, dead URLs cached 60 days, domains cached 30 days. Org profile editor.</div></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Section 6 -->
-      <div class="acc-item">
-        <button class="acc-trigger" onclick="toggleAcc(this)" aria-expanded="false">
-          <div class="acc-num" aria-hidden="true">6</div>
-          <div><span class="acc-label">Architecture</span><span class="acc-title">Pipeline flow and what makes this stand out</span></div>
-          <i class="ti ti-chevron-down acc-chev" aria-hidden="true"></i>
-        </button>
-        <div class="acc-body">
-          <div style="display:grid;grid-template-columns:22px 1fr auto;gap:8px;padding:8px 0;border-bottom:0.5px solid #F0EDF8;align-items:start;"><div style="width:20px;height:20px;border-radius:50%;background:var(--c-purple);color:#fff;font-size:9.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;" aria-hidden="true">1</div><div><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin-bottom:1px;">Discovery &middot; groq/compound</div><div style="font-size:10.5px;color:var(--c-muted);">Live web search, 6 funder categories. Memory auto-excludes known funders.</div></div><span style="font-size:9px;font-weight:700;background:var(--c-soft);color:var(--c-deep);padding:2px 7px;border-radius:20px;white-space:nowrap;">Web search</span></div>
-          <div style="display:grid;grid-template-columns:22px 1fr auto;gap:8px;padding:8px 0;border-bottom:0.5px solid #F0EDF8;align-items:start;"><div style="width:20px;height:20px;border-radius:50%;background:#0369A1;color:#fff;font-size:8px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;" aria-hidden="true">1.5</div><div><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin-bottom:1px;">Link verification &middot; visit_website</div><div style="font-size:10.5px;color:var(--c-muted);">Every URL visited server-side. Dead, login wall, unverifiable → silently dropped. Cached 60 days.</div></div><span style="font-size:9px;font-weight:700;background:#FEE2E2;color:#991B1B;padding:2px 7px;border-radius:20px;white-space:nowrap;">Filters dead links</span></div>
-          <div style="display:grid;grid-template-columns:22px 1fr auto;gap:8px;padding:8px 0;border-bottom:0.5px solid #F0EDF8;align-items:start;"><div style="width:20px;height:20px;border-radius:50%;background:#92400E;color:#fff;font-size:9.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;" aria-hidden="true">2</div><div><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin-bottom:1px;">Qualification &middot; gpt-oss-120b</div><div style="font-size:10.5px;color:var(--c-muted);">Fit score 1–5 vs org profile. Mission, geography, eligibility, risks. Below minimum → filtered out.</div></div><span style="font-size:9px;font-weight:700;background:#FEF3C7;color:#92400E;padding:2px 7px;border-radius:20px;white-space:nowrap;">Fit score</span></div>
-          <div style="display:grid;grid-template-columns:22px 1fr auto;gap:8px;padding:8px 0;border-bottom:0.5px solid #F0EDF8;align-items:start;"><div style="width:20px;height:20px;border-radius:50%;background:#991B1B;color:#fff;font-size:7.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;" aria-hidden="true">2.5</div><div><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin-bottom:1px;">Guard &middot; gpt-oss-safeguard-20b</div><div style="font-size:10.5px;color:var(--c-muted);">Language, bias, accuracy, appropriateness. Soft-flag only, never hard-blocks.</div></div><span style="font-size:9px;font-weight:700;background:#FEE2E2;color:#991B1B;padding:2px 7px;border-radius:20px;white-space:nowrap;">Guardrails</span></div>
-          <div style="display:grid;grid-template-columns:22px 1fr auto;gap:8px;padding:8px 0;border-bottom:0.5px solid #F0EDF8;align-items:start;"><div style="width:20px;height:20px;border-radius:50%;background:#166534;color:#fff;font-size:9.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;" aria-hidden="true">3</div><div><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin-bottom:1px;">Tracker &middot; browser + memory</div><div style="font-size:10.5px;color:var(--c-muted);">Verified results land here. Status changes feed back to memory. CSV export.</div></div><span style="font-size:9px;font-weight:700;background:#DCFCE7;color:#166534;padding:2px 7px;border-radius:20px;white-space:nowrap;">Persistent</span></div>
-          <div style="display:grid;grid-template-columns:22px 1fr auto;gap:8px;padding:8px 0;border-bottom:0.5px solid #F0EDF8;align-items:start;"><div style="width:20px;height:20px;border-radius:50%;background:var(--c-deep);color:#fff;font-size:9.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;" aria-hidden="true">4</div><div><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin-bottom:1px;">Proposal &middot; NotebookLM</div><div style="font-size:10.5px;color:var(--c-muted);">Generated prompt + org docs → draft grounded in real data only.</div></div><span style="font-size:9px;font-weight:700;background:var(--c-soft);color:var(--c-deep);padding:2px 7px;border-radius:20px;white-space:nowrap;">Human-driven</span></div>
-          <div style="display:grid;grid-template-columns:22px 1fr auto;gap:8px;padding:8px 0;align-items:start;"><div style="width:20px;height:20px;border-radius:50%;background:#374151;color:#fff;font-size:9.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;" aria-hidden="true">5</div><div><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin-bottom:1px;">Human review &middot; staff submits</div><div style="font-size:10.5px;color:var(--c-muted);">AI discovers and drafts. Humans decide and submit. Always.</div></div><span style="font-size:9px;font-weight:700;background:#DCFCE7;color:#166534;padding:2px 7px;border-radius:20px;white-space:nowrap;">Human in control</span></div>
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px;">
-            <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:10px;"><i class="ti ti-filter" style="font-size:16px;color:var(--c-purple);" aria-hidden="true"></i><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin:4px 0 3px;">5-layer pipeline</div><div style="font-size:10px;color:var(--c-muted);line-height:1.5;">Each layer filters noise. Only the best reach staff.</div></div>
-            <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:10px;"><i class="ti ti-brain" style="font-size:16px;color:var(--c-purple);" aria-hidden="true"></i><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin:4px 0 3px;">Search memory</div><div style="font-size:10px;color:var(--c-muted);line-height:1.5;">Every run smarter. Known funders excluded automatically.</div></div>
-            <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:10px;"><i class="ti ti-shield-check" style="font-size:16px;color:var(--c-purple);" aria-hidden="true"></i><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin:4px 0 3px;">Guardrails</div><div style="font-size:10px;color:var(--c-muted);line-height:1.5;">Bias, accuracy, appropriateness checked every run.</div></div>
-            <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:10px;"><i class="ti ti-link-off" style="font-size:16px;color:var(--c-purple);" aria-hidden="true"></i><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin:4px 0 3px;">Links checked automatically</div><div style="font-size:10px;color:var(--c-muted);line-height:1.5;">Every URL is checked before results are shown.</div></div>
-            <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:10px;"><i class="ti ti-plug" style="font-size:16px;color:var(--c-purple);" aria-hidden="true"></i><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin:4px 0 3px;">Modular</div><div style="font-size:10px;color:var(--c-muted);line-height:1.5;">One config line swaps any AI provider.</div></div>
-            <div style="background:var(--c-bg);border:0.5px solid var(--c-border);border-radius:8px;padding:10px;"><i class="ti ti-currency-dollar-off" style="font-size:16px;color:var(--c-purple);" aria-hidden="true"></i><div style="font-size:11.5px;font-weight:600;color:var(--c-text);margin:4px 0 3px;">Runs on free tiers</div><div style="font-size:10px;color:var(--c-muted);line-height:1.5;">Under 10% of free daily token limit per weekly run.</div></div>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- /about-content -->
-  </section>
-
-  <section class="how-section" id="how-it-works">
-    <span class="how-sec-label">How it works</span>
-    <h2 class="how-title">From search to proposal in five steps</h2>
-    <p class="how-sub">Select a category, let AI do the research, review only verified leads.</p>
-    <button id="how-it-works-expand-btn" class="hero-ghost-btn" onclick="expandHowItWorks()" style="margin-bottom:20px;">
-      Show details <i class="ti ti-chevron-down" style="font-size:12px;vertical-align:-1px;" aria-hidden="true"></i>
-    </button>
-    <div id="how-it-works-content" style="display:none;">
-      <div class="how-steps">
-        <div class="how-step"><div class="how-step-num">1</div><div class="how-step-title">Choose category</div><div class="how-step-desc">Pick a funder type or type a custom search</div></div>
-        <div class="how-step"><div class="how-step-num">2</div><div class="how-step-title">AI searches</div><div class="how-step-desc">5-layer pipeline runs automatically</div></div>
-        <div class="how-step"><div class="how-step-num">3</div><div class="how-step-title">Review results</div><div class="how-step-desc">Verified, scored, guard-checked leads only</div></div>
-        <div class="how-step"><div class="how-step-num">4</div><div class="how-step-title">Track pipeline</div><div class="how-step-desc">Add to tracker, assign, set deadlines</div></div>
-        <div class="how-step"><div class="how-step-num">5</div><div class="how-step-title">Draft &amp; submit</div><div class="how-step-desc">NotebookLM drafts, staff reviews, submits</div></div>
-      </div>
+  <div class="stats">
+    <div class="wrap stats-row">
+      <div class="stat"><div class="num">750K+</div><div class="label">nonprofits this is built for</div></div>
+      <div class="stat"><div class="num">5 layers</div><div class="label">of AI verification before you see a result</div></div>
+      <div class="stat"><div class="num">30 min</div><div class="label">staff time per week to run a full search</div></div>
     </div>
-  </section>
+  </div>
 
-    <footer class="landing-footer">
-    <div class="landing-footer-logo">
+  <div class="wrap how">
+    <div class="how-head">
+      <h2>How it works</h2>
+      <p>From setup to submitted proposal in six steps</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="n">0</div><h3>Setup</h3><p>Setup Groq API key and your org profile</p></div>
+      <div class="step"><div class="n">1</div><h3>Choose category</h3><p>Pick a funder type or type a custom search</p></div>
+      <div class="step"><div class="n">2</div><h3>AI searches</h3><p>5-layer pipeline runs automatically</p></div>
+      <div class="step"><div class="n">3</div><h3>Review results</h3><p>Verified, scored, guard-checked leads only</p></div>
+      <div class="step"><div class="n">4</div><h3>Track pipeline</h3><p>Add to tracker, assign, set deadlines</p></div>
+      <div class="step"><div class="n">5</div><h3>Draft and submit</h3><p>NotebookLM drafts, staff reviews, submits</p></div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap foot-row">
+    <a href="index.html" class="brand-lockup" aria-label="Fundaigo. AI-powered funding intelligence for nonprofits.">
       <svg width="24" height="24" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <defs><linearGradient id="lg-footer" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#8B3410"/><stop offset="100%" stop-color="#C1461A"/></linearGradient></defs>
-        <rect width="80" height="80" rx="18" fill="url(#lg-footer)"/>
+        <defs><linearGradient id="lg-foot" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#8B3410"/><stop offset="100%" stop-color="#C1461A"/></linearGradient></defs>
+        <rect width="80" height="80" rx="18" fill="url(#lg-foot)"/>
         <line x1="40" y1="33" x2="40" y2="18" stroke="#fff" stroke-width="1.8" stroke-linecap="round" opacity=".9"/>
         <line x1="40" y1="47" x2="40" y2="62" stroke="#fff" stroke-width="1.8" stroke-linecap="round" opacity=".9"/>
         <line x1="33" y1="40" x2="18" y2="40" stroke="#fff" stroke-width="1.8" stroke-linecap="round" opacity=".9"/>
@@ -810,22 +789,26 @@
         <circle cx="17" cy="40" r="3" fill="#fff" opacity=".9"/><circle cx="63" cy="40" r="3" fill="#fff" opacity=".9"/>
         <circle cx="22" cy="22" r="2.5" fill="#fff" opacity=".8"/><circle cx="58" cy="22" r="2.5" fill="#fff" opacity=".8"/>
         <circle cx="22" cy="58" r="2.5" fill="#fff" opacity=".8"/><circle cx="58" cy="58" r="2.5" fill="#fff" opacity=".8"/>
-        <circle cx="40" cy="40" r="6.5" fill="#fff"/><circle cx="40" cy="40" r="3" fill="url(#lg-footer)"/>
+        <circle cx="40" cy="40" r="6.5" fill="#fff"/><circle cx="40" cy="40" r="3" fill="url(#lg-foot)"/>
         <circle cx="11" cy="12" r="1.8" fill="#fff" opacity=".4"/><circle cx="69" cy="11" r="1.8" fill="#fff" opacity=".4"/>
         <circle cx="11" cy="68" r="1.8" fill="#fff" opacity=".4"/><circle cx="69" cy="69" r="1.8" fill="#fff" opacity=".4"/>
       </svg>
-      <div><div class="landing-footer-name">Fund<span>aigo</span></div><div style="display:flex;align-items:center;gap:2px;margin:1px 0 2px;"><div style="width:16px;height:1px;background:linear-gradient(to left,#C1461A,transparent);"></div><div style="width:3px;height:3px;border-radius:50%;background:#C1461A;flex-shrink:0;"></div><div style="width:16px;height:1px;background:linear-gradient(to right,#C1461A,transparent);"></div></div></div>
-    </div>
-    <div class="landing-footer-links">
+      <div>
+        <div class="logo-word" style="font-size:19px;">Fund<span class="accent">aigo</span></div>
+        <div class="logo-divider"><i></i><b></b><i></i></div>
+      </div>
+    </a>
+    <nav class="foot-links" aria-label="Footer">
       <a href="index.html">Home</a>
       <a href="faq.html">Help</a>
       <a href="https://www.linkedin.com/in/madhudevi/" target="_blank" rel="noopener">LinkedIn</a>
       <a href="https://mdevi25.github.io/" target="_blank" rel="noopener">Portfolio</a>
+    </nav>
+    <div class="foot-right">
+      <span>&copy; 2026 Madhu Devi. All rights reserved.</span>
     </div>
-    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px;">
-            <div style="font-size:10px;color:#8A93A1;">&#169; 2026 Madhu Devi. All rights reserved.</div>
-    </div>
-  </footer>
+  </div>
+</footer>
 
 </div><!-- /view-landing -->
 
@@ -2058,97 +2041,82 @@ function setTextContent(id,val) { const el = document.getElementById(id); if (el
 
 // ── NETWORK ANIMATION ───────────────────────────────────────────
 (function() {
-  const canvas = document.getElementById('network-canvas');
+  var canvas = document.getElementById('network-canvas');
   if (!canvas) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const ctx = canvas.getContext('2d');
-  const COUNT = 70, MAX = 160, SPIKES = 10;
-  let nodes = [], W = 0, H = 0, frame = 0;
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ctx = canvas.getContext('2d');
+  var COUNT = 55, MAX = 150, SPIKES = 7;
+  var nodes = [], W = 0, H = 0;
 
-  function resize() {
-    const r = canvas.parentElement.getBoundingClientRect();
-    W = canvas.width = r.width || 900;
-    H = canvas.height = r.height || 500;
+  function resize(){
+    var r = canvas.parentElement.getBoundingClientRect();
+    W = canvas.width = r.width;
+    H = canvas.height = r.height;
   }
-
-  function initNodes() {
+  function initNodes(){
     nodes = [];
-    for (let i = 0; i < COUNT; i++) {
+    for (var i = 0; i < COUNT; i++){
       nodes.push({
-        x: Math.random() * W, y: Math.random() * H,
-        vx: (Math.random() - .5) * .55, vy: (Math.random() - .5) * .55,
-        r: 1.5 + Math.random() * 2,
+        x: Math.random()*W, y: Math.random()*H,
+        vx: (Math.random()-0.5)*0.4, vy: (Math.random()-0.5)*0.4,
+        r: 1.3 + Math.random()*1.7,
         spike: i < SPIKES,
-        phase: Math.random() * Math.PI * 2,
-        speed: .018 + Math.random() * .018
+        phase: Math.random()*Math.PI*2,
+        speed: 0.015 + Math.random()*0.015
       });
     }
   }
-
-  function drawSpike(x, y, phase) {
-    const spokes = 8;
-    const outer = 10 + Math.sin(phase) * 5;
-    const inner = 4;
-    const alpha = .12 + .1 * Math.sin(phase);
-    ctx.save();
-    ctx.translate(x, y);
-    ctx.beginPath();
-    for (let i = 0; i < spokes * 2; i++) {
-      const ang = (i * Math.PI) / spokes;
-      const rr = i % 2 === 0 ? outer : inner;
-      if (i === 0) ctx.moveTo(Math.cos(ang) * rr, Math.sin(ang) * rr);
-      else ctx.lineTo(Math.cos(ang) * rr, Math.sin(ang) * rr);
+  function drawSpike(x, y, phase){
+    var spokes = 8, outer = 8 + Math.sin(phase)*4, inner = 3;
+    var alpha = .10 + .08*Math.sin(phase);
+    ctx.save(); ctx.translate(x, y); ctx.beginPath();
+    for (var i = 0; i < spokes*2; i++){
+      var ang = (i*Math.PI)/spokes;
+      var rr = i % 2 === 0 ? outer : inner;
+      if (i === 0) ctx.moveTo(Math.cos(ang)*rr, Math.sin(ang)*rr);
+      else ctx.lineTo(Math.cos(ang)*rr, Math.sin(ang)*rr);
     }
     ctx.closePath();
-    ctx.fillStyle = 'rgba(193,70,26,' + alpha + ')';
+    ctx.fillStyle = 'rgba(193,70,26,'+alpha+')';
     ctx.fill();
-    ctx.strokeStyle = 'rgba(193,70,26,' + (.35 + .25 * Math.sin(phase)) + ')';
-    ctx.lineWidth = .7;
-    ctx.stroke();
     ctx.restore();
   }
-
-  function draw() {
-    frame++;
+  function draw(){
     ctx.clearRect(0, 0, W, H);
-    nodes.forEach(function(n) {
+    nodes.forEach(function(n){
       n.x += n.vx; n.y += n.vy;
       if (n.x < 0 || n.x > W) n.vx *= -1;
       if (n.y < 0 || n.y > H) n.vy *= -1;
       n.phase += n.speed;
     });
-    // connections
-    for (var i = 0; i < nodes.length; i++) {
-      for (var j = i + 1; j < nodes.length; j++) {
+    for (var i = 0; i < nodes.length; i++){
+      for (var j = i+1; j < nodes.length; j++){
         var dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y;
-        var d = Math.sqrt(dx * dx + dy * dy);
-        if (d < MAX) {
-          var a = (1 - d / MAX) * .32;
+        var d = Math.sqrt(dx*dx + dy*dy);
+        if (d < MAX){
+          var a = (1 - d/MAX) * 0.22;
           ctx.beginPath();
           ctx.moveTo(nodes[i].x, nodes[i].y);
           ctx.lineTo(nodes[j].x, nodes[j].y);
-          ctx.strokeStyle = 'rgba(193,70,26,' + a + ')';
-          ctx.lineWidth = .8;
+          ctx.strokeStyle = 'rgba(193,70,26,'+a+')';
+          ctx.lineWidth = .7;
           ctx.stroke();
         }
       }
     }
-    // nodes + spikes
-    nodes.forEach(function(n) {
-      var pulse = .5 + .5 * Math.sin(n.phase);
+    nodes.forEach(function(n){
+      var pulse = .5 + .5*Math.sin(n.phase);
       if (n.spike) drawSpike(n.x, n.y, n.phase);
       ctx.beginPath();
-      ctx.arc(n.x, n.y, n.r * (n.spike ? 1 + pulse * .5 : 1), 0, Math.PI * 2);
-      ctx.fillStyle = n.spike
-        ? 'rgba(193,70,26,' + (.55 + pulse * .35) + ')'
-        : 'rgba(193,70,26,.22)';
+      ctx.arc(n.x, n.y, n.r * (n.spike ? 1 + pulse*.4 : 1), 0, Math.PI*2);
+      ctx.fillStyle = n.spike ? 'rgba(193,70,26,'+(.45+pulse*.3)+')' : 'rgba(193,70,26,.18)';
       ctx.fill();
     });
-    requestAnimationFrame(draw);
+    if (!reduceMotion) requestAnimationFrame(draw);
   }
 
   resize(); initNodes(); draw();
-  window.addEventListener('resize', function() { resize(); initNodes(); });
+  window.addEventListener('resize', function(){ resize(); initNodes(); });
 })();
 </script>
 

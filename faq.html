@@ -3,89 +3,115 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Help - Fundaigo</title>
-  <meta name="description" content="Frequently asked questions about Fundaigo, the free AI-powered funding intelligence platform for small nonprofits.">
+  <title>Fundaigo Help & FAQ</title>
+  <meta name="description" content="Frequently asked questions about Fundaigo, the free AI-powered grant intelligence platform for small nonprofits.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Alex+Brush&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/tabler-icons.min.css">
   <style>
     :root{
-      --c-bg:#F5F0E6;--c-border:rgba(36,28,20,.1);--c-purple:#C1461A;--c-deep:#8B3410;
-      --c-tint:rgba(193,70,26,.07);--c-soft:rgba(193,70,26,.16);--c-text:#241C14;--c-muted:rgba(36,28,20,.66);--c-faint:rgba(36,28,20,.73);
-      --font-sans:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+      --paper:#FAF8F3;--paper-dim:#F2EEE5;--ink:#20242A;--ink-soft:#4F4E47;--ink-faint:#8A887F;
+      --plum:#5B2A55;--plum-deep:#3E1D3B;--plum-tint:rgba(91,42,85,.07);--plum-soft:rgba(91,42,85,.14);
+      --line:#DFD8C8;--logo-a:#8B3410;--logo-b:#C1461A;--radius:2px;
+      --font-sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     html{scroll-behavior:smooth;}
-    body{font-family:var(--font-sans);background:var(--c-bg);color:var(--c-text);font-size:13px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+    body{font-family:var(--font-sans);background:var(--paper);color:var(--ink);font-size:13px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+    a:focus-visible,button:focus-visible{outline:3px solid var(--plum);outline-offset:2px;}
+    .skip-link{position:absolute;left:-999px;top:auto;background:var(--plum);color:#fff;padding:12px 18px;font-size:14px;font-weight:600;z-index:200;border-radius:var(--radius);}
+    .skip-link:focus{left:16px;top:16px;}
+
+    /* ---- brand lockup (matches index.html) ---- */
+    .brand-lockup{display:inline-flex;align-items:center;gap:8px;text-decoration:none;}
+    .logo-word{font-family:'Fraunces',serif;font-size:22px;font-weight:600;letter-spacing:-0.01em;color:var(--ink);line-height:1;}
+    .logo-word .accent{color:var(--logo-b);}
+    .logo-divider{display:flex;align-items:center;gap:2px;margin:2px 0 2px;}
+    .logo-divider i{width:14px;height:1px;background:linear-gradient(to right,transparent,var(--logo-b));}
+    .logo-divider i:last-child{background:linear-gradient(to left,transparent,var(--logo-b));}
+    .logo-divider b{width:3px;height:3px;border-radius:50%;background:var(--logo-b);flex:none;}
+    .logo-tagline{font-family:'Inter',sans-serif;font-size:9.5px;color:var(--ink-soft);letter-spacing:0.01em;white-space:nowrap;}
 
     /* ── NAV ── */
-    .nav{display:flex;align-items:center;justify-content:space-between;padding:14px 32px;background:var(--c-bg);border-bottom:0.5px solid var(--c-border);position:sticky;top:0;z-index:100;}
-    .nav-logo{display:flex;align-items:center;gap:8px;text-decoration:none;}
-    .nav-name{font-family:'Alex Brush',cursive;font-size:30px;font-weight:400;color:var(--c-text);line-height:1;}
-    .nav-name span{color:var(--c-purple);}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:10px 32px;background:var(--paper);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:100;}
     .nav-links{display:flex;align-items:center;gap:20px;}
-    .nav-links a{font-size:12.5px;color:var(--c-muted);text-decoration:none;font-weight:500;transition:color .15s;}
-    .nav-links a:hover{color:var(--c-purple);}
+    .nav-links a{font-size:12.5px;color:var(--ink-soft);text-decoration:none;font-weight:500;transition:color .15s;}
+    .nav-links a:hover{color:var(--ink);}
     .nav-links a.nav-cta{color:#fff !important;}
-    .nav-links a.nav-cta:hover{color:#fff !important;background:var(--c-deep);}
-    .nav-links a.active{color:var(--c-purple);font-weight:700;}
-    .nav-cta{background:var(--c-purple);color:#fff !important;border:1px solid var(--c-purple);border-radius:8px;padding:8px 20px;font-size:12.5px;font-weight:600;cursor:pointer;transition:background .15s;text-decoration:none;display:inline-block;}
-    .nav-cta:hover{background:var(--c-deep);}
+    .nav-links a.nav-cta:hover{color:#fff !important;background:var(--plum-deep);}
+    .nav-links a.active{color:var(--plum);font-weight:700;}
+    .nav-cta{background:var(--plum);color:#fff !important;border:1px solid var(--plum);border-radius:var(--radius);padding:9px 18px;font-size:12.5px;font-weight:600;cursor:pointer;transition:background .15s;text-decoration:none;display:inline-block;}
+    .nav-cta:hover{background:var(--plum-deep);}
 
     /* ── HERO ── */
     .faq-hero{padding:32px 32px 24px;max-width:760px;margin:0 auto;}
-    .faq-title{font-size:26px;font-weight:500;color:var(--c-text);letter-spacing:-.02em;margin-bottom:16px;}
+    .faq-title{font-family:'Fraunces',serif;font-size:28px;font-weight:500;color:var(--ink);letter-spacing:-.01em;margin-bottom:16px;}
     .faq-search-wrap{position:relative;}
-    .faq-search{width:100%;border:0.5px solid var(--c-border);border-radius:10px;padding:11px 14px 11px 38px;font-size:13px;color:var(--c-text);background:#FFFFFF;font-family:var(--font-sans);}
-    .faq-search:focus{outline:none;border-color:var(--c-purple);box-shadow:0 0 0 3px rgba(124,58,237,.1);}
-    .faq-search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--c-faint);font-size:15px;pointer-events:none;}
+    .faq-search{width:100%;border:1px solid var(--line);border-radius:8px;padding:11px 14px 11px 38px;font-size:13px;color:var(--ink);background:#fff;font-family:var(--font-sans);}
+    .faq-search:focus{outline:none;border-color:var(--plum);box-shadow:0 0 0 3px var(--plum-tint);}
+    .faq-search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--ink-faint);font-size:15px;pointer-events:none;}
 
     /* ── BODY ── */
     .faq-body{max-width:760px;margin:0 auto;padding:12px 32px 72px;}
-    .cat-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--c-purple);margin:28px 0 10px;display:flex;align-items:center;gap:6px;cursor:pointer;user-select:none;}
-    .cat-label:first-child{margin-top:4px;}
-    .cat-chev{margin-left:auto;font-size:12px;transition:transform .15s;}
-    .cat-label.cat-open .cat-chev{transform:rotate(180deg);}
-    .faq-item{border:0.5px solid var(--c-border);border-radius:10px;margin-bottom:7px;background:#FFFFFF;overflow:hidden;}
-    .faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 15px;background:#FFFFFF;border:none;cursor:pointer;text-align:left;font-family:var(--font-sans);font-size:13px;font-weight:600;color:var(--c-text);}
-    .faq-q:hover{background:var(--c-tint);}
-    .faq-q.open{background:var(--c-tint);border-bottom:0.5px solid var(--c-border);}
-    .faq-chev{color:var(--c-faint);font-size:14px;transition:transform .2s;flex-shrink:0;}
+    .cat-block{margin:28px 0 10px;}
+    .cat-block:first-child{margin-top:4px;}
+    .cat-label{
+      width:100%;font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;
+      color:var(--logo-b);display:flex;align-items:center;justify-content:space-between;gap:6px;
+      background:none;border:none;padding:4px 2px;cursor:pointer;text-align:left;
+    }
+    .cat-label-left{display:flex;align-items:center;gap:6px;}
+    .cat-toggle{
+      width:18px;height:18px;border-radius:50%;border:1px solid var(--line);flex:none;
+      display:flex;align-items:center;justify-content:center;
+      font-family:'IBM Plex Mono',monospace;font-size:12px;line-height:1;color:var(--logo-b);
+      transition:background .15s;
+    }
+    .cat-label:hover .cat-toggle{background:var(--paper-dim);}
+    .cat-label[aria-expanded="false"] .cat-toggle::before{content:"+";}
+    .cat-label[aria-expanded="true"] .cat-toggle::before{content:"\2212";}
+    .cat-group{margin-top:10px;}
+    .cat-group[hidden]{display:none;}
+    .faq-item{border:1px solid var(--line);border-radius:8px;margin-bottom:7px;background:#fff;overflow:hidden;}
+    .faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 15px;background:#fff;border:none;cursor:pointer;text-align:left;font-family:var(--font-sans);font-size:13px;font-weight:600;color:var(--ink);}
+    .faq-q:hover{background:var(--paper-dim);}
+    .faq-q.open{background:var(--paper-dim);border-bottom:1px solid var(--line);}
+    .faq-chev{color:var(--ink-faint);font-size:14px;transition:transform .2s;flex-shrink:0;}
     .faq-q.open .faq-chev{transform:rotate(180deg);}
-    .faq-a{display:none;padding:13px 15px;font-size:12.5px;color:var(--c-muted);line-height:1.7;}
+    .faq-a{display:none;padding:13px 15px;font-size:12.5px;color:var(--ink-soft);line-height:1.7;}
     .faq-a.open{display:block;}
-    .faq-a b{color:var(--c-text);}
-    .faq-a code{background:var(--c-soft);color:var(--c-deep);padding:1px 6px;border-radius:4px;font-size:11.5px;font-family:monospace;}
-    .faq-a a{color:var(--c-purple);font-weight:600;}
-    .no-results{text-align:center;padding:48px 20px;color:var(--c-muted);font-size:13px;display:none;}
-    .no-results i{font-size:32px;color:var(--c-soft);display:block;margin-bottom:10px;}
+    .faq-a b{color:var(--ink);}
+    .faq-a code{background:var(--plum-soft);color:var(--plum-deep);padding:1px 6px;border-radius:4px;font-size:11.5px;font-family:monospace;}
+    .faq-a a{color:var(--plum);font-weight:600;}
+    .no-results{text-align:center;padding:48px 20px;color:var(--ink-soft);font-size:13px;display:none;}
+    .no-results i{font-size:32px;color:var(--line);display:block;margin-bottom:10px;}
 
-    /* ── FOOTER ── */
-    .faq-footer{background:#EFE7D8;padding:20px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
-    .footer-logo{display:flex;align-items:center;gap:8px;}
-    .footer-name{font-family:'Alex Brush',cursive;font-size:24px;font-weight:400;color:#fff;line-height:1;}
-    .footer-name span{color:var(--c-purple);}
-    .footer-links{display:flex;gap:16px;}
-    .footer-links a{font-size:11.5px;color:#8A93A1;text-decoration:none;}
-    .footer-links a:hover{color:#C1461A;}
+    /* ── FOOTER (matches index.html: light, not a dark block) ── */
+    .faq-footer{background:var(--paper);border-top:1px solid var(--line);padding:16px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+    .footer-links{display:flex;flex-wrap:wrap;align-items:center;}
+    .footer-links a{text-decoration:none;margin-left:16px;font-size:12px;color:var(--ink-soft);}
+    .footer-links a:hover{color:var(--ink);}
+    .footer-copy{font-size:11.5px;color:var(--ink-soft);}
 
     @media(max-width:640px){
-      .nav{padding:12px 16px;}
+      .nav{padding:10px 16px;}
       .faq-hero,.faq-body{padding-left:16px;padding-right:16px;}
       .nav-links a:not(.nav-cta){display:none;}
-      .faq-footer{flex-direction:column;align-items:flex-start;}
+      .faq-footer{flex-direction:column;align-items:flex-start;padding:16px;}
+      .footer-links a:first-child{margin-left:0;}
     }
   </style>
 </head>
 <body>
 
+<a href="#main" class="skip-link">Skip to content</a>
+
 <!-- NAV -->
 <nav class="nav">
-  <a class="nav-logo" href="index.html">
+  <a class="brand-lockup" href="index.html" aria-label="Fundaigo. AI-powered funding intelligence for nonprofits.">
     <svg width="30" height="30" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <defs><linearGradient id="lg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#8B3410"/><stop offset="100%" stop-color="#C1461A"/></linearGradient></defs>
-      <rect width="80" height="80" rx="18" fill="url(#lg)"/>
+      <defs><linearGradient id="lg-nav" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#8B3410"/><stop offset="100%" stop-color="#C1461A"/></linearGradient></defs>
+      <rect width="80" height="80" rx="18" fill="url(#lg-nav)"/>
       <line x1="40" y1="33" x2="40" y2="18" stroke="#fff" stroke-width="1.8" stroke-linecap="round" opacity=".9"/>
       <line x1="40" y1="47" x2="40" y2="62" stroke="#fff" stroke-width="1.8" stroke-linecap="round" opacity=".9"/>
       <line x1="33" y1="40" x2="18" y2="40" stroke="#fff" stroke-width="1.8" stroke-linecap="round" opacity=".9"/>
@@ -98,20 +124,26 @@
       <circle cx="17" cy="40" r="3" fill="#fff" opacity=".9"/><circle cx="63" cy="40" r="3" fill="#fff" opacity=".9"/>
       <circle cx="22" cy="22" r="2.5" fill="#fff" opacity=".8"/><circle cx="58" cy="22" r="2.5" fill="#fff" opacity=".8"/>
       <circle cx="22" cy="58" r="2.5" fill="#fff" opacity=".8"/><circle cx="58" cy="58" r="2.5" fill="#fff" opacity=".8"/>
-      <circle cx="40" cy="40" r="6.5" fill="#fff"/><circle cx="40" cy="40" r="3" fill="url(#lg)"/>
+      <circle cx="40" cy="40" r="6.5" fill="#fff"/><circle cx="40" cy="40" r="3" fill="url(#lg-nav)"/>
       <circle cx="11" cy="12" r="1.8" fill="#fff" opacity=".4"/><circle cx="69" cy="11" r="1.8" fill="#fff" opacity=".4"/>
       <circle cx="11" cy="68" r="1.8" fill="#fff" opacity=".4"/><circle cx="69" cy="69" r="1.8" fill="#fff" opacity=".4"/>
     </svg>
-    <div><div class="nav-name">Fund<span>aigo</span></div><div style="display:flex;align-items:center;gap:2px;margin:1px 0 2px;"><div style="width:16px;height:1px;background:linear-gradient(to left,#C1461A,transparent);"></div><div style="width:3px;height:3px;border-radius:50%;background:#C1461A;flex-shrink:0;"></div><div style="width:16px;height:1px;background:linear-gradient(to right,#C1461A,transparent);"></div></div></div>
+    <div>
+      <div class="logo-word">Fund<span class="accent">aigo</span></div>
+      <div class="logo-divider"><i></i><b></b><i></i></div>
+    </div>
   </a>
   <div class="nav-links">
-    <a href="index.html">&larr; Home</a>
+    <a href="index.html">Home</a>
+    <a href="index.html">About</a>
     <a href="faq.html" class="active">Help</a>
     <a href="index.html" class="nav-cta">Start here</a>
   </div>
 </nav>
 
-<!-- HERO: title + search only -->
+
+<!-- HERO, title + search only -->
+<main id="main">
 <div class="faq-hero">
   <h1 class="faq-title">Help &amp; FAQ</h1>
   <div class="faq-search-wrap">
@@ -128,40 +160,43 @@
     No questions match your search. Try different keywords.
   </div>
 
-  <div class="cat-label" data-cat onclick="toggleCategory(this)"><i class="ti ti-rocket" style="font-size:11px;" aria-hidden="true"></i> Getting started<i class="ti ti-chevron-down cat-chev" aria-hidden="true"></i></div>
+  <!-- GETTING STARTED -->
+  <div class="cat-block">
+    <button type="button" class="cat-label" data-cat aria-expanded="false" aria-controls="cat-getting-started" onclick="toggleSection(this)">
+      <span class="cat-label-left"><i class="ti ti-rocket" style="font-size:11px;" aria-hidden="true"></i> Getting started</span>
+      <span class="cat-toggle" aria-hidden="true"></span>
+    </button>
+    <div class="cat-group" id="cat-getting-started" hidden>
 
   <div class="faq-item" data-q="what is fundigo">
     <button class="faq-q" onclick="toggle(this)" aria-expanded="false">What is Fundaigo?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">Fundaigo is a free AI-powered funding intelligence platform for small nonprofits in education. It runs a <b>5-layer pipeline</b>, discovery, link verification, qualification scoring, bias guard, and tracking, so your team spends 30 minutes a week instead of hours finding verified, scored funding leads.</div>
+    <div class="faq-a">Fundaigo is a free AI-powered grant intelligence platform for small nonprofits in education. It runs a <b>5-layer pipeline</b>, discovery, link verification, qualification scoring, bias guard, and tracking, so your team spends 30 minutes a week instead of hours finding verified, scored funding leads.</div>
   </div>
-
-  <div class="faq-item" data-q="is it really free cost catch credit card">
-    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">Is it really free? What's the catch?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">Yes, genuinely free. <b>No credit card required to start.</b> Fundaigo runs on Groq's free API tier: 1,000 requests and 200,000 tokens per day, resetting every 24 hours. One weekly full scan uses under 10% of that daily limit. No trial period, no expiry date.</div>
-  </div>
-
   <div class="faq-item" data-q="what do i need setup get started requirements google account shared drive">
     <button class="faq-q" onclick="toggle(this)" aria-expanded="false">What do I need to get started?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
     <div class="faq-a"><b>(1)</b> A free Groq API key from <a href="https://console.groq.com" target="_blank" rel="noopener">console.groq.com</a>, no credit card. <b>(2)</b> A Google account, for NotebookLM and a Shared Drive to hold your team's tracker. <b>(3)</b> Your org's core documents for NotebookLM (mission statement, program descriptions, 501(c)(3) letter, impact stats). Setup takes under 30 minutes.</div>
   </div>
-
   <div class="faq-item" data-q="groq api key how to get create account">
     <button class="faq-q" onclick="toggle(this)" aria-expanded="false">How do I get a Groq API key?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
     <div class="faq-a">Go to <a href="https://console.groq.com" target="_blank" rel="noopener">console.groq.com</a> → sign up (free, no credit card) → click <b>API Keys</b> in the sidebar → click <b>Create API Key</b> → name it <code>Fundaigo</code> → copy the key. It starts with <code>gsk_</code>. Takes about 3 minutes total.</div>
   </div>
-
-  <div class="faq-item" data-q="other nonprofits use clone different organization profile">
-    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">Can other nonprofits use Fundaigo?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">Yes, that's the point. Any small nonprofit updates the org profile in the Settings tab and runs their own searches immediately. The architecture is identical whether you serve 50 students in Chicago or 5,000 in Texas. An estimated <b>750,000+ US nonprofits</b> share this exact problem, and the same zero-cost approach works for any of them.</div>
+  <div class="faq-item" data-q="is it really free cost catch credit card">
+    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">Is it really free? What's the catch?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
+    <div class="faq-a">Yes, genuinely free. <b>No credit card required to start.</b> Fundaigo runs on Groq's free API tier, 1,000 requests and 200,000 tokens per day, resetting every 24 hours. One weekly full scan uses under 10% of that daily limit. No trial period, no expiry date.</div>
   </div>
-
-  <!-- DISCOVERY -->
-
-<div class="cat-label" data-cat onclick="toggleCategory(this)"><i class="ti ti-search" style="font-size:11px;" aria-hidden="true"></i> Discovery<i class="ti ti-chevron-down cat-chev" aria-hidden="true"></i></div>
+  </div>
+  </div>
+<!-- DISCOVERY -->
+  <div class="cat-block">
+    <button type="button" class="cat-label" data-cat aria-expanded="false" aria-controls="cat-discovery" onclick="toggleSection(this)">
+      <span class="cat-label-left"><i class="ti ti-search" style="font-size:11px;" aria-hidden="true"></i> Discovery</span>
+      <span class="cat-toggle" aria-hidden="true"></span>
+    </button>
+    <div class="cat-group" id="cat-discovery" hidden>
 
   <div class="faq-item" data-q="how does ai search grants find funders web">
     <button class="faq-q" onclick="toggle(this)" aria-expanded="false">How does the AI search for grants?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">Fundaigo uses <b>groq/compound</b>, a model with built-in live web search, to scan the open web across 6 funder categories simultaneously. It runs up to 10 separate searches per call, then returns the strongest candidates matching your org profile. Every result then passes through 4 more pipeline layers before you see it.</div>
+    <div class="faq-a">Fundaigo uses <b>groq/compound</b>, a model with built-in live web search, to scan the open web across 6 funder categories simultaneously. It runs up to 10 internal searches per call to find a match, then returns a single strongest candidate matching your org profile. That one result then passes through the remaining 4 pipeline layers before you see it.</div>
   </div>
 
   <div class="faq-item" data-q="why filtered out dead links removed before see them">
@@ -174,20 +209,20 @@
     <div class="faq-a">Every result passes through Layer 2.5 which checks four things: language quality, demographic bias, factual accuracy, and nonprofit appropriateness. A <b>⚠ Guard flagged</b> badge means at least one check raised a concern. The result is shown with a warning rather than hidden, your staff reviews and decides. AI surfaces the flag; humans make the final call. Always.</div>
   </div>
 
-  <div class="faq-item" data-q="how many grants results per search find">
+  <div class="faq-item" data-q="how many grants results per search find one result per run">
     <button class="faq-q" onclick="toggle(this)" aria-expanded="false">How many opportunities does it find per search?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">Up to 8 candidates are discovered in Layer 1. After link verification, qualification scoring, and guard checks, typically <b>3-6 verified, qualified results</b> reach you. Accuracy over volume, a small set of checked leads with source links and fit scores is far more useful than a large unverified list.</div>
+    <div class="faq-a">By design, each run surfaces <b>one candidate opportunity</b> from Layer 1. That single result then passes through link verification, qualification scoring, and the guard check. At the end of the run, it's either dropped, if it fails verification or scores below the fit threshold, or it reaches you as a verified, scored lead flagged for your review and decision. One result per run keeps each review focused. Run the search again for the next candidate.</div>
   </div>
 
   <div class="faq-item" data-q="fit score 1 2 3 4 5 criteria what does it mean rubric">
-    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">What does the fit score 1–5 mean? How does the AI decide?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
+    <button class="faq-q" onclick="toggle(this)" aria-expanded="false">What does the fit score 1-5 mean? How does the AI decide?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
     <div class="faq-a">Every grant opportunity is scored 1-5 by the Qualification Agent against your org profile. The rubric is explicit, the AI applies the same criteria every run:<br><br>
-      <b>5 &middot; Perfect fit:</b> Mission directly matches the funder's stated focus. Location explicitly eligible. Amount within your stated grant range. No special requirements or flags.<br><br>
-      <b>4 &middot; Strong fit:</b> Mission closely aligns. Location eligible. Amount within range. Minor manageable flags such as a Letter of Intent required.<br><br>
-      <b>3 &middot; Moderate fit:</b> Mission partially aligns or is an adjacent focus area. Location eligible but not the funder's primary geography. Amount slightly outside your range.<br><br>
-      <b>2 &middot; Weak fit:</b> Mission alignment is a stretch. Location may need verification. Amount significantly outside range. Multiple flags to investigate.<br><br>
-      <b>1 &middot; Poor fit:</b> Mission mismatch, funder focus is unrelated to your work. Location ineligible. Amount far outside range. Major barriers such as invitation-only or school district sponsorship required.<br><br>
-      Opportunities scoring below 3 are filtered out and moved to the Future Monitoring section rather than shown as active results.
+      <b>5 · Perfect fit:</b> Mission directly matches the funder's stated focus. Location explicitly eligible. Amount within your stated grant range. No special requirements or flags.<br><br>
+      <b>4 · Strong fit:</b> Mission closely aligns. Location eligible. Amount within range. Minor manageable flags such as a Letter of Intent required.<br><br>
+      <b>3 · Moderate fit:</b> Mission partially aligns or is an adjacent focus area. Location eligible but not the funder's primary geography. Amount slightly outside your range.<br><br>
+      <b>2 · Weak fit:</b> Mission alignment is a stretch. Location may need verification. Amount significantly outside range. Multiple flags to investigate.<br><br>
+      <b>1 · Poor fit:</b> Mission mismatch, funder focus is unrelated to your work. Location ineligible. Amount far outside range. Major barriers such as invitation-only or school district sponsorship required.<br><br>
+      If the result scores below 3, it's dropped rather than shown to you as an active opportunity.
     </div>
   </div>
 
@@ -201,9 +236,15 @@
     <div class="faq-a">Six categories: <b>Community foundations</b> (local and regional, rolling deadlines), <b>Corporate giving</b> (company programs, often unpublicized), <b>Government grants</b> (federal, state, Title I-adjacent), <b>Faith-based funders</b> (churches, dioceses, religious foundations), <b>Family foundations</b> (private, rarely publicized), and <b>Healthcare foundations</b> (health equity, trauma-informed programs). The "Full scan" chip searches all six in one run.</div>
   </div>
 
-  <!-- TRACKER -->
-
-<div class="cat-label" data-cat onclick="toggleCategory(this)"><i class="ti ti-table" style="font-size:11px;" aria-hidden="true"></i> Tracker<i class="ti ti-chevron-down cat-chev" aria-hidden="true"></i></div>
+  </div>
+  </div>
+<!-- TRACKER -->
+  <div class="cat-block">
+    <button type="button" class="cat-label" data-cat aria-expanded="false" aria-controls="cat-tracker" onclick="toggleSection(this)">
+      <span class="cat-label-left"><i class="ti ti-table" style="font-size:11px;" aria-hidden="true"></i> Tracker</span>
+      <span class="cat-toggle" aria-hidden="true"></span>
+    </button>
+    <div class="cat-group" id="cat-tracker" hidden>
 
   <div class="faq-item" data-q="data saved browser close session persistent storage">
     <button class="faq-q" onclick="toggle(this)" aria-expanded="false">Will my tracker data be saved if I close the browser?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
@@ -217,7 +258,7 @@
 
   <div class="faq-item" data-q="deadline alert reminder 14 days urgent red">
     <button class="faq-q" onclick="toggle(this)" aria-expanded="false">How do deadline alerts work?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
-    <div class="faq-a">When you open the Tracker tab, the system checks every deadline in your pipeline. Any opportunity with a deadline within <b>14 days</b> triggers a red alert banner at the top of the tracker listing each urgent grant by name, amount, and exact date. Deadline badges on each row also change color: green (&gt;30 days), amber (14–30 days), red (&lt;14 days).</div>
+    <div class="faq-a">When you open the Tracker tab, the system checks every deadline in your pipeline. Any opportunity with a deadline within <b>14 days</b> triggers a red alert banner at the top of the tracker listing each urgent grant by name, amount, and exact date. Deadline badges on each row also change color: green (&gt;30 days), amber (14-30 days), red (&lt;14 days).</div>
   </div>
 
   <div class="faq-item" data-q="status options new pursuing submitted funded declined deferred">
@@ -225,9 +266,15 @@
     <div class="faq-a">Seven statuses: <b>New</b> (just added), <b>Pursuing</b> (actively working on application), <b>Submitted</b> (application sent), <b>Funded</b> (award received), <b>Declined</b> (rejected this cycle), <b>Not Eligible</b> (confirmed doesn't qualify), <b>Deferred</b> (skipping this cycle, revisit later). Funded and Submitted funders are automatically excluded from future discovery searches.</div>
   </div>
 
-  <!-- PROPOSALS -->
-
-<div class="cat-label" data-cat onclick="toggleCategory(this)"><i class="ti ti-file-text" style="font-size:11px;" aria-hidden="true"></i> Proposals<i class="ti ti-chevron-down cat-chev" aria-hidden="true"></i></div>
+  </div>
+  </div>
+<!-- PROPOSALS -->
+  <div class="cat-block">
+    <button type="button" class="cat-label" data-cat aria-expanded="false" aria-controls="cat-proposals" onclick="toggleSection(this)">
+      <span class="cat-label-left"><i class="ti ti-file-text" style="font-size:11px;" aria-hidden="true"></i> Proposals</span>
+      <span class="cat-toggle" aria-hidden="true"></span>
+    </button>
+    <div class="cat-group" id="cat-proposals" hidden>
 
   <div class="faq-item" data-q="notebooklm what is why documents knowledge base upload">
     <button class="faq-q" onclick="toggle(this)" aria-expanded="false">What is NotebookLM and why does it need my documents?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
@@ -249,17 +296,23 @@
     <div class="faq-a"><b>Required:</b> Mission/vision statement, program descriptions, student outcome data and impact statistics, IRS 501(c)(3) determination letter, past funders list.<br><br><b>Recommended:</b> Annual budget overview, student testimonials, geographic service areas (cities and zip codes).<br><br>Upload once. The Proposal tab in Fundaigo shows the full checklist with required vs optional labels.</div>
   </div>
 
-  <!-- TECHNICAL -->
-
-<div class="cat-label" data-cat onclick="toggleCategory(this)"><i class="ti ti-cpu" style="font-size:11px;" aria-hidden="true"></i> Technical<i class="ti ti-chevron-down cat-chev" aria-hidden="true"></i></div>
+  </div>
+  </div>
+<!-- TECHNICAL -->
+  <div class="cat-block">
+    <button type="button" class="cat-label" data-cat aria-expanded="false" aria-controls="cat-technical" onclick="toggleSection(this)">
+      <span class="cat-label-left"><i class="ti ti-cpu" style="font-size:11px;" aria-hidden="true"></i> Technical</span>
+      <span class="cat-toggle" aria-hidden="true"></span>
+    </button>
+    <div class="cat-group" id="cat-technical" hidden>
 
   <div class="faq-item" data-q="what ai models used groq llm layer pipeline">
     <button class="faq-q" onclick="toggle(this)" aria-expanded="false">What AI models does Fundaigo use?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
     <div class="faq-a">All free under one Groq API key:<br><br>
-      <b>Layer 1 + 1.5:</b> <code>groq/compound</code>, live web search and URL verification via <code>visit_website</code><br>
-      <b>Layer 2:</b> <code>openai/gpt-oss-120b</code>, qualification scoring 1-5 with <code>reasoning_effort: "low"</code><br>
-      <b>Layer 2.5:</b> <code>openai/gpt-oss-safeguard-20b</code>, bias, accuracy, and appropriateness guard<br>
-      <b>Layer 4:</b> Google NotebookLM, proposal drafting (no API key required)</div>
+      <b>Layer 1 + 1.5:</b> <code>groq/compound</code> · live web search and URL verification via <code>visit_website</code><br>
+      <b>Layer 2:</b> <code>openai/gpt-oss-120b</code> · qualification scoring 1-5 with <code>reasoning_effort: "low"</code><br>
+      <b>Layer 2.5:</b> <code>openai/gpt-oss-safeguard-20b</code> · bias, accuracy, and appropriateness guard<br>
+      <b>Layer 4:</b> Google NotebookLM · proposal drafting (no API key required)</div>
   </div>
 
   <div class="faq-item" data-q="data privacy stored org documents secure server">
@@ -282,9 +335,15 @@
     <div class="faq-a">All five tabs share JavaScript state, tracker rows, pipeline results, and org profile all live in the same memory scope. Splitting into separate HTML files would break cross-tab communication: the Proposal tab needs tracker data, the Discover tab writes to the same memory the Settings tab reads. One shell file, eight separate JS modules for business logic, is the right architecture for vanilla JS with shared state. A React or Vue app would restructure this with a component store.</div>
   </div>
 
-  <!-- FUTURE -->
-
-<div class="cat-label" data-cat onclick="toggleCategory(this)"><i class="ti ti-alert-triangle" style="font-size:11px;color:#92400E;" aria-hidden="true"></i> Known error messages<i class="ti ti-chevron-down cat-chev" aria-hidden="true"></i></div>
+  </div>
+  </div>
+<!-- KNOWN ERROR MESSAGES -->
+  <div class="cat-block">
+    <button type="button" class="cat-label" data-cat aria-expanded="false" aria-controls="cat-known-error-messages" onclick="toggleSection(this)">
+      <span class="cat-label-left"><i class="ti ti-alert-triangle" style="font-size:11px;color:#D97706;" aria-hidden="true"></i> Known error messages</span>
+      <span class="cat-toggle" aria-hidden="true"></span>
+    </button>
+    <div class="cat-group" id="cat-known-error-messages" hidden>
 
   <div class="faq-item" data-q="rate limit reached tpm 429 qualification groq tokens per minute">
     <button class="faq-q" onclick="toggle(this)" aria-expanded="false">
@@ -307,7 +366,7 @@
     <div class="faq-a">
       <b>What it means:</b> The guard agent (Layer 2.5) ran successfully but its response wasn't in the expected format, so the system couldn't automatically read the pass/flag decision. This is a <b>soft warning, not an error</b>. The opportunity still appears in results.<br><br>
       <b>What to do:</b> Review the opportunity yourself before adding it to the tracker. Check that the funder is real, the URL works, and the grant is open. This is exactly what staff should do regardless of what the guard says.<br><br>
-      <b>Why it shows:</b> By design, Fundaigo never silently passes something it can't fully assess. The warning is the system being honest: AI flags uncertainty, human decides.
+      <b>Why it shows:</b> By design, Fundaigo never silently passes something it can't fully assess. The warning is the system being honest, AI flags uncertainty, human decides.
     </div>
   </div>
 
@@ -320,8 +379,8 @@
       <b>What it means:</b> The combined size of the system prompt + org profile + exclude list exceeded Groq's request size limit.<br><br>
       <b>What to do:</b>
       <ul style="margin:6px 0 6px 16px;line-height:1.8;">
-        <li>Shorten your org mission in Settings (keep to 1–2 sentences)</li>
-        <li>Shorten your focus areas (3–5 keywords, not full sentences)</li>
+        <li>Shorten your org mission in Settings (keep to 1-2 sentences)</li>
+        <li>Shorten your focus areas (3-5 keywords, not full sentences)</li>
         <li>Go to Settings → <b>Reset all memory</b> to clear the exclude list</li>
       </ul>
       <b>Why it happens:</b> The exclude list grows with every run. The system caps it at 20 funders automatically, but a very long org profile can push the request over the limit.
@@ -352,7 +411,7 @@
       <i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i>
     </button>
     <div class="faq-a">
-      <b>What it means:</b> The pipeline ran but all discovered opportunities were filtered out before reaching you, either by link verification or by scoring below the minimum fit threshold.<br><br>
+      <b>What it means:</b> The pipeline ran but the discovered candidate was dropped before reaching you, either it failed link verification or it scored below the minimum fit threshold.<br><br>
       <b>What to do:</b>
       <ul style="margin:6px 0 6px 16px;line-height:1.8;">
         <li>Wait 2 minutes and run again, a different search result may come back</li>
@@ -370,7 +429,7 @@
       <i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i>
     </button>
     <div class="faq-a">
-      <b>What it means:</b> The request to Groq's API failed: either a network issue, a Groq service outage, or the request timed out.<br><br>
+      <b>What it means:</b> The request to Groq's API failed, either a network issue, a Groq service outage, or the request timed out.<br><br>
       <b>What to do:</b>
       <ul style="margin:6px 0 6px 16px;line-height:1.8;">
         <li>Check your internet connection</li>
@@ -381,15 +440,21 @@
     </div>
   </div>
 
-  <!-- GETTING STARTED -->
-
-<div class="cat-label" data-cat onclick="toggleCategory(this)"><i class="ti ti-road" style="font-size:11px;" aria-hidden="true"></i> Future<i class="ti ti-chevron-down cat-chev" aria-hidden="true"></i></div>
+  </div>
+  </div>
+<!-- FUTURE -->
+  <div class="cat-block">
+    <button type="button" class="cat-label" data-cat aria-expanded="false" aria-controls="cat-future" onclick="toggleSection(this)">
+      <span class="cat-label-left"><i class="ti ti-road" style="font-size:11px;" aria-hidden="true"></i> Future</span>
+      <span class="cat-toggle" aria-hidden="true"></span>
+    </button>
+    <div class="cat-group" id="cat-future" hidden>
 
   <div class="faq-item" data-q="what's coming next roadmap phase 2 3 features google sheets">
     <button class="faq-q" onclick="toggle(this)" aria-expanded="false">What's coming next?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
     <div class="faq-a">
       <b>Phase 2:</b> Google Sheets direct sync, Google Sign-In via OAuth, automated weekly email digest of new opportunities.<br><br>
-      <b>Phase 3:</b> Multi-org SaaS platform, each nonprofit gets isolated profile, tracker, and memory. Free for small nonprofits under $500K budget.<br><br>
+      <b>Phase 3:</b> Multi-org SaaS platform on Netlify + Supabase, each nonprofit gets isolated profile, tracker, and memory. Free for small nonprofits under $500K budget.<br><br>
       <b>Phase 4:</b> AI router, <code>config.js</code> intelligently selects the optimal free model per pipeline task based on available keys and org preference (speed vs accuracy).
     </div>
   </div>
@@ -398,14 +463,18 @@
     <button class="faq-q" onclick="toggle(this)" aria-expanded="false">Will it always be free?<i class="ti ti-chevron-down faq-chev" aria-hidden="true"></i></button>
     <div class="faq-a">Fundaigo runs on free tools by design. The underlying AI providers (Groq) currently offer free tiers sufficient for weekly nonprofit use, but LLM pricing is a market decision outside our control. If a provider changes pricing, the one-line model swap in <code>config.js</code> lets any org move to a different free provider immediately. The system is designed to never depend on a single vendor.</div>
   </div>
+
+</div>
+  </div>
 </div><!-- /faq-body -->
+</main>
 
 <!-- FOOTER -->
 <footer class="faq-footer">
-  <div class="footer-logo">
-    <svg width="26" height="26" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <defs><linearGradient id="flg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#8B3410"/><stop offset="100%" stop-color="#C1461A"/></linearGradient></defs>
-      <rect width="80" height="80" rx="18" fill="url(#flg)"/>
+  <a class="brand-lockup" href="index.html" aria-label="Fundaigo. AI-powered funding intelligence for nonprofits.">
+    <svg width="24" height="24" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs><linearGradient id="lg-foot" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#8B3410"/><stop offset="100%" stop-color="#C1461A"/></linearGradient></defs>
+      <rect width="80" height="80" rx="18" fill="url(#lg-foot)"/>
       <line x1="40" y1="33" x2="40" y2="18" stroke="#fff" stroke-width="1.8" stroke-linecap="round" opacity=".9"/>
       <line x1="40" y1="47" x2="40" y2="62" stroke="#fff" stroke-width="1.8" stroke-linecap="round" opacity=".9"/>
       <line x1="33" y1="40" x2="18" y2="40" stroke="#fff" stroke-width="1.8" stroke-linecap="round" opacity=".9"/>
@@ -418,22 +487,24 @@
       <circle cx="17" cy="40" r="3" fill="#fff" opacity=".9"/><circle cx="63" cy="40" r="3" fill="#fff" opacity=".9"/>
       <circle cx="22" cy="22" r="2.5" fill="#fff" opacity=".8"/><circle cx="58" cy="22" r="2.5" fill="#fff" opacity=".8"/>
       <circle cx="22" cy="58" r="2.5" fill="#fff" opacity=".8"/><circle cx="58" cy="58" r="2.5" fill="#fff" opacity=".8"/>
-      <circle cx="40" cy="40" r="6.5" fill="#fff"/><circle cx="40" cy="40" r="3" fill="url(#flg)"/>
+      <circle cx="40" cy="40" r="6.5" fill="#fff"/><circle cx="40" cy="40" r="3" fill="url(#lg-foot)"/>
       <circle cx="11" cy="12" r="1.8" fill="#fff" opacity=".4"/><circle cx="69" cy="11" r="1.8" fill="#fff" opacity=".4"/>
       <circle cx="11" cy="68" r="1.8" fill="#fff" opacity=".4"/><circle cx="69" cy="69" r="1.8" fill="#fff" opacity=".4"/>
     </svg>
-    <div><div class="footer-name">Fund<span>aigo</span></div><div style="display:flex;align-items:center;gap:2px;margin:1px 0 2px;"><div style="width:16px;height:1px;background:linear-gradient(to left,#C1461A,transparent);"></div><div style="width:3px;height:3px;border-radius:50%;background:#C1461A;flex-shrink:0;"></div><div style="width:16px;height:1px;background:linear-gradient(to right,#C1461A,transparent);"></div></div></div>
-  </div>
-  <div class="footer-links">
+    <div>
+      <div class="logo-word" style="font-size:19px;">Fund<span class="accent">aigo</span></div>
+      <div class="logo-divider"><i></i><b></b><i></i></div>
+    </div>
+  </a>
+  <nav class="footer-links" aria-label="Footer">
     <a href="index.html">Home</a>
     <a href="faq.html">Help</a>
     <a href="https://www.linkedin.com/in/madhudevi/" target="_blank" rel="noopener">LinkedIn</a>
     <a href="https://mdevi25.github.io/" target="_blank" rel="noopener">Portfolio</a>
-  </div>
-  <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px;">
-        <div style="font-size:10px;color:#8A93A1;">© 2026 Madhu Devi. All rights reserved.</div>
-  </div>
+  </nav>
+  <div class="footer-copy">&copy; 2026 Madhu Devi. All rights reserved.</div>
 </footer>
+
 
 <script>
 function toggle(btn) {
@@ -444,56 +515,45 @@ function toggle(btn) {
   btn.setAttribute('aria-expanded', String(!open));
 }
 
-// ── CATEGORY COLLAPSE (reduces scroll: only category headers show by default) ──
-function toggleCategory(catEl) {
-  const isOpen = catEl.classList.contains('cat-open');
-  catEl.classList.toggle('cat-open', !isOpen);
-  let next = catEl.nextElementSibling;
-  while (next && !next.classList.contains('cat-label')) {
-    if (next.classList.contains('faq-item')) next.style.display = isOpen ? 'none' : '';
-    next = next.nextElementSibling;
-  }
+function toggleSection(btn) {
+  const group = document.getElementById(btn.getAttribute('aria-controls'));
+  const open = btn.getAttribute('aria-expanded') === 'true';
+  btn.setAttribute('aria-expanded', String(!open));
+  if (group) group.hidden = open;
 }
-
-function collapseAllCategories() {
-  document.querySelectorAll('.cat-label').forEach(cat => cat.classList.remove('cat-open'));
-  document.querySelectorAll('.faq-item').forEach(item => { item.style.display = 'none'; });
-}
-
-collapseAllCategories();
 
 function filterFAQ(val) {
   const q = val.toLowerCase().trim();
-
-  if (!q) {
-    collapseAllCategories();
-    document.getElementById('no-results').style.display = 'none';
-    document.querySelectorAll('.cat-label').forEach(cat => { cat.style.display = ''; });
-    return;
-  }
-
-  const items = document.querySelectorAll('.faq-item');
-  const cats  = document.querySelectorAll('.cat-label');
+  const blocks = document.querySelectorAll('.cat-block');
   let any = false;
 
-  items.forEach(item => {
-    const text = (item.dataset.q || '') + ' ' +
-                 (item.querySelector('.faq-q')?.textContent  || '') + ' ' +
-                 (item.querySelector('.faq-a')?.textContent  || '');
-    const match = text.toLowerCase().includes(q);
-    item.style.display = match ? '' : 'none';
-    if (match) any = true;
-  });
+  blocks.forEach(block => {
+    const label = block.querySelector('.cat-label');
+    const group = block.querySelector('.cat-group');
+    const items = block.querySelectorAll('.faq-item');
+    let hasMatch = false;
 
-  cats.forEach(cat => {
-    cat.classList.add('cat-open');
-    let next = cat.nextElementSibling;
-    let has  = false;
-    while (next && !next.classList.contains('cat-label')) {
-      if (next.classList.contains('faq-item') && next.style.display !== 'none') has = true;
-      next = next.nextElementSibling;
+    items.forEach(item => {
+      const text = (item.dataset.q || '') + ' ' +
+                   (item.querySelector('.faq-q')?.textContent || '') + ' ' +
+                   (item.querySelector('.faq-a')?.textContent || '');
+      const match = !q || text.toLowerCase().includes(q);
+      item.style.display = match ? '' : 'none';
+      if (match) hasMatch = true;
+    });
+
+    block.style.display = hasMatch ? '' : 'none';
+    if (hasMatch) any = true;
+
+    // While actively searching, force matching sections open so results aren't hidden by a collapsed state.
+    // When the search is cleared, restore the default collapsed state.
+    if (q && hasMatch && group) {
+      group.hidden = false;
+      label.setAttribute('aria-expanded', 'true');
+    } else if (!q && group) {
+      group.hidden = true;
+      label.setAttribute('aria-expanded', 'false');
     }
-    cat.style.display = has ? '' : 'none';
   });
 
   document.getElementById('no-results').style.display = any ? 'none' : 'block';
