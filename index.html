@@ -275,6 +275,9 @@
 
     /* ── SETTINGS TAB ── */
     .settings-panel{background:#fff;border:0.5px solid var(--c-border);border-radius:12px;padding:16px;margin-bottom:12px;}
+    .panel-guest-collapsed{opacity:.55;}
+    .panel-guest-collapsed .shared-drive-details{display:none;}
+    .panel-guest-collapsed h2{color:var(--c-muted);}
     .settings-panel h2{font-size:14px;font-weight:500;margin-bottom:4px;}
     .settings-panel-desc{font-size:11.5px;color:var(--c-muted);margin-bottom:12px;line-height:1.5;}
     .api-key-row{display:flex;gap:8px;align-items:flex-end;}
@@ -1227,7 +1230,7 @@
     ══════════════════════════════════════════ -->
     <div id="tab-settings" class="tab-section" role="tabpanel">
 
-      <div class="settings-panel">
+      <div class="settings-panel" id="shared-drive-panel">
         <h2>Team data: org-owned Shared Drive</h2>
         <p class="settings-panel-desc">
           Grant data lives in a Google Sheet inside your org's Shared Drive,
@@ -1239,25 +1242,27 @@
 
         <div id="shared-drive-status" style="font-size:12px;margin-bottom:10px;"></div>
 
-        <div style="display:flex;gap:8px;align-items:flex-end;flex-wrap:wrap;margin-bottom:8px;">
-          <div style="flex:1;min-width:220px;">
-            <label class="field-label" for="shared-drive-id-input">Shared Drive ID</label>
-            <input type="text" id="shared-drive-id-input" class="api-key-input"
-              placeholder="e.g. 0AbCdEfGhIjKlMnOp..." autocomplete="off">
+        <div class="shared-drive-details">
+          <div style="display:flex;gap:8px;align-items:flex-end;flex-wrap:wrap;margin-bottom:8px;">
+            <div style="flex:1;min-width:220px;">
+              <label class="field-label" for="shared-drive-id-input">Shared Drive ID</label>
+              <input type="text" id="shared-drive-id-input" class="api-key-input"
+                placeholder="e.g. 0AbCdEfGhIjKlMnOp..." autocomplete="off">
+            </div>
+            <button class="save-key-btn" id="shared-drive-save-btn" onclick="saveSharedDriveId()">Save</button>
+            <button class="save-key-btn" onclick="openTeamSpreadsheetLink()">Open spreadsheet →</button>
           </div>
-          <button class="save-key-btn" id="shared-drive-save-btn" onclick="saveSharedDriveId()">Save</button>
-          <button class="save-key-btn" onclick="openTeamSpreadsheetLink()">Open spreadsheet →</button>
-        </div>
 
-        <div class="api-note">
-          <b>One-time setup (founder/admin does this once):</b>
-          1) In Google Drive, click <b>New → Shared Drive</b>, name it (e.g.
-          "Fundaigo Grant Data"), and add your grant team as members.
-          2) Open it. The URL looks like
-          <code style="background:var(--c-soft);color:var(--c-deep);padding:1px 5px;border-radius:4px;">drive.google.com/drive/folders/&lt;ID&gt;</code>
-          , copy the <code style="background:var(--c-soft);color:var(--c-deep);padding:1px 5px;border-radius:4px;">&lt;ID&gt;</code> part.
-          3) Paste it above and click Save. The team spreadsheet is created
-          inside it automatically the first time anyone loads data.
+          <div class="api-note">
+            <b>One-time setup (founder/admin does this once):</b>
+            1) In Google Drive, click <b>New → Shared Drive</b>, name it (e.g.
+            "Fundaigo Grant Data"), and add your grant team as members.
+            2) Open it. The URL looks like
+            <code style="background:var(--c-soft);color:var(--c-deep);padding:1px 5px;border-radius:4px;">drive.google.com/drive/folders/&lt;ID&gt;</code>
+            , copy the <code style="background:var(--c-soft);color:var(--c-deep);padding:1px 5px;border-radius:4px;">&lt;ID&gt;</code> part.
+            3) Paste it above and click Save. The team spreadsheet is created
+            inside it automatically the first time anyone loads data.
+          </div>
         </div>
       </div>
 
@@ -1394,7 +1399,18 @@ async function refreshSharedDriveStatus() {
   const el = document.getElementById("shared-drive-status");
   const input = document.getElementById("shared-drive-id-input");
   const saveBtn = document.getElementById("shared-drive-save-btn");
+  const panel = document.getElementById("shared-drive-panel");
   if (!el) return;
+
+  if (window._isGuest) {
+    if (panel) panel.classList.add("panel-guest-collapsed");
+    el.innerHTML = `<span style="color:var(--c-muted);">Not available as a guest, this syncs to your org's shared Sheet. <a href="#" onclick="showAuthGate();return false;" style="color:var(--c-purple);font-weight:600;">Sign in</a> to connect it.</span>`;
+    if (input) input.disabled = true;
+    if (saveBtn) saveBtn.disabled = true;
+    return;
+  }
+  if (panel) panel.classList.remove("panel-guest-collapsed");
+
   const user = getSignedInUser();
   const domain = (user?.email || "").split("@")[1] || "";
   const publicDomains = ["gmail.com","googlemail.com","yahoo.com","outlook.com",
@@ -1911,25 +1927,29 @@ async function updateSetupChecklist() {
   } catch (e) { hasProfile = false; }
 
   let hasSharedDrive = false;
-  try {
-    const status = typeof getOrgPointerStatus === 'function' ? await getOrgPointerStatus() : null;
-    hasSharedDrive = !!(status && status.sharedDriveId);
-  } catch (e) { hasSharedDrive = false; }
+  if (!window._isGuest) {
+    try {
+      const status = typeof getOrgPointerStatus === 'function' ? await getOrgPointerStatus() : null;
+      hasSharedDrive = !!(status && status.sharedDriveId);
+    } catch (e) { hasSharedDrive = false; }
+  }
 
   const steps = [
     { label: 'Add your Groq API key', done: hasKey },
     { label: 'Set up your organization profile', done: hasProfile },
-    { label: 'Connect your Shared Drive', done: hasSharedDrive },
   ];
+  if (!window._isGuest) {
+    steps.push({ label: 'Connect your Shared Drive', done: hasSharedDrive });
+  }
   const doneCount = steps.filter(s => s.done).length;
 
-  if (doneCount === 3) {
+  if (doneCount === steps.length) {
     banner.style.display = 'none';
     return;
   }
 
   banner.style.display = 'block';
-  countEl.textContent = `${doneCount} of 3`;
+  countEl.textContent = `${doneCount} of ${steps.length}`;
 
   let firstPending = true;
   itemsEl.innerHTML = steps.map(s => {
