@@ -1302,10 +1302,10 @@
         <p class="settings-panel-desc">This profile powers every discovery search. The more specific, the better the results.</p>
         <div class="profile-grid">
           <div class="profile-field"><label class="field-label" for="profile-name">Org name</label><input type="text" id="profile-name" class="profile-input" placeholder="Your organization name"></div>
-          <div class="profile-field"><label class="field-label" for="profile-type">Type</label><input type="text" id="profile-type" class="profile-input" placeholder="501(c)(3) nonprofit"></div>
+          <div class="profile-field"><label class="field-label" for="profile-type">Type</label><input type="text" id="profile-type" class="profile-input" value="501(c)(3) nonprofit" placeholder="501(c)(3) nonprofit"></div>
           <div class="profile-field full"><label class="field-label" for="profile-mission">Mission</label><textarea id="profile-mission" class="profile-textarea" placeholder="e.g. Free high-quality tutoring for underserved K-12 students"></textarea></div>
           <div class="profile-field"><label class="field-label" for="profile-locations">Locations</label><input type="text" id="profile-locations" class="profile-input" placeholder="e.g. Illinois, Texas"></div>
-          <div class="profile-field"><label class="field-label" for="profile-grant-range">Grant range sought</label><input type="text" id="profile-grant-range" class="profile-input" placeholder="e.g. $5,000 – $100,000"></div>
+          <div class="profile-field"><label class="field-label" for="profile-grant-range">Grant range sought</label><input type="text" id="profile-grant-range" class="profile-input" value="$5,000 – $100,000" placeholder="e.g. $5,000 – $100,000"></div>
           <div class="profile-field full"><label class="field-label" for="profile-focus">Focus areas</label><input type="text" id="profile-focus" class="profile-input" placeholder="e.g. Education equity, culturally responsive teaching, achievement gap"></div>
           <div class="profile-field full"><label class="field-label" for="profile-population">Population served</label><input type="text" id="profile-population" class="profile-input" placeholder="e.g. Low-income K-12 students from underrepresented communities"></div>
           <div class="profile-field full"><label class="field-label" for="profile-exclude">Exclude known funders (comma-separated)</label><input type="text" id="profile-exclude" class="profile-input" placeholder="e.g. Chicago Community Trust, Polk Bros Foundation"></div>
@@ -2020,10 +2020,10 @@ function checkApiKeyStatus() {
 async function loadProfileIntoSettings() {
   const p = await loadProfile();
   setValue('profile-name',        p.name       || '');
-  setValue('profile-type',        p.type       || '');
+  setValue('profile-type',        p.type       || '501(c)(3) nonprofit');
   setValue('profile-mission',     p.mission    || '');
   setValue('profile-locations',   p.locations  || '');
-  setValue('profile-grant-range', p.grantRange || '');
+  setValue('profile-grant-range', p.grantRange || '$5,000 \u2013 $100,000');
   setValue('profile-focus',       Array.isArray(p.focus) ? p.focus.join(', ') : (p.focus||''));
   setValue('profile-population',  p.population || '');
   setValue('profile-exclude',     (p.excludeFunders||[]).join(', '));
