@@ -147,8 +147,9 @@ const CATEGORY_SEARCH_MAP = {
  * tailored to ERE / BLF specifically.
  * @param {Object} profile        org profile from loadProfile()
  * @param {Object} [searchOverride] optional { category, customQuery }
- *   - category:    one of CATEGORY_SEARCH_MAP keys (from chip selection)
- *   - customQuery: free-text string typed by the user (280 char max)
+ *   - category:    one or more CATEGORY_SEARCH_MAP keys (from chip
+ *                  selection) — a single string, or an array for
+ *                  multiple selected chips
  *   When customQuery is present it takes priority over category.
  * @returns {string}
  */
@@ -176,17 +177,22 @@ function buildDiscoveryUserPrompt(profile, searchOverride) {
     : "No exclusions.";
 
   // ── Determine what to search for ──────────────────────────
-  // Priority: typed custom search > selected category chip > default "all"
+  // Priority: typed custom search > selected category chip(s) > default "all"
   const customQuery = searchOverride && searchOverride.customQuery
     ? searchOverride.customQuery.trim()
     : "";
-  const category = searchOverride && searchOverride.category
+  const categoryInput = searchOverride && searchOverride.category
     ? searchOverride.category
     : "all";
+  // Accept a single category string (legacy) or an array of them (multi-select chips)
+  const categories = Array.isArray(categoryInput) ? categoryInput : [categoryInput];
+  const categoryPhrase = categories.length
+    ? [...new Set(categories)].map(c => CATEGORY_SEARCH_MAP[c] || CATEGORY_SEARCH_MAP.all).join(", ")
+    : CATEGORY_SEARCH_MAP.all;
 
   const searchDirective = customQuery
     ? `Search specifically for: ${customQuery}`
-    : `Search across ${CATEGORY_SEARCH_MAP[category] || CATEGORY_SEARCH_MAP.all} in ${profile.locations}.`;
+    : `Search across ${categoryPhrase} in ${profile.locations}.`;
 
   return `Find 1 currently OPEN grant for this nonprofit:
 Name: ${profile.name}

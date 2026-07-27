@@ -148,9 +148,12 @@
     .search-panel h2{font-size:14px;font-weight:500;margin-bottom:3px;}
     .search-panel-desc{font-size:11.5px;color:var(--c-muted);margin-bottom:12px;line-height:1.5;}
     .chip-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;}
-    .chip{display:flex;align-items:center;gap:8px;padding:9px 11px;border:0.5px solid var(--c-border);border-radius:10px;cursor:pointer;background:var(--c-bg);transition:all .15s;text-align:left;}
+    .chip{display:flex;align-items:center;gap:8px;padding:9px 11px;border:0.5px solid var(--c-border);border-radius:10px;cursor:pointer;background:var(--c-bg);transition:all .15s;text-align:left;position:relative;}
+    .chip-check{display:none;position:absolute;top:8px;right:8px;width:18px;height:18px;border-radius:50%;background:var(--app-action);color:#fff;align-items:center;justify-content:center;font-size:11px;}
+    .chip.chip-selected .chip-check{display:flex;}
     .chip:hover,.chip.chip-selected{border-color:var(--c-purple);background:var(--c-tint);}
-    .chip.chip-full{grid-column:1/-1;border-color:var(--c-purple);background:var(--c-tint);}
+    .chip.chip-full{grid-column:1/-1;}
+    .chip.chip-full.chip-selected{border-color:var(--c-purple);background:var(--c-tint);}
     .chip-icon{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
     .chip-label{font-size:12px;font-weight:600;color:var(--c-text);display:block;line-height:1.2;}
     .chip-desc{font-size:10px;color:var(--c-muted);display:block;margin-top:2px;}
@@ -369,7 +372,7 @@
     .search-panel-summary-text{color:rgba(36,28,20,.68);}
     .chip{background:#F5F0E6;border-color:rgba(36,28,20,.1);}
     .chip:hover,.chip.chip-selected{border-color:var(--app-action);background:var(--app-action-tint);}
-    .chip.chip-full{border-color:var(--app-action) !important;background:var(--app-action-tint) !important;}
+    .chip.chip-full.chip-selected{border-color:var(--app-action) !important;background:var(--app-action-tint) !important;}
     .chip-label{color:#241C14;}
     .chip-desc{color:rgba(36,28,20,.71);}
     .custom-search-label{color:rgba(36,28,20,.68);}
@@ -903,34 +906,34 @@
           <button class="search-panel-change-btn" onclick="expandSearchPanel()">Change search</button>
         </div>
         <h2>What do you want to search for?</h2>
-        <p class="search-panel-desc">Select a category or type a custom search. Results are verified, scored, and guard-checked before you see them.</p>
+        <p class="search-panel-desc">Select one or more categories, or type a custom search. Results are verified, scored, and guard-checked before you see them.</p>
 
         <div class="chip-grid" id="chip-grid">
-          <div class="chip" data-category="community" onclick="selectChip(this)">
+          <div class="chip" data-category="community" onclick="selectChip(this)"><span class="chip-check"><i class="ti ti-check" style="font-size:11px;" aria-hidden="true"></i></span>
             <div class="chip-icon" style="background:linear-gradient(135deg,#3b82f6,#60a5fa);"><i class="ti ti-home" style="font-size:14px;color:transparent;" aria-hidden="true"></i></div>
             <div><span class="chip-label">Community foundations</span><span class="chip-desc">Local giving, rolling deadlines</span></div>
           </div>
-          <div class="chip" data-category="corporate" onclick="selectChip(this)">
+          <div class="chip" data-category="corporate" onclick="selectChip(this)"><span class="chip-check"><i class="ti ti-check" style="font-size:11px;" aria-hidden="true"></i></span>
             <div class="chip-icon" style="background:linear-gradient(135deg,#f59e0b,#fbbf24);"><i class="ti ti-building" style="font-size:14px;color:transparent;" aria-hidden="true"></i></div>
             <div><span class="chip-label">Corporate giving</span><span class="chip-desc">Unpublicized company programs</span></div>
           </div>
-          <div class="chip" data-category="government" onclick="selectChip(this)">
+          <div class="chip" data-category="government" onclick="selectChip(this)"><span class="chip-check"><i class="ti ti-check" style="font-size:11px;" aria-hidden="true"></i></span>
             <div class="chip-icon" style="background:linear-gradient(135deg,#10b981,#34d399);"><i class="ti ti-landmark" style="font-size:14px;color:transparent;" aria-hidden="true"></i></div>
             <div><span class="chip-label">Government grants</span><span class="chip-desc">Federal, state, Title I</span></div>
           </div>
-          <div class="chip" data-category="faith" onclick="selectChip(this)">
+          <div class="chip" data-category="faith" onclick="selectChip(this)"><span class="chip-check"><i class="ti ti-check" style="font-size:11px;" aria-hidden="true"></i></span>
             <div class="chip-icon" style="background:linear-gradient(135deg,#ef4444,#f87171);"><i class="ti ti-heart" style="font-size:14px;color:transparent;" aria-hidden="true"></i></div>
             <div><span class="chip-label">Faith-based funders</span><span class="chip-desc">Churches, dioceses, missions</span></div>
           </div>
-          <div class="chip" data-category="family" onclick="selectChip(this)">
+          <div class="chip" data-category="family" onclick="selectChip(this)"><span class="chip-check"><i class="ti ti-check" style="font-size:11px;" aria-hidden="true"></i></span>
             <div class="chip-icon" style="background:linear-gradient(135deg,#8b5cf6,#a78bfa);"><i class="ti ti-users" style="font-size:14px;color:transparent;" aria-hidden="true"></i></div>
             <div><span class="chip-label">Family foundations</span><span class="chip-desc">Private, rarely publicized</span></div>
           </div>
-          <div class="chip" data-category="healthcare" onclick="selectChip(this)">
+          <div class="chip" data-category="healthcare" onclick="selectChip(this)"><span class="chip-check"><i class="ti ti-check" style="font-size:11px;" aria-hidden="true"></i></span>
             <div class="chip-icon" style="background:linear-gradient(135deg,#f97316,#fb923c);"><i class="ti ti-heart-handshake" style="font-size:14px;color:transparent;" aria-hidden="true"></i></div>
             <div><span class="chip-label">Healthcare foundations</span><span class="chip-desc">Health equity, trauma-informed</span></div>
           </div>
-          <div class="chip chip-full" data-category="all" onclick="selectChip(this)">
+          <div class="chip chip-full" data-category="all" onclick="selectChip(this)"><span class="chip-check"><i class="ti ti-check" style="font-size:11px;" aria-hidden="true"></i></span>
             <div class="chip-icon" style="background:linear-gradient(135deg,#8B3410,#C1461A);"><i class="ti ti-planet" style="font-size:14px;color:transparent;" aria-hidden="true"></i></div>
             <div><span class="chip-label" style="color:#C1461A;">Grants for after school tutoring</span><span class="chip-desc">Illinois &amp; Texas · underserved K-12 students</span></div>
           </div>
@@ -1369,7 +1372,7 @@
 ============================================================ */
 
 // ── GLOBALS ───────────────────────────────────────────────────
-let _selectedCategory = null;
+let _selectedCategories = []; // array of data-category values — multi-select chips
 window._currentPipelineResults = [];
 let _toastTimer = null;
 
@@ -1576,7 +1579,7 @@ function resetSearch() {
   document.querySelectorAll('.chip').forEach(c => c.classList.remove('chip-selected'));
   const fullChip = document.querySelector('.chip[data-category="all"]');
   if (fullChip) fullChip.classList.add('chip-selected');
-  _selectedCategory = 'all';
+  _selectedCategories = ['all'];
   // Clear results
   document.getElementById('results-container').innerHTML = '';
   document.getElementById('future-container').innerHTML = '';
@@ -1605,8 +1608,10 @@ function collapseSearchPanel() {
   if (customQ) {
     label = customQ.length > 60 ? customQ.slice(0, 60) + '…' : customQ;
   } else {
-    const selectedChip = document.querySelector('.chip.chip-selected .chip-label');
-    label = selectedChip ? selectedChip.textContent : 'your search';
+    const selectedChips = Array.from(document.querySelectorAll('.chip.chip-selected .chip-label'));
+    label = selectedChips.length
+      ? selectedChips.map(c => c.textContent).join(' + ')
+      : 'your search';
   }
 
   if (summaryText) {
@@ -1625,21 +1630,36 @@ function expandSearchPanel() {
   if (panel) panel.classList.remove('search-panel-collapsed');
 }
 
-// ── CHIP SELECTION ─────────────────────────────────────────────────
+// ── CHIP SELECTION (multi-select; "all" is mutually exclusive with
+//    specific categories since it already covers every one of them) ──
 function clearChips() {
   document.querySelectorAll('.chip').forEach(c => c.classList.remove('chip-selected'));
-  _selectedCategory = null;
+  _selectedCategories = [];
 }
 
 function selectChip(el) {
+  const isAllChip = el.dataset.category === 'all';
   const wasSelected = el.classList.contains('chip-selected');
-  document.querySelectorAll('.chip').forEach(c => c.classList.remove('chip-selected'));
+
   if (wasSelected) {
-    _selectedCategory = null;
-  } else {
+    el.classList.remove('chip-selected');
+  } else if (isAllChip) {
+    // Selecting "all" replaces any specific category picks — combining
+    // them would be redundant, "all" already spans every category.
+    document.querySelectorAll('.chip').forEach(c => c.classList.remove('chip-selected'));
     el.classList.add('chip-selected');
-    _selectedCategory = el.dataset.category || 'all';
-    // Clear custom text — chip takes over
+  } else {
+    // Selecting a specific category deselects "all", if it was active.
+    const fullChip = document.querySelector('.chip[data-category="all"]');
+    if (fullChip) fullChip.classList.remove('chip-selected');
+    el.classList.add('chip-selected');
+  }
+
+  _selectedCategories = Array.from(document.querySelectorAll('.chip.chip-selected'))
+    .map(c => c.dataset.category);
+
+  if (_selectedCategories.length > 0) {
+    // Clear custom text — chip selection takes over
     const input = document.getElementById('custom-search-input');
     if (input) { input.value = ''; updateCharCount(input); }
   }
@@ -1683,7 +1703,7 @@ async function runPipeline() {
   try {
     const customQ = document.getElementById('custom-search-input').value.trim();
 
-    if (!_selectedCategory && !customQ) {
+    if (_selectedCategories.length === 0 && !customQ) {
       showToast('Select a category or describe what you need first.');
       btn.disabled = false;
       btn.innerHTML = '<i class="ti ti-player-play" style="font-size:13px;" aria-hidden="true"></i> Run search';
@@ -1694,7 +1714,7 @@ async function runPipeline() {
     onStatus('Layer 1: Searching the web for open grant opportunities…');
     // Pass custom text if typed, otherwise use the selected chip category.
     // buildDiscoveryUserPrompt() prioritises customQuery over category.
-    const searchOverride = { category: _selectedCategory || 'all', customQuery: customQ || '' };
+    const searchOverride = { category: _selectedCategories.length ? _selectedCategories : ['all'], customQuery: customQ || '' };
     // runDiscovery() returns { opportunities, futureMonitoring, meta }
     const discoveryResult = await runDiscovery(onStatus, searchOverride);
     const discovered = discoveryResult.opportunities || [];
@@ -1759,7 +1779,7 @@ async function runPipeline() {
         });
       }
     } catch(e) {}
-    try { if (typeof logRun === 'function') logRun({ category: _selectedCategory, found: discovered.length, verified: verified.length }); } catch(e) {}
+    try { if (typeof logRun === 'function') logRun({ category: _selectedCategories, found: discovered.length, verified: verified.length }); } catch(e) {}
     showToast(`Search complete. ${guardResult.checked.length} opportunities found.`);
 
   } catch (err) {
