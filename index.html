@@ -326,6 +326,7 @@
     .dl-urgent{background:#FEE2E2;color:#991B1B;font-size:9px;font-weight:700;padding:1px 7px;border-radius:20px;}
     .dl-soon{background:#FEF3C7;color:#92400E;font-size:9px;font-weight:700;padding:1px 7px;border-radius:20px;}
     .dl-ok{background:#DCFCE7;color:#166534;font-size:9px;font-weight:700;padding:1px 7px;border-radius:20px;}
+    .dl-pastdue{background:#EFEBE3;color:#5F5E5A;font-size:9px;font-weight:700;padding:1px 7px;border-radius:20px;}
 
     /* ── TOAST ── */
     #toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--c-text);color:#fff;padding:10px 20px;border-radius:8px;font-size:12.5px;font-weight:500;box-shadow:0 4px 20px rgba(0,0,0,.2);z-index:9999;transition:transform .3s ease;pointer-events:none;}
@@ -417,6 +418,7 @@
     .pill-verified{background:var(--app-action-soft);color:var(--app-action);}
     .dl-urgent{background:rgba(248,113,113,.18);color:#f87171;}
     .dl-ok{background:rgba(93,227,150,.15);color:#5de396;}
+    .dl-pastdue{background:rgba(148,146,138,.18);color:#a8a69c;}
     .future-header:hover{background:rgba(91,42,85,.05);}
     .future-label{color:rgba(36,28,20,.71);}
     .future-count{background:var(--app-action-soft);color:var(--app-action);}
@@ -1317,6 +1319,11 @@
 
   </main>
 
+  <!-- AI DISCLAIMER -->
+  <div style="max-width:1040px;margin:0 auto;padding:10px 32px;text-align:center;font-size:11px;color:#8A93A1;line-height:1.5;border-top:1px solid rgba(36,28,20,.08);">
+    Fundaigo uses AI to search, score, and summarize funding opportunities. Results can be incomplete or inaccurate, always confirm details directly with the funder before applying.
+  </div>
+
   <!-- APP FOOTER -->
   <footer class="app-footer">
     <a class="app-footer-logo" href="index.html">
@@ -1838,7 +1845,10 @@ function renderOpportunityCards(opportunities) {
         </div>
         <div class="opp-card-body">
           ${opp.whyQualifies ? `<div class="opp-why">${esc(opp.whyQualifies)}</div>` : ''}
-          ${isNeedsCheck ? `<div class="opp-guard-flag">⚠ URL not verified. The link below may redirect or return a 404. Visit the funder's homepage directly and search for this grant before applying.</div>` : ''}
+          ${opp.deadlinePassed && isNeedsCheck ? `<div class="opp-guard-flag">⚠ Not independently verified: this deadline was reported as already passed, and the link hasn't been checked either. Confirm both directly on the funder's site, funders often reopen similar cycles yearly, so it may still be worth tracking for next time.</div>`
+          : opp.deadlinePassed ? `<div class="opp-guard-flag">⚠ This deadline was reported as already passed (not independently confirmed). Funders often reopen similar cycles yearly, add it to your tracker now so it's on your radar for next time.</div>`
+          : isNeedsCheck ? `<div class="opp-guard-flag">⚠ Not independently verified. The link below may redirect or return a 404, and the reported deadline hasn't been double-checked either. Visit the funder's homepage directly and search for this grant before applying.</div>`
+          : ''}
           ${isFlagged && opp.guardNote ? `<div class="opp-guard-flag">⚠ ${esc(opp.guardNote)}</div>` : ''}
           <div class="opp-foot">
             ${opp.finalUrl||opp.url

@@ -84,8 +84,9 @@ const CONFIG = {
     maxTokens:   2000,
     temperature: 0.2,
     maxResults:  1,
-                        // set higher than filtered target to allow
-                        // for link verification dropping some results
+                        // hard cap, enforced in discovery.js by slicing
+                        // the model's response — "one result per run" is
+                        // a real guarantee, not just a prompt request.
   },
 
   // ============================================================

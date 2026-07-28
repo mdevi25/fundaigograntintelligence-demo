@@ -51,14 +51,19 @@ function buildDiscoverySystemPrompt() {
 Your job is to search the live web for currently OPEN funding opportunities
 that match the organization profile you are given.
 
+PRIORITY: Strongly prefer grants with the most time remaining before their
+deadline. Do not return a grant whose deadline has already passed unless,
+after searching thoroughly, no better alternative exists, this should be
+rare, not a fallback you reach for early.
+
 SEARCH STRATEGY:
 Search across ALL of these funder categories in separate searches:
-1. Community foundations (Illinois and Texas)
+1. Community foundations (local, often rolling deadlines)
 2. Corporate giving programs (unpublicized funders)
-3. Government grants (federal, state, Title I)
-4. Faith-based funders (churches, dioceses)
+3. Government grants (federal, state, and local)
+4. Faith-based funders (churches, dioceses, religious organizations)
 5. Family foundations (private, rarely publicized)
-6. University foundations (Illinois and Texas)
+6. University foundations (regional and national)
 7. Healthcare foundations (health equity, social determinants)
 
 STRICT VALIDATION RULES — only include an opportunity if ALL are true:
@@ -230,7 +235,7 @@ Return exactly 1 open grant with a real URL. Today: ${today()}.`;
  * @returns {Promise<Object>}  { opportunities: [], futureMonitoring: [], meta: {} }
  * @throws {Error}             on API failure or parse failure
  */
-async function runDiscovery(onStatus, searchOverride) {
+async function runDiscoveryOnce(onStatus, searchOverride) {
   // ── Guard: check API key is set ──────────────────────────
   if (!hasApiKey("groq")) {
     throw new Error(
@@ -238,7 +243,7 @@ async function runDiscovery(onStatus, searchOverride) {
     );
   }
 
-  onStatus("Layer 1 — Searching the live web for open grant opportunities…");
+  onStatus("Layer 1 · Searching the live web for open grant opportunities…");
 
   // ── Load profile ─────────────────────────────────────────
   const profile = await loadProfile();
@@ -285,7 +290,7 @@ async function runDiscovery(onStatus, searchOverride) {
     throw new Error(`Discovery search failed: ${err.message}`);
   }
 
-  onStatus("Layer 1 — Parsing search results…");
+  onStatus("Layer 1 · Parsing search results…");
 
   // ── Extract text content ──────────────────────────────────
   const responseText = extractText(rawData);
@@ -318,7 +323,13 @@ async function runDiscovery(onStatus, searchOverride) {
   }
 
   // ── Validate and normalise results ────────────────────────
-  const opportunities = normaliseOpportunities(parsed.opportunities || []);
+  // The model is instructed to return exactly 1 grant, but LLMs don't
+  // always obey instruction counts precisely. Truncate here so "one
+  // result per run" is a real guarantee enforced in code, not just a
+  // hope based on the prompt, this is what the rest of the app (and
+  // the FAQ) documents as the actual behavior.
+  const maxResults = (CONFIG.discovery && CONFIG.discovery.maxResults) || 1;
+  const opportunities = normaliseOpportunities(parsed.opportunities || []).slice(0, maxResults);
   const futureMonitoring = normaliseFutureMonitoring(parsed.futureMonitoring || []);
 
   // ── Attach executed tool metadata for transparency ─────────
@@ -327,9 +338,8 @@ async function runDiscovery(onStatus, searchOverride) {
   const executedTools = rawData?.choices?.[0]?.message?.executed_tools || [];
 
   onStatus(
-    `Layer 1 — Found ${opportunities.length} candidate${opportunities.length !== 1 ? "s" : ""}` +
-    ` from ${executedTools.length} web search${executedTools.length !== 1 ? "es" : ""}.` +
-    ` Verifying links…`
+    `Layer 1 \u00b7 Found ${opportunities.length} candidate${opportunities.length !== 1 ? "s" : ""}` +
+    ` from ${executedTools.length} web search${executedTools.length !== 1 ? "es" : ""}. Passing to link check\u2026`
   );
 
   return {
@@ -342,6 +352,31 @@ async function runDiscovery(onStatus, searchOverride) {
       rawResultCount: opportunities.length,
     },
   };
+}
+
+/**
+ * Public entry point. Runs discovery once, and if the single candidate
+ * that comes back already has a passed deadline, retries exactly once
+ * before returning. This never drops or hides an expired result, it
+ * just gives the model one extra chance to find something with time
+ * left, absorbing one manual re-click a user would otherwise have to
+ * do themselves. Whatever comes back after the retry is returned as-is,
+ * expired or not, no gate, no third attempt.
+ * @param {Function} onStatus
+ * @param {Object|string} searchOverride
+ */
+async function runDiscovery(onStatus, searchOverride) {
+  const first = await runDiscoveryOnce(onStatus, searchOverride);
+
+  const firstIsExpired = first.opportunities.length > 0
+    && first.opportunities.every((o) => o.deadlinePassed);
+
+  if (!firstIsExpired) return first;
+
+  onStatus("Layer 1 \u00b7 That result's deadline had already passed, trying once more for something with time left\u2026");
+
+  const retry = await runDiscoveryOnce(onStatus, searchOverride);
+  return retry;
 }
 
 
@@ -384,6 +419,13 @@ function normaliseOpportunities(raw) {
       amount:        (o.amount        || "TBD").trim(),
       appStatus:     normaliseAppStatus(o.appStatus),
       deadline:      normaliseDeadline(o.deadline),
+      // True when the deadline is a real date already in the past.
+      // Kept visible rather than dropped — the org may still want to
+      // add it to the tracker for next year's cycle. daysUntil()
+      // returns null for Rolling or unparseable dates, those are
+      // left unflagged since we can't confirm they're expired either.
+      deadlinePassed: (typeof daysUntil === "function" ? daysUntil(o.deadline) : null) !== null
+                       && daysUntil(o.deadline) < 0,
       deadlineNote:  (o.deadlineNote  || "").trim(),
       geoEligibility:(o.geoEligibility|| "").trim(),
       orgEligibility:(o.orgEligibility|| "").trim(),
@@ -538,7 +580,7 @@ async function groqCallCompound(endpoint, body, onStatus) {
       // Auto-retry once after 65 seconds
       if (!body._retried) {
         if (typeof onStatus === "function") {
-          onStatus("Rate limit hit — auto-retrying in 65 seconds…");
+          onStatus("Rate limit hit, auto-retrying in 65 seconds…");
         }
         await new Promise(r => setTimeout(r, 65000));
         body._retried = true;
@@ -561,275 +603,3 @@ async function groqCallCompound(endpoint, body, onStatus) {
   return resp.json();
 }
 
-
-// ============================================================
-// UI HELPERS
-// Functions called directly by index.html to render discovery
-// state and results during the run.
-// ============================================================
-
-/**
- * Render the pipeline progress bar in the UI.
- * Called once before the run starts.
- * Steps: Discovery → Link Verify → Qualify → Guard → Tracker
- * @param {string} activeStep  which step is currently running
- */
-function renderPipelineBar(activeStep) {
-  const el = document.getElementById("pipeline-bar");
-  if (!el) return;
-
-  const steps = [
-    { id: "discover",  label: "1 — Discover"      },
-    { id: "verify",    label: "1.5 — Verify Links" },
-    { id: "qualify",   label: "2 — Qualify"        },
-    { id: "guard",     label: "2.5 — Guard"        },
-    { id: "tracker",   label: "3 — Tracker"        },
-  ];
-
-  el.innerHTML = steps
-    .map((s, i) => {
-      // Determine step state
-      const stepOrder = steps.findIndex((x) => x.id === activeStep);
-      const thisOrder = i;
-      let stateClass = "step-waiting";
-      if (thisOrder < stepOrder)  stateClass = "step-done";
-      if (thisOrder === stepOrder) stateClass = "step-running";
-
-      const arrow = i < steps.length - 1
-        ? `<span class="pipeline-arrow">→</span>`
-        : "";
-
-      return `
-        <div class="pipeline-step ${stateClass}" id="step-${s.id}">
-          ${s.label}
-        </div>
-        ${arrow}`;
-    })
-    .join("");
-}
-
-/**
- * Update a single pipeline step's visual state.
- * Called as each layer completes.
- * @param {string} stepId     e.g. "discover"
- * @param {string} stateClass "step-running" | "step-done" | "step-error"
- */
-function updatePipelineStep(stepId, stateClass) {
-  const el = document.getElementById(`step-${stepId}`);
-  if (!el) return;
-  el.className = `pipeline-step ${stateClass}`;
-}
-
-/**
- * Render the discovery summary strip (stat cards).
- * Called after link verification completes so counts are final.
- * @param {Object} meta  summary data object
- */
-function renderSummaryStrip(meta) {
-  const el = document.getElementById("summary-strip");
-  if (!el) return;
-
-  const stats = [
-    { n: meta.rawFound,     l: "Found"         },
-    { n: meta.verified,     l: "Verified"       },
-    { n: meta.dropped,      l: "Filtered out"   },
-    { n: meta.proceeding,   l: "To qualify"     },
-    { n: meta.webSearches,  l: "Web searches"   },
-    { n: meta.earliestDeadline || "—", l: "Earliest deadline", mono: true },
-  ];
-
-  el.innerHTML = stats
-    .map(
-      (s) => `
-      <div class="stat-card">
-        <div class="stat-number ${s.mono ? "mono" : ""}">${esc(String(s.n))}</div>
-        <div class="stat-label">${esc(s.l)}</div>
-      </div>`
-    )
-    .join("");
-
-  el.style.display = "flex";
-}
-
-/**
- * Render a single opportunity card in the results panel.
- * Called for each opportunity that passes all layers.
- * @param {Object} opp  fully-processed opportunity object
- * @returns {string}    HTML string for the card
- */
-function renderOpportunityCard(opp) {
-  // App status pill class
-  const pillClass = {
-    "OPEN":               "pill-open",
-    "OPEN – Rolling":     "pill-rolling",
-    "OPENS SOON":         "pill-soon",
-    "NEEDS VERIFICATION": "pill-verify",
-  }[opp.appStatus] || "pill-verify";
-
-  // Fit score dots
-  const fitDots = [1, 2, 3, 4, 5]
-    .map(
-      (n) =>
-        `<span class="fit-dot ${n <= (opp.fitScore || 0) ? "filled" : ""}"></span>`
-    )
-    .join("");
-
-  // Deadline badge
-  const dlClass = deadlineClass(opp.deadline);
-  const dlText  = opp.deadline === "Rolling"
-    ? "Rolling"
-    : opp.deadline === "Needs Verification"
-    ? "Check deadline"
-    : daysLabel(opp.deadline);
-
-  // Guard flag block — only shown if flagged
-  const guardBlock = opp.guardStatus === "FLAG"
-    ? `<div class="opp-guard-flag">
-         ⚠️ <b>Staff review needed:</b> ${esc(opp.guardNote || "")}
-         ${opp.guardIssues && opp.guardIssues.length
-           ? `<ul style="margin:4px 0 0 16px;">${opp.guardIssues.map((i) => `<li>${esc(i)}</li>`).join("")}</ul>`
-           : ""}
-       </div>`
-    : "";
-
-  // Flags / risk block
-  const riskText = [
-    ...(opp.flags || []),
-    ...(opp.risks ? [opp.risks] : []),
-  ].filter(Boolean).join(" · ");
-
-  const riskBlock = riskText
-    ? `<div class="opp-risk">⚑ ${esc(riskText)}</div>`
-    : "";
-
-  // Link status badge
-  const linkBadgeClass = opp.linkStatus === "VERIFIED" ? "verified" : "redirect";
-  const linkBadge = opp.linkStatus
-    ? `<span class="link-status ${linkBadgeClass}">${esc(CONFIG.linkStatusOptions[opp.linkStatus] || opp.linkStatus)}</span>`
-    : "";
-
-  // Card flagged class
-  const cardFlaggedClass = opp.guardStatus === "FLAG" ? "guard-flagged" : "";
-
-  return `
-    <div class="opp-card ${cardFlaggedClass}" id="opp-${esc(opp.id)}">
-
-      <div class="opp-card-top">
-        <div>
-          <p class="opp-funder">${esc(opp.funder)}</p>
-          <div class="opp-program">${esc(opp.program)}</div>
-        </div>
-        <div style="display:flex;gap:6px;align-items:flex-start;flex-wrap:wrap;">
-          <span class="pill ${pillClass}">${esc(opp.appStatus)}</span>
-          ${opp.guardStatus === "PASS"
-            ? `<span class="pill pill-pass">✅ Guard pass</span>`
-            : opp.guardStatus === "FLAG"
-            ? `<span class="pill pill-flag">⚠️ Review</span>`
-            : ""}
-        </div>
-      </div>
-
-      <div class="opp-meta">
-        <div class="opp-meta-item">
-          <span class="opp-meta-key">Amount</span>
-          <span class="opp-meta-val">${esc(opp.amount)}</span>
-        </div>
-        <div class="opp-meta-item">
-          <span class="opp-meta-key">Deadline</span>
-          <span class="opp-meta-val">
-            <span class="dl-badge ${dlClass}">${esc(dlText)}</span>
-            ${opp.deadlineNote ? `<span class="muted" style="font-size:11px;margin-left:4px;">${esc(opp.deadlineNote)}</span>` : ""}
-          </span>
-        </div>
-        <div class="opp-meta-item">
-          <span class="opp-meta-key">Fit score</span>
-          <span class="opp-meta-val">
-            <span class="fit-dots score-${opp.fitScore || 0}">${fitDots}</span>
-            <span class="mono" style="margin-left:6px;font-size:11px;color:var(--muted);">${esc(CONFIG.fitLabels[opp.fitScore] || "—")}</span>
-          </span>
-        </div>
-        <div class="opp-meta-item">
-          <span class="opp-meta-key">Confidence</span>
-          <span class="opp-meta-val">${esc(opp.confidence || "—")}</span>
-        </div>
-        <div class="opp-meta-item">
-          <span class="opp-meta-key">Geography</span>
-          <span class="opp-meta-val">${esc(opp.geoEligibility || "—")}</span>
-        </div>
-        <div class="opp-meta-item">
-          <span class="opp-meta-key">Link</span>
-          <span class="opp-meta-val">${linkBadge}</span>
-        </div>
-      </div>
-
-      ${opp.whyQualifies
-        ? `<div class="opp-why"><b>Why it qualifies:</b> ${esc(opp.whyQualifies)}</div>`
-        : ""}
-
-      ${guardBlock}
-      ${riskBlock}
-
-      <div class="opp-actions">
-        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-          <a href="${esc(opp.finalUrl || opp.url)}" target="_blank" rel="noopener noreferrer"
-             class="btn btn-teal btn-sm">
-            Open application page →
-          </a>
-          ${opp.pageTitle
-            ? `<span class="opp-verified-info">📄 ${esc(opp.pageTitle)}</span>`
-            : ""}
-        </div>
-        <div style="display:flex;align-items:center;gap:8px;">
-          <span class="opp-verified-info">
-            Verified ${esc(opp.dateVerified || today())}
-            · <b>${esc(opp.recommendedAction || "—")}</b>
-          </span>
-          <button
-            class="btn btn-gold btn-sm"
-            onclick="addOpportunityToTracker('${esc(opp.id)}')"
-            title="Add this opportunity to the Grant Tracker">
-            + Add to Tracker
-          </button>
-        </div>
-      </div>
-
-    </div>`;
-}
-
-/**
- * Render the future monitoring section below the results.
- * @param {Array} futureMonitoring  array of future monitoring objects
- * @returns {string}  HTML string or empty string if none
- */
-function renderFutureMonitoring(futureMonitoring) {
-  if (!futureMonitoring || futureMonitoring.length === 0) return "";
-
-  const items = futureMonitoring
-    .map(
-      (f) => `
-      <div class="future-item">
-        <div>
-          <div class="future-item-name">${esc(f.funder)}</div>
-          <div class="future-item-reason">${esc(f.reason)}</div>
-        </div>
-        <div class="future-item-cycle">
-          ${esc(f.cycleNote || "Cycle timing unknown")}
-          ${f.url
-            ? `<br><a href="${esc(f.url)}" target="_blank" rel="noopener">Visit site</a>`
-            : ""}
-        </div>
-      </div>`
-    )
-    .join("");
-
-  return `
-    <div class="panel" style="margin-top:var(--gap-md);">
-      <h2>Future monitoring candidates</h2>
-      <p class="panel-desc">
-        Strong long-term fits whose current cycle is closed.
-        Not recommended for immediate action — watch for reopening.
-        These are NOT added to the tracker automatically.
-      </p>
-      ${items}
-    </div>`;
-}
