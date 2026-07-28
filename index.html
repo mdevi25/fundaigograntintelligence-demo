@@ -1302,6 +1302,18 @@
       <div class="settings-panel">
         <h2>Organization profile</h2>
         <p class="settings-panel-desc">This profile powers every discovery search. The more specific, the better the results.</p>
+
+        <div style="display:flex;align-items:flex-end;gap:10px;margin-bottom:14px;flex-wrap:wrap;">
+          <div style="flex:1;min-width:220px;">
+            <label class="field-label" for="profile-template-select">Load a template (optional)</label>
+            <select id="profile-template-select" class="field-select" onchange="loadProfileTemplate(this.value); this.value='';">
+              <option value="">— Select a template —</option>
+              <option value="ere">Educate. Radiate. Elevate. (ERE)</option>
+            </select>
+          </div>
+          <div style="font-size:10.5px;color:var(--c-muted);max-width:320px;padding-bottom:9px;">Fills the fields below with the exact wording, review and edit before saving.</div>
+        </div>
+
         <div class="profile-grid">
           <div class="profile-field"><label class="field-label" for="profile-name">Org name</label><input type="text" id="profile-name" class="profile-input" placeholder="Your organization name"></div>
           <div class="profile-field"><label class="field-label" for="profile-type">Type</label><input type="text" id="profile-type" class="profile-input" value="501(c)(3) nonprofit" placeholder="501(c)(3) nonprofit"></div>
@@ -2027,6 +2039,40 @@ function checkApiKeyStatus() {
     }
   } catch(e) { console.warn('apiKey:', e.message); }
 }
+// ── PROFILE TEMPLATES ────────────────────────────────────────────
+// Convenience presets for the profile form — NOT used anywhere in
+// discovery or qualification logic. Those stay fully org-agnostic
+// and only ever read whatever is actually saved in the profile.
+// This is purely a data-entry shortcut: picking a template just
+// fills the form fields below with known-good wording, the org
+// still reviews and clicks Save themselves, nothing is auto-saved.
+const PROFILE_TEMPLATES = {
+  ere: {
+    name:       "Educate. Radiate. Elevate. (ERE)",
+    type:       "501(c)(3) nonprofit",
+    mission:    "Provide free, high-quality tutoring in Math and Reading for underserved students in grades 7-12, helping them achieve academic success and long-term educational equity.",
+    locations:  "Illinois, Texas",
+    grantRange: "$5,000 \u2013 $100,000",
+    focus:      "Tutoring in Math and Reading, academic achievement, achievement gap reduction",
+    population: "Low-income and underserved students in grades 7-12",
+  },
+};
+
+function loadProfileTemplate(key) {
+  const t = PROFILE_TEMPLATES[key];
+  if (!t) return;
+  setValue('profile-name',        t.name       || '');
+  setValue('profile-type',        t.type       || '');
+  setValue('profile-mission',     t.mission    || '');
+  setValue('profile-locations',   t.locations  || '');
+  setValue('profile-grant-range', t.grantRange || '');
+  setValue('profile-focus',       t.focus      || '');
+  setValue('profile-population',  t.population || '');
+  if (typeof showToast === 'function') {
+    showToast(`Loaded the ${t.name} template. Review it, then click Save to keep it.`);
+  }
+}
+
 async function loadProfileIntoSettings() {
   const p = await loadProfile();
   setValue('profile-name',        p.name       || '');
