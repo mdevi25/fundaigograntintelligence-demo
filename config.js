@@ -89,7 +89,7 @@ const CONFIG = {
   // Leave blank to hide the Feedback link entirely.
   // ============================================================
   feedback: {
-    webhookUrl: "", // <-- paste your Apps Script Web App URL here
+    webhookUrl: "https://script.google.com/macros/s/AKfycbySp2FQcdKogW0xJOg1_8w3QMlagOanJb9Kh771HMW-wdMVB7Xfd58daRoVmzM2rIzauw/exec", // <-- paste your Apps Script Web App URL here
   },
 
   discovery: {
