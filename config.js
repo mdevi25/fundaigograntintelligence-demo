@@ -78,6 +78,21 @@ const CONFIG = {
   //   "groq/compound-mini"  → faster, single search, lower latency
   //                           use if discovery is timing out
   // ============================================================
+  // ============================================================
+  // FEEDBACK
+  // Where in-app feedback submissions get sent. This is a single
+  // app-wide destination (the developer's own inbox), not an
+  // org-specific setting like the Shared Drive ID, so it lives
+  // here in config.js rather than in each org's own profile.
+  //
+  // Paste the Web App URL from your deployed Apps Script (see
+  // fundaigo-feedback-apps-script.gs for the one-time setup).
+  // Leave blank to hide the Feedback link entirely.
+  // ============================================================
+  feedback: {
+    webhookUrl: "https://script.google.com/macros/s/AKfycbySp2FQcdKogW0xJOg1_8w3QMlagOanJb9Kh771HMW-wdMVB7Xfd58daRoVmzM2rIzauw/exec", // <-- paste your Apps Script Web App URL here
+  },
+
   discovery: {
     endpoint:    "https://api.groq.com/openai/v1/chat/completions",
     model:       "compound-beta-mini",

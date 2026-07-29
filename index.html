@@ -708,6 +708,47 @@
   </div>
 </div>
 
+<!-- FEEDBACK MODAL -->
+<div id="feedback-modal" onclick="if(event.target===this)hideFeedbackModal();" style="display:none;position:fixed;inset:0;z-index:9999;
+     background:rgba(17,17,17,.55);backdrop-filter:blur(3px);
+     align-items:center;justify-content:center;padding:16px;">
+  <div style="background:#FFFFFF;border-radius:16px;max-width:420px;width:100%;
+       padding:28px 26px;box-shadow:0 20px 60px rgba(36,28,20,.25);border:1px solid rgba(36,28,20,.1);position:relative;">
+    <button onclick="hideFeedbackModal()" aria-label="Close"
+      style="position:absolute;top:10px;right:10px;background:rgba(36,28,20,.08);border:none;color:#241C14;
+             width:30px;height:30px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;line-height:1;">
+      &times;
+    </button>
+    <div style="font-weight:700;font-size:18px;color:#241C14;margin-bottom:4px;">Send feedback</div>
+    <p style="font-size:12.5px;color:rgba(36,28,20,.7);line-height:1.55;margin:0 0 18px;">
+      Found a bug, have an idea, or something's confusing? This goes straight to the person building Fundaigo.
+    </p>
+
+    <div id="feedback-form">
+      <label class="field-label" for="feedback-category" style="display:block;margin-bottom:4px;">Type</label>
+      <select id="feedback-category" class="field-select" style="width:100%;margin-bottom:14px;" onchange="updateFeedbackPlaceholder()">
+        <option value="Bug">Something's broken</option>
+        <option value="Idea">I have an idea</option>
+        <option value="General" selected>General feedback</option>
+      </select>
+
+      <label class="field-label" for="feedback-message" style="display:block;margin-bottom:4px;">What's on your mind?</label>
+      <textarea id="feedback-message" class="profile-textarea" style="width:100%;min-height:90px;margin-bottom:14px;" placeholder="What would you like to share?"></textarea>
+
+      <label class="field-label" for="feedback-email" style="display:block;margin-bottom:4px;">Your email (optional, only if you want a reply)</label>
+      <input type="email" id="feedback-email" class="profile-input" style="width:100%;margin-bottom:18px;" placeholder="you@example.com">
+
+      <div id="feedback-status" style="font-size:12px;margin-bottom:10px;"></div>
+
+      <button type="button" onclick="submitFeedback()" id="feedback-submit-btn"
+        style="width:100%;background:var(--app-action,#5B2A55);color:#fff;border:none;
+               font-size:13px;font-weight:700;padding:11px 16px;border-radius:8px;cursor:pointer;">
+        Send feedback
+      </button>
+    </div>
+  </div>
+</div>
+
 <!-- TOAST -->
 <div id="toast" role="status" aria-live="polite"></div>
 
@@ -876,6 +917,7 @@
         </a>
         <a href="javascript:void(0)" onclick="switchTab('about', document.getElementById('tab-btn-about'))" style="font-size:12px;color:var(--c-muted);text-decoration:none;white-space:nowrap;">About</a>
         <a href="faq.html" style="font-size:12px;color:var(--c-muted);text-decoration:none;white-space:nowrap;">Help</a>
+        <a href="javascript:void(0)" id="feedback-link" onclick="openFeedbackModal()" style="font-size:12px;color:var(--c-muted);text-decoration:none;white-space:nowrap;">Feedback</a>
         <div id="auth-header-slot"></div>
       </div>
       <nav class="app-tabs" role="tablist" aria-label="App navigation">
@@ -883,7 +925,7 @@
         <button class="app-tab tab-active" role="tab" aria-selected="true"  onclick="switchTab('discover', this)">Step 2 &middot; Discover</button>
         <button class="app-tab"            role="tab" aria-selected="false" onclick="switchTab('tracker',  this)">Step 3 &middot; Tracker <span class="tab-badge" id="tracker-tab-badge" style="display:none;">0</span></button>
         <button class="app-tab"            role="tab" aria-selected="false" onclick="switchTab('proposal', this)">Step 4 &middot; Proposal</button>
-        <button class="app-tab" id="tab-btn-about" role="tab" aria-selected="false" onclick="switchTab('about',    this)">About</button>
+        <button class="app-tab" id="tab-btn-about" role="tab" aria-selected="false" onclick="switchTab('about',    this)" style="display:none;" aria-hidden="true" tabindex="-1">About</button>
       </nav>
     </div>
   </header>
@@ -1507,6 +1549,7 @@ function enterApp() {
     window.scrollTo(0, 0);
     if (!window._appInited) {
       window._appInited = true;
+      window._activeTab = window._activeTab || 'discover';
       // Request the Sheets-scoped access token FIRST and wait for it.
       // This token is granted separately (and silently) from basic
       // sign-in, so firing Sheets-dependent reads before it resolves
@@ -1521,6 +1564,7 @@ function enterApp() {
       try { if (typeof loadProfileIntoSettings === 'function') loadProfileIntoSettings(); } catch(e) { console.warn('loadProfile:', e); }
       try { if (typeof updateMemoryStats === 'function') updateMemoryStats(); } catch(e) { console.warn('memStats:', e); }
       try { if (typeof checkApiKeyStatus === 'function') checkApiKeyStatus(); } catch(e) { console.warn('apiKey:', e); }
+      try { if (typeof initFeedbackLink === 'function') initFeedbackLink(); } catch(e) {}
       try { await updateSetupChecklist(); } catch(e) { console.warn('setupChecklist:', e); }
       // window._fundigoOrgInfo is only known after the first real
       // window.storage.get/set round-trip (in the calls above) —
@@ -1532,6 +1576,7 @@ function enterApp() {
 
 // ── TAB SWITCHING ─────────────────────────────────────────────
 function switchTab(tabId, btn) {
+  window._activeTab = tabId;
   document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('tab-active'));
   document.querySelectorAll('.app-tab').forEach(b => {
     b.classList.remove('tab-active');
@@ -2148,6 +2193,115 @@ function showToast(message, duration = 3000) {
   el.classList.add('toast-visible');
   if (_toastTimer) clearTimeout(_toastTimer);
   _toastTimer = setTimeout(() => el.classList.remove('toast-visible'), duration);
+}
+
+// ── FEEDBACK ─────────────────────────────────────────────────────
+// Sends straight to the developer's own Google Sheet via a small
+// Apps Script Web App (see fundaigo-feedback-apps-script.gs) — works
+// for guests and signed-in users alike, since it runs under the
+// developer's Google account, not the submitter's. If no webhook is
+// configured, the Feedback link hides itself rather than showing a
+// form that goes nowhere.
+function initFeedbackLink() {
+  const link = document.getElementById('feedback-link');
+  if (!link) return;
+  const url = CONFIG.feedback && CONFIG.feedback.webhookUrl;
+  if (!url) link.style.display = 'none';
+}
+
+// Steers vague submissions toward something actionable by swapping
+// the textarea's placeholder based on what kind of feedback it is,
+// without adding an extra field or step.
+const FEEDBACK_PLACEHOLDERS = {
+  Bug:     "What were you trying to do, and what happened instead? Include what page you were on if you can.",
+  Idea:    "What would you want to be able to do that you can't right now?",
+  General: "What's on your mind?",
+};
+
+function updateFeedbackPlaceholder() {
+  const category = getValue('feedback-category');
+  const textarea = document.getElementById('feedback-message');
+  if (textarea) textarea.placeholder = FEEDBACK_PLACEHOLDERS[category] || FEEDBACK_PLACEHOLDERS.General;
+}
+
+function openFeedbackModal() {
+  const modal = document.getElementById('feedback-modal');
+  if (!modal) return;
+  document.getElementById('feedback-status').textContent = '';
+  updateFeedbackPlaceholder();
+  modal.style.display = 'flex';
+}
+
+function hideFeedbackModal() {
+  const modal = document.getElementById('feedback-modal');
+  if (modal) modal.style.display = 'none';
+}
+
+// Builds "who this is from" for the feedback row — org name plus
+// guest/signed-in state, so a blank org name doesn't just read as
+// "(unknown)" when there's actually useful context available.
+function getFeedbackIdentity_() {
+  const orgName = getValue('profile-name') || '(no org name set)';
+  try {
+    if (window._isGuest) return orgName + ', guest';
+    if (typeof getSignedInUser === 'function') {
+      const u = getSignedInUser();
+      if (u && u.email) return orgName + ', ' + u.email;
+    }
+  } catch (e) {}
+  return orgName;
+}
+
+async function submitFeedback() {
+  const url = CONFIG.feedback && CONFIG.feedback.webhookUrl;
+  const statusEl = document.getElementById('feedback-status');
+  const message = getValue('feedback-message');
+
+  if (!url) {
+    statusEl.innerHTML = '<span style="color:#991B1B;">Feedback isn\u2019t set up yet, no destination configured.</span>';
+    return;
+  }
+  if (!message) {
+    statusEl.innerHTML = '<span style="color:#991B1B;">Add a quick note before sending.</span>';
+    return;
+  }
+
+  const btn = document.getElementById('feedback-submit-btn');
+  btn.disabled = true;
+  btn.textContent = 'Sending\u2026';
+
+  const payload = {
+    category: getValue('feedback-category'),
+    message:  message,
+    email:    getValue('feedback-email'),
+    orgName:  getFeedbackIdentity_(),
+    page:     window._activeTab || 'unknown',
+  };
+
+  try {
+    // no-cors: Apps Script Web Apps don't reliably return CORS headers,
+    // so the response body isn't readable here. That's fine, we treat
+    // a request that didn't throw as a success. Genuine delivery
+    // failures (bad URL, script not deployed) still throw and get caught.
+    await fetch(url, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload),
+    });
+    statusEl.innerHTML = '<span style="color:#166534;">Sent, thank you!</span>';
+    setTimeout(() => {
+      hideFeedbackModal();
+      setValue('feedback-message', '');
+      setValue('feedback-email', '');
+      btn.disabled = false;
+      btn.textContent = 'Send feedback';
+    }, 1200);
+  } catch (err) {
+    statusEl.innerHTML = '<span style="color:#991B1B;">Couldn\u2019t send, check your connection and try again.</span>';
+    btn.disabled = false;
+    btn.textContent = 'Send feedback';
+  }
 }
 
 // ── DOM HELPERS ───────────────────────────────────────────────
