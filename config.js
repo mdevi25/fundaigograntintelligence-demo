@@ -4,7 +4,6 @@
  * Version: 2.0 | July 2026
  *
  * Organization: Educate. Radiate. Elevate. (ERE)
- * Demo org:     BrightPath Learning Foundation (BLF)
  * Repo:         github.com/mdevi25/fundigo-gip
  * Cost:         $0.00 — one Groq API key covers all layers
  *
@@ -90,7 +89,7 @@ const CONFIG = {
   // Leave blank to hide the Feedback link entirely.
   // ============================================================
   feedback: {
-    webhookUrl: "https://script.google.com/macros/s/AKfycbySp2FQcdKogW0xJOg1_8w3QMlagOanJb9Kh771HMW-wdMVB7Xfd58daRoVmzM2rIzauw/exec", // <-- paste your Apps Script Web App URL here
+    webhookUrl: "", // <-- paste your Apps Script Web App URL here
   },
 
   discovery: {
@@ -345,11 +344,10 @@ const CONFIG = {
   // ============================================================
   // Loaded when no saved profile exists in storage.
   // User overrides this in the Profile tab — saved persistently.
-  // Both ERE and BLF use this same profile for the demo.
+  // This deployment is shared with the ERE team only.
   // ============================================================
   defaultProfile: {
-    name:           "BrightPath Learning Foundation (BLF)",
-    aka:            "Educate. Radiate. Elevate. (ERE)",
+    name:           "Educate. Radiate. Elevate.",
     type:           "501(c)(3) nonprofit",
     mission:        "Provide free, high-quality tutoring, academic support, and educational enrichment for underserved K-12 students, helping them achieve academic success and long-term educational equity.",
     locations:      "Illinois, Texas",

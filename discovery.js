@@ -149,7 +149,7 @@ const CATEGORY_SEARCH_MAP = {
 /**
  * Build the user prompt for discovery.
  * Incorporates the saved org profile so the search is
- * tailored to ERE / BLF specifically.
+ * tailored to whichever org profile is currently loaded.
  * @param {Object} profile        org profile from loadProfile()
  * @param {Object} [searchOverride] optional { category, customQuery }
  *   - category:    one or more CATEGORY_SEARCH_MAP keys (from chip
