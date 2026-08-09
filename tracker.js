@@ -117,6 +117,17 @@ function addOpportunityToTracker(oppId, silent = false) {
     populationMatch:   opp.populationMatch   || "",
     geoMatch:          opp.geoMatch          || "",
     nonprofitEligible: opp.nonprofitEligible ?? "",
+    // Which category chip(s) the search that found this opportunity
+    // used — e.g. ["faith"] or ["community","corporate"]. Empty for
+    // rows added before this field existed, or added manually; those
+    // rows are simply excluded from learning.js's category aggregation,
+    // never guessed at. Consumed by learning.js, never read elsewhere.
+    searchCategory:    opp.searchCategory    || [],
+    // Learning adjustment applied at scoring time, if any — kept
+    // separate from matchLevel so the original pure waterfall result
+    // is never lost, and the UI can show both the tier and why it
+    // moved. "" when no adjustment was made.
+    learningNote:      opp.learningNote      || "",
     // Always starts neutral — status is a deliberate team decision, not
     // something the AI's suggestion should imply has already happened.
     status:            "New",
@@ -237,6 +248,8 @@ function addBlankTrackerRow() {
     dateFound:    today(),
     guardStatus:  "PASS",
     confidence:   "Medium",
+    searchCategory: [], // untagged until set manually via the Category dropdown
+    learningNote:   "",
   };
 
   // Add at top so staff sees it immediately
@@ -273,11 +286,31 @@ function updateTrackerField(rowId, field, value) {
   const row = trackerRows.find((r) => r.id === rowId);
   if (!row) return;
 
-  row[field] = value;
+  // ── searchCategory is stored as an array (a row can, in
+  // principle, belong to more than one category if found via a
+  // multi-select search) but edited here as a single dropdown —
+  // wrap/clear rather than overwrite with a raw string, so
+  // learning.js's aggregateByCategory() (which expects an array)
+  // keeps working whether the row came from a real search or was
+  // tagged manually here.
+  if (field === "searchCategory") {
+    row.searchCategory = value ? [value] : [];
+  } else {
+    row[field] = value;
+  }
 
   // ── Memory integration on status change ──────────────────
   if (field === "status" && row.funder) {
     updateKnownFunderStatus(row.funder, value);
+  }
+
+  // ── Learning refresh on status or category change ─────────
+  // Either edit can cross learning.js's minimum sample threshold
+  // for some category — refresh the Discover tab's recommendation
+  // panel so it's never showing stale advice. No-op if the
+  // Discover tab isn't currently mounted.
+  if ((field === "status" || field === "searchCategory") && typeof renderLearningRecommendations === "function") {
+    try { renderLearningRecommendations(); } catch (e) {}
   }
 
   // ── Memory integration on funder name change ──────────────
@@ -289,7 +322,7 @@ function updateTrackerField(rowId, field, value) {
 
   // Re-render only the deadline badge if deadline changed
   // (avoid full re-render on every keystroke)
-  if (field === "deadline" || field === "status") {
+  if (field === "deadline" || field === "status" || field === "searchCategory") {
     renderTracker();
   }
 }
@@ -373,6 +406,44 @@ function renderTracker() {
 
   // Render rows
   tableBody.innerHTML = sorted.map((row) => renderTrackerRow(row)).join("");
+}
+
+/**
+ * Local fallback for learning.js's CATEGORY_LABELS — used only if
+ * learning.js hasn't loaded for some reason, so this dropdown never
+ * hard-depends on script load order. Keep in sync with
+ * learning.js's CATEGORY_LABELS and discovery.js's
+ * CATEGORY_SEARCH_MAP keys.
+ */
+const TRACKER_CATEGORY_FALLBACK = {
+  community:  "Community foundations",
+  corporate:  "Corporate giving programs",
+  government: "Government grants",
+  faith:      "Faith-based funders",
+  family:     "Family foundations",
+  healthcare: "Healthcare foundations",
+};
+
+/**
+ * Build the <option> list for the tracker row's Category dropdown.
+ * @param {string[]} rowCategories  row.searchCategory (0 or 1 items
+ *   expected here — multi-category rows from a multi-select search
+ *   show their first category selected; editing the dropdown always
+ *   collapses back to a single category, which is fine, this field
+ *   is a "what worked" signal for learning.js, not a permanent record
+ *   of the exact search that found it).
+ * @returns {string}
+ */
+function trackerCategoryOptions(rowCategories) {
+  const labels = (typeof CATEGORY_LABELS !== "undefined") ? CATEGORY_LABELS : TRACKER_CATEGORY_FALLBACK;
+  const current = Array.isArray(rowCategories) && rowCategories.length ? rowCategories[0] : "";
+
+  const blank = `<option value="" ${current === "" ? "selected" : ""}>—</option>`;
+  const opts = Object.keys(labels).map((key) =>
+    `<option value="${esc(key)}" ${current === key ? "selected" : ""}>${esc(labels[key])}</option>`
+  ).join("");
+
+  return blank + opts;
 }
 
 /**
@@ -488,6 +559,22 @@ function renderTrackerRow(row) {
           onchange="updateTrackerField('${esc(row.id)}', 'status', this.value)"
         >
           ${statusOptions}
+        </select>
+      </td>
+
+      <!-- Search Category — editable so legacy/manual rows can be
+           tagged retroactively, feeding learning.js's per-category
+           history. Single-select in the UI; stored as a 1-item
+           array (or [] for "—") to match the shape real multi-
+           category searches produce. Falls back to a local label
+           map if learning.js hasn't loaded yet for any reason. -->
+      <td>
+        <select
+          class="table-input"
+          style="width:118px;"
+          onchange="updateTrackerField('${esc(row.id)}', 'searchCategory', this.value)"
+        >
+          ${trackerCategoryOptions(row.searchCategory)}
         </select>
       </td>
 
@@ -646,13 +733,15 @@ function exportTrackerToCSV() {
   const headers = [
     "Funder", "Program", "Amount", "Deadline", "Fit Score",
     "Status", "URL", "Link Status", "Page Title", "Date Verified",
-    "Assigned To", "Notes", "Date Found", "Guard Status", "Confidence"
+    "Assigned To", "Notes", "Date Found", "Guard Status", "Confidence",
+    "Search Category"
   ];
 
   const rows = trackerRows.map((r) => [
     r.funder, r.program, r.amount, r.deadline, r.fitScore,
     r.status, r.url, r.linkStatus, r.pageTitle, r.dateVerified,
-    r.assignedTo, r.notes, r.dateFound, r.guardStatus, r.confidence
+    r.assignedTo, r.notes, r.dateFound, r.guardStatus, r.confidence,
+    Array.isArray(r.searchCategory) ? r.searchCategory.join("; ") : (r.searchCategory || "")
   ]);
 
   const csvContent = [headers, ...rows]
