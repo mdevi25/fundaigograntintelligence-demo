@@ -293,7 +293,7 @@ async function runDiscoveryOnce(onStatus, searchOverride) {
     if (provider === "gemini") {
       const geminiCfg = CONFIG.discovery.gemini || {};
       const requestBody = buildGeminiRequestBody(systemPrompt, userPrompt, geminiCfg);
-      rawData = await geminiCallGrounded(geminiCfg, requestBody);
+      rawData = await geminiCallGrounded(geminiCfg, requestBody, onStatus);
       responseText = extractGeminiText(rawData);
       toolsUsedCount = extractGeminiToolCount(rawData);
     } else {
@@ -687,12 +687,17 @@ function buildGeminiRequestBody(systemPrompt, userPrompt, geminiCfg) {
 
 /**
  * Make a Gemini generateContent call with Google Search grounding.
+ * On a 429 (rate limit), auto-retries exactly once after 65 seconds
+ * — same pattern and same wait as groqCallCompound(). 65s rather
+ * than a flat 60s to give Gemini's rolling 60-second RPM window a
+ * safety margin before retrying, same reasoning as the Groq side.
  * @param {Object} geminiCfg  CONFIG.discovery.gemini
  * @param {Object} body       request body from buildGeminiRequestBody()
+ * @param {Function} [onStatus]  optional UI status callback
  * @returns {Promise<Object>} parsed JSON response
- * @throws {Error}            on network, auth, or rate-limit error
+ * @throws {Error}            on network, auth, or repeated rate-limit error
  */
-async function geminiCallGrounded(geminiCfg, body) {
+async function geminiCallGrounded(geminiCfg, body, onStatus) {
   const key = getApiKey("gemini");
   if (!key) {
     throw new Error("Gemini API key not set. Enter it in the Settings tab.");
@@ -730,9 +735,23 @@ async function geminiCallGrounded(geminiCfg, body) {
       throw new Error("Invalid Gemini API key. Check your key in Settings.");
     }
     if (resp.status === 429) {
+      // Auto-retry once after 65 seconds — Gemini 2.5 Flash's free
+      // tier RPM limit is a rolling 60-second window, confirmed
+      // August 2026. Mirrors groqCallCompound()'s exact retry
+      // pattern below, including the same _retried guard so a
+      // second consecutive 429 fails loudly instead of looping.
+      if (!body._retried) {
+        if (typeof onStatus === "function") {
+          onStatus("Gemini rate limit hit, auto-retrying in 65 seconds…");
+        }
+        await new Promise(r => setTimeout(r, 65000));
+        body._retried = true;
+        return geminiCallGrounded(geminiCfg, body, onStatus);
+      }
       throw new Error(
-        "Gemini rate limit reached. Wait a bit and try again, " +
-        "or switch provider to Groq in Settings."
+        "Gemini rate limit reached again after retrying. " +
+        "Free tier allows 10 requests/minute on Gemini 2.5 Flash. " +
+        "Wait a minute and try again, or switch provider to Groq in Settings."
       );
     }
     throw new Error(`Gemini API error: ${errMsg}`);
