@@ -1323,20 +1323,6 @@
       </div>
 
       <div class="settings-panel">
-        <h2>Groq API key</h2>
-        <p class="settings-panel-desc">Stored in session memory only, cleared when you close this tab. Never saved to disk or sent anywhere except Groq's API.</p>
-        <div class="api-key-row">
-          <div style="flex:1;">
-            <label class="field-label" for="api-key-input">Groq API key</label>
-            <input type="password" id="api-key-input" class="api-key-input" placeholder="gsk_..." autocomplete="off">
-          </div>
-          <button class="save-key-btn" onclick="saveApiKey()" style="align-self:flex-end;">Save key</button>
-          <span class="key-status" id="key-status" aria-live="polite">✓ Set</span>
-        </div>
-        <div class="api-note">Get a free key at <a href="https://console.groq.com" target="_blank" rel="noopener" style="color:var(--c-purple);font-weight:600;">console.groq.com</a>, no credit card required. The key starts with <code style="background:var(--c-soft);color:var(--c-deep);padding:1px 5px;border-radius:4px;">gsk_</code>. Always required — qualification and guard checks run on Groq regardless of which search provider is selected below.</div>
-      </div>
-
-      <div class="settings-panel">
         <h2>Search provider</h2>
         <p class="settings-panel-desc">Which LLM performs the live web search in Layer 1. Everything after that (link check, qualification, guard) stays on Groq either way.</p>
         <div style="display:flex;gap:10px;margin-bottom:10px;">
@@ -1358,6 +1344,20 @@
           <span class="key-status" id="gemini-key-status" aria-live="polite">✓ Set</span>
         </div>
         <div class="api-note">Get a free key at <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener" style="color:var(--c-purple);font-weight:600;">aistudio.google.com</a>. Only required if Gemini is selected above.</div>
+      </div>
+
+      <div class="settings-panel">
+        <h2>Groq API key</h2>
+        <p class="settings-panel-desc">Stored in session memory only, cleared when you close this tab. Never saved to disk or sent anywhere except Groq's API.</p>
+        <div class="api-key-row">
+          <div style="flex:1;">
+            <label class="field-label" for="api-key-input">Groq API key</label>
+            <input type="password" id="api-key-input" class="api-key-input" placeholder="gsk_..." autocomplete="off">
+          </div>
+          <button class="save-key-btn" onclick="saveApiKey()" style="align-self:flex-end;">Save key</button>
+          <span class="key-status" id="key-status" aria-live="polite">✓ Set</span>
+        </div>
+        <div class="api-note">Get a free key at <a href="https://console.groq.com" target="_blank" rel="noopener" style="color:var(--c-purple);font-weight:600;">console.groq.com</a>, no credit card required. The key starts with <code style="background:var(--c-soft);color:var(--c-deep);padding:1px 5px;border-radius:4px;">gsk_</code>. Always required — qualification and guard checks run on Groq regardless of which search provider is selected above.</div>
       </div>
 
       <div class="settings-panel">
