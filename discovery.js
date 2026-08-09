@@ -181,6 +181,21 @@ function buildDiscoveryUserPrompt(profile, searchOverride) {
     ? `Exclude these already-known funders (do not return them): ${excludeList.join(", ")}`
     : "No exclusions.";
 
+  // ── Compound learning ──────────────────────────────────────
+  // Read from learning.js — a short, org-history-derived preference
+  // line, or "" if there isn't enough resolved tracker history yet
+  // to say anything (see learning.js MIN_RESOLVED_SAMPLE). This is
+  // advisory only — it never overrides the org's own selected
+  // category or the STRICT VALIDATION RULES in the system prompt,
+  // it just gives the model extra context about what has actually
+  // worked for this org so far.
+  let learningLine = "";
+  try {
+    if (typeof buildLearningPromptLine === "function") {
+      learningLine = buildLearningPromptLine();
+    }
+  } catch (e) {}
+
   // ── Determine what to search for ──────────────────────────
   // Priority: typed custom search > selected category chip(s) > default "all"
   const customQuery = searchOverride && searchOverride.customQuery
@@ -199,13 +214,15 @@ function buildDiscoveryUserPrompt(profile, searchOverride) {
     ? `Search specifically for: ${customQuery}`
     : `Search across ${categoryPhrase} in ${profile.locations}.`;
 
+  const learningSection = learningLine ? `\n${learningLine}` : "";
+
   return `Find 1 currently OPEN grant for this nonprofit:
 Name: ${profile.name}
 Mission: ${profile.mission}
 Location: ${profile.locations}
 Focus: ${focusList}
 Grant range: ${profile.grantRange}
-${excludeSection}
+${excludeSection}${learningSection}
 
 ${searchDirective}
 Return exactly 1 open grant with a real URL. Today: ${today()}.`;
@@ -262,38 +279,49 @@ async function runDiscoveryOnce(onStatus, searchOverride) {
   const systemPrompt = buildDiscoverySystemPrompt();
   const userPrompt   = buildDiscoveryUserPrompt(profile, normalisedOverride);
 
-  // ── Build request body ────────────────────────────────────
-  // Verified from Groq docs July 2026:
-  // - compound_custom.tools.enabled_tools restricts to web_search only
-  //   (visit_website is handled separately in Layer 1.5)
-  // - max_completion_tokens 4000 recommended for multi-search calls
-  // - Groq-Model-Version header is passed via groqCallCompound()
-  const requestBody = {
-    model:                CONFIG.discovery.model,
-    max_completion_tokens: 1000,  // compound-beta-mini — single search, lower context
-    temperature:          CONFIG.discovery.temperature,
-    messages: [
-      { role: "system", content: systemPrompt },
-      { role: "user",   content: userPrompt   },
-    ],
-  };
+  // ── Call the API — provider branch ────────────────────────
+  // Groq and Gemini have entirely different request/response
+  // shapes (see groqCallCompound/geminiCallGrounded below), but
+  // both branches converge to the same two values before this
+  // point ends: responseText and toolsUsedCount. Everything from
+  // here down (JSON-tag extraction, normalisation) never needs to
+  // know which provider ran.
+  const provider = (CONFIG.discovery && CONFIG.discovery.provider) || "groq";
 
-  // ── Call the API ──────────────────────────────────────────
-  let rawData;
+  let rawData, responseText, toolsUsedCount;
   try {
-    rawData = await groqCallCompound(
-      CONFIG.discovery.endpoint,
-      requestBody
-    );
+    if (provider === "gemini") {
+      const geminiCfg = CONFIG.discovery.gemini || {};
+      const requestBody = buildGeminiRequestBody(systemPrompt, userPrompt, geminiCfg);
+      rawData = await geminiCallGrounded(geminiCfg, requestBody);
+      responseText = extractGeminiText(rawData);
+      toolsUsedCount = extractGeminiToolCount(rawData);
+    } else {
+      // ── Build request body ──────────────────────────────────
+      // Verified from Groq docs July 2026:
+      // - compound_custom.tools.enabled_tools restricts to web_search only
+      //   (visit_website is handled separately in Layer 1.5)
+      // - max_completion_tokens 4000 recommended for multi-search calls
+      // - Groq-Model-Version header is passed via groqCallCompound()
+      const requestBody = {
+        model:                CONFIG.discovery.model,
+        max_completion_tokens: 1000,  // compound-beta-mini — single search, lower context
+        temperature:          CONFIG.discovery.temperature,
+        messages: [
+          { role: "system", content: systemPrompt },
+          { role: "user",   content: userPrompt   },
+        ],
+      };
+      rawData = await groqCallCompound(CONFIG.discovery.endpoint, requestBody);
+      responseText = extractText(rawData);
+      toolsUsedCount = (rawData?.choices?.[0]?.message?.executed_tools || []).length;
+    }
   } catch (err) {
     // Rethrow with context so UI can surface a useful message
     throw new Error(`Discovery search failed: ${err.message}`);
   }
 
   onStatus("Layer 1 · Parsing search results…");
-
-  // ── Extract text content ──────────────────────────────────
-  const responseText = extractText(rawData);
 
   if (!responseText || responseText.trim().length === 0) {
     throw new Error(
@@ -329,17 +357,27 @@ async function runDiscoveryOnce(onStatus, searchOverride) {
   // hope based on the prompt, this is what the rest of the app (and
   // the FAQ) documents as the actual behavior.
   const maxResults = (CONFIG.discovery && CONFIG.discovery.maxResults) || 1;
-  const opportunities = normaliseOpportunities(parsed.opportunities || []).slice(0, maxResults);
+  // Categories actually used for THIS search — "all" is stored as-is
+  // rather than expanded, since learning.js already excludes "all"
+  // from its per-category aggregation (there's nothing to attribute
+  // to a catch-all search).
+  const usedCategories = normalisedOverride && normalisedOverride.category
+    ? (Array.isArray(normalisedOverride.category) ? normalisedOverride.category : [normalisedOverride.category])
+    : ["all"];
+  const opportunities = normaliseOpportunities(parsed.opportunities || [])
+    .slice(0, maxResults)
+    .map((o) => ({ ...o, searchCategory: usedCategories }));
   const futureMonitoring = normaliseFutureMonitoring(parsed.futureMonitoring || []);
 
-  // ── Attach executed tool metadata for transparency ─────────
-  // groq/compound returns executed_tools — useful for the UI
-  // to show "searched X sources" as a trust signal
-  const executedTools = rawData?.choices?.[0]?.message?.executed_tools || [];
+  // ── Tool-use count already extracted above (provider-agnostic) ──
+  // Groq: executed_tools array length. Gemini: groundingMetadata
+  // search-query/chunk count. Both represent the same thing to the
+  // UI — "how many live web searches backed this result" — so it's
+  // computed once, in the provider branch above, not re-derived here.
 
   onStatus(
     `Layer 1 \u00b7 Found ${opportunities.length} candidate${opportunities.length !== 1 ? "s" : ""}` +
-    ` from ${executedTools.length} web search${executedTools.length !== 1 ? "es" : ""}. Passing to link check\u2026`
+    ` from ${toolsUsedCount} web search${toolsUsedCount !== 1 ? "es" : ""}. Passing to link check\u2026`
   );
 
   return {
@@ -348,8 +386,9 @@ async function runDiscoveryOnce(onStatus, searchOverride) {
     meta: {
       searchDate:     today(),
       totalSearched:  parsed.totalSearched || opportunities.length,
-      executedTools:  executedTools.length,
+      executedTools:  toolsUsedCount,
       rawResultCount: opportunities.length,
+      provider,
     },
   };
 }
@@ -601,5 +640,132 @@ async function groqCallCompound(endpoint, body, onStatus) {
   }
 
   return resp.json();
+}
+
+
+// ============================================================
+// GEMINI PROVIDER — Grounding with Google Search
+// Fundaigo's Layer 1 provider alternative to Groq Compound.
+//
+// WHY THIS IS SEPARATE FROM groqCallCompound:
+// Gemini's live-web-search feature ("Grounding with Google
+// Search") is a completely different mechanism from Groq's
+// Compound system — different endpoint, different auth (API key
+// as a query param, not a Bearer header), different request body
+// shape (`contents`/`parts`, not `messages`), different response
+// shape (`candidates[0].content.parts`, not `choices[0].message`),
+// and search is enabled via an explicit `tools` field rather than
+// being implicit in the model choice. None of that complexity
+// leaks past this section — runDiscoveryOnce() only ever sees the
+// same responseText/toolsUsedCount shape Groq produces.
+//
+// Verified from Gemini API docs, August 2026:
+// https://ai.google.dev/gemini-api/docs/grounding
+// ============================================================
+
+/**
+ * Build the Gemini request body for a grounded search call.
+ * @param {string} systemPrompt
+ * @param {string} userPrompt
+ * @param {Object} geminiCfg  CONFIG.discovery.gemini
+ * @returns {Object}
+ */
+function buildGeminiRequestBody(systemPrompt, userPrompt, geminiCfg) {
+  return {
+    systemInstruction: { parts: [{ text: systemPrompt }] },
+    contents: [{ role: "user", parts: [{ text: userPrompt }] }],
+    // Enables live Google Search grounding — Gemini's equivalent of
+    // Groq compound's built-in web_search tool. Without this field
+    // the model answers from training data only, no live search.
+    tools: [{ google_search: {} }],
+    generationConfig: {
+      temperature:     geminiCfg.temperature ?? CONFIG.discovery.temperature,
+      maxOutputTokens: geminiCfg.maxOutputTokens || 2000,
+    },
+  };
+}
+
+/**
+ * Make a Gemini generateContent call with Google Search grounding.
+ * @param {Object} geminiCfg  CONFIG.discovery.gemini
+ * @param {Object} body       request body from buildGeminiRequestBody()
+ * @returns {Promise<Object>} parsed JSON response
+ * @throws {Error}            on network, auth, or rate-limit error
+ */
+async function geminiCallGrounded(geminiCfg, body) {
+  const key = getApiKey("gemini");
+  if (!key) {
+    throw new Error("Gemini API key not set. Enter it in the Settings tab.");
+  }
+
+  const url = `${geminiCfg.endpoint}/${geminiCfg.model}:generateContent`;
+
+  const resp = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type":  "application/json",
+      // Header-based auth, not a URL query param — avoids the key
+      // showing up in logs or browser history. As of mid-2026,
+      // Google has also begun phasing out unrestricted keys and
+      // issuing some keys with a different prefix than the classic
+      // "AIza" format, so this app deliberately does not validate
+      // key format/prefix client-side — only Google's own API can
+      // tell you whether a given key is valid.
+      "x-goog-api-key": key,
+    },
+    body: JSON.stringify(body),
+  });
+
+  if (!resp.ok) {
+    let errMsg = `HTTP ${resp.status}`;
+    try {
+      const errBody = await resp.json();
+      // Gemini error format: { error: { message: "..." } }
+      errMsg = errBody?.error?.message || errMsg;
+    } catch (_) {
+      // Response was not JSON — use status code only
+    }
+
+    if (resp.status === 400 || resp.status === 403) {
+      throw new Error("Invalid Gemini API key. Check your key in Settings.");
+    }
+    if (resp.status === 429) {
+      throw new Error(
+        "Gemini rate limit reached. Wait a bit and try again, " +
+        "or switch provider to Groq in Settings."
+      );
+    }
+    throw new Error(`Gemini API error: ${errMsg}`);
+  }
+
+  return resp.json();
+}
+
+/**
+ * Extract the model's text response from a Gemini API result.
+ * Gemini can return multiple parts (rare for a text-only grounded
+ * call) — concatenated here, same convention as extractText() for
+ * Groq's response shape.
+ * @param {Object} rawData
+ * @returns {string}
+ */
+function extractGeminiText(rawData) {
+  const parts = rawData?.candidates?.[0]?.content?.parts || [];
+  return parts.map((p) => p.text || "").join("");
+}
+
+/**
+ * Count how many live searches backed this Gemini response, for
+ * parity with Groq's executed_tools count — used only for the
+ * "searched X sources" trust signal in the UI, never for logic.
+ * @param {Object} rawData
+ * @returns {number}
+ */
+function extractGeminiToolCount(rawData) {
+  const gm = rawData?.candidates?.[0]?.groundingMetadata;
+  if (!gm) return 0;
+  if (Array.isArray(gm.webSearchQueries)) return gm.webSearchQueries.length;
+  if (Array.isArray(gm.groundingChunks))  return gm.groundingChunks.length;
+  return 0;
 }
 

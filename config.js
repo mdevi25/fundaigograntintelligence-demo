@@ -101,6 +101,24 @@ const CONFIG = {
                         // hard cap, enforced in discovery.js by slicing
                         // the model's response — "one result per run" is
                         // a real guarantee, not just a prompt request.
+
+    // Which LLM performs the live web search in Layer 1.
+    // "groq" | "gemini" — everything AFTER this layer (link
+    // verification, qualification, guard) stays on Groq regardless
+    // of this setting; see staging.js for why that boundary exists.
+    provider: "groq",
+
+    // Gemini's equivalent of Groq's Compound search — Grounding
+    // with Google Search. Only used when provider is "gemini".
+    // Verified from Gemini API docs, August 2026: grounding is
+    // enabled via the `tools: [{ google_search: {} }]` request
+    // field, not a model choice, and works on Flash-tier models.
+    gemini: {
+      endpoint:        "https://generativelanguage.googleapis.com/v1beta/models",
+      model:           "gemini-2.5-flash",
+      maxOutputTokens: 2000,
+      temperature:     0.2,
+    },
   },
 
   // ============================================================
@@ -200,6 +218,22 @@ const CONFIG = {
                         // 1 = poor fit, never worth pursuing
                         // 2 = weak but possible edge case
                         // raise to 3 to tighten the pipeline
+  },
+
+  // ============================================================
+  // COMPOUND LEARNING (learning.js)
+  // Reads resolved Tracker history (Pursue/Submitted/Funded/
+  // Declined/Not Eligible) to shape future searches and nudge
+  // Fit Scores. Both are additive layers on top of the existing
+  // pipeline and never touch matchScoring.js's core waterfall —
+  // set either flag to false to turn that surface off instantly
+  // without editing learning.js itself.
+  // ============================================================
+  learning: {
+    enabled:              true,  // master switch — false disables both surfaces below
+    promptCompounding:    true,  // fold preference line into discovery.js's search prompt
+    scoreAdjustment:      true,  // apply the one-tier-max Fit Score nudge in index.html
+    minResolvedSample:    5,     // must match learning.js's MIN_RESOLVED_SAMPLE
   },
 
   // ============================================================
