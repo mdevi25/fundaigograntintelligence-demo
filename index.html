@@ -1337,27 +1337,49 @@
         </div>
         <div class="api-key-row">
           <div style="flex:1;">
-            <label class="field-label" for="gemini-api-key-input">Gemini API key</label>
-            <input type="password" id="gemini-api-key-input" class="api-key-input" placeholder="AIza..." autocomplete="off">
+            <label class="field-label" id="provider-key-label" for="provider-api-key-input">Groq API key</label>
+            <input type="password" id="provider-api-key-input" class="api-key-input" placeholder="gsk_..." autocomplete="off">
           </div>
-          <button class="save-key-btn" onclick="saveGeminiApiKey()" style="align-self:flex-end;">Save key</button>
-          <span class="key-status" id="gemini-key-status" aria-live="polite">✓ Set</span>
+          <button class="save-key-btn" onclick="saveProviderApiKey()" style="align-self:flex-end;">Save key</button>
+          <span class="key-status" id="provider-key-status" aria-live="polite">✓ Set</span>
         </div>
-        <div class="api-note">Get a free key at <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener" style="color:var(--c-purple);font-weight:600;">aistudio.google.com</a>. Only required if Gemini is selected above.</div>
+        <div class="api-note" id="provider-key-note">Get a free key at <a href="https://console.groq.com" target="_blank" rel="noopener" style="color:var(--c-purple);font-weight:600;">console.groq.com</a>, no credit card required. The key starts with <code style="background:var(--c-soft);color:var(--c-deep);padding:1px 5px;border-radius:4px;">gsk_</code>.</div>
       </div>
 
-      <div class="settings-panel">
+      <div class="settings-panel" id="groq-key-panel">
         <h2>Groq API key</h2>
         <p class="settings-panel-desc">Stored in session memory only, cleared when you close this tab. Never saved to disk or sent anywhere except Groq's API.</p>
-        <div class="api-key-row">
-          <div style="flex:1;">
-            <label class="field-label" for="api-key-input">Groq API key</label>
-            <input type="password" id="api-key-input" class="api-key-input" placeholder="gsk_..." autocomplete="off">
-          </div>
-          <button class="save-key-btn" onclick="saveApiKey()" style="align-self:flex-end;">Save key</button>
-          <span class="key-status" id="key-status" aria-live="polite">✓ Set</span>
+
+        <!-- Shown only when Gemini is the active search provider —
+             Groq's key has nowhere else to be entered in that case,
+             and is still mandatory for qualification/guard, so this
+             makes that explicit instead of relying on description
+             text alone (this is exactly the confusion flagged
+             earlier when both fields sat side by side, ambiguous). -->
+        <div id="groq-still-required-banner" style="display:none;background:#FFF4E8;border:1px solid rgba(193,70,26,.25);border-radius:8px;padding:10px 12px;margin-bottom:10px;font-size:12px;color:var(--c-deep);">
+          <b>Still required.</b> Gemini is selected for search above, but qualification and guard checks always run on Groq — enter your Groq key below too.
         </div>
-        <div class="api-note">Get a free key at <a href="https://console.groq.com" target="_blank" rel="noopener" style="color:var(--c-purple);font-weight:600;">console.groq.com</a>, no credit card required. The key starts with <code style="background:var(--c-soft);color:var(--c-deep);padding:1px 5px;border-radius:4px;">gsk_</code>. Always required — qualification and guard checks run on Groq regardless of which search provider is selected above.</div>
+
+        <!-- Compact status — shown only when Groq is the active
+             search provider, since the dynamic field in the panel
+             above already IS this same key entry. Showing the full
+             form here too would just mean filling out the same key
+             twice. -->
+        <div id="groq-key-compact" style="display:none;font-size:12.5px;color:var(--c-muted);padding:2px 0;">
+          <span id="groq-key-compact-status">Enter your Groq key in the panel above.</span>
+        </div>
+
+        <div id="groq-key-full-form">
+          <div class="api-key-row">
+            <div style="flex:1;">
+              <label class="field-label" for="api-key-input">Groq API key</label>
+              <input type="password" id="api-key-input" class="api-key-input" placeholder="gsk_..." autocomplete="off">
+            </div>
+            <button class="save-key-btn" onclick="saveApiKey()" style="align-self:flex-end;">Save key</button>
+            <span class="key-status" id="key-status" aria-live="polite">✓ Set</span>
+          </div>
+          <div class="api-note">Get a free key at <a href="https://console.groq.com" target="_blank" rel="noopener" style="color:var(--c-purple);font-weight:600;">console.groq.com</a>, no credit card required. The key starts with <code style="background:var(--c-soft);color:var(--c-deep);padding:1px 5px;border-radius:4px;">gsk_</code>.</div>
+        </div>
       </div>
 
       <div class="settings-panel">
@@ -2235,19 +2257,98 @@ function saveApiKey() {
   document.getElementById('key-status').classList.add('visible');
   showToast('API key saved for this session.');
   updateSetupChecklist();
+  updateGroqPanelState(); // keep the dynamic field above in sync if it's currently showing Groq too
 }
 
-function saveGeminiApiKey() {
-  const val = document.getElementById('gemini-api-key-input').value.trim();
-  if (!val) { showToast('Enter a valid Gemini API key first.'); return; }
-  // Deliberately no prefix check here — Google has begun issuing
-  // keys with prefixes other than the classic "AIza" format as of
-  // mid-2026, and unrestricted "AIza" keys are being phased out.
-  // Only Gemini's own API can actually confirm a key is valid.
-  setApiKey('gemini', val);
-  document.getElementById('gemini-key-status').classList.add('visible');
-  showToast('Gemini API key saved for this session.');
+/**
+ * Save whichever key the dynamic field in the Search provider panel
+ * currently represents — Groq or Gemini, matching CONFIG.discovery
+ * .provider at the moment Save is clicked.
+ */
+function saveProviderApiKey() {
+  const provider = (CONFIG.discovery && CONFIG.discovery.provider) || 'groq';
+  const val = document.getElementById('provider-api-key-input').value.trim();
+  const label = provider === 'gemini' ? 'Gemini' : 'Groq';
+  if (!val) { showToast(`Enter a valid ${label} API key first.`); return; }
+  if (provider === 'groq' && !val.startsWith('gsk_')) {
+    showToast('Groq keys start with gsk_, double-check and try again.');
+    return;
+  }
+  // Deliberately no prefix check for Gemini — Google has begun
+  // issuing keys with prefixes other than the classic "AIza" format
+  // as of mid-2026, and unrestricted "AIza" keys are being phased
+  // out. Only Gemini's own API can actually confirm a key is valid.
+  setApiKey(provider, val);
+  const status = document.getElementById('provider-key-status');
+  if (status) status.classList.add('visible');
+  showToast(`${label} API key saved for this session.`);
   updateSetupChecklist();
+  updateGroqPanelState(); // if this was a Groq key, the lower panel's compact status needs to reflect it
+}
+
+/**
+ * Update the dynamic key field's label, placeholder, help link, and
+ * pre-filled value to match whichever provider is currently
+ * selected. Called on provider switch and on initial page load.
+ * @param {string} provider  "groq" | "gemini"
+ */
+function updateProviderKeyFieldUI(provider) {
+  const labelEl = document.getElementById('provider-key-label');
+  const input   = document.getElementById('provider-api-key-input');
+  const note    = document.getElementById('provider-key-note');
+  if (!labelEl || !input || !note) return;
+
+  if (provider === 'gemini') {
+    labelEl.textContent = 'Gemini API key';
+    input.placeholder = 'AIza...';
+    note.innerHTML = 'Get a free key at <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener" style="color:var(--c-purple);font-weight:600;">aistudio.google.com</a>.';
+  } else {
+    labelEl.textContent = 'Groq API key';
+    input.placeholder = 'gsk_...';
+    note.innerHTML = 'Get a free key at <a href="https://console.groq.com" target="_blank" rel="noopener" style="color:var(--c-purple);font-weight:600;">console.groq.com</a>, no credit card required. The key starts with <code style="background:var(--c-soft);color:var(--c-deep);padding:1px 5px;border-radius:4px;">gsk_</code>.';
+  }
+
+  // Pre-fill with whatever key is already saved for this provider,
+  // so switching the radio shows what's already set rather than a
+  // blank field that looks unconfigured when it isn't.
+  const existing = (typeof getApiKey === 'function') ? getApiKey(provider) : '';
+  input.value = existing || '';
+  const status = document.getElementById('provider-key-status');
+  if (status) status.classList.toggle('visible', !!existing);
+}
+
+/**
+ * Show/collapse the lower Groq panel based on the active provider.
+ * Groq selected: the dynamic field above already IS the Groq key
+ * entry, so collapse to a one-line status instead of duplicating
+ * the same form. Gemini selected: Groq's key has nowhere else to
+ * be entered (still mandatory for qualification/guard), so expand
+ * fully with the "still required" banner visible.
+ */
+function updateGroqPanelState() {
+  const provider   = (CONFIG.discovery && CONFIG.discovery.provider) || 'groq';
+  const banner     = document.getElementById('groq-still-required-banner');
+  const compact     = document.getElementById('groq-key-compact');
+  const fullForm    = document.getElementById('groq-key-full-form');
+  const compactText = document.getElementById('groq-key-compact-status');
+  if (!banner || !compact || !fullForm) return;
+
+  const hasGroqKey = typeof hasApiKey === 'function' ? hasApiKey('groq') : false;
+
+  if (provider === 'gemini') {
+    banner.style.display = 'block';
+    compact.style.display = 'none';
+    fullForm.style.display = 'block';
+  } else {
+    banner.style.display = 'none';
+    fullForm.style.display = 'none';
+    compact.style.display = 'block';
+    if (compactText) {
+      compactText.textContent = hasGroqKey
+        ? '✓ Groq key set — entered above, also covers qualification and guard checks.'
+        : 'Enter your Groq key in the panel above.';
+    }
+  }
 }
 
 /**
@@ -2260,11 +2361,34 @@ function saveGeminiApiKey() {
 function setSearchProvider(provider) {
   CONFIG.discovery.provider = provider;
   try { localStorage.setItem('fundaigo_search_provider', provider); } catch (e) {}
+  updateProviderKeyFieldUI(provider);
+  updateGroqPanelState();
   showToast(`Search provider set to ${provider === 'gemini' ? 'Gemini' : 'Groq'}.`);
 }
 
 function checkApiKeyStatus() {
   try {
+    // Restore provider radio selection — localStorage first (user's
+    // last explicit choice), falling back to whatever CONFIG.discovery
+    // .provider already is (the config.js default, "groq") if nothing
+    // was ever saved. Done FIRST so the dynamic field and Groq panel
+    // below both reflect the correct provider on initial load, not
+    // Groq-by-default before this runs.
+    let savedProvider = null;
+    try { savedProvider = localStorage.getItem('fundaigo_search_provider'); } catch (e) {}
+    const activeProvider = savedProvider || CONFIG.discovery.provider || 'groq';
+    CONFIG.discovery.provider = activeProvider;
+    const radio = document.getElementById(activeProvider === 'gemini' ? 'provider-gemini' : 'provider-groq');
+    if (radio) radio.checked = true;
+
+    updateProviderKeyFieldUI(activeProvider);
+    updateGroqPanelState();
+
+    // The lower Groq panel's full form (id=api-key-input) is only
+    // ever visible when Gemini is the active provider — but restore
+    // its value regardless of current visibility, so it's correct
+    // the moment someone switches back to Gemini later in the
+    // session without needing to re-type it.
     const key = sessionStorage.getItem('ere_key_groq');
     if (key) {
       const inp = document.getElementById('api-key-input');
@@ -2272,23 +2396,6 @@ function checkApiKeyStatus() {
       if (inp) inp.value = key;
       if (sts) sts.classList.add('visible');
     }
-    const geminiKey = sessionStorage.getItem('ere_key_gemini');
-    if (geminiKey) {
-      const gInp = document.getElementById('gemini-api-key-input');
-      const gSts = document.getElementById('gemini-key-status');
-      if (gInp) gInp.value = geminiKey;
-      if (gSts) gSts.classList.add('visible');
-    }
-    // Restore provider radio selection — localStorage first (user's
-    // last explicit choice), falling back to whatever CONFIG.discovery
-    // .provider already is (the config.js default, "groq") if nothing
-    // was ever saved.
-    let savedProvider = null;
-    try { savedProvider = localStorage.getItem('fundaigo_search_provider'); } catch (e) {}
-    const activeProvider = savedProvider || CONFIG.discovery.provider || 'groq';
-    CONFIG.discovery.provider = activeProvider;
-    const radio = document.getElementById(activeProvider === 'gemini' ? 'provider-gemini' : 'provider-groq');
-    if (radio) radio.checked = true;
   } catch(e) { console.warn('apiKey:', e.message); }
 }
 // ── PROFILE TEMPLATES ────────────────────────────────────────────
