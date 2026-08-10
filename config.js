@@ -101,24 +101,6 @@ const CONFIG = {
                         // hard cap, enforced in discovery.js by slicing
                         // the model's response — "one result per run" is
                         // a real guarantee, not just a prompt request.
-
-    // Which LLM performs the live web search in Layer 1.
-    // "groq" | "gemini" — everything AFTER this layer (link
-    // verification, qualification, guard) stays on Groq regardless
-    // of this setting; see staging.js for why that boundary exists.
-    provider: "groq",
-
-    // Gemini's equivalent of Groq's Compound search — Grounding
-    // with Google Search. Only used when provider is "gemini".
-    // Verified from Gemini API docs, August 2026: grounding is
-    // enabled via the `tools: [{ google_search: {} }]` request
-    // field, not a model choice, and works on Flash-tier models.
-    gemini: {
-      endpoint:        "https://generativelanguage.googleapis.com/v1beta/models",
-      model:           "gemini-2.5-flash",
-      maxOutputTokens: 2000,
-      temperature:     0.2,
-    },
   },
 
   // ============================================================

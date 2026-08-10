@@ -4,23 +4,31 @@
  * Fundaigo
  * Version: 1.0 | August 2026
  *
+ * CURRENT STATUS (August 2026): Gemini support was built, tested,
+ * then rolled back — the provider toggle UI was removed from
+ * Settings, and the Gemini call code was removed from discovery.js
+ * and config.js. Groq is the only active search provider right now.
+ * This file's functional code is unchanged by that rollback — it
+ * was never Gemini-specific, and stays ready to route between
+ * providers again the moment a second one exists.
+ *
  * WHAT THIS FILE DOES:
- * Sits between Layer 1 (search — Groq or Gemini) and everything
- * after it (link verification, qualification, guard). Discovery
- * no longer hands its output directly to qualification; instead it
- * publishes a "search results staged" event through this file, and
- * a registered handler picks it up from there.
+ * Sits between Layer 1 (search) and everything after it (link
+ * verification, qualification, guard). Discovery doesn't hand its
+ * output directly to qualification; instead it publishes a "search
+ * results staged" event through this file, and a registered
+ * handler picks it up from there.
  *
  * WHY THIS EXISTS:
- * Fundaigo can now search with either Groq or Gemini (see
- * CONFIG.discovery.provider and geminiCallGrounded() in
- * discovery.js). Today, downstream processing is identical no
- * matter which provider found an opportunity — same link
+ * Built while Fundaigo supported both Groq and Gemini for search
+ * (see the CURRENT STATUS note above for why that's since rolled
+ * back). Downstream processing was — and still is — identical no
+ * matter which provider found an opportunity: same link
  * verification, same qualification, same guard, all still Groq-
- * based. This file is the ONE place that would change if that
- * ever needs to differ by provider. Nothing in qualification.js,
- * guard.js, matchScoring.js, tracker.js, or learning.js changes —
- * they never knew which provider ran, and still don't.
+ * based. This file was the ONE place that would change if that
+ * ever needed to differ by provider. Nothing in qualification.js,
+ * guard.js, matchScoring.js, tracker.js, or learning.js changed for
+ * this — they never knew which provider ran, and still don't.
  *
  * WHY THIS ISN'T A REAL EVENT BUS / MESSAGE QUEUE:
  * Fundaigo runs entirely client-side, one pipeline run at a time,
@@ -36,7 +44,11 @@
  * runDiscoveryOnce() (unchanged, still tested by the dry-run
  * harness) — this file does not re-tag it. This file adds
  * searchProvider and stagedAt, the two fields that only make
- * sense once staging exists as a distinct step.
+ * sense once staging exists as a distinct step. searchProvider is
+ * currently always "groq" (hardcoded in discovery.js's return
+ * value) since there's only one provider active, but the field is
+ * kept rather than removed — no other file needs to change if a
+ * second provider comes back.
  *
  * HOW IT CONNECTS TO OTHER FILES:
  *   discovery.js → produces the normalised opportunities and the
@@ -81,7 +93,7 @@ function onSearchResultsStaged(handler) {
  *
  * @param {Array} opportunities  normalised opportunities from
  *   discovery.js's runDiscovery() — already carry searchCategory
- * @param {Object} meta  must include provider: "groq"|"gemini".
+ * @param {Object} meta  must include provider (currently always "groq").
  *   Any other keys (e.g. onStatus, setPipe callbacks the UI needs)
  *   are passed through untouched to every handler.
  * @returns {Promise<any>} the LAST registered handler's return
