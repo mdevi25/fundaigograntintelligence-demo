@@ -921,8 +921,8 @@
         <div id="auth-header-slot"></div>
       </div>
       <nav class="app-tabs" role="tablist" aria-label="App navigation">
-        <button class="app-tab"            role="tab" aria-selected="false" onclick="switchTab('settings', this)">Step 1 &middot; Setup</button>
-        <button class="app-tab tab-active" role="tab" aria-selected="true"  onclick="switchTab('discover', this)">Step 2 &middot; Discover</button>
+        <button class="app-tab tab-active" role="tab" aria-selected="true"  onclick="switchTab('settings', this)">Step 1 &middot; Setup</button>
+        <button class="app-tab"            role="tab" aria-selected="false" onclick="switchTab('discover', this)">Step 2 &middot; Discover</button>
         <button class="app-tab"            role="tab" aria-selected="false" onclick="switchTab('tracker',  this)">Step 3 &middot; Tracker <span class="tab-badge" id="tracker-tab-badge" style="display:none;">0</span></button>
         <button class="app-tab"            role="tab" aria-selected="false" onclick="switchTab('proposal', this)">Step 4 &middot; Proposal</button>
         <button class="app-tab" id="tab-btn-about" role="tab" aria-selected="false" onclick="switchTab('about',    this)" style="display:none;" aria-hidden="true" tabindex="-1">About</button>
@@ -940,7 +940,7 @@
     <!-- ══════════════════════════════════════════
          DISCOVER TAB
     ══════════════════════════════════════════ -->
-    <div id="tab-discover" class="tab-section tab-active" role="tabpanel">
+    <div id="tab-discover" class="tab-section" role="tabpanel">
 
       <div class="search-panel" id="search-panel">
         <div class="search-panel-summary">
@@ -1042,7 +1042,7 @@
 
       <!-- Top 3 -->
       <div class="top-recs" id="top-recs" style="display:none;">
-        <div class="top-recs-title">Top 3 recommendations</div>
+        <div class="top-recs-title">Your result</div>
         <div id="top-recs-content"></div>
       </div>
 
@@ -1284,7 +1284,7 @@
     <!-- ══════════════════════════════════════════
          SETTINGS TAB
     ══════════════════════════════════════════ -->
-    <div id="tab-settings" class="tab-section" role="tabpanel">
+    <div id="tab-settings" class="tab-section tab-active" role="tabpanel">
 
       <div class="settings-panel" id="shared-drive-panel">
         <h2>Team data: org-owned Shared Drive</h2>
@@ -1946,11 +1946,15 @@ async function runPipeline() {
     document.getElementById('stat-highest').textContent  = qualResult.meta.highestAmount || '—';
     document.getElementById('summary-stats').style.display = 'grid';
 
-    // Top 3 recommendations — inline (renderTopRecommendations does not exist as separate fn)
+    // This search's result — a compact summary line above the full
+    // card. NOT "top 3": CONFIG.discovery.maxResults is 1, so
+    // guardResult.checked only ever has 0 or 1 items. The numbered
+    // "1. Funder..." format was removed since numbering implies a
+    // list of several when there is only ever one.
     const top3 = guardResult.checked.slice(0, 3);
     if (top3.length > 0) {
-      document.getElementById('top-recs-content').innerHTML = top3.map((o, i) =>
-        `<div class="top-rec-row">${i+1}. <b>${esc(o.funder)}</b> · ${esc(o.amount||'—')} · ${esc(o.deadline||'—')} · Fit ${o.fitScore||'—'}/5</div>`
+      document.getElementById('top-recs-content').innerHTML = top3.map((o) =>
+        `<div class="top-rec-row"><b>${esc(o.funder)}</b> · ${esc(o.amount||'—')} · ${esc(o.deadline||'—')} · Fit ${o.fitScore||'—'}/5</div>`
       ).join('');
       document.getElementById('top-recs').style.display = 'block';
     }
