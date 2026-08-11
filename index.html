@@ -2146,7 +2146,12 @@ async function updateSetupChecklist() {
   let hasProfile = false;
   try {
     const profile = typeof loadProfile === 'function' ? await loadProfile() : null;
-    hasProfile = !!(profile && profile.name && profile.name !== CONFIG.defaultProfile.name);
+    // Was: profile.name !== CONFIG.defaultProfile.name — broke
+    // specifically for ERE, whose real org name IS
+    // CONFIG.defaultProfile.name ("Educate. Radiate. Elevate."), so a
+    // correctly-saved real profile could never be told apart from an
+    // untouched default. loadProfile() now tags this directly instead.
+    hasProfile = !!(profile && profile._isSaved);
   } catch (e) { hasProfile = false; }
 
   let hasSharedDrive = false;
